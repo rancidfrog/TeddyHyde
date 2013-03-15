@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+        >
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Enter your GitHub crendentials"
+            android:id="@+id/textView" android:layout_gravity="center" android:layout_margin="3pt"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GitHub username"
+            android:id="@+id/editText" android:layout_gravity="center" android:padding="5pt"
+            android:layout_margin="3pt"/>
+    <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="GitHub password"
+            android:id="@+id/editText1" android:layout_gravity="center" android:padding="5pt"
+            android:layout_margin="3pt"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login"
+            android:id="@+id/button" android:layout_gravity="center" android:textSize="14pt"
+            android:layout_marginTop="10pt"/>
+    <ListView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/listView" android:layout_gravity="center"/>
+    <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Your username and credentials are only stored in this application"
+            android:id="@+id/textView1" android:layout_margin="5pt"/>
+</LinearLayout>
+
