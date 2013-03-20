@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="classes">
+  <library name="android-support-v4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/libs/cwac-anddown/bin/classes.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/android-support-v4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
