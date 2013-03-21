@@ -18,9 +18,9 @@
 
         <activity android:name=".FileListingActivity"/>
 
-        <activity android:name=".EditorActivity"/>
-
         <activity android:name=".RenderedActivity"/>
+
+        <activity android:name=".ScreenSlideActivity"/>
 
     </application>
 </manifest> 

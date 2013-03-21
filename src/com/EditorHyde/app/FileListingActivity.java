@@ -66,7 +66,8 @@ public class FileListingActivity extends Activity {
     }
 
     public void showEditor() {
-        Intent i = new Intent(this, EditorActivity.class);
+        Intent i;
+        i = new Intent(this, ScreenSlideActivity.class);
         startActivity(i);
     }
 
