@@ -2,15 +2,18 @@ package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.content.Context;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.TextView;
-
+import com.petebevin.markdown.MarkdownProcessor;
 
 /**
  * Created with IntelliJ IDEA.
@@ -28,7 +31,7 @@ public class EditorActivity extends Activity { // } implements View.OnClickListe
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.editor);
+   //     setContentView(R.layout.editor);
         cxt = this;
         MarkdownPagerAdapter adapter = new MarkdownPagerAdapter();
         ViewPager vp = (ViewPager) findViewById(R.id.markdownPager);
@@ -37,11 +40,13 @@ public class EditorActivity extends Activity { // } implements View.OnClickListe
     }
 
 
-    private class MarkdownPagerAdapter extends PagerAdapter{
+    private class MarkdownPagerAdapter extends FragmentPagerAdapter {
 
+        Fragment fragments[];
 
         @Override
         public int getCount() {
+            fragments = new Fragment[2];
             return 2;
         }
 
@@ -58,14 +63,27 @@ public class EditorActivity extends Activity { // } implements View.OnClickListe
          */
         @Override
         public Object instantiateItem(ViewGroup collection, int position) {
-            TextView tv = new TextView(cxt);
-            tv.setText(getString(R.string.app_name) + position);
-            tv.setTextColor(Color.WHITE);
-            tv.setTextSize(30);
 
-            collection.addView(tv,0);
+            View v = null;
 
-            return tv;
+            if( 0 == position ) {
+                MarkdownProcessor mp = new MarkdownProcessor();
+                TextView tv = (TextView) findViewById(R.id.editText1);
+                String data = mp.markdown( tv.toString() );
+                WebView wv = (WebView) findViewById(R.id.webView);
+                wv.loadData(data, "text/html", null);
+                v = wv;
+            }
+            else {
+                LayoutInflater vi = (LayoutInflater) cxt.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                v = vi.inflate(R.layout.markdown_editor, null);
+            }
+
+            ((ViewPager)collection).addView(v, 0);
+
+
+            fragments[position] = v;
+            return v;
         }
 
         /**
@@ -115,6 +133,11 @@ public class EditorActivity extends Activity { // } implements View.OnClickListe
         @Override
         public Parcelable saveState() {
             return null;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return fragments[ position ];
         }
 
         @Override
