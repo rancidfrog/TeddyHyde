@@ -2,6 +2,7 @@ package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -26,28 +27,40 @@ public class MainActivity extends Activity {
         findViewById(R.id.button).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        String username, password;
 
-                        TextView tvU = (TextView)findViewById(R.id.githubUsername);
-                        TextView tvP = (TextView)findViewById(R.id.githubUsername);
-                        username = (String) tvU.getText();
-                        password = (String)tvP.getText();
 
-                        // Basic authentication
-                        GitHubClient client = new GitHubClient();
-                        client.setCredentials( username, password );
-                        RepositoryService service = new RepositoryService();
-                        List<Repository> repos = null;
-                        try {
-                            repos = service.getRepositories("slowgramming");
-                        }
-                        catch( IOException ioe ) {
 
-                        }
-                        showRepoList( repos );
+                        new GetReposTask().execute();
                     }
                 });
 
+    }
+
+    private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
+        protected Boolean doInBackground(Void...voids) {
+            Boolean rv = true;
+            String username, password;
+
+            TextView tvU = (TextView)findViewById(R.id.githubUsername);
+            TextView tvP = (TextView)findViewById(R.id.githubUsername);
+            username = (String) tvU.getText();
+            password = (String)tvP.getText();
+
+            // Basic authentication
+            GitHubClient client = new GitHubClient();
+            client.setCredentials( username, password );
+
+            RepositoryService service = new RepositoryService();
+            List<Repository> repos = null;
+            try {
+                repos = service.getRepositories();
+            }
+            catch( IOException ioe ) {
+                  rv = false;
+            }
+            showRepoList( repos );
+              return rv;
+        }
     }
 
     public void showRepoList( List<Repository> repos ) {
