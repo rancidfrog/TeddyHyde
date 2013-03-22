@@ -13,13 +13,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GitHub username"
-            android:id="@+id/editText" android:layout_gravity="center" android:padding="5pt"
+            android:id="@+id/githubUsername" android:layout_gravity="center" android:padding="5pt"
             android:layout_margin="3pt"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="GitHub password"
-            android:id="@+id/editText1" android:layout_gravity="center" android:padding="5pt"
+            android:id="@+id/githubPassword" android:layout_gravity="center" android:padding="5pt"
             android:layout_margin="3pt"/>
     <Button
             android:layout_width="wrap_content"
