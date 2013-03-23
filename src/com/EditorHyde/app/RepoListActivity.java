@@ -37,7 +37,8 @@ public class RepoListActivity extends Activity {
         ListView listView;
         listView = (ListView) findViewById(R.id.listView);
 
-        String[] values = savedInstanceState.getStringArray("repos");
+        Bundle extras = getIntent().getExtras();
+        String[] values = extras.getStringArray("repos");
                 //new String[]
                 //{ "xrd.github.com", "slowgramming.github.com", "webiphany.github.com" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,

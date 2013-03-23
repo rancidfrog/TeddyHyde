@@ -91,16 +91,18 @@ public class MainActivity extends Activity {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
 
-            // OAuth authentication
-            GitHubClient client = new GitHubClient();
-            client.setOAuth2Token(auth.getToken());
+//            // OAuth authentication
+//            GitHubClient client = new GitHubClient();
+//            client.setOAuth2Token(auth.getToken());
 
             RepositoryService service = new RepositoryService();
+            service.getClient().setOAuth2Token(auth.getToken());
             repos = null;
             try {
                 repos = service.getRepositories();
             }
-            catch( IOException ioe ) {
+            catch( Exception e ) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 rv = false;
             }
 
