@@ -2,6 +2,7 @@ package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.util.List;
 
 public class MainActivity extends Activity {
+
+    SharedPreferences sp;
     /**
      * Called when the activity is first created.
      */
@@ -23,12 +26,26 @@ public class MainActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main);
 
+        sp = getPreferences( MODE_PRIVATE );
+        String username = sp.getString( "username", null );
+        String password = sp.getString( "password", null );
+
+        if( null != username && null != password ) {
+            TextView tvU = (TextView)findViewById(R.id.githubUsername);
+            TextView tvP = (TextView)findViewById(R.id.githubPassword);
+            tvU.setText( username );
+            tvP.setText( password );
+        }
 
         findViewById(R.id.button).setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
+//
+                        TextView tvU = (TextView)findViewById(R.id.githubUsername);
+                        TextView tvP = (TextView)findViewById(R.id.githubPassword) ;
 
-
+                        sp.edit().putString( "username", tvU.getText().toString() );
+                        sp.edit().putString( "password", tvP.getText().toString() );
 
                         new GetReposTask().execute();
                     }
@@ -42,9 +59,9 @@ public class MainActivity extends Activity {
             String username, password;
 
             TextView tvU = (TextView)findViewById(R.id.githubUsername);
-            TextView tvP = (TextView)findViewById(R.id.githubUsername);
-            username = (String) tvU.getText();
-            password = (String)tvP.getText();
+            TextView tvP = (TextView)findViewById(R.id.githubPassword);
+            username = tvU.getText().toString();
+            password = tvP.getText().toString();
 
             // Basic authentication
             GitHubClient client = new GitHubClient();
@@ -56,10 +73,10 @@ public class MainActivity extends Activity {
                 repos = service.getRepositories();
             }
             catch( IOException ioe ) {
-                  rv = false;
+                rv = false;
             }
             showRepoList( repos );
-              return rv;
+            return rv;
         }
     }
 
