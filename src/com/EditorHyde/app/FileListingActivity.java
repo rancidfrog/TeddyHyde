@@ -18,6 +18,7 @@ import org.eclipse.egit.github.core.client.*;
 import org.eclipse.egit.github.core.service.*;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -99,12 +100,13 @@ public class FileListingActivity extends Activity {
 
                 List<TreeEntry> entries  = tree.getTree();
 
+                values = new ArrayList<TreeEntry>();
                 for( TreeEntry entry: entries) {
                  values.add(entry);
                 }
 
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
                 rv = false;
             }
