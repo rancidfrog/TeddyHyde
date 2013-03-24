@@ -19,6 +19,7 @@ import org.eclipse.egit.github.core.service.*;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -85,7 +86,11 @@ public class FileListingActivity extends Activity {
                 Repository repo = repositoryService.getRepository(username, repoName);
 //                // Get first commit
                 PageIterator<RepositoryCommit> pager = cs.pageCommits( repo, 1 );
-                RepositoryCommit rc = (RepositoryCommit) pager.next();
+                Collection<RepositoryCommit> commits = pager.next();
+                RepositoryCommit rc = null;
+                for( RepositoryCommit commit: commits) {
+                    rc = commit;
+                }
 
                 String sha = rc.getSha();
                 DataService ds = new DataService();
