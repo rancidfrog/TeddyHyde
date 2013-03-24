@@ -12,8 +12,8 @@
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/githubUsername" android:layout_gravity="center" android:padding="5pt"
-            android:layout_margin="3pt" android:hint="GitHub username"/>
+            android:id="@+id/githubEmail" android:layout_gravity="center" android:padding="5pt"
+            android:layout_margin="3pt" android:hint="GitHub login"/>
     <EditText
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

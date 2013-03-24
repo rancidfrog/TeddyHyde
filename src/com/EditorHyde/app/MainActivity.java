@@ -12,9 +12,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import org.eclipse.egit.github.core.Authorization;
 import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.User;
 import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.OAuthService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.eclipse.egit.github.core.service.UserService;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -26,6 +28,8 @@ public class MainActivity extends Activity {
     TextView loginMessage = null;
     List<Repository> repos;
 
+    public static final String APP_ID = "com.TeddyHyde.app";
+
     /**
      * Called when the activity is first created.
      */
@@ -36,14 +40,14 @@ public class MainActivity extends Activity {
 
         loginMessage = (TextView)findViewById(R.id.loginMessage);
 
-        sp = getPreferences( MODE_PRIVATE );
-        String username = sp.getString( "username", null );
+        sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
+        String email = sp.getString( "email", null );
         String password = sp.getString( "password", null );
 
-        if( null != username && null != password ) {
-            EditText etU = (EditText)findViewById(R.id.githubUsername);
+        if( null != email && null != password ) {
+            EditText etU = (EditText)findViewById(R.id.githubEmail);
             EditText etP = (EditText)findViewById(R.id.githubPassword);
-            etU.setText( username );
+            etU.setText( email );
             etP.setText(password);
         }
 
@@ -52,12 +56,13 @@ public class MainActivity extends Activity {
                     public void onClick(View v) {
 //
                         loginMessage.setText( "Logging in...");
-                        EditText etU = (EditText)findViewById(R.id.githubUsername);
+                        EditText etU = (EditText)findViewById(R.id.githubEmail);
                         EditText etP = (EditText)findViewById(R.id.githubPassword) ;
 
-                        sp.edit().putString( "username", etU.getText().toString() );
-                        sp.edit().putString( "password", etP.getText().toString() );
-
+                        String email = etU.getText().toString();
+                        String password = etP.getText().toString();
+                        sp.edit().putString( "email", email ).commit();
+                        sp.edit().putString( "password", password ).commit();
                         new GetReposTask().execute();
                     }
                 });
@@ -69,24 +74,31 @@ public class MainActivity extends Activity {
     private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void...voids) {
             Boolean rv = true;
-            String username, password;
+            String email, password;
 
-            EditText etU = (EditText)findViewById(R.id.githubUsername);
+            EditText etU = (EditText)findViewById(R.id.githubEmail);
             EditText etP = (EditText)findViewById(R.id.githubPassword);
-            username = etU.getText().toString();
+            email = etU.getText().toString();
             password = etP.getText().toString();
 
 
             OAuthService oauthService = new OAuthService();
 
             // Replace with actual login and password
-            oauthService.getClient().setCredentials(username, password);
+            oauthService.getClient().setCredentials(email, password);
+
 
             // Create authorization with 'gist' scope only
             Authorization auth = new Authorization();
             auth.setScopes(Arrays.asList("gist", "repo"));
+            String authToken = null;
             try {
                 auth = oauthService.createAuthorization(auth);
+                authToken = auth.getToken();
+
+                // Store it for other activities
+                sp.edit().putString( "authToken", authToken ).commit();
+
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
@@ -96,10 +108,18 @@ public class MainActivity extends Activity {
 //            client.setOAuth2Token(auth.getToken());
 
             RepositoryService service = new RepositoryService();
-            service.getClient().setOAuth2Token(auth.getToken());
+            service.getClient().setOAuth2Token(authToken);
             repos = null;
             try {
                 repos = service.getRepositories();
+
+                // If we succeeded, get the user information and store it
+                UserService userService = new UserService();
+                userService.getClient().setOAuth2Token(authToken);
+                String name = userService.getUser().getName();
+                String login = userService.getUser().getLogin();
+                sp.edit().putString( "name", name ).commit();
+                sp.edit().putString( "login", login ).commit();
             }
             catch( Exception e ) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

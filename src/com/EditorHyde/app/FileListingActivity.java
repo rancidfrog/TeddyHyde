@@ -3,16 +3,24 @@ package com.EditorHyde.app;
 import android.app.Activity;
 import android.app.ListActivity;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
-import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.*;
 
 import org.eclipse.egit.github.core.client.*;
 import org.eclipse.egit.github.core.service.*;
+
+import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
 
 
 /**
@@ -28,42 +36,83 @@ public class FileListingActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.file_list);
+        SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+        String authToken = sp.getString("authToken", null);
+        String username = sp.getString("email", null);
+        String name = sp.getString("name", null );
+        String login = sp.getString("login", null );
+
+        Bundle extras = getIntent().getExtras();
+        String repoName = extras.getString("repo");
+
+        new GetRepoFiles().execute( login, authToken, repoName );
+    }
+
+    private void showFiles( List<TreeEntry> files ) {
 
         ListView listView;
         listView = (ListView) findViewById(R.id.repoFilesList);
 
-//        //Basic authentication
-//        GitHubClient client = new GitHubClient();
-//        client.setCredentials("user", "passw0rd");
-//
-//        String[] values = new String[20];
-//        RepositoryService service = new RepositoryService();
-//        for (Repository repo : service.getRepositories("slowgramming")) {
-//            values[0] = repo.getName();
-//        }
-
-        String[] values = new String[] { "_config.yml", "_posts", "_pages", "_attachments" };
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                R.layout.file_list_layout, values);
-
-        FileListAdapter adapter = new FileListAdapter(this, values);
-
-//        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-//                R.layout.file_list_layout,
-//                R.id.firstLine,
-//                values);
-
+        FileListAdapter adapter = new FileListAdapter( this, files );
         listView.setAdapter(adapter);
-
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 showEditor();
             }
         });
+    }
 
+    private class GetRepoFiles extends AsyncTask<String, Void, Boolean> {
+        private List<TreeEntry> values;
+
+        protected Boolean doInBackground(String...strings) {
+
+            Boolean rv = true;
+            String username = strings[0];
+            String authToken = strings[1];
+            String repoName = strings[2];
+
+            RepositoryService repositoryService = new RepositoryService();
+            repositoryService.getClient().setOAuth2Token(authToken);
+            String master = "";
+
+            Repository repository;
+
+            try {
+                CommitService cs = new CommitService();
+                cs.getClient().setOAuth2Token(authToken);
+                Repository repo = repositoryService.getRepository(username, repoName);
+//                // Get first commit
+                PageIterator<RepositoryCommit> pager = cs.pageCommits( repo, 1 );
+                RepositoryCommit rc = (RepositoryCommit) pager.next();
+
+                String sha = rc.getSha();
+                DataService ds = new DataService();
+                ds.getClient().setOAuth2Token(authToken);
+                Tree tree = ds.getTree( repo, sha, true );
+
+                List<TreeEntry> entries  = tree.getTree();
+
+                for( TreeEntry entry: entries) {
+                 values.add(entry);
+                }
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+                rv = false;
+            }
+
+            return rv;
+        }
+
+        protected void onPostExecute(Boolean result) {
+            showFiles( values );
+        }
 
     }
+
 
     public void showEditor() {
         Intent i;

@@ -15,15 +15,18 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
+import org.eclipse.egit.github.core.TreeEntry;
 
-public class FileListAdapter extends ArrayAdapter<String> {
+import java.util.List;
+
+public class FileListAdapter extends ArrayAdapter<TreeEntry> {
     private final Context context;
-    private final String[] values;
+    private final List<TreeEntry> files;
 
-    public FileListAdapter(Context context, String[] values) {
-        super(context, R.layout.file_list_layout, values);
+    public FileListAdapter(Context context, List<TreeEntry>theFiles ) {
+        super(context, R.layout.file_list_layout, theFiles);
         this.context = context;
-        this.values = values;
+        this.files = theFiles;
     }
 
     @Override
@@ -33,9 +36,9 @@ public class FileListAdapter extends ArrayAdapter<String> {
         View rowView = inflater.inflate(R.layout.file_list_layout, parent, false);
         TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
-        textView.setText(values[position]);
+        textView.setText(files.get(position).getPath());
         // Change the icon for Windows and iPhone
-        String s = values[position];
+        String s = files.get(position).getPath();
         if (s.startsWith("_conf")) {
             imageView.setImageResource(R.drawable.icon);
         } else {

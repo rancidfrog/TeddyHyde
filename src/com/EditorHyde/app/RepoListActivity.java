@@ -7,10 +7,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -22,9 +19,15 @@ import android.widget.ListView;
 public class RepoListActivity extends Activity {
 
 
-    public void showFilesList() {
+    public void showFilesList( String repo ) {
         Intent i = new Intent(this, FileListingActivity.class);
+
+        Bundle bundle = new Bundle();
+        bundle.putString("repo", repo );
+        i.putExtras(bundle);
+
         startActivity(i);
+
 
     }
 
@@ -39,8 +42,6 @@ public class RepoListActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         String[] values = extras.getStringArray("repos");
-                //new String[]
-                //{ "xrd.github.com", "slowgramming.github.com", "webiphany.github.com" };
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_expandable_list_item_1, values);
         listView.setAdapter(adapter);
@@ -48,7 +49,8 @@ public class RepoListActivity extends Activity {
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-             showFilesList();
+                String repo = (String)adapterView.getItemAtPosition(i);
+                showFilesList(repo);
             }
         });
 
