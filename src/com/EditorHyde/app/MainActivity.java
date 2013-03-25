@@ -26,7 +26,6 @@ public class MainActivity extends Activity {
 
     SharedPreferences sp;
     TextView loginMessage = null;
-    List<Repository> repos;
 
     public static final String APP_ID = "com.TeddyHyde.app";
 
@@ -63,7 +62,7 @@ public class MainActivity extends Activity {
                         String password = etP.getText().toString();
                         sp.edit().putString( "email", email ).commit();
                         sp.edit().putString( "password", password ).commit();
-                        new GetReposTask().execute();
+                        new LoginTask().execute();
                     }
                 });
 
@@ -71,7 +70,7 @@ public class MainActivity extends Activity {
 
 
 
-    private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
+    private class LoginTask extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void...voids) {
             Boolean rv = true;
             String email, password;
@@ -81,12 +80,9 @@ public class MainActivity extends Activity {
             email = etU.getText().toString();
             password = etP.getText().toString();
 
-
             OAuthService oauthService = new OAuthService();
-
             // Replace with actual login and password
             oauthService.getClient().setCredentials(email, password);
-
 
             // Create authorization with 'gist' scope only
             Authorization auth = new Authorization();
@@ -99,20 +95,6 @@ public class MainActivity extends Activity {
                 // Store it for other activities
                 sp.edit().putString( "authToken", authToken ).commit();
 
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-            }
-
-//            // OAuth authentication
-//            GitHubClient client = new GitHubClient();
-//            client.setOAuth2Token(auth.getToken());
-
-            RepositoryService service = new RepositoryService();
-            service.getClient().setOAuth2Token(authToken);
-            repos = null;
-            try {
-                repos = service.getRepositories();
-
                 // If we succeeded, get the user information and store it
                 UserService userService = new UserService();
                 userService.getClient().setOAuth2Token(authToken);
@@ -120,9 +102,9 @@ public class MainActivity extends Activity {
                 String login = userService.getUser().getLogin();
                 sp.edit().putString( "name", name ).commit();
                 sp.edit().putString( "login", login ).commit();
-            }
-            catch( Exception e ) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+
+            } catch (IOException e) {
+                e.printStackTrace();
                 rv = false;
             }
 
@@ -134,27 +116,16 @@ public class MainActivity extends Activity {
                 loginMessage.setText( "Invalid credentials, try again.");
             }
             else {
-                showRepoList( repos );
+                showRepoList();
             }
 
         }
     }
 
-    public void showRepoList( List<Repository> repos ) {
+    public void showRepoList() {
 
-        if( null != repos ) {
-            Intent i = new Intent(this, RepoListActivity.class);
-
-            String [] repoNames = new String[repos.size()];
-            for( int j = 0; j < repos.size(); j++ ) {
-                repoNames[j] = repos.get(j).getName();
-            }
-            Bundle bundle = new Bundle();
-            bundle.putStringArray("repos", repoNames);
-            i.putExtras(bundle);
-            startActivity(i);
-
-        }
+        Intent i = new Intent(this, RepoListActivity.class);
+        startActivity(i);
 
     }
 }

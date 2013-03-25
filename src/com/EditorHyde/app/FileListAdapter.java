@@ -29,6 +29,7 @@ public class FileListAdapter extends ArrayAdapter<TreeEntry> {
         this.files = theFiles;
     }
 
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context
@@ -37,12 +38,21 @@ public class FileListAdapter extends ArrayAdapter<TreeEntry> {
         TextView textView = (TextView) rowView.findViewById(R.id.firstLine);
         ImageView imageView = (ImageView) rowView.findViewById(R.id.icon);
         textView.setText(files.get(position).getPath());
-        // Change the icon for Windows and iPhone
-        String s = files.get(position).getPath();
-        if (s.startsWith("_conf")) {
-            imageView.setImageResource(R.drawable.icon);
-        } else {
-            imageView.setImageResource(R.drawable.directory);
+
+        TreeEntry treeEntry = files.get(position);
+
+        String s = treeEntry.getPath();
+        String type = treeEntry.getType();
+
+        if( "blob".equals( type ) ) {
+            if (s.startsWith("_conf")) {
+                imageView.setImageResource(R.drawable.icon);
+            } else {
+                imageView.setImageResource(R.drawable.directory);
+            }
+        }
+        else if( "tree".equals( type ) ) {
+
         }
 
         return rowView;

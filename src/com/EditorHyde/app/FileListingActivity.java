@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -37,6 +38,22 @@ import java.util.logging.Logger;
 public class FileListingActivity extends Activity {
 
     private ProgressDialog pd;
+    private String root;
+
+    @Override
+    public void onBackPressed() {
+        Log.d("com.EditorHyde.app", "onBackPressed Called");
+        if( null == root ) {
+
+            Intent i;
+            i = new Intent(this, RepoListActivity.class);
+            startActivity(i);
+        }
+        else {
+           ascend();
+        }
+
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -48,7 +65,6 @@ public class FileListingActivity extends Activity {
         String username = sp.getString("email", null);
         String name = sp.getString("name", null );
         String login = sp.getString("login", null );
-
 
         Bundle extras = getIntent().getExtras();
         String repoName = extras.getString("repo");
@@ -68,9 +84,35 @@ public class FileListingActivity extends Activity {
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                showEditor();
+                // if item is directory, go into it
+                TreeEntry treeEntry = (TreeEntry) adapterView.getItemAtPosition(i);
+                String type = treeEntry.getType();
+                String file = treeEntry.getPath();
+
+                if( "tree" == type ) {
+                    descend(file);
+                    // show the tree
+
+                }
+                else {
+
+                    showEditor();
+                }
             }
         });
+    }
+
+    private void descend( String directory ) {
+        if( null == root) {
+            root = directory;
+        }
+        else {
+            root += "/" + directory;
+        }
+    }
+
+    private void ascend() {
+        root = null;
     }
 
     private class GetRepoFiles extends AsyncTask<String, Void, Boolean> {
@@ -111,7 +153,7 @@ public class FileListingActivity extends Activity {
 
                 values = new ArrayList<TreeEntry>();
                 for( TreeEntry entry: entries) {
-                 values.add(entry);
+                    values.add(entry);
                 }
 
 

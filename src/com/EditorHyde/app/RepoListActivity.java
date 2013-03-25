@@ -1,13 +1,22 @@
 package com.EditorHyde.app;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.DataSetObserver;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.service.RepositoryService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created with IntelliJ IDEA.
@@ -18,18 +27,23 @@ import android.widget.*;
  */
 public class RepoListActivity extends Activity {
 
+    Context ctx;
 
     public void showFilesList( String repo ) {
         Intent i = new Intent(this, FileListingActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString("repo", repo );
+        bundle.putString("repo", repo);
         i.putExtras(bundle);
 
         startActivity(i);
 
-
     }
+
+    ArrayAdapter<String> adapter;
+    private ProgressDialog pd;
+    String authToken;
+    ListView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -37,23 +51,68 @@ public class RepoListActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.repo_list);
 
-        ListView listView;
+        ctx = this;
+
         listView = (ListView) findViewById(R.id.listView);
 
-        Bundle extras = getIntent().getExtras();
-        String[] values = extras.getStringArray("repos");
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_expandable_list_item_1, values);
-        listView.setAdapter(adapter);
+        SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+        authToken = sp.getString("authToken", null);
 
-        listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                String repo = (String)adapterView.getItemAtPosition(i);
-                showFilesList(repo);
-            }
-        });
+        pd = ProgressDialog.show( this, "", "Loading all repositories...", true);
+
+        new GetReposTask().execute();
 
     }
 
+    private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
+
+        List<String> repoNames;
+
+        protected Boolean doInBackground(Void...voids) {
+            Boolean rv = true;
+            List<Repository> repos = null;
+
+            RepositoryService service = new RepositoryService();
+            service.getClient().setOAuth2Token(authToken);
+            try {
+                repos = service.getRepositories();
+            }
+            catch( Exception e) {
+                e.printStackTrace();
+                rv = false;
+            }
+
+            repoNames = new ArrayList<String>();
+            for( int j = 0; j < repos.size(); j++ ) {
+                Repository repo = repos.get(j);
+                String name = repo.getName();
+                if( name.contains("github.com") ) {
+                    repoNames.add(name);
+                }
+            }
+
+            return rv;
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+            pd.hide();
+
+            if( result ) {
+                adapter = new ArrayAdapter<String>(ctx,
+                        android.R.layout.simple_dropdown_item_1line, android.R.id.text1, repoNames);
+                listView.setAdapter(adapter);
+
+                listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                        String repo = (String)adapterView.getItemAtPosition(i);
+                        showFilesList(repo);
+                    }
+                });
+            }
+
+        }
+    }
 }
