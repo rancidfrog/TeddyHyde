@@ -2,6 +2,8 @@ package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -33,6 +35,9 @@ import java.util.logging.Logger;
  * To change this template use File | Settings | File Templates.
  */
 public class FileListingActivity extends Activity {
+
+    private ProgressDialog pd;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -44,8 +49,11 @@ public class FileListingActivity extends Activity {
         String name = sp.getString("name", null );
         String login = sp.getString("login", null );
 
+
         Bundle extras = getIntent().getExtras();
         String repoName = extras.getString("repo");
+
+        pd = ProgressDialog.show( this, "", "Loading repository data..", true);
 
         new GetRepoFiles().execute( login, authToken, repoName );
     }
@@ -69,6 +77,7 @@ public class FileListingActivity extends Activity {
         private List<TreeEntry> values;
 
         protected Boolean doInBackground(String...strings) {
+
 
             Boolean rv = true;
             String username = strings[0];
@@ -115,6 +124,7 @@ public class FileListingActivity extends Activity {
         }
 
         protected void onPostExecute(Boolean result) {
+            pd.hide();
             showFiles( values );
         }
 
