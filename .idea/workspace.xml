@@ -26,7 +26,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app" afterPath="$PROJECT_DIR$/app" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/layout/fragment_screen_slide_page_editor.xml" afterPath="$PROJECT_DIR$/res/layout/fragment_screen_slide_page_editor.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" />
     </list>
     <ignored path="Editor Hyde.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -79,8 +80,8 @@
     <file path="/a.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874641282" ignored="false" />
     <file path="/exerpt_content.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363867204978" ignored="false" />
     <file path="/fragment_screen_slide_page.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874261823" ignored="false" />
-    <file path="/ScreenSlideActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364271026687" ignored="false" />
-    <file path="/ScreenSlidePageFragment.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364271565877" ignored="false" />
+    <file path="/ScreenSlideActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364273094416" ignored="false" />
+    <file path="/ScreenSlidePageFragment.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364273074537" ignored="false" />
     <file path="/MainActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364245360025" ignored="false" />
     <file path="/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364090268081" ignored="false" />
     <file path="/EditorHyde.iml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363964165538" ignored="false" />
@@ -136,7 +137,7 @@
     </breakpoint_any>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="76" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="81" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -150,7 +151,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="70" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="75" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -164,7 +165,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="95" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" line="100" class="com.EditorHyde.app.ScreenSlidePageFragment" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -264,7 +265,7 @@
       <file leaf-file-name="FileListingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="155" column="0" selection-start="4339" selection-end="4339" vertical-scroll-proportion="0.0">
+            <state line="252" column="0" selection-start="7479" selection-end="7479" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#2649#3302#0" expanded="true" />
@@ -274,24 +275,24 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="80" column="0" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.66346157">
+            <state line="80" column="0" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#0#6197#0" expanded="true" />
+                <element signature="e#0#6250#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScreenSlidePageFragment.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ScreenSlidePageFragment.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="70" column="0" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
+            <state line="81" column="0" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.33093524">
               <folding>
-                <element signature="e#0#3141#0" expanded="true" />
+                <element signature="e#0#3275#0" expanded="true" />
                 <element signature="imports" expanded="true" />
               </folding>
             </state>
@@ -390,10 +391,10 @@
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListAdapter.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" />
         <option value="$PROJECT_DIR$/res/layout/fragment_screen_slide_page_editor.xml" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
       </list>
     </option>
   </component>
@@ -769,7 +770,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="22" width="1420" height="795" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32751092" sideWeight="0.48740742" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32532752" sideWeight="0.48740742" order="2" side_tool="false" content_ui="tabs" />
@@ -779,7 +780,7 @@
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3288889" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5125926" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5125926" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -953,16 +954,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="70" column="0" selection-start="2242" selection-end="2242" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#3141#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/layout/fragment_screen_slide_page_editor.xml">
       <provider selected="true" editor-type-id="android-designer">
         <state />
@@ -975,7 +966,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="155" column="0" selection-start="4339" selection-end="4339" vertical-scroll-proportion="0.0">
+        <state line="252" column="0" selection-start="7479" selection-end="7479" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#2649#3302#0" expanded="true" />
@@ -986,9 +977,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="80" column="0" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.66346157">
+        <state line="80" column="0" selection-start="2892" selection-end="2892" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#0#6197#0" expanded="true" />
+            <element signature="e#0#6250#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="81" column="0" selection-start="2638" selection-end="2638" vertical-scroll-proportion="0.33093524">
+          <folding>
+            <element signature="e#0#3275#0" expanded="true" />
             <element signature="imports" expanded="true" />
           </folding>
         </state>

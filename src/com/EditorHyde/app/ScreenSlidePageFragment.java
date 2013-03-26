@@ -47,8 +47,9 @@ public class ScreenSlidePageFragment extends Fragment {
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static ScreenSlidePageFragment create(int pageNumber ) {
+    public static ScreenSlidePageFragment create(int pageNumber, String markdown ) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
+        fragment.setMarkdown( markdown );
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
@@ -62,6 +63,10 @@ public class ScreenSlidePageFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
+    }
+
+    public void setMarkdown( String md) {
+        theMarkdown = md;
     }
 
     @Override

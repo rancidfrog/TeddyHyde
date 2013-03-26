@@ -151,7 +151,8 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create( position );
+            Fragment rv = ScreenSlidePageFragment.create( position, theMarkdown );
+            return (Fragment)rv;
         }
 
         @Override
