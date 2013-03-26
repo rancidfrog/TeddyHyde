@@ -21,6 +21,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 /**
@@ -41,10 +42,12 @@ public class ScreenSlidePageFragment extends Fragment {
      */
     private int mPageNumber;
 
+    private String theMarkdown;
+
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static ScreenSlidePageFragment create(int pageNumber) {
+    public static ScreenSlidePageFragment create(int pageNumber ) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
@@ -64,13 +67,24 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
             Bundle savedInstanceState) {
+
+        ViewGroup rootView;
         // Inflate the layout containing a title and body text.
-        ViewGroup rootView = (ViewGroup) inflater
+        if( mPageNumber == 0 ) {
+            rootView = (ViewGroup) inflater
+                    .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
+
+            ((EditText)rootView.findViewById(R.id.markdownEditor)).setText( theMarkdown );
+
+        }
+        else {
+        rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page, container, false);
 
         // Set the title view to show the page number.
         ((TextView) rootView.findViewById(android.R.id.text1)).setText(
                 getString(R.string.title_template_step, mPageNumber + 1));
+        }
 
         return rootView;
     }

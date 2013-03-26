@@ -44,15 +44,11 @@ public class FileListAdapter extends ArrayAdapter<TreeEntry> {
         String s = treeEntry.getPath();
         String type = treeEntry.getType();
 
-        if( "blob".equals( type ) ) {
-            if (s.startsWith("_conf")) {
-                imageView.setImageResource(R.drawable.icon);
-            } else {
-                imageView.setImageResource(R.drawable.directory);
-            }
+        if( 0 ==  "tree".compareTo( type ) ) {
+            imageView.setImageResource(R.drawable.directory);
         }
-        else if( "tree".equals( type ) ) {
-
+        else {
+            imageView.setImageResource(R.drawable.icon);
         }
 
         return rowView;

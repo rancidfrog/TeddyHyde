@@ -18,7 +18,10 @@ package com.EditorHyde.app;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -27,6 +30,17 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.Menu;
 import android.view.MenuItem;
+import org.eclipse.egit.github.core.Blob;
+import org.eclipse.egit.github.core.Repository;
+import org.eclipse.egit.github.core.RepositoryCommit;
+import org.eclipse.egit.github.core.Tree;
+import org.eclipse.egit.github.core.client.PageIterator;
+import org.eclipse.egit.github.core.service.CommitService;
+import org.eclipse.egit.github.core.service.DataService;
+import org.eclipse.egit.github.core.service.RepositoryService;
+
+import java.io.IOException;
+import java.util.Collection;
 
 /**
  * Demonstrates a "screen-slide" animation using a {@link ViewPager}. Because {@link ViewPager}
@@ -44,12 +58,16 @@ public class ScreenSlideActivity extends FragmentActivity {
      * The number of pages (wizard steps) to show in this demo.
      */
     private static final int NUM_PAGES = 5;
+    private ProgressDialog pd;
+    Tree repoTree;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
      * and next wizard steps.
      */
     private ViewPager mPager;
+
+    String theMarkdown;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -59,6 +77,9 @@ public class ScreenSlideActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        theMarkdown = getIntent().getExtras().getString( "markdown" );
+
         setContentView(R.layout.activity_screen_slide);
 
         // Instantiate a ViewPager and a PagerAdapter.
@@ -130,7 +151,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            return ScreenSlidePageFragment.create(position);
+            return ScreenSlidePageFragment.create( position );
         }
 
         @Override
@@ -138,4 +159,5 @@ public class ScreenSlideActivity extends FragmentActivity {
             return NUM_PAGES;
         }
     }
+
 }
