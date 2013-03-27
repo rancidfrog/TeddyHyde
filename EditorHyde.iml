@@ -43,6 +43,7 @@
     <orderEntry type="library" name="com.madgag:markdownj-core:0.4.1" level="project" />
     <orderEntry type="library" name="android-support-v13" level="project" />
     <orderEntry type="library" name="org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpclient:4.2.1" level="project" />
+    <orderEntry type="library" name="classes" level="project" />
   </component>
 </module>
 

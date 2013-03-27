@@ -40,5 +40,6 @@
     <string name="exception_message">Unable to choose image, please try again</string>
 
     <string name="WebServiceUrl">http://pix.teddyhyde.com</string>
+    <string name="app_id">233056656840150</string>
 
 </resources>
