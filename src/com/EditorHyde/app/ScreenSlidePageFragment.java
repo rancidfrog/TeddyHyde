@@ -99,9 +99,14 @@ public class ScreenSlidePageFragment extends Fragment {
 
 
             MarkdownProcessor md = new MarkdownProcessor();
-
             String converted = "";
-            converted = md.markdown(markdown);
+            int yfmStart = markdown.indexOf( "---" );
+            int yfmEnd = markdown.indexOf( "---", 4 );
+            String withOutYFM = markdown;
+            if( -1 != yfmStart && -1 != yfmEnd ) {
+                withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
+            }
+            converted = md.markdown(withOutYFM);
             wv.loadData(converted, "text/html", null );
 
         }
