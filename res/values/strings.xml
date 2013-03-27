@@ -30,7 +30,7 @@
     <!-- Accessibility-only descriptions -->
     <string name="description_image_1">Image 1</string>
     <string name="description_image_2">Image 2</string>
-    <string name="description_zoom_touch_close">Expanded image (touch to close)</string>
+    <string name="description_zoom_touch_close"> !!!! Expanded image (touch to close)</string>
 
     <!-- Other strings -->
     <string name="card_back_title">Angry Red Android</string>
@@ -41,5 +41,6 @@
 
     <string name="WebServiceUrl">http://pix.teddyhyde.com</string>
     <string name="app_id">233056656840150</string>
+    <string name="FbTokenAuthEndpoint">/authentication/fbtoken</string>
 
 </resources>

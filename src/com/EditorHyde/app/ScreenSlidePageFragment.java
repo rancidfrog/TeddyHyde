@@ -96,8 +96,6 @@ public class ScreenSlidePageFragment extends Fragment {
             // Get md text
             EditText et = (EditText)container.findViewById(R.id.markdownEditor);
             String markdown = et.getText().toString();
-
-
             MarkdownProcessor md = new MarkdownProcessor();
             String converted = "";
             int yfmStart = markdown.indexOf( "---" );

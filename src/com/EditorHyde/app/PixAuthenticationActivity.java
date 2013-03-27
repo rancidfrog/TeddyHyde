@@ -28,13 +28,12 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.ByteArrayOutputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -47,11 +46,9 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
 
     private static final int PICK_IMAGE = 1;
     private Context ctx;
-    private ImageView imgView;
-    private Button upload;
     private Bitmap bitmap;
     private ProgressDialog pd;
-
+    private ImageView imgView;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -160,10 +157,10 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
 
             // callback when session changes state
             @Override
-            public void call(Session session, SessionState state, Exception exception) {
+            public void call(final Session session, SessionState state, Exception exception) {
                 if (session.isOpened()) {
 
-                    String mFbAccessToken = session.getAccessToken();
+                    final String fbToken = session.getAccessToken();
 
                     Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
 
@@ -171,14 +168,11 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
                         @Override
                         public void onCompleted(GraphUser user, Response response) {
                             if (user != null) {
-//                                TextView welcome = (TextView) findViewById(R.id.facebook_username_id);
-//                                welcome.setText("Hello " + user.getName() + "!");
-//                                mFbId = user.getId();
-//                                storeFbTokenForGcm();
-//                                GcmRegister.startGcm(v.getContext(), "facebook", mFbId, mFbAccessToken);
-//                                mLogger.i("fbtoken in fblogin:" + mFbAccessToken);
+                                String fbId = user.getId();
 
-                                    Toast.makeText( ctx, "Username: " + user.getBirthday(), Toast.LENGTH_SHORT );
+                                new FbTokenValidatorTask().execute( fbToken,  fbId);
+
+                                Toast.makeText( ctx, "Username: " + user.getFirstName(), Toast.LENGTH_SHORT );
                             }
                         }
 
@@ -192,26 +186,88 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
 
 
     private void captureImage() {
+        try {
+            Intent intent = new Intent();
+            intent.setType("image/*");
+            intent.setAction(Intent.ACTION_GET_CONTENT);
+            startActivityForResult(
+                    Intent.createChooser(intent, "Select Picture"),
+                    PICK_IMAGE);
+        } catch (Exception e) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.exception_message),
+                    Toast.LENGTH_LONG).show();
+            Log.e(e.getClass().getName(), e.getMessage(), e);
+        }
+
+    }
+
+    class FbTokenValidatorTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... args) {
+            String fbToken = args[0];
+            String fbId = args[1];
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpContext localContext = new BasicHttpContext();
+            String endpoint =  getString(R.string.WebServiceUrl) + getString(R.string.FbTokenAuthEndpoint);
+            HttpPost httpPost = new HttpPost( endpoint );
+
+            String sResponse = "";
+            MultipartEntity entity = new MultipartEntity(
+                    HttpMultipartMode.BROWSER_COMPATIBLE);
             try {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(
-                        Intent.createChooser(intent, "Select Picture"),
-                        PICK_IMAGE);
+
+                entity.addPart("fbToken",   new StringBody("fbToken" ) );
+                entity.addPart("fbId", new StringBody( "fbId" ) );
+                httpPost.setEntity(entity);
+                HttpResponse response = null;
+                response = httpClient.execute(httpPost,
+                        localContext);
+                BufferedReader reader = new BufferedReader(
+                        new InputStreamReader(
+                                response.getEntity().getContent(), "UTF-8"));
+                sResponse= reader.readLine();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return sResponse;
+
+        }
+
+        @Override
+        protected void onPostExecute(String sResponse) {
+            try {
+                if (pd.isShowing())
+                    pd.dismiss();
+
+                if (sResponse != null) {
+                    JSONObject JResponse = new JSONObject(sResponse);
+                    int success = JResponse.getInt("success");
+                    if (success == 0) {
+                        Toast.makeText(getApplicationContext(), "Unable to create auth token, please try again later",
+                                Toast.LENGTH_LONG).show();
+                    } else {
+                        String token = JResponse.getString("pixAuthToken");
+                        SharedPreferences sp = getSharedPreferences("com.EditorHyde.app", MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sp.edit();
+                        editor.putString( "pixAuthToken", token );
+                    }
+
+                }
             } catch (Exception e) {
                 Toast.makeText(getApplicationContext(),
                         getString(R.string.exception_message),
                         Toast.LENGTH_LONG).show();
                 Log.e(e.getClass().getName(), e.getMessage(), e);
             }
-
+        }
     }
-
 
     class ImageUploadTask extends AsyncTask<Void, Void, String> {
         @Override
-        protected String doInBackground(Void... unsued) {
+        protected String doInBackground(Void... unused) {
             try {
                 HttpClient httpClient = new DefaultHttpClient();
                 HttpContext localContext = new BasicHttpContext();
