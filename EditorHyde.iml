@@ -42,8 +42,7 @@
     <orderEntry type="library" name="src" level="application" />
     <orderEntry type="library" name="com.madgag:markdownj-core:0.4.1" level="project" />
     <orderEntry type="library" name="android-support-v13" level="project" />
-    <orderEntry type="library" name="apache-codec:commons-codec:1.2" level="project" />
-    <orderEntry type="library" name="com.madgag:markdownj-core:0.4.11" level="project" />
+    <orderEntry type="library" name="org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpclient:4.2.1" level="project" />
   </component>
 </module>
 
