@@ -21,8 +21,13 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.petebevin.markdown.MarkdownProcessor;
+
+import java.io.IOException;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
@@ -71,7 +76,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-            Bundle savedInstanceState) {
+                             Bundle savedInstanceState) {
 
         ViewGroup rootView;
         // Inflate the layout containing a title and body text.
@@ -83,12 +88,22 @@ public class ScreenSlidePageFragment extends Fragment {
 
         }
         else {
-        rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page, container, false);
+            rootView = (ViewGroup) inflater
+                    .inflate(R.layout.fragment_screen_slide_page, container, false);
+            // Set the title view to show the page number.
+            WebView wv = (WebView)rootView.findViewById(R.id.webView);
 
-        // Set the title view to show the page number.
-        ((TextView) rootView.findViewById(android.R.id.text1)).setText(
-                getString(R.string.title_template_step, mPageNumber + 1));
+            // Get md text
+            EditText et = (EditText)container.findViewById(R.id.markdownEditor);
+            String markdown = et.getText().toString();
+
+
+            MarkdownProcessor md = new MarkdownProcessor();
+
+            String converted = "";
+            converted = md.markdown(markdown);
+            wv.loadData(converted, "text/html", null );
+
         }
 
         return rootView;

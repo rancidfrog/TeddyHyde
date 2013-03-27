@@ -15,6 +15,8 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ListView;
 
+import org.apache.commons.codec.binary.Base64;
+
 import org.eclipse.egit.github.core.*;
 
 import org.eclipse.egit.github.core.client.*;
@@ -239,7 +241,10 @@ public class FileListingActivity extends Activity {
                 DataService ds = new DataService();
                 ds.getClient().setOAuth2Token(authToken);
                 Blob blob = ds.getBlob(repo, fileSha);
-                theMarkdown = blob.getContent();
+                String theMarkdown64 = blob.getContent();
+                String encoding = blob.getEncoding();
+                byte[] decoded = Base64.decodeBase64(theMarkdown64.getBytes());
+                theMarkdown = new String( decoded );
 
             } catch (IOException e) {
                 e.printStackTrace();

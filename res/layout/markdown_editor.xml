@@ -14,6 +14,7 @@
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
             android:text="### Hello! ###"
+            android:inputType="textNoSuggestions"
             android:id="@+id/editText" android:layout_gravity="center" android:gravity="top"/>
 
 

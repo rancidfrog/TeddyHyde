@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="com.madgag:markdownj-core:0.4.11" type="repository">
+    <properties maven-id="com.madgag:markdownj-core:0.4.1" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/markdownj-core-0.4.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
