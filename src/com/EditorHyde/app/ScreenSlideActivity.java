@@ -81,7 +81,6 @@ public class ScreenSlideActivity extends FragmentActivity {
      * The number of pages (wizard steps) to show in this demo.
      */
     private static final int NUM_PAGES = 2;
-    private ProgressDialog pd;
     Tree repoTree;
     ProgressBar pb;
 
@@ -194,7 +193,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
 
     /**
-     * A simple pager adapter that represents 5 {@link ScreenSlidePageFragment} objects, in
+     * A simple pager adapter that represents 2 {@link ScreenSlidePageFragment} objects, in
      * sequence.
      */
     private class ScreenSlidePagerAdapter extends FragmentStatePagerAdapter {
@@ -204,8 +203,16 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-            Fragment rv = ScreenSlidePageFragment.create( position, theMarkdown );
-            return (Fragment)rv;
+            Fragment rv;
+            if( position == 0 ) {
+
+                rv = ScreenSlidePageFragment.create( position, theMarkdown );
+
+            }
+            else {
+            rv = ScreenSlidePageFragmentMarkdown.create( position );
+            }
+                return (Fragment)rv;
         }
 
         @Override

@@ -16,6 +16,7 @@
 
 package com.EditorHyde.app;
 
+import android.app.Dialog;
 import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
@@ -31,14 +32,7 @@ import com.petebevin.markdown.MarkdownProcessor;
 
 import java.io.IOException;
 
-/**
- * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
- * the page number, along with some dummy text.
- *
- * <p>This class is used by the {@link CardFlipActivity} and {@link
- * ScreenSlideActivity} samples.</p>
- */
-public class ScreenSlidePageFragment extends Fragment {
+public class ScreenSlidePageFragmentMarkdown extends Fragment {
     /**
      * The argument key for the page number this fragment represents.
      */
@@ -51,20 +45,18 @@ public class ScreenSlidePageFragment extends Fragment {
 
     private String theMarkdown;
     ViewGroup rootView;
-
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static ScreenSlidePageFragment create(int pageNumber, String markdown ) {
-        ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        fragment.setMarkdown( markdown );
+    public static ScreenSlidePageFragmentMarkdown create(int pageNumber ) {
+        ScreenSlidePageFragmentMarkdown fragment = new ScreenSlidePageFragmentMarkdown();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ScreenSlidePageFragment() {
+    public ScreenSlidePageFragmentMarkdown() {
     }
 
     @Override
@@ -73,19 +65,37 @@ public class ScreenSlidePageFragment extends Fragment {
         mPageNumber = getArguments().getInt(ARG_PAGE);
     }
 
-    public void setMarkdown( String md) {
-        theMarkdown = md;
+
+    @Override
+    public void onResume() {
+
+        super.onResume();
+        // Set the title view to show the page number.
+        WebView wv = (WebView)rootView.findViewById(R.id.webView);
+
+        // Get md text
+        EditText et = (EditText)getActivity().findViewById(R.id.markdownEditor);
+        String markdown = et.getText().toString();
+        MarkdownProcessor md = new MarkdownProcessor();
+        String converted = "";
+        int yfmStart = markdown.indexOf( "---" );
+        int yfmEnd = markdown.indexOf( "---", 4 );
+        String withOutYFM = markdown;
+        if( -1 != yfmStart && -1 != yfmEnd ) {
+            withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
+        }
+        converted = md.markdown(withOutYFM);
+        wv.loadData(converted, "text/html", null );
+       // this.setShowsDialog(false);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-
         rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
-
-        ((EditText)rootView.findViewById(R.id.markdownEditor)).setText( theMarkdown );
+                .inflate(R.layout.fragment_screen_slide_page, container, false);
+        // getDialog().setTitle("Rendering markdown");
 
         return rootView;
     }
