@@ -42,5 +42,6 @@
     <string name="WebServiceUrl">http://pix.teddyhyde.com</string>
     <string name="app_id">233056656840150</string>
     <string name="FbTokenAuthEndpoint">/authentication/fbtoken</string>
+    <string name="save_file">Save File</string>
 
 </resources>

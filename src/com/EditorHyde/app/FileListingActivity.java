@@ -108,7 +108,7 @@ public class FileListingActivity extends Activity {
                 }
                 else {
                     String fileSha = treeEntry.getSha();
-                    showEditor( fileSha );
+                    showEditor( file, fileSha );
                 }
             }
         });
@@ -209,7 +209,7 @@ public class FileListingActivity extends Activity {
     }
 
 
-    public void showEditor( String fileSha ) {
+    public void showEditor( String filename, String fileSha ) {
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         String authToken = sp.getString("authToken", null);
@@ -217,7 +217,7 @@ public class FileListingActivity extends Activity {
 
         pd = ProgressDialog.show( this, "", "Loading file data...", true);
 
-        new GetFileTask().execute( login, authToken, repoName, fileSha );
+        new GetFileTask().execute( login, authToken, repoName, filename, fileSha );
 
     }
 
@@ -225,6 +225,7 @@ public class FileListingActivity extends Activity {
     private class GetFileTask extends AsyncTask<String, Void, Boolean> {
 
         String theMarkdown;
+        String theFilename;
 
         protected Boolean doInBackground(String...strings) {
 
@@ -232,7 +233,8 @@ public class FileListingActivity extends Activity {
             String username = strings[0];
             String authToken = strings[1];
             String repoName = strings[2];
-            String fileSha = strings[3];
+            theFilename = strings[3];
+            String fileSha = strings[4];
 
             try {
                 RepositoryService repositoryService = new RepositoryService();
@@ -245,6 +247,7 @@ public class FileListingActivity extends Activity {
                 String encoding = blob.getEncoding();
                 byte[] decoded = Base64.decodeBase64(theMarkdown64.getBytes());
                 theMarkdown = new String( decoded );
+
 
             } catch (IOException e) {
                 e.printStackTrace();
@@ -260,6 +263,9 @@ public class FileListingActivity extends Activity {
             i = new Intent(ctx, ScreenSlideActivity.class);
             Bundle extras = getIntent().getExtras();
             extras.putString( "markdown", theMarkdown );
+            extras.putString( "filename", theFilename );
+            extras.putString( "repo", repoName );
+
             i.putExtras(extras);
             startActivity(i);
         }

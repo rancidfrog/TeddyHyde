@@ -26,5 +26,9 @@
           android:showAsAction="ifRoom|withText" />
 
 
+    <item android:id="@+id/save_file"
+          android:title="@string/save_file"
+          android:showAsAction="ifRoom|withText" />
+
 
 </menu>

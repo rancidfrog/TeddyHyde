@@ -37,31 +37,29 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.Toast;
+import android.view.View;
+import android.widget.*;
+import org.apache.commons.codec.binary.Base64;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
-import org.eclipse.egit.github.core.Blob;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.RepositoryCommit;
-import org.eclipse.egit.github.core.Tree;
+import org.eclipse.egit.github.core.*;
 import org.eclipse.egit.github.core.client.PageIterator;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.DataService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.eclipse.egit.github.core.service.UserService;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Collection;
+import java.util.*;
+
 import org.apache.http.entity.mime.HttpMultipartMode;
 import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
@@ -85,6 +83,8 @@ public class ScreenSlideActivity extends FragmentActivity {
     private static final int NUM_PAGES = 2;
     private ProgressDialog pd;
     Tree repoTree;
+    ProgressBar pb;
+
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -93,6 +93,9 @@ public class ScreenSlideActivity extends FragmentActivity {
     private ViewPager mPager;
 
     String theMarkdown;
+    String theFile;
+    String theRepo;
+    String authToken;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -104,6 +107,11 @@ public class ScreenSlideActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
 
         theMarkdown = getIntent().getExtras().getString( "markdown" );
+        theFile = getIntent().getExtras().getString( "filename" );
+        theRepo = getIntent().getExtras().getString( "repo" );
+
+        SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+        authToken = sp.getString("authToken", null);
 
         setContentView(R.layout.activity_screen_slide);
 
@@ -146,14 +154,20 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             case R.id.add_image:
                 // check to see if we are authenticated
-
                 Intent i;
                 i = new Intent(this, PixAuthenticationActivity.class);
-
                 startActivity(i);
+                return true;
+
+            case R.id.save_file:
+                pb = (ProgressBar) findViewById(R.id.editProgressBar);
+                pb.setVisibility(View.VISIBLE);
+
+                EditText et = (EditText) findViewById(R.id.markdownEditor);
+                String contents = et.getText().toString();
 
 
-
+                new SaveFileTask().execute( authToken, theRepo, contents );
                 return true;
 
             case android.R.id.home:
@@ -200,4 +214,94 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
     }
 
+
+    private class SaveFileTask extends AsyncTask<String, Void, Boolean> {
+
+        protected Boolean doInBackground(String...strings) {
+            Boolean rv = true;
+
+            String authToken = strings[0];
+            String repoName = strings[1];
+            String contents = strings[2];
+
+            try {
+
+                UserService userService = new UserService();
+                userService.getClient().setOAuth2Token(authToken);
+                String username = userService.getUser().getLogin();
+
+                // Thank you!
+                // https://gist.github.com/Detelca/2337731
+
+                // create needed services
+                RepositoryService repositoryService = new RepositoryService();
+                repositoryService.getClient().setOAuth2Token(authToken);
+                CommitService commitService = new CommitService();
+                commitService.getClient().setOAuth2Token(authToken);
+                DataService dataService = new DataService();
+                dataService.getClient().setOAuth2Token(authToken);
+
+                // get some sha's from current state in git
+                Repository repository =  repositoryService.getRepository(username, repoName);
+                String baseCommitSha = repositoryService.getBranches(repository).get(0).getCommit().getSha();
+                RepositoryCommit baseCommit = commitService.getCommit(repository, baseCommitSha);
+                String treeSha = baseCommit.getSha();
+
+                // create new blob with data
+
+                Random random = new Random();
+                Blob blob = new Blob();
+                blob.setContent(contents);
+                blob.setEncoding(Blob.ENCODING_UTF8);
+                String blob_sha = dataService.createBlob(repository, blob);
+                Tree baseTree = dataService.getTree(repository, treeSha);
+
+                // create new tree entry
+                TreeEntry treeEntry = new TreeEntry();
+                treeEntry.setPath(theFile);
+                treeEntry.setMode(TreeEntry.MODE_BLOB);
+                treeEntry.setType(TreeEntry.TYPE_BLOB);
+                treeEntry.setSha(blob_sha);
+                treeEntry.setSize(blob.getContent().length());
+                Collection<TreeEntry> entries = new ArrayList<TreeEntry>();
+                entries.add(treeEntry);
+                Tree newTree = dataService.createTree(repository, entries, baseTree.getSha());
+
+                // create commit
+                Commit commit = new Commit();
+                commit.setMessage("Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString());
+                commit.setTree(newTree);
+                List<Commit> listOfCommits = new ArrayList<Commit>();
+                listOfCommits.add(new Commit().setSha(baseCommitSha));
+                // listOfCommits.containsAll(base_commit.getParents());
+                commit.setParents(listOfCommits);
+                // commit.setSha(base_commit.getSha());
+                Commit newCommit = dataService.createCommit(repository, commit);
+
+                // create resource
+                TypedResource commitResource = new TypedResource();
+                commitResource.setSha(newCommit.getSha());
+                commitResource.setType(TypedResource.TYPE_COMMIT);
+                commitResource.setUrl(newCommit.getUrl());
+
+                // get master reference and update it
+                Reference reference = dataService.getReference(repository, "heads/master");
+                reference.setObject(commitResource);
+                dataService.editReference(repository, reference, true);
+
+
+            } catch (IOException e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                 rv = false;
+            }
+
+            return rv;
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+            pb.setVisibility(View.GONE);
+        }
+    }
 }
