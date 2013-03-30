@@ -88,7 +88,6 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
     @Override
     public void onPageScrolled(int i, float v, int i2) {
         //To change body of implemented methods use File | Settings | File Templates.
-        System.out.println("Hi there");
     }
 
     @Override
@@ -115,7 +114,6 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
 
     @Override
     public void onPageScrollStateChanged(int i) {
-        System.out.println( "OK" );
         //To change body of implemented methods use File | Settings | File Templates.
     }
 }
