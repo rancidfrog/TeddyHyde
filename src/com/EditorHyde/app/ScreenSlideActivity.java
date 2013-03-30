@@ -16,10 +16,8 @@
 
 package com.EditorHyde.app;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
+import android.app.*;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -34,6 +32,7 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.text.Editable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -97,6 +96,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     String authToken;
 
     ScreenSlidePageFragmentMarkdown md;
+    ProgressDialog pd;
 
     /**
      * The pager adapter, which provides the pages to the view pager widget.
@@ -151,12 +151,60 @@ public class ScreenSlideActivity extends FragmentActivity {
                         ? R.string.action_finish
                         : R.string.action_next);
         item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
+
+        // If we are in the editor menu, then enable the save with commit message...
+        menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
+
         return true;
+    }
+
+    private void promptForCommitMessage( final String contents ) {
+// Set an EditText view to get user input
+        final LinearLayout ll = new LinearLayout(ScreenSlideActivity.this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        final EditText input = new EditText(ScreenSlideActivity.this);
+        final CheckBox cb = new CheckBox(ScreenSlideActivity.this);
+        cb.setText( "append 'Teddy Hyde' to end of commit ");
+        cb.setChecked( true );
+        ll.addView( input );
+        ll.addView( cb );
+
+        new AlertDialog.Builder(ScreenSlideActivity.this)
+                .setTitle("Commit message")
+                .setMessage( "Enter your commit message: ")
+                .setView(ll)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        startSaveProgressIndicator();
+                        Editable text = input.getText();
+                        String message = text.toString();
+
+                        if( cb.isChecked()) {
+                            message += " (edited by Teddy Hyde)";
+                        }
+
+                        // deal with the editable
+                        new SaveFileTask().execute( authToken, theRepo, contents, message );
+
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+    }
+
+    private void startSaveProgressIndicator() {
+        pb = (ProgressBar) findViewById(R.id.editProgressBar);
+        pb.setVisibility(View.VISIBLE);
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
+        int itemId = item.getItemId();
+        switch ( itemId ) {
 
             case R.id.add_image:
                 // check to see if we are authenticated
@@ -165,15 +213,18 @@ public class ScreenSlideActivity extends FragmentActivity {
                 startActivity(i);
                 return true;
 
+            case R.id.action_save_with_commit:
             case R.id.save_file:
-                pb = (ProgressBar) findViewById(R.id.editProgressBar);
-                pb.setVisibility(View.VISIBLE);
-
                 EditText et = (EditText) findViewById(R.id.markdownEditor);
                 String contents = et.getText().toString();
+                if( R.id.action_save_with_commit == itemId ) {
+                    promptForCommitMessage( contents );
+                }
+                else {
 
-
-                new SaveFileTask().execute( authToken, theRepo, contents );
+                    startSaveProgressIndicator();
+                    new SaveFileTask().execute( authToken, theRepo, contents, null );
+                }
                 return true;
 
             case android.R.id.home:
@@ -221,7 +272,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 rv = md;
 
             }
-                return (Fragment)rv;
+            return (Fragment)rv;
         }
 
         @Override
@@ -239,6 +290,7 @@ public class ScreenSlideActivity extends FragmentActivity {
             String authToken = strings[0];
             String repoName = strings[1];
             String contents = strings[2];
+            String commitMessage = strings[3];
 
             try {
 
@@ -285,7 +337,10 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 // create commit
                 Commit commit = new Commit();
-                commit.setMessage("Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString());
+                if( null == commitMessage ) {
+                    commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
+                }
+                commit.setMessage( commitMessage );
                 commit.setTree(newTree);
                 List<Commit> listOfCommits = new ArrayList<Commit>();
                 listOfCommits.add(new Commit().setSha(baseCommitSha));
@@ -308,7 +363,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             } catch (IOException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                 rv = false;
+                rv = false;
             }
 
             return rv;

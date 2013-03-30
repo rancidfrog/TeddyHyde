@@ -31,4 +31,8 @@
           android:showAsAction="ifRoom|withText" />
 
 
+    <item android:id="@+id/action_save_with_commit"
+          android:title="@string/save_with_commit"
+          android:showAsAction="ifRoom|withText" />
+
 </menu>

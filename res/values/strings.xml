@@ -43,5 +43,6 @@
     <string name="app_id">233056656840150</string>
     <string name="FbTokenAuthEndpoint">/authentication/fbtoken</string>
     <string name="save_file">Save File</string>
+    <string name="save_with_commit">Save with message...</string>
 
 </resources>
