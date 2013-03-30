@@ -21,6 +21,7 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +33,7 @@ import com.petebevin.markdown.MarkdownProcessor;
 
 import java.io.IOException;
 
-public class ScreenSlidePageFragmentMarkdown extends Fragment {
+public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPager.OnPageChangeListener {
     /**
      * The argument key for the page number this fragment represents.
      */
@@ -67,9 +68,31 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment {
 
 
     @Override
-    public void onResume() {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
 
-        super.onResume();
+        rootView = (ViewGroup) inflater
+                .inflate(R.layout.fragment_screen_slide_page, container, false);
+        // getDialog().setTitle("Rendering markdown");
+
+        return rootView;
+    }
+
+    /**
+     * Returns the page number represented by this fragment object.
+     */
+    public int getPageNumber() {
+        return mPageNumber;
+    }
+
+    @Override
+    public void onPageScrolled(int i, float v, int i2) {
+        //To change body of implemented methods use File | Settings | File Templates.
+        System.out.println("Hi there");
+    }
+
+    @Override
+    public void onPageSelected(int i) {
         // Set the title view to show the page number.
         WebView wv = (WebView)rootView.findViewById(R.id.webView);
 
@@ -86,24 +109,13 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment {
         }
         converted = md.markdown(withOutYFM);
         wv.loadData(converted, "text/html", null );
-       // this.setShowsDialog(false);
+        // this.setShowsDialog(false);
+
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-
-        rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page, container, false);
-        // getDialog().setTitle("Rendering markdown");
-
-        return rootView;
-    }
-
-    /**
-     * Returns the page number represented by this fragment object.
-     */
-    public int getPageNumber() {
-        return mPageNumber;
+    public void onPageScrollStateChanged(int i) {
+        System.out.println( "OK" );
+        //To change body of implemented methods use File | Settings | File Templates.
     }
 }

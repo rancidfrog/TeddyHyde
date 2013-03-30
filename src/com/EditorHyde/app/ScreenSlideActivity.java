@@ -96,6 +96,8 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theRepo;
     String authToken;
 
+    ScreenSlidePageFragmentMarkdown md;
+
     /**
      * The pager adapter, which provides the pages to the view pager widget.
      */
@@ -126,6 +128,11 @@ public class ScreenSlideActivity extends FragmentActivity {
                 // fragment expose actions itself (rather than the activity exposing actions),
                 // but for simplicity, the activity provides the actions in this sample.
                 invalidateOptionsMenu();
+
+                if( 1 == position ) {
+                    md.onPageSelected(position);
+                }
+
             }
         });
     }
@@ -210,7 +217,9 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             }
             else {
-            rv = ScreenSlidePageFragmentMarkdown.create( position );
+                md = ScreenSlidePageFragmentMarkdown.create( position );
+                rv = md;
+
             }
                 return (Fragment)rv;
         }
