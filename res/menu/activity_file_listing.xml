@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item android:id="@+id/action_add_new_post"
+          android:title="@string/add_new_post"
+          android:showAsAction="ifRoom|withText" />
+
+
+    <item android:id="@+id/action_add_new_page"
+          android:title="@string/add_new_page"
+          android:showAsAction="ifRoom|withText" />
+
+</menu>

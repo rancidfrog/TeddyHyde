@@ -1,19 +1,21 @@
 package com.EditorHyde.app;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.text.Editable;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ListView;
+import android.widget.*;
 
 import org.apache.commons.codec.binary.Base64;
 
@@ -23,10 +25,9 @@ import org.eclipse.egit.github.core.client.*;
 import org.eclipse.egit.github.core.service.*;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.logging.Logger;
 
 
@@ -62,6 +63,74 @@ public class FileListingActivity extends Activity {
             rebuildFilesList();
         }
 
+    }
+
+    private void promptForFilename( final String root, final String template, final String type ) {
+        // Set an EditText view to get user input
+        final EditText input = new EditText(FileListingActivity.this);
+
+        AlertDialog show = new AlertDialog.Builder(FileListingActivity.this)
+                .setTitle(type + " title")
+                .setMessage("Provide a title for your " + type.toLowerCase())
+                .setView(input)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+
+                        Editable text = input.getText();
+                        String title = text.toString();
+                        String whitespaceStripped = title.toLowerCase().replaceAll( "\\S+", "-");
+
+                        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+                        String prefix = sdf.format( new Date() );
+                        String filename = root + prefix + whitespaceStripped;
+
+                        // Convert it to proper format
+                        loadEditor( template, filename, repoName );
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        String filename;
+        switch ( itemId ) {
+
+            case R.id.action_add_new_page:
+                cwd.clear();
+                cwd.add( "_pages");
+
+                promptForFilename( "_pages/", getString( R.string.page_template ), "Page" );
+
+                return true;
+
+            case R.id.action_add_new_post:
+                cwd.clear();
+                cwd.add( "_posts");
+
+                promptForFilename( "_posts/", getString( R.string.page_template ), "Post" );
+
+                // create a new post
+                return true;
+
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.activity_file_listing, menu);
+        return true;
     }
 
     @Override
@@ -183,10 +252,10 @@ public class FileListingActivity extends Activity {
                 // Iterate over the branches and find gh-pages or master
                 for( RepositoryBranch i : branches ) {
                     String theName = i.getName().toString();
-                    if( theName.equalsIgnoreCase( "gh-pages" ) ) {
+                    if( theName.equalsIgnoreCase("gh-pages") ) {
                         theBranch = i;
                     }
-                    else if( theName.equalsIgnoreCase( "master") ) {
+                    else if( theName.equalsIgnoreCase("master") ) {
                         master = i;
                     }
                 }
@@ -268,15 +337,20 @@ public class FileListingActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             pd.hide();
-            Intent i;
-            i = new Intent(ctx, ScreenSlideActivity.class);
-            Bundle extras = getIntent().getExtras();
-            extras.putString( "markdown", theMarkdown );
-            extras.putString( "filename", theFilename );
-            extras.putString( "repo", repoName );
-
-            i.putExtras(extras);
-            startActivity(i);
+            loadEditor( theMarkdown, theFilename, repoName );
         }
+    }
+
+    private void loadEditor( String theMarkdown, String theFilename, String repoName ) {
+        Intent i;
+        i = new Intent(ctx, ScreenSlideActivity.class);
+        Bundle extras = getIntent().getExtras();
+        extras.putString( "markdown", theMarkdown );
+        extras.putString( "filename", theFilename );
+        extras.putString( "repo", repoName );
+
+        i.putExtras(extras);
+        startActivity(i);
+
     }
 }

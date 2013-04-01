@@ -327,10 +327,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                     theBranch = master;
                 }
 
-                String masterCommitSha = master.getCommit().getSha();
                 String baseCommitSha = theBranch.getCommit().getSha();
-                RepositoryCommit baseCommit = commitService.getCommit(repository, baseCommitSha);
-                String treeSha = baseCommit.getSha();
 
                 // create new blob with data
 
@@ -339,7 +336,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 blob.setContent(contents);
                 blob.setEncoding(Blob.ENCODING_UTF8);
                 String blob_sha = dataService.createBlob(repository, blob);
-                Tree baseTree = dataService.getTree(repository, treeSha);
+                Tree baseTree = dataService.getTree(repository, baseCommitSha);
 
                 // create new tree entry
                 TreeEntry treeEntry = new TreeEntry();

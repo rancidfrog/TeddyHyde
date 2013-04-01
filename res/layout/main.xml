@@ -18,7 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/githubPassword" android:layout_gravity="center" android:padding="5pt"
-            android:layout_margin="3pt" android:hint="GitHub password"/>
+            android:layout_margin="3pt" android:hint="GitHub password" android:password="true"/>
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
