@@ -82,13 +82,25 @@ public class RepoListActivity extends Activity {
                 rv = false;
             }
 
-            repoNames = new ArrayList<String>();
+
+            ArrayList<String> nonJekyll = new ArrayList<String>();
+            ArrayList<String> possibleJekyll = new ArrayList<String>();
             for( int j = 0; j < repos.size(); j++ ) {
+
                 Repository repo = repos.get(j);
                 String name = repo.getName();
-                repoNames.add(name);
+
+                if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
+                    possibleJekyll.add( name );
+
+                }
+                else {
+                    nonJekyll.add( name );
+                }
             }
 
+            possibleJekyll.addAll( nonJekyll);
+            repoNames = possibleJekyll;
             return rv;
 
         }

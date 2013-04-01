@@ -17,9 +17,7 @@
 package com.EditorHyde.app;
 
 import android.app.*;
-import android.content.DialogInterface;
-import android.content.Intent;
-import android.content.SharedPreferences;
+import android.content.*;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -28,6 +26,7 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
+import android.text.SpannableString;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -178,17 +177,59 @@ public class ScreenSlideActivity extends FragmentActivity {
         pb.setVisibility(View.VISIBLE);
     }
 
+    private void pasteCode( String preprocessed ) {
+        String code = preprocessed.replaceAll( "\n", "\n    ");
+        insertAtCursor( "\n    " + code + "\n" );
+    }
+
+    private void insertAtCursor( String text )  {
+        EditText et = (EditText) findViewById(R.id.markdownEditor);
+        int start = et.getSelectionStart();
+        int end = et.getSelectionEnd();
+        et.getText().replace(Math.min(start, end), Math.max(start, end),
+                text, 0, text.length());
+    }
+
+    private void pasteQuote( String preprocessed ) {
+        String quote = preprocessed.replaceAll( "\n", "\n> ");
+        // make sure first line is also done
+        insertAtCursor( "\n> " + quote + "\n" );
+
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         switch ( itemId ) {
 
             case R.id.add_image:
-                // check to see if we are authenticated
                 Intent i;
                 i = new Intent(this, PixActivity.class);
                 startActivity(i);
                 return true;
+
+            case R.id.action_paste_code:
+            case R.id.action_paste_quote:
+
+                // grab whatever is in the clipboard
+                ClipboardManager cm = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                if( cm.hasPrimaryClip() ) {
+                    ClipData cd = cm.getPrimaryClip();
+                    ClipData.Item clipItem  = cd.getItemAt(0);
+                    if( null != item ) {
+                        SpannableString theText = (SpannableString) clipItem.getText();
+
+                        if( itemId == R.id.action_paste_quote ) {
+                            pasteQuote( theText.toString() );
+                        }
+                        else if( itemId == R.id.action_paste_code ) {
+                            pasteCode( theText.toString() );
+                        }
+                    }
+                }
+
+                return true;
+
 
             case R.id.action_save_with_commit:
             case R.id.save_file:
@@ -241,7 +282,7 @@ public class ScreenSlideActivity extends FragmentActivity {
             Fragment rv;
             if( position == 0 ) {
                 rv = ScreenSlidePageFragment.create( position, theMarkdown );
-               // ((TextView)findViewById(R.id.currentFilename)).setText( theFile );
+                // ((TextView)findViewById(R.id.currentFilename)).setText( theFile );
             }
             else {
                 md = ScreenSlidePageFragmentMarkdown.create( position );

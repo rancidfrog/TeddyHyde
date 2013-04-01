@@ -59,7 +59,8 @@ Write your post here, using Markdown.\n
 \n
 
 </string>
-
+    <string name="paste_quote">Paste Quote</string>
+    <string name="paste_code">Paste Code</string>
 
 
 </resources>

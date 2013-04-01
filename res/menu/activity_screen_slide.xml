@@ -36,5 +36,16 @@
           android:showAsAction="ifRoom|withText" />
 
 
+    <item android:id="@+id/action_paste_quote"
+          android:title="@string/paste_quote"
+          android:showAsAction="ifRoom|withText" />
+
+
+    <item android:id="@+id/action_paste_code"
+          android:title="@string/paste_code"
+          android:showAsAction="ifRoom|withText" />
+
+
+
 
 </menu>
