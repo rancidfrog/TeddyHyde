@@ -102,13 +102,15 @@ public class FileListingActivity extends Activity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         String filename;
+        String template;
         switch ( itemId ) {
 
             case R.id.action_add_new_page:
                 cwd.clear();
                 cwd.add( "_pages");
 
-                promptForFilename( "_pages/", getString( R.string.page_template ), "Page" );
+                template = getString(R.string.page_template);
+                promptForFilename( "_pages/", template, "Page" );
 
                 return true;
 
@@ -116,7 +118,8 @@ public class FileListingActivity extends Activity {
                 cwd.clear();
                 cwd.add( "_posts");
 
-                promptForFilename("_posts/", getString(R.string.page_template), "Post");
+                template = getString(R.string.page_template);
+                promptForFilename("_posts/", template, "Post");
 
                 // create a new post
                 return true;

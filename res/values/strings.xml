@@ -3,16 +3,6 @@
     <string name="app_name">EditorHyde</string>
     <string name="login">Login</string>
 
-    <!-- Titles -->
-
-    <string name="title_crossfade">Simple Crossfade</string>
-    <string name="title_card_flip">Card Flip</string>
-    <string name="title_screen_slide">Screen Slide</string>
-    <string name="title_zoom">Zoom</string>
-    <string name="title_layout_changes">Layout Changes</string>
-    <string name="title_template_step">Step <xliff:g id="step_number">%1$d</xliff:g>: Lorem
-        Ipsum</string>
-
     <!-- Actions -->
     <string name="action_toggle">Toggle indicator</string>
     <string name="action_add_item">Add item</string>
@@ -23,19 +13,11 @@
     <string name="action_info">Photo info</string>
     <string name="action_photo">View photo</string>
 
-    <!-- Messages -->
-    <string name="message_empty_layout_changes">Add an item above to get started.</string>
-    <string name="message_zoom_touch_expand">Touch a photo to expand it.</string>
-
     <!-- Accessibility-only descriptions -->
     <string name="description_image_1">Image 1</string>
     <string name="description_image_2">Image 2</string>
     <string name="description_zoom_touch_close"> !!!! Expanded image (touch to close)</string>
 
-    <!-- Other strings -->
-    <string name="card_back_title">Angry Red Android</string>
-    <string name="card_back_description"><![CDATA[Lorem ipsum dolor sit]]></string>
-    <string name="lorem_ipsum"><![CDATA[Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris et magna ut erat elementum cursus in quis ipsum. Nam faucibus ultrices eros, vel tempor leo semper sit amet. Duis magna quam, congue vitae interdum nec, condimentum ut lectus. Sed commodo venenatis eros a dignissim. Nunc adipiscing turpis nec magna venenatis at ultricies ipsum bibendum. Sed volutpat urna quis nisi vulputate egestas. Etiam eu dui a enim lacinia dapibus. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.\n\nPhasellus orci mi, eleifend nec congue id, volutpat at neque. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer semper velit vel leo rutrum sed fermentum elit porta.]]></string>
     <string name="add_image">Add Images</string>
     <string name="exception_message">Unable to choose image, please try again</string>
 
@@ -43,37 +25,40 @@
     <string name="app_id">233056656840150</string>
     <string name="FbTokenAuthEndpoint">/authentication/fbtoken</string>
     <string name="save_file">Save File</string>
-    <string name="save_with_commit">Save with message...</string>
-    <string name="add_new_post">Add new post...</string>
-    <string name="add_new_page">Add new page...</string>
+    <string name="save_with_commit">Save with message…</string>
+    <string name="add_new_post">New post…</string>
+    <string name="add_new_page">New page…</string>
 
-    <string name="page_template"><![CDATA[
----
-layout: page
-category :
-tagline:
-tags : []
----
+    <string name="page_template">
+---\n
+layout: page\n
+category: \n
+tagline: \n
+tags : [] \n
+published: false\n
+---\n
+\n
+# A new page\n
+\n
+Write your page here, using Markdown.\n
+\n
+</string>
 
-# A new page
+    <string name="post_template">
+---\n
+layout: post \n
+category: \n
+tagline: \n
+tags : [] \n
+published: false\n
+---\n
+\n
+# A new post \n
+\n
+Write your post here, using Markdown.\n
+\n
 
-Write your page here, using Markdown.
-
-    ]]></string>
-
-    <string name="post_template"><![CDATA[
----
-layout: post
-category :
-tagline:
-tags : []
----
-
-# A new post
-
-Write your post here, using Markdown.
-
-    ]]></string>
+</string>
 
 
 
