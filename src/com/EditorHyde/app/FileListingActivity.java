@@ -170,15 +170,33 @@ public class FileListingActivity extends Activity {
 
             RepositoryService repositoryService = new RepositoryService();
             repositoryService.getClient().setOAuth2Token(authToken);
-            String master = "";
-
             Repository repository;
 
             try {
                 CommitService cs = new CommitService();
                 cs.getClient().setOAuth2Token(authToken);
                 Repository repo = repositoryService.getRepository(username, repoName);
-//                // Get first commit
+
+                List<RepositoryBranch> branches = repositoryService.getBranches(repo);
+                RepositoryBranch theBranch = null;
+                RepositoryBranch master = null;
+                // Iterate over the branches and find gh-pages or master
+                for( RepositoryBranch i : branches ) {
+                    String theName = i.getName().toString();
+                    if( theName.equalsIgnoreCase( "gh-pages" ) ) {
+                        theBranch = i;
+                    }
+                    else if( theName.equalsIgnoreCase( "master") ) {
+                        master = i;
+                    }
+                }
+                if( null == theBranch ) {
+                    theBranch = master;
+                }
+
+                String baseCommitSha = theBranch.getCommit().getSha();
+                RepositoryCommit baseCommit = cs.getCommit(repo, baseCommitSha);
+                String treeSha = baseCommit.getSha();
                 PageIterator<RepositoryCommit> pager = cs.pageCommits( repo, 1 );
                 Collection<RepositoryCommit> commits = pager.next();
                 RepositoryCommit rc = null;

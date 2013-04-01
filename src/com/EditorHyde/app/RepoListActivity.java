@@ -58,7 +58,7 @@ public class RepoListActivity extends Activity {
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
 
-        pd = ProgressDialog.show( this, "", "Loading all jekyll repositories...", true);
+        pd = ProgressDialog.show( this, "", "Loading all repositories...", true);
 
         new GetReposTask().execute();
 
@@ -86,9 +86,7 @@ public class RepoListActivity extends Activity {
             for( int j = 0; j < repos.size(); j++ ) {
                 Repository repo = repos.get(j);
                 String name = repo.getName();
-                if( name.contains("github.com") ) {
-                    repoNames.add(name);
-                }
+                repoNames.add(name);
             }
 
             return rv;

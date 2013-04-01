@@ -180,12 +180,12 @@ public class ScreenSlideActivity extends FragmentActivity {
                         Editable text = input.getText();
                         String message = text.toString();
 
-                        if( cb.isChecked()) {
+                        if (cb.isChecked()) {
                             message += " (edited by Teddy Hyde)";
                         }
 
                         // deal with the editable
-                        new SaveFileTask().execute( authToken, theRepo, contents, message );
+                        new SaveFileTask().execute(authToken, theRepo, contents, message);
 
                     }
                 })
@@ -311,7 +311,24 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 // get some sha's from current state in git
                 Repository repository =  repositoryService.getRepository(username, repoName);
-                String baseCommitSha = repositoryService.getBranches(repository).get(0).getCommit().getSha();
+                List<RepositoryBranch> branches = repositoryService.getBranches(repository);
+                RepositoryBranch theBranch = null;
+                RepositoryBranch master = null;
+                // Iterate over the branches and find gh-pages or master
+                for( RepositoryBranch i : branches ) {
+                    String theName = i.getName().toString();
+                    if( theName.equalsIgnoreCase( "gh-pages" ) ) {
+                        theBranch = i;
+                    }
+                    else if( theName.equalsIgnoreCase( "master") ) {
+                        master = i;
+                    }
+                }
+                if( null == theBranch ) {
+                    theBranch = master;
+                }
+
+                String baseCommitSha = theBranch.getCommit().getSha();
                 RepositoryCommit baseCommit = commitService.getCommit(repository, baseCommitSha);
                 String treeSha = baseCommit.getSha();
 
