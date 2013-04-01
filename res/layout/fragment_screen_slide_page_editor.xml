@@ -27,8 +27,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="_config.yml"
-                android:id="@+id/textView"
+                android:id="@+id/currentFilename"
                 android:layout_gravity="left" android:layout_weight="4"/>
         <ProgressBar
                 android:layout_width="wrap_content"

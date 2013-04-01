@@ -194,20 +194,11 @@ public class FileListingActivity extends Activity {
                     theBranch = master;
                 }
 
+                String masterCommitSha = master.getCommit().getSha();
                 String baseCommitSha = theBranch.getCommit().getSha();
-                RepositoryCommit baseCommit = cs.getCommit(repo, baseCommitSha);
-                String treeSha = baseCommit.getSha();
-                PageIterator<RepositoryCommit> pager = cs.pageCommits( repo, 1 );
-                Collection<RepositoryCommit> commits = pager.next();
-                RepositoryCommit rc = null;
-                for( RepositoryCommit commit: commits) {
-                    rc = commit;
-                }
-
-                String sha = rc.getSha();
                 DataService ds = new DataService();
                 ds.getClient().setOAuth2Token(authToken);
-                repoTree = ds.getTree( repo, sha, true );
+                repoTree = ds.getTree( repo, baseCommitSha, true );
                 entries  = repoTree.getTree();
                 filterArray();
 

@@ -263,9 +263,8 @@ public class ScreenSlideActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             Fragment rv;
             if( position == 0 ) {
-
                 rv = ScreenSlidePageFragment.create( position, theMarkdown );
-
+               // ((TextView)findViewById(R.id.currentFilename)).setText( theFile );
             }
             else {
                 md = ScreenSlidePageFragmentMarkdown.create( position );
@@ -317,10 +316,10 @@ public class ScreenSlideActivity extends FragmentActivity {
                 // Iterate over the branches and find gh-pages or master
                 for( RepositoryBranch i : branches ) {
                     String theName = i.getName().toString();
-                    if( theName.equalsIgnoreCase( "gh-pages" ) ) {
+                    if( theName.equalsIgnoreCase("gh-pages") ) {
                         theBranch = i;
                     }
-                    else if( theName.equalsIgnoreCase( "master") ) {
+                    else if( theName.equalsIgnoreCase("master") ) {
                         master = i;
                     }
                 }
@@ -328,6 +327,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                     theBranch = master;
                 }
 
+                String masterCommitSha = master.getCommit().getSha();
                 String baseCommitSha = theBranch.getCommit().getSha();
                 RepositoryCommit baseCommit = commitService.getCommit(repository, baseCommitSha);
                 String treeSha = baseCommit.getSha();
