@@ -40,6 +40,7 @@ import java.util.logging.Logger;
  */
 public class FileListingActivity extends Activity {
 
+    private static final String MARKDOWN_EXTENSION = ".md";
     private ProgressDialog pd;
     private List<String> cwd;
     Tree repoTree;
@@ -82,7 +83,7 @@ public class FileListingActivity extends Activity {
 
                         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
                         String prefix = sdf.format( new Date() );
-                        String filename = root + prefix + whitespaceStripped;
+                        String filename = root + prefix + "-" + whitespaceStripped + MARKDOWN_EXTENSION;
 
                         // Convert it to proper format
                         loadEditor( template, filename, repoName );
@@ -115,7 +116,7 @@ public class FileListingActivity extends Activity {
                 cwd.clear();
                 cwd.add( "_posts");
 
-                promptForFilename( "_posts/", getString( R.string.page_template ), "Post" );
+                promptForFilename("_posts/", getString(R.string.page_template), "Post");
 
                 // create a new post
                 return true;
