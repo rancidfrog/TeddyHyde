@@ -370,7 +370,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 commitResource.setUrl(newCommit.getUrl());
 
                 // get master reference and update it
-                Reference reference = dataService.getReference(repository, "heads/master");
+                Reference reference = dataService.getReference(repository, "heads/" + theBranch );
                 reference.setObject(commitResource);
                 dataService.editReference(repository, reference, true);
 
