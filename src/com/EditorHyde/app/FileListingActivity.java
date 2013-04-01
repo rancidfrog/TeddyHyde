@@ -78,7 +78,7 @@ public class FileListingActivity extends Activity {
 
                         Editable text = input.getText();
                         String title = text.toString();
-                        String whitespaceStripped = title.toLowerCase().replaceAll( "\\S+", "-");
+                        String whitespaceStripped = title.toLowerCase().replaceAll( "\\s+", "-");
 
                         SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
                         String prefix = sdf.format( new Date() );
