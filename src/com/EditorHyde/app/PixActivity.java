@@ -28,7 +28,6 @@ import org.apache.http.entity.mime.MultipartEntity;
 import org.apache.http.entity.mime.content.ByteArrayBody;
 import org.apache.http.entity.mime.content.StringBody;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.message.BasicHttpEntityEnclosingRequest;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
@@ -42,7 +41,7 @@ import java.io.*;
  * Time: 10:48 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PixAuthenticationActivity extends Activity implements View.OnClickListener {
+public class PixActivity extends Activity {
 
     private static final int PICK_IMAGE = 1;
     private Context ctx;
@@ -54,32 +53,19 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        SharedPreferences sp = getSharedPreferences("com.EditorHyde.app", MODE_PRIVATE);
-        String pixAuthToken= sp.getString("pixAuthToken", null );
 
         ctx = this;
 
-        if( null == pixAuthToken ) {
+        setContentView(R.layout.pix_grid_layout);
 
-            setContentView(R.layout.picture_authentication);
+        GridView gridview = (GridView) findViewById(R.id.gridview);
+        gridview.setAdapter(new ImageAdapter(this));
 
-            Button btnFacebookLogin = (Button) findViewById(R.id.fb_login_button);
-            btnFacebookLogin.setOnClickListener(this);
-
-        }
-        else {
-            setContentView(R.layout.pix_grid_layout);
-
-            GridView gridview = (GridView) findViewById(R.id.gridview);
-            gridview.setAdapter(new ImageAdapter(this));
-
-            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    Toast.makeText( ctx, "" + position, Toast.LENGTH_SHORT).show();
-                }
-            });
-
-        }
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                Toast.makeText( ctx, "" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -115,7 +101,7 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
                             bitmap = null;
                         }
 
-                        pd = ProgressDialog.show(PixAuthenticationActivity.this, "Uploading",
+                        pd = ProgressDialog.show(PixActivity.this, "Uploading",
                                 "Please wait...", true);
                         new ImageUploadTask().execute();
                     } catch (Exception e) {
@@ -143,46 +129,6 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
             return null;
     }
 
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-
-        startFacebookLogin();
-
-    }
-
-    private void startFacebookLogin( ) {
-        // start Facebook Login
-        Session.openActiveSession(this, true, new Session.StatusCallback() {
-
-            // callback when session changes state
-            @Override
-            public void call(final Session session, SessionState state, Exception exception) {
-                if (session.isOpened()) {
-
-                    final String fbToken = session.getAccessToken();
-
-                    Request.executeMeRequestAsync(session, new Request.GraphUserCallback() {
-
-                        // callback after Graph API response with user object
-                        @Override
-                        public void onCompleted(GraphUser user, Response response) {
-                            if (user != null) {
-                                String fbId = user.getId();
-
-                                new FbTokenValidatorTask().execute( fbToken,  fbId);
-
-                                Toast.makeText( ctx, "Username: " + user.getFirstName(), Toast.LENGTH_SHORT );
-                            }
-                        }
-
-                    });
-                }
-            }
-
-        });
-    }
-
 
 
     private void captureImage() {
@@ -200,69 +146,6 @@ public class PixAuthenticationActivity extends Activity implements View.OnClickL
             Log.e(e.getClass().getName(), e.getMessage(), e);
         }
 
-    }
-
-    class FbTokenValidatorTask extends AsyncTask<String, Void, String> {
-        @Override
-        protected String doInBackground(String... args) {
-            String fbToken = args[0];
-            String fbId = args[1];
-            HttpClient httpClient = new DefaultHttpClient();
-            HttpContext localContext = new BasicHttpContext();
-            String endpoint =  getString(R.string.WebServiceUrl) + getString(R.string.FbTokenAuthEndpoint);
-            HttpPost httpPost = new HttpPost( endpoint );
-
-            String sResponse = "";
-            MultipartEntity entity = new MultipartEntity(
-                    HttpMultipartMode.BROWSER_COMPATIBLE);
-            try {
-
-                entity.addPart("fbToken",   new StringBody("fbToken" ) );
-                entity.addPart("fbId", new StringBody( "fbId" ) );
-                httpPost.setEntity(entity);
-                HttpResponse response = null;
-                response = httpClient.execute(httpPost,
-                        localContext);
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(
-                                response.getEntity().getContent(), "UTF-8"));
-                sResponse= reader.readLine();
-
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-
-            return sResponse;
-
-        }
-
-        @Override
-        protected void onPostExecute(String sResponse) {
-            try {
-                if (pd.isShowing())
-                    pd.dismiss();
-
-                if (sResponse != null) {
-                    JSONObject JResponse = new JSONObject(sResponse);
-                    int success = JResponse.getInt("success");
-                    if (success == 0) {
-                        Toast.makeText(getApplicationContext(), "Unable to create auth token, please try again later",
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        String token = JResponse.getString("pixAuthToken");
-                        SharedPreferences sp = getSharedPreferences("com.EditorHyde.app", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sp.edit();
-                        editor.putString( "pixAuthToken", token );
-                    }
-
-                }
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(),
-                        getString(R.string.exception_message),
-                        Toast.LENGTH_LONG).show();
-                Log.e(e.getClass().getName(), e.getMessage(), e);
-            }
-        }
     }
 
     class ImageUploadTask extends AsyncTask<Void, Void, String> {
