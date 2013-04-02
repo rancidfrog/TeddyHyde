@@ -309,94 +309,11 @@ public class ScreenSlideActivity extends FragmentActivity {
             String contents = strings[2];
             String commitMessage = strings[3];
 
-            try {
-
-                UserService userService = new UserService();
-                userService.getClient().setOAuth2Token(authToken);
-                String username = userService.getUser().getLogin();
-
-                // Thank you!
-                // https://gist.github.com/Detelca/2337731
-
-                // create needed services
-                RepositoryService repositoryService = new RepositoryService();
-                repositoryService.getClient().setOAuth2Token(authToken);
-                CommitService commitService = new CommitService();
-                commitService.getClient().setOAuth2Token(authToken);
-                DataService dataService = new DataService();
-                dataService.getClient().setOAuth2Token(authToken);
-
-                // get some sha's from current state in git
-                Repository repository =  repositoryService.getRepository(username, repoName);
-                List<RepositoryBranch> branches = repositoryService.getBranches(repository);
-                RepositoryBranch theBranch = null;
-                RepositoryBranch master = null;
-                // Iterate over the branches and find gh-pages or master
-                for( RepositoryBranch i : branches ) {
-                    String theName = i.getName().toString();
-                    if( theName.equalsIgnoreCase("gh-pages") ) {
-                        theBranch = i;
-                    }
-                    else if( theName.equalsIgnoreCase("master") ) {
-                        master = i;
-                    }
-                }
-                if( null == theBranch ) {
-                    theBranch = master;
-                }
-
-                String baseCommitSha = theBranch.getCommit().getSha();
-
-                // create new blob with data
-
-                Random random = new Random();
-                Blob blob = new Blob();
-                blob.setContent(contents);
-                blob.setEncoding(Blob.ENCODING_UTF8);
-                String blob_sha = dataService.createBlob(repository, blob);
-                Tree baseTree = dataService.getTree(repository, baseCommitSha);
-
-                // create new tree entry
-                TreeEntry treeEntry = new TreeEntry();
-                treeEntry.setPath(theFile);
-                treeEntry.setMode(TreeEntry.MODE_BLOB);
-                treeEntry.setType(TreeEntry.TYPE_BLOB);
-                treeEntry.setSha(blob_sha);
-                treeEntry.setSize(blob.getContent().length());
-                Collection<TreeEntry> entries = new ArrayList<TreeEntry>();
-                entries.add(treeEntry);
-                Tree newTree = dataService.createTree(repository, entries, baseTree.getSha());
-
-                // create commit
-                Commit commit = new Commit();
-                if( null == commitMessage ) {
-                    commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
-                }
-                commit.setMessage( commitMessage );
-                commit.setTree(newTree);
-                List<Commit> listOfCommits = new ArrayList<Commit>();
-                listOfCommits.add(new Commit().setSha(baseCommitSha));
-                // listOfCommits.containsAll(base_commit.getParents());
-                commit.setParents(listOfCommits);
-                // commit.setSha(base_commit.getSha());
-                Commit newCommit = dataService.createCommit(repository, commit);
-
-                // create resource
-                TypedResource commitResource = new TypedResource();
-                commitResource.setSha(newCommit.getSha());
-                commitResource.setType(TypedResource.TYPE_COMMIT);
-                commitResource.setUrl(newCommit.getUrl());
-
-                // get master reference and update it
-                Reference reference = dataService.getReference(repository, "heads/" + theBranch.getName() );
-                reference.setObject(commitResource);
-                dataService.editReference(repository, reference, true);
-
-
-            } catch (IOException e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                rv = false;
+            if( null == commitMessage ) {
+                commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
             }
+
+            rv = Github.SaveFile( authToken, repoName, contents, theFile, commitMessage );
 
             return rv;
 
@@ -405,6 +322,10 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         protected void onPostExecute(Boolean result) {
             pb.setVisibility(View.GONE);
+
+            if( !result ) {
+                 Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
+            }
         }
     }
 }
