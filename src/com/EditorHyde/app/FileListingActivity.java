@@ -11,6 +11,7 @@ import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -49,6 +50,7 @@ public class FileListingActivity extends Activity {
     String repoName;
     List<TreeEntry> entries;
     Context ctx;
+    Repository theRepo;
 
     @Override
     public void onBackPressed() {
@@ -66,27 +68,46 @@ public class FileListingActivity extends Activity {
 
     }
 
-    private void promptForFilename( final String root, final String template, final String type ) {
+    private void promptForFilename( final String root, final String prefix, final String template, final String type ) {
         // Set an EditText view to get user input
+        final String[] filename = new String[1];
+        final LinearLayout ll = new LinearLayout(FileListingActivity.this);
+        ll.setOrientation(LinearLayout.VERTICAL);
         final EditText input = new EditText(FileListingActivity.this);
+        final TextView finalFilename = new TextView(FileListingActivity.this);
+        ll.addView(finalFilename);
+        ll.addView(input);
+
+        input.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                Editable text = input.getText();
+                String title = text.toString();
+                String whitespaceStripped = title.toLowerCase().replaceAll( "\\W+", "-");
+
+                filename[0] = root + prefix + whitespaceStripped + MARKDOWN_EXTENSION;
+
+                finalFilename.setText( "Filename: " + filename[0] );
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+                //To change body of implemented methods use File | Settings | File Templates.
+            }
+        });
 
         AlertDialog show = new AlertDialog.Builder(FileListingActivity.this)
                 .setTitle(type + " title")
                 .setMessage("Provide a title for your " + type.toLowerCase())
-                .setView(input)
+                .setView(ll)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-
-                        Editable text = input.getText();
-                        String title = text.toString();
-                        String whitespaceStripped = title.toLowerCase().replaceAll( "\\s+", "-");
-
-                        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
-                        String prefix = sdf.format( new Date() );
-                        String filename = root + prefix + "-" + whitespaceStripped + MARKDOWN_EXTENSION;
-
                         // Convert it to proper format
-                        loadEditor( template, filename, repoName );
+                        loadEditor( template, filename[0], repoName );
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -106,20 +127,23 @@ public class FileListingActivity extends Activity {
         switch ( itemId ) {
 
             case R.id.action_add_new_page:
-                cwd.clear();
-                cwd.add( "_pages");
-
+                String cwdWithSlashes = "";
+                for( String dir : cwd) {
+                    cwdWithSlashes += dir + "/";
+                }
                 template = getString(R.string.page_template);
-                promptForFilename( "_pages/", template, "Page" );
+                promptForFilename( cwdWithSlashes, "", template, "Page" );
 
                 return true;
 
             case R.id.action_add_new_post:
                 cwd.clear();
                 cwd.add( "_posts");
+                SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-" );
+                String prefix = sdf.format( new Date() );
 
                 template = getString(R.string.page_template);
-                promptForFilename("_posts/", template, "Post");
+                promptForFilename("_posts/", prefix, template, "Post");
 
                 // create a new post
                 return true;
@@ -158,8 +182,6 @@ public class FileListingActivity extends Activity {
 
         new GetRepoFiles().execute( login, authToken, repoName );
     }
-
-
 
     private void showFiles( List<TreeEntry> files ) {
 
@@ -233,24 +255,25 @@ public class FileListingActivity extends Activity {
 
     private class GetRepoFiles extends AsyncTask<String, Void, Boolean> {
 
+        String authToken;
+        List<User> users;
 
         protected Boolean doInBackground(String...strings) {
 
             Boolean rv = true;
             String username = strings[0];
-            String authToken = strings[1];
+            authToken = strings[1];
             String repoName = strings[2];
 
             RepositoryService repositoryService = new RepositoryService();
             repositoryService.getClient().setOAuth2Token(authToken);
-            Repository repository;
 
             try {
                 CommitService cs = new CommitService();
                 cs.getClient().setOAuth2Token(authToken);
-                Repository repo = repositoryService.getRepository(username, repoName);
+                 theRepo = repositoryService.getRepository(username, repoName);
 
-                List<RepositoryBranch> branches = repositoryService.getBranches(repo);
+                List<RepositoryBranch> branches = repositoryService.getBranches(theRepo);
                 RepositoryBranch theBranch = null;
                 RepositoryBranch master = null;
                 // Iterate over the branches and find gh-pages or master
@@ -271,9 +294,20 @@ public class FileListingActivity extends Activity {
                 String baseCommitSha = theBranch.getCommit().getSha();
                 DataService ds = new DataService();
                 ds.getClient().setOAuth2Token(authToken);
-                repoTree = ds.getTree( repo, baseCommitSha, true );
+                repoTree = ds.getTree( theRepo, baseCommitSha, true );
                 entries  = repoTree.getTree();
                 filterArray();
+
+                // See if we have multiple collaborators, and if so, warn the user
+                // theRepo.
+                CollaboratorService cos = new CollaboratorService();
+                cos.getClient().setOAuth2Token(authToken);
+
+                try {
+                    users = cos.getCollaborators(theRepo);
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
 
             } catch (Exception e) {
                 e.printStackTrace();
@@ -285,7 +319,13 @@ public class FileListingActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             pd.hide();
-            showFiles( values );
+            showFiles(values);
+
+            // This does not work. Why?
+            if( true || ( null != users && users.size() > 1 ) ) {
+                Toast.makeText( FileListingActivity.this, "WARNING: This repository has multiple collaborators. Teddy Hyde does not always detect recent file changes made via other collaborators. (bug #1)", Toast.LENGTH_LONG );
+            }
+
         }
 
     }
