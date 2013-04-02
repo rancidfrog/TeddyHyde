@@ -18,7 +18,7 @@ import java.util.*;
  */
 public class Github {
 
-    public static boolean SaveFile( String authToken, String repoName, String contents, String filename, String commitMessage ) {
+    public static boolean SaveFile( String authToken, String repoName, String contentsBase64, String filename, String commitMessage ) {
 
         boolean rv = true;
 
@@ -63,8 +63,8 @@ public class Github {
 
         Random random = new Random();
         Blob blob = new Blob();
-        blob.setContent(contents);
-        blob.setEncoding(Blob.ENCODING_UTF8);
+        blob.setContent(contentsBase64);
+        blob.setEncoding(Blob.ENCODING_BASE64);
         String blob_sha = dataService.createBlob(repository, blob);
         Tree baseTree = dataService.getTree(repository, baseCommitSha);
 
@@ -73,6 +73,7 @@ public class Github {
         treeEntry.setPath(filename);
         treeEntry.setMode(TreeEntry.MODE_BLOB);
         treeEntry.setType(TreeEntry.TYPE_BLOB);
+
         treeEntry.setSha(blob_sha);
         treeEntry.setSize(blob.getContent().length());
         Collection<TreeEntry> entries = new ArrayList<TreeEntry>();

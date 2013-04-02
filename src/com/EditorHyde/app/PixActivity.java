@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,6 +12,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -27,6 +29,12 @@ import org.apache.http.protocol.HttpContext;
 import org.json.JSONObject;
 
 import java.io.*;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 
 /**
  * Created with IntelliJ IDEA.
@@ -43,6 +51,9 @@ public class PixActivity extends Activity {
     private ProgressDialog pd;
     private ImageView imgView;
 
+    String theRepo;
+    String authToken;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
@@ -50,20 +61,31 @@ public class PixActivity extends Activity {
 
         ctx = this;
 
+        Bundle extras = getIntent().getExtras();
+
+        theRepo = extras.getString("repo");
+        String [] images;
+        images = extras.getStringArray( "images" );
+        SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+        authToken = sp.getString("authToken", null);
+
         setContentView(R.layout.pix_grid_layout);
 
-        GridView gridview = (GridView) findViewById(R.id.gridview);
-        gridview.setAdapter(new ImageAdapter(this));
+        pd = ProgressDialog.show(PixActivity.this, "Loading images from server",
+                "Please wait...", true);
+        new LoadImageTask().execute( images );
 
-        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                Toast.makeText( ctx, "" + position, Toast.LENGTH_SHORT).show();
+        Button btn = (Button)findViewById(R.id.uploadImage);
+        btn.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                captureImage();
+
             }
         });
 
+
     }
-
-
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         switch (requestCode) {
@@ -142,78 +164,127 @@ public class PixActivity extends Activity {
 
     }
 
-    class ImageUploadTask extends AsyncTask<Void, Void, String> {
-        @Override
-        protected String doInBackground(Void... unused) {
-            try {
-                HttpClient httpClient = new DefaultHttpClient();
-                HttpContext localContext = new BasicHttpContext();
-                HttpPost httpPost = new HttpPost( getString(R.string.WebServiceUrl) );
 
-                MultipartEntity entity = new MultipartEntity(
-                        HttpMultipartMode.BROWSER_COMPATIBLE);
-
-                ByteArrayOutputStream bos = new ByteArrayOutputStream();
-                bitmap.compress(Bitmap.CompressFormat.JPEG, 100, bos);
-                byte[] data = bos.toByteArray();
-                entity.addPart("photoId", new StringBody(getIntent()
-                        .getStringExtra("photoId")));
-                entity.addPart("returnformat", new StringBody("json"));
-                entity.addPart("uploaded", new ByteArrayBody(data,
-                        "myImage.jpg"));
-                httpPost.setEntity(entity);
-                HttpResponse response = httpClient.execute(httpPost,
-                        localContext);
-                BufferedReader reader = new BufferedReader(
-                        new InputStreamReader(
-                                response.getEntity().getContent(), "UTF-8"));
-
-                String sResponse = reader.readLine();
-                return sResponse;
-            } catch (Exception e) {
-                if (pd.isShowing())
-                    pd.dismiss();
-                Toast.makeText(getApplicationContext(),
-                        getString(R.string.exception_message),
-                        Toast.LENGTH_LONG).show();
-                Log.e(e.getClass().getName(), e.getMessage(), e);
-                return null;
-            }
-
-            // (null);
-        }
+    class LoadImageTask extends AsyncTask<String, Void, Boolean> {
+        RemoteImage[] ris;
 
         @Override
-        protected void onProgressUpdate(Void... unsued) {
+        protected Boolean doInBackground(String... images) {
 
-        }
-
-        @Override
-        protected void onPostExecute(String sResponse) {
-            try {
-                if (pd.isShowing())
-                    pd.dismiss();
-
-                if (sResponse != null) {
-                    JSONObject JResponse = new JSONObject(sResponse);
-                    int success = JResponse.getInt("SUCCESS");
-                    String message = JResponse.getString("MESSAGE");
-                    if (success == 0) {
-                        Toast.makeText(getApplicationContext(), message,
-                                Toast.LENGTH_LONG).show();
-                    } else {
-                        Toast.makeText(getApplicationContext(),
-                                "Photo uploaded successfully",
-                                Toast.LENGTH_SHORT).show();
-
-                    }
+            ris = new RemoteImage[images.length];
+            int index = 0;
+            for( String imageUrl : images ) {
+                try {
+                    Bitmap bmp = getRemoteImage( new URL( imageUrl ) );
+                    ris[index] = new RemoteImage( imageUrl, bmp );
+                } catch (MalformedURLException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
-            } catch (Exception e) {
-                Toast.makeText(getApplicationContext(),
-                        getString(R.string.exception_message),
-                        Toast.LENGTH_LONG).show();
-                Log.e(e.getClass().getName(), e.getMessage(), e);
+                index++;
             }
+            return true;
+
+        }
+
+
+        // Thanks
+        // http://stackoverflow.com/questions/3075637/loading-remote-images
+        public Bitmap getRemoteImage(final URL aURL) {
+            try {
+                final URLConnection conn = aURL.openConnection();
+                conn.connect();
+                final BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
+                final Bitmap bm = BitmapFactory.decodeStream(bis);
+                bis.close();
+                return bm;
+            } catch (IOException e) {}
+            return null;
+        }
+
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (pd.isShowing())
+                pd.dismiss();
+
+
+            final GridView gridview = (GridView) findViewById(R.id.gridview);
+            ImageAdapter ia = new ImageAdapter(PixActivity.this);
+            ia.setImages( ris );
+            gridview.setAdapter( ia );
+
+            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                    // send back the image
+                    RemoteImage ri =  (RemoteImage)gridview.getItemAtPosition(position);
+                    Bundle bundle = new Bundle();
+                    bundle.putString("imageUri", ri.getUrl() );
+                    Intent intent = new Intent();
+                    intent.putExtras(bundle);
+                    setResult(RESULT_OK, intent);
+                    finish();
+                }
+            });
+
+
+            if( !result ) {
+                Toast.makeText( PixActivity.this, "Unable to upload image, please try again later", Toast.LENGTH_LONG );
+            }
+
+        }
+    }
+
+
+    class ImageUploadTask extends AsyncTask<Void, Void, Boolean> {
+        @Override
+        protected Boolean doInBackground(Void... unused) {
+
+            boolean rv = false;
+            ByteArrayOutputStream bos = new ByteArrayOutputStream();
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            byte[] data = bos.toByteArray();
+
+            // Convert to base64
+            String base64ed = Base64.encodeToString(data, Base64.DEFAULT);
+
+            SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-hh-mm-ss" );
+            String prefix = sdf.format( new Date() );
+
+            String filename = "assets/images/" + prefix + "-image.png";
+
+            rv = Github.SaveFile( authToken, theRepo,  base64ed, filename, "Image added using Teddy Hyde on Android" );
+
+            // add thumbnail
+            Bitmap thumb = Bitmap.createScaledBitmap( bitmap, 64, 64, false);
+
+            bos = new ByteArrayOutputStream();
+            thumb.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            data = bos.toByteArray();
+
+            // Convert to base64
+            base64ed = Base64.encodeToString(data, Base64.DEFAULT);
+
+            String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
+
+            rv = Github.SaveFile( authToken, theRepo,  base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android" ) && rv;
+
+            return rv;
+        }
+
+        @Override
+        protected void onProgressUpdate(Void... unused) {
+
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (pd.isShowing())
+                pd.dismiss();
+
+            if( !result ) {
+                Toast.makeText( PixActivity.this, "Unable to upload image, please try again later", Toast.LENGTH_LONG );
+            }
+
         }
     }
 
@@ -242,7 +313,6 @@ public class PixActivity extends Activity {
         o2.inSampleSize = scale;
         bitmap = BitmapFactory.decodeFile(filePath, o2);
 
-        imgView.setImageBitmap(bitmap);
 
     }
 

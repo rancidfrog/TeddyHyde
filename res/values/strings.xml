@@ -61,6 +61,7 @@ Write your post here, using Markdown.\n
 </string>
     <string name="paste_quote">Paste Quote</string>
     <string name="paste_code">Paste Code</string>
+    <string name="upload_image_button">Upload Image...</string>
 
 
 </resources>

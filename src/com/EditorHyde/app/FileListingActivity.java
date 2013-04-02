@@ -51,6 +51,7 @@ public class FileListingActivity extends Activity {
     List<TreeEntry> entries;
     Context ctx;
     Repository theRepo;
+    final String[] IMAGES = {"http://teddyhyde.com/assets/images/2013-04-02-12-22-19-image-thumb.png"};
 
     @Override
     public void onBackPressed() {
@@ -392,6 +393,7 @@ public class FileListingActivity extends Activity {
         extras.putString( "markdown", theMarkdown );
         extras.putString( "filename", theFilename );
         extras.putString( "repo", repoName );
+        extras.putStringArray( "images", IMAGES );
 
         i.putExtras(extras);
         startActivity(i);

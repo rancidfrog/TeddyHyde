@@ -27,6 +27,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.text.SpannableString;
+import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -56,6 +57,7 @@ public class ScreenSlideActivity extends FragmentActivity {
      * The number of pages (wizard steps) to show in this demo.
      */
     private static final int NUM_PAGES = 2;
+    private static final int CHOOSE_IMAGE = 1 ;
     Tree repoTree;
     ProgressBar pb;
 
@@ -70,6 +72,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theFile;
     String theRepo;
     String authToken;
+    String[] images;
 
     ScreenSlidePageFragmentMarkdown md;
     ProgressDialog pd;
@@ -86,6 +89,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         theMarkdown = getIntent().getExtras().getString( "markdown" );
         theFile = getIntent().getExtras().getString( "filename" );
         theRepo = getIntent().getExtras().getString( "repo" );
+        images = getIntent().getExtras().getStringArray( "images" );
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
@@ -194,6 +198,19 @@ public class ScreenSlideActivity extends FragmentActivity {
         String quote = preprocessed.replaceAll( "\n", "\n> ");
         // make sure first line is also done
         insertAtCursor( "\n> " + quote + "\n" );
+    }
+
+    @Override
+    public void onActivityResult( int reqCode, int resCode, Intent data ) {
+        if( resCode == RESULT_OK ){
+            if( reqCode == CHOOSE_IMAGE ) {
+                Bundle extras = data.getExtras();
+                String uri = extras.getString( "imageUri" );
+                if( null != uri ) {
+                    insertAtCursor( "!(" + uri +")" );
+                }
+            }
+        }
 
     }
 
@@ -204,8 +221,13 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             case R.id.add_image:
                 Intent i;
+                Bundle extras = getIntent().getExtras();
+                extras.putString( "repo", theRepo );
+                extras.putStringArray( "images", images );
                 i = new Intent(this, PixActivity.class);
-                startActivity(i);
+                i.putExtras(extras);
+
+                startActivityForResult(i, CHOOSE_IMAGE );
                 return true;
 
             case R.id.action_paste_code:
@@ -313,7 +335,9 @@ public class ScreenSlideActivity extends FragmentActivity {
                 commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
             }
 
-            rv = Github.SaveFile( authToken, repoName, contents, theFile, commitMessage );
+            String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
+
+            rv = Github.SaveFile( authToken, repoName, base64ed, theFile, commitMessage );
 
             return rv;
 
@@ -324,7 +348,7 @@ public class ScreenSlideActivity extends FragmentActivity {
             pb.setVisibility(View.GONE);
 
             if( !result ) {
-                 Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
+                Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
             }
         }
     }
