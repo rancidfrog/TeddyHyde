@@ -29,18 +29,18 @@ public class RepoListActivity extends Activity {
 
     Context ctx;
 
-    public void showFilesList( String repo ) {
+    public void showFilesList( Repository repo ) {
         Intent i = new Intent(this, FileListingActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString("repo", repo);
+        bundle.putString("repo", repo.getName());
+        bundle.putString( "login", repo.getOwner().getLogin() );
         i.putExtras(bundle);
-
         startActivity(i);
 
     }
 
-    ArrayAdapter<String> adapter;
+    RepoListAdapter adapter;
     private ProgressDialog pd;
     String authToken;
     ListView listView;
@@ -66,7 +66,7 @@ public class RepoListActivity extends Activity {
 
     private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
 
-        List<String> repoNames;
+        List<Repository> allRepos;
 
         protected Boolean doInBackground(Void...voids) {
             Boolean rv = true;
@@ -83,24 +83,24 @@ public class RepoListActivity extends Activity {
             }
 
 
-            ArrayList<String> nonJekyll = new ArrayList<String>();
-            ArrayList<String> possibleJekyll = new ArrayList<String>();
+            ArrayList<Repository> nonJekyll = new ArrayList<Repository>();
+            ArrayList<Repository> possibleJekyll = new ArrayList<Repository>();
             for( int j = 0; j < repos.size(); j++ ) {
 
                 Repository repo = repos.get(j);
                 String name = repo.getName();
 
                 if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
-                    possibleJekyll.add( name );
+                    possibleJekyll.add( repo );
 
                 }
                 else {
-                    nonJekyll.add( name );
+                    nonJekyll.add( repo );
                 }
             }
 
             possibleJekyll.addAll( nonJekyll);
-            repoNames = possibleJekyll;
+            allRepos = possibleJekyll;
             return rv;
 
         }
@@ -110,14 +110,13 @@ public class RepoListActivity extends Activity {
             pd.hide();
 
             if( result ) {
-                adapter = new ArrayAdapter<String>(ctx,
-                        android.R.layout.simple_dropdown_item_1line, android.R.id.text1, repoNames);
+                adapter = new RepoListAdapter(ctx, allRepos );
                 listView.setAdapter(adapter);
 
                 listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                        String repo = (String)adapterView.getItemAtPosition(i);
+                        Repository repo = (Repository)adapterView.getItemAtPosition(i);
                         showFilesList(repo);
                     }
                 });

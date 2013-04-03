@@ -43,7 +43,6 @@ public class FileListingActivity extends Activity {
     private List<TreeEntry> values;
     String repoName;
     String authToken;
-    String username;
     String login;
     List<TreeEntry> entries;
     Context ctx;
@@ -164,7 +163,6 @@ public class FileListingActivity extends Activity {
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
-        username = sp.getString("email", null);
         login = sp.getString("login", null );
 
         Bundle extras = getIntent().getExtras();
@@ -207,8 +205,7 @@ public class FileListingActivity extends Activity {
             }
 
             if( null != cnameContents) {
-                baseUrl = cnameContents;
-                baseUrl.trim();
+                baseUrl = cnameContents.trim();
             }
 
             for( TreeEntry entry: entries) {
@@ -344,7 +341,7 @@ public class FileListingActivity extends Activity {
             try {
                 CommitService cs = new CommitService();
                 cs.getClient().setOAuth2Token(authToken);
-                theRepo = repositoryService.getRepository(username, repoName);
+                theRepo = repositoryService.getRepository(login, repoName);
 
                 List<RepositoryBranch> branches = repositoryService.getBranches(theRepo);
                 RepositoryBranch theBranch = null;
