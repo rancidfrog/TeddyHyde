@@ -1,4 +1,1 @@
-You need to create a file called password.cfg which has the crendentials for logging in on GitHub. It should look like this
-
-foobar@barfoo.com
-MySecretPassword
+To run tests, copy the Passwords.java.sample file to Passwords.java and set the proper credentials

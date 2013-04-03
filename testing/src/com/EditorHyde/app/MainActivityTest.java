@@ -46,7 +46,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         mPassword = (EditText) mActivity.findViewById( R.id.githubPassword );
 
         // Load up the password file
-        readPasswordFile();
+        setPasswords();
 
     } // end of setUp() method definition
 
