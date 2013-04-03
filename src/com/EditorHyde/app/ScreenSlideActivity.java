@@ -33,12 +33,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 import org.eclipse.egit.github.core.*;
-import org.eclipse.egit.github.core.service.CommitService;
-import org.eclipse.egit.github.core.service.DataService;
-import org.eclipse.egit.github.core.service.RepositoryService;
-import org.eclipse.egit.github.core.service.UserService;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -72,6 +67,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theFile;
     String theRepo;
     String authToken;
+    String theLogin;
     String[] images;
 
     ScreenSlidePageFragmentMarkdown md;
@@ -89,7 +85,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         theMarkdown = getIntent().getExtras().getString( "markdown" );
         theFile = getIntent().getExtras().getString( "filename" );
         theRepo = getIntent().getExtras().getString( "repo" );
-        images = getIntent().getExtras().getStringArray( "images" );
+        theLogin = getIntent().getExtras().getString( "login" );
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
@@ -207,7 +203,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 Bundle extras = data.getExtras();
                 String uri = extras.getString( "imageUri" );
                 if( null != uri ) {
-                    insertAtCursor( "!(" + uri +")" );
+                    insertAtCursor( "!["+ uri + "](" + uri +")" );
                 }
             }
         }
@@ -223,6 +219,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                 Intent i;
                 Bundle extras = getIntent().getExtras();
                 extras.putString( "repo", theRepo );
+                extras.putString( "login", theLogin );
+
                 extras.putStringArray( "images", images );
                 i = new Intent(this, PixActivity.class);
                 i.putExtras(extras);
@@ -263,7 +261,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 else {
 
                     startSaveProgressIndicator();
-                    new SaveFileTask().execute( authToken, theRepo, contents, null );
+                    new SaveFileTask().execute( authToken, theRepo, theLogin, contents, null );
                 }
                 return true;
 
@@ -337,7 +335,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
 
-            rv = Github.SaveFile( authToken, repoName, base64ed, theFile, commitMessage );
+            rv = ThGitClient.SaveFile(authToken, repoName, theLogin, base64ed, theFile, commitMessage);
 
             return rv;
 

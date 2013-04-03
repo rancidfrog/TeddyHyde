@@ -2,7 +2,6 @@ package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -18,19 +17,13 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
 
-import org.apache.commons.codec.binary.Base64;
-
-import org.apache.commons.codec.binary.StringUtils;
 import org.eclipse.egit.github.core.*;
 
-import org.eclipse.egit.github.core.client.*;
 import org.eclipse.egit.github.core.service.*;
 
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.util.logging.Logger;
 
 
 /**
@@ -49,10 +42,12 @@ public class FileListingActivity extends Activity {
     FileListAdapter adapter;
     private List<TreeEntry> values;
     String repoName;
+    String authToken;
+    String username;
+    String login;
     List<TreeEntry> entries;
     Context ctx;
     Repository theRepo;
-    final String[] IMAGES = {"http://teddyhyde.com/assets/images/2013-04-02-12-22-19-image-thumb.png"};
     TextView repoTv;
 
     @Override
@@ -168,10 +163,9 @@ public class FileListingActivity extends Activity {
         setContentView(R.layout.file_list);
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
-        String authToken = sp.getString("authToken", null);
-        String username = sp.getString("email", null);
-        String name = sp.getString("name", null );
-        String login = sp.getString("login", null );
+        authToken = sp.getString("authToken", null);
+        username = sp.getString("email", null);
+        login = sp.getString("login", null );
 
         Bundle extras = getIntent().getExtras();
         repoName = extras.getString("repo");
@@ -181,8 +175,67 @@ public class FileListingActivity extends Activity {
 
         pd = ProgressDialog.show( this, "", "Loading repository data..", true);
 
-        new GetRepoFiles().execute( login, authToken, repoName );
+        new GetRepoFiles().execute();
+
     }
+
+
+    class LoadImageTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... unused) {
+            // Find all images in the repository
+            // Only add items at the root for now
+            String cnameContents = null;
+            String baseUrl = repoName;
+            ArrayList<String> images = new ArrayList<String>();
+
+            for( TreeEntry entry: entries) {
+
+                String name = entry.getPath();
+
+                // Get the CNAME file. If not there, use the repository name as the URL
+                if( name.equals( "CNAME" ) ) {
+                    try {
+                        String fileSha = entry.getSha();
+                        cnameContents = ThGitClient.GetFile(authToken, repoName, login, fileSha);
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
+                }
+
+            }
+
+            if( null != cnameContents) {
+                baseUrl = cnameContents;
+                baseUrl.trim();
+            }
+
+            for( TreeEntry entry: entries) {
+
+                String name = entry.getPath();
+
+                if( name.contains( "assets/images") && name.contains( "thumb") ) {
+                    String fullUrl = "http://" + baseUrl + "/" + name;
+                    images.add( fullUrl );
+                }
+            }
+
+            RemoteFileCache.loadImages(images);
+            return true;
+        }
+
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            if (pd.isShowing())
+                pd.dismiss();
+
+            showFiles(values);
+        }
+    }
+
+
 
     private void showFiles( List<TreeEntry> files ) {
 
@@ -276,17 +329,14 @@ public class FileListingActivity extends Activity {
         cwd.ascendOne();
     }
 
-    private class GetRepoFiles extends AsyncTask<String, Void, Boolean> {
+    private class GetRepoFiles extends AsyncTask<Void, Void, Boolean> {
 
         String authToken;
         List<User> users;
 
-        protected Boolean doInBackground(String...strings) {
+        protected Boolean doInBackground(Void...unused) {
 
             Boolean rv = true;
-            String username = strings[0];
-            authToken = strings[1];
-            String repoName = strings[2];
 
             RepositoryService repositoryService = new RepositoryService();
             repositoryService.getClient().setOAuth2Token(authToken);
@@ -341,18 +391,16 @@ public class FileListingActivity extends Activity {
         }
 
         protected void onPostExecute(Boolean result) {
-            pd.hide();
-            showFiles(values);
+            // Determine the images, and load them
+            pd.setMessage( "Loading and caching images...");
+            new LoadImageTask().execute();
 
             // This does not work. Why?
-            if( true || ( null != users && users.size() > 1 ) ) {
+            if( null != users && users.size() > 1 ) {
                 Toast.makeText( FileListingActivity.this, "WARNING: This repository has multiple collaborators. Teddy Hyde does not always detect recent file changes made via other collaborators. (bug #1)", Toast.LENGTH_LONG );
             }
-
         }
-
     }
-
 
     public void showEditor( String filename, String fileSha ) {
 
@@ -382,18 +430,7 @@ public class FileListingActivity extends Activity {
             String fileSha = strings[4];
 
             try {
-                RepositoryService repositoryService = new RepositoryService();
-                repositoryService.getClient().setOAuth2Token(authToken);
-                Repository repo = repositoryService.getRepository(username, repoName);
-                DataService ds = new DataService();
-                ds.getClient().setOAuth2Token(authToken);
-                Blob blob = ds.getBlob(repo, fileSha);
-                String theMarkdown64 = blob.getContent();
-                String encoding = blob.getEncoding();
-                byte[] decoded = Base64.decodeBase64(theMarkdown64.getBytes());
-                theMarkdown = new String( decoded );
-
-
+                theMarkdown = ThGitClient.GetFile(authToken, repoName, username, fileSha);
             } catch (IOException e) {
                 e.printStackTrace();
                 rv = false;
@@ -415,7 +452,7 @@ public class FileListingActivity extends Activity {
         extras.putString( "markdown", theMarkdown );
         extras.putString( "filename", theFilename );
         extras.putString( "repo", repoName );
-        extras.putStringArray( "images", IMAGES );
+        extras.putString( "login", login );
 
         i.putExtras(extras);
         startActivity(i);

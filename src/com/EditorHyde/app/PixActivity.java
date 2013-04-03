@@ -16,24 +16,9 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
-import org.apache.http.HttpResponse;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.entity.mime.HttpMultipartMode;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.ByteArrayBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
-import org.json.JSONObject;
 
 import java.io.*;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -53,6 +38,7 @@ public class PixActivity extends Activity {
 
     String theRepo;
     String authToken;
+    String theLogin;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -64,6 +50,8 @@ public class PixActivity extends Activity {
         Bundle extras = getIntent().getExtras();
 
         theRepo = extras.getString("repo");
+        theLogin = extras.getString("login");
+
         String [] images;
         images = extras.getStringArray( "images" );
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
@@ -71,9 +59,23 @@ public class PixActivity extends Activity {
 
         setContentView(R.layout.pix_grid_layout);
 
-        pd = ProgressDialog.show(PixActivity.this, "Loading images from server",
-                "Please wait...", true);
-        new LoadImageTask().execute( images );
+        final GridView gridview = (GridView) findViewById(R.id.gridview);
+        ImageAdapter ia = new ImageAdapter(PixActivity.this);
+        ia.setImages( RemoteFileCache.getImages() );
+        gridview.setAdapter( ia );
+
+        gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                // send back the image
+                RemoteImage ri =  (RemoteImage)gridview.getItemAtPosition(position);
+                Bundle bundle = new Bundle();
+                bundle.putString("imageUri", ri.getUrl() );
+                Intent intent = new Intent();
+                intent.putExtras(bundle);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
 
         Button btn = (Button)findViewById(R.id.uploadImage);
         btn.setOnClickListener( new View.OnClickListener() {
@@ -164,77 +166,6 @@ public class PixActivity extends Activity {
 
     }
 
-
-    class LoadImageTask extends AsyncTask<String, Void, Boolean> {
-        RemoteImage[] ris;
-
-        @Override
-        protected Boolean doInBackground(String... images) {
-
-            ris = new RemoteImage[images.length];
-            int index = 0;
-            for( String imageUrl : images ) {
-                try {
-                    Bitmap bmp = getRemoteImage( new URL( imageUrl ) );
-                    ris[index] = new RemoteImage( imageUrl, bmp );
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-                index++;
-            }
-            return true;
-
-        }
-
-
-        // Thanks
-        // http://stackoverflow.com/questions/3075637/loading-remote-images
-        public Bitmap getRemoteImage(final URL aURL) {
-            try {
-                final URLConnection conn = aURL.openConnection();
-                conn.connect();
-                final BufferedInputStream bis = new BufferedInputStream(conn.getInputStream());
-                final Bitmap bm = BitmapFactory.decodeStream(bis);
-                bis.close();
-                return bm;
-            } catch (IOException e) {}
-            return null;
-        }
-
-
-        @Override
-        protected void onPostExecute(Boolean result) {
-            if (pd.isShowing())
-                pd.dismiss();
-
-
-            final GridView gridview = (GridView) findViewById(R.id.gridview);
-            ImageAdapter ia = new ImageAdapter(PixActivity.this);
-            ia.setImages( ris );
-            gridview.setAdapter( ia );
-
-            gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                    // send back the image
-                    RemoteImage ri =  (RemoteImage)gridview.getItemAtPosition(position);
-                    Bundle bundle = new Bundle();
-                    bundle.putString("imageUri", ri.getUrl() );
-                    Intent intent = new Intent();
-                    intent.putExtras(bundle);
-                    setResult(RESULT_OK, intent);
-                    finish();
-                }
-            });
-
-
-            if( !result ) {
-                Toast.makeText( PixActivity.this, "Unable to upload image, please try again later", Toast.LENGTH_LONG );
-            }
-
-        }
-    }
-
-
     class ImageUploadTask extends AsyncTask<Void, Void, Boolean> {
         @Override
         protected Boolean doInBackground(Void... unused) {
@@ -252,7 +183,7 @@ public class PixActivity extends Activity {
 
             String filename = "assets/images/" + prefix + "-image.png";
 
-            rv = Github.SaveFile( authToken, theRepo,  base64ed, filename, "Image added using Teddy Hyde on Android" );
+            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, "Image added using Teddy Hyde on Android");
 
             // add thumbnail
             Bitmap thumb = Bitmap.createScaledBitmap( bitmap, 64, 64, false);
@@ -266,7 +197,7 @@ public class PixActivity extends Activity {
 
             String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
 
-            rv = Github.SaveFile( authToken, theRepo,  base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android" ) && rv;
+            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android") && rv;
 
             return rv;
         }
