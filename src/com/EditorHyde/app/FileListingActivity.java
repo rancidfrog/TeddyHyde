@@ -20,6 +20,7 @@ import android.widget.*;
 
 import org.apache.commons.codec.binary.Base64;
 
+import org.apache.commons.codec.binary.StringUtils;
 import org.eclipse.egit.github.core.*;
 
 import org.eclipse.egit.github.core.client.*;
@@ -43,7 +44,7 @@ public class FileListingActivity extends Activity {
 
     private static final String MARKDOWN_EXTENSION = ".md";
     private ProgressDialog pd;
-    private List<String> cwd;
+    private Cwd cwd;
     Tree repoTree;
     FileListAdapter adapter;
     private List<TreeEntry> values;
@@ -56,8 +57,7 @@ public class FileListingActivity extends Activity {
     @Override
     public void onBackPressed() {
         Log.d("com.EditorHyde.app", "onBackPressed Called");
-        if( cwd.isEmpty()) {
-
+        if( cwd.atRoot()) {
             Intent i;
             i = new Intent(this, RepoListActivity.class);
             startActivity(i);
@@ -128,18 +128,13 @@ public class FileListingActivity extends Activity {
         switch ( itemId ) {
 
             case R.id.action_add_new_page:
-                String cwdWithSlashes = "";
-                for( String dir : cwd) {
-                    cwdWithSlashes += dir + "/";
-                }
                 template = getString(R.string.page_template);
-                promptForFilename( cwdWithSlashes, "", template, "Page" );
+                promptForFilename( cwd.getFullPathWithTrailingSlash(), "", template, "Page" );
 
                 return true;
 
             case R.id.action_add_new_post:
-                cwd.clear();
-                cwd.add( "_posts");
+                cwd.descendTo("_posts");
                 SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-" );
                 String prefix = sdf.format( new Date() );
 
@@ -167,7 +162,7 @@ public class FileListingActivity extends Activity {
 
         super.onCreate(savedInstanceState);
         ctx = this;
-        cwd = new ArrayList<String>();
+        cwd = new Cwd();
         values = new ArrayList<TreeEntry>();
         setContentView(R.layout.file_list);
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
@@ -188,6 +183,7 @@ public class FileListingActivity extends Activity {
 
         ListView listView;
         listView = (ListView) findViewById(R.id.repoFilesList);
+
         adapter = new FileListAdapter( this, files );
         listView.setAdapter(adapter);
         listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
@@ -213,10 +209,8 @@ public class FileListingActivity extends Activity {
     private void filterArray() {
         values.clear();
 
-        // build up the path
-        String path = "";
-        for( String dir : cwd ) {
-            path +=  dir + "/";
+        if( null != adapter ) {
+            adapter.setFrontPath( cwd.getFullPathWithTrailingSlash() );
         }
 
         // Only add items at the root for now
@@ -225,20 +219,33 @@ public class FileListingActivity extends Activity {
             String type = entry.getType();
             String name = entry.getPath();
 
-            if( cwd.isEmpty()) {
-                // Only look for items without a slash in them, at the root
-                if( -1 == name.indexOf( "/" )  ) {
+            String path = cwd.getFullPathWithTrailingSlash();
+            if( -1 != name.indexOf( path )  ) {
+
+                int slashesInCwd = countOccurrences( path, '/' );
+                int slashesInFile = countOccurrences( name, '/' );
+
+                if( slashesInCwd == slashesInFile ) {
                     values.add( entry );
                 }
-            }
-            else {
-                if( -1 != name.indexOf( path )  ) {
-                    values.add( entry );
-                }
+
             }
         }
     }
 
+    // Thanks: http://stackoverflow.com/questions/275944/how-do-i-count-the-number-of-occurrences-of-a-char-in-a-string
+    public static int countOccurrences(String haystack, char needle)
+    {
+        int count = 0;
+        for (int i=0; i < haystack.length(); i++)
+        {
+            if (haystack.charAt(i) == needle)
+            {
+                count++;
+            }
+        }
+        return count;
+    }
 
     private void rebuildFilesList() {
         // filter out those with the proper path
@@ -247,11 +254,11 @@ public class FileListingActivity extends Activity {
     }
 
     private void descend( String directory ) {
-        cwd.add(directory);
+        cwd.descendTo(directory);
     }
 
     private void ascend() {
-        cwd.remove(cwd.size()-1);
+        cwd.ascendOne();
     }
 
     private class GetRepoFiles extends AsyncTask<String, Void, Boolean> {
@@ -272,7 +279,7 @@ public class FileListingActivity extends Activity {
             try {
                 CommitService cs = new CommitService();
                 cs.getClient().setOAuth2Token(authToken);
-                 theRepo = repositoryService.getRepository(username, repoName);
+                theRepo = repositoryService.getRepository(username, repoName);
 
                 List<RepositoryBranch> branches = repositoryService.getBranches(theRepo);
                 RepositoryBranch theBranch = null;
