@@ -6,6 +6,7 @@ import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 /**
@@ -27,11 +28,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private String githubLogin;
     private String githubPassword;
 
-    private void readPasswordFile() {
-        Scanner scan = new Scanner("password.cfg");
-        scan.useDelimiter("\\n");
-        githubLogin = scan.next();
-        githubPassword = scan.next();
+    private void setPasswords() {
+        githubLogin = Passwords.login;
+        githubPassword = Passwords.password;
     }
 
     @Override
