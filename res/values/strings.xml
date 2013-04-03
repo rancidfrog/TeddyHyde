@@ -28,37 +28,8 @@
     <string name="save_with_commit">Save with message…</string>
     <string name="add_new_post">New post…</string>
     <string name="add_new_page">New page…</string>
-
-    <string name="page_template">
----\n
-layout: page\n
-category: \n
-tagline: \n
-tags : [] \n
-published: false\n
----\n
-\n
-# A new page\n
-\n
-Write your page here, using Markdown.\n
-\n
-</string>
-
-    <string name="post_template">
----\n
-layout: post \n
-category: \n
-tagline: \n
-tags : [] \n
-published: false\n
----\n
-\n
-# A new post \n
-\n
-Write your post here, using Markdown.\n
-\n
-
-</string>
+    <string name="page_template">---\nlayout: page\ncategory: \ntagline: \ntags : [] \npublished: false\n---\n\n# A new page #\n\nWrite your page here, using Markdown.\n\n</string>
+    <string name="post_template">---\nlayout: post \ncategory: \ntagline: \ntags : [] \npublished: false\n---\n\n# A new post #\n\nWrite your post here, using Markdown.\n\n</string>
     <string name="paste_quote">Paste Quote</string>
     <string name="paste_code">Paste Code</string>
     <string name="upload_image_button">Upload Image...</string>
