@@ -26,6 +26,10 @@ public class RemoteFileCache {
         return mImages;
     }
 
+    public static void clear() {
+        mImages = null;
+    }
+
     public static void loadImages( ArrayList<String> urls ) {
         mImages = new RemoteImage[urls.size()];
 

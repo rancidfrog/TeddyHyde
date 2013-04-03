@@ -58,6 +58,8 @@ public class RepoListActivity extends Activity {
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
 
+        RemoteFileCache.clear();
+
         pd = ProgressDialog.show( this, "", "Loading all repositories...", true);
 
         new GetReposTask().execute();
