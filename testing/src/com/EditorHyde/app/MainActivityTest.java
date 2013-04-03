@@ -1,8 +1,11 @@
 package com.EditorHyde.app;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
 import android.graphics.Path;
 import android.provider.MediaStore;
 import android.test.ActivityInstrumentationTestCase2;
+import android.widget.Button;
 import android.widget.EditText;
 
 import java.io.File;
@@ -24,6 +27,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private MainActivity mActivity;
     private EditText mLogin;
     private EditText mPassword;
+    private Button mLoginButton;
 
     private String githubLogin;
     private String githubPassword;
@@ -44,6 +48,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         mLogin = (EditText) mActivity.findViewById( R.id.githubEmail );
         mPassword = (EditText) mActivity.findViewById( R.id.githubPassword );
+        mLoginButton = (Button) mActivity.findViewById( R.id.button );
 
         // Load up the password file
         setPasswords();
@@ -57,5 +62,28 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     public void testPreConditions() {
         String login = mLogin.getText().toString();
         assertTrue( login.equals("") );
+    }
+
+    public void testLogin() {
+        mLogin.setText( githubLogin );
+        mPassword.setText(githubPassword);
+
+        mActivity.runOnUiThread(new Runnable() {
+            public void run() {
+                mLoginButton.performClick();
+            }
+        });
+
+        try {
+            Thread.sleep(20000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+
+
+        SharedPreferences sp = mActivity.getSharedPreferences(MainActivity.APP_ID, Activity.MODE_PRIVATE);
+        String authToken = sp.getString( "authToken", null );
+        assertNotNull(authToken);
+
     }
 }
