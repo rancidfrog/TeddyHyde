@@ -53,6 +53,7 @@ public class FileListingActivity extends Activity {
     Context ctx;
     Repository theRepo;
     final String[] IMAGES = {"http://teddyhyde.com/assets/images/2013-04-02-12-22-19-image-thumb.png"};
+    TextView repoTv;
 
     @Override
     public void onBackPressed() {
@@ -165,6 +166,7 @@ public class FileListingActivity extends Activity {
         cwd = new Cwd();
         values = new ArrayList<TreeEntry>();
         setContentView(R.layout.file_list);
+
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         String authToken = sp.getString("authToken", null);
         String username = sp.getString("email", null);
@@ -173,6 +175,9 @@ public class FileListingActivity extends Activity {
 
         Bundle extras = getIntent().getExtras();
         repoName = extras.getString("repo");
+
+        repoTv = (TextView)findViewById(R.id.repoName);
+        repoTv.setText( repoName );
 
         pd = ProgressDialog.show( this, "", "Loading repository data..", true);
 
@@ -250,6 +255,16 @@ public class FileListingActivity extends Activity {
     private void rebuildFilesList() {
         // filter out those with the proper path
         filterArray();
+
+        // Update the repository name
+        String theCwd = cwd.getFullPathWithTrailingSlash();
+        String repoPlusCwd = repoName;
+        if( theCwd.equals("") ) {
+            repoPlusCwd += ":" + theCwd;
+        }
+        repoTv.setText( repoPlusCwd  );
+
+        // update the list
         adapter.notifyDataSetChanged();
     }
 
