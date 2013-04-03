@@ -161,7 +161,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                         }
 
                         // deal with the editable
-                        new SaveFileTask().execute(authToken, theRepo, contents, message);
+                        new SaveFileTask().execute( contents, message);
 
                     }
                 })
@@ -261,7 +261,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 else {
 
                     startSaveProgressIndicator();
-                    new SaveFileTask().execute( authToken, theRepo, theLogin, contents, null );
+                    new SaveFileTask().execute( contents, null );
                 }
                 return true;
 
@@ -324,10 +324,8 @@ public class ScreenSlideActivity extends FragmentActivity {
         protected Boolean doInBackground(String...strings) {
             Boolean rv = true;
 
-            String authToken = strings[0];
-            String repoName = strings[1];
-            String contents = strings[2];
-            String commitMessage = strings[3];
+            String contents = strings[0];
+            String commitMessage = strings[1];
 
             if( null == commitMessage ) {
                 commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
@@ -335,7 +333,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
 
-            rv = ThGitClient.SaveFile(authToken, repoName, theLogin, base64ed, theFile, commitMessage);
+            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, theFile, commitMessage);
 
             return rv;
 
