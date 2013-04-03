@@ -48,6 +48,9 @@ public class FileListingActivity extends Activity {
     Context ctx;
     Repository theRepo;
     TextView repoTv;
+    Button branchTv;
+
+    RepositoryBranch theBranch;
 
     @Override
     public void onBackPressed() {
@@ -168,6 +171,17 @@ public class FileListingActivity extends Activity {
         repoTv = (TextView)findViewById(R.id.repoName);
         repoTv.setText( repoName );
 
+        branchTv = (Button)findViewById(R.id.branchName);
+
+        branchTv.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                // Allow user to choose the branch...
+                // NYI
+
+            }
+        });
         pd = ProgressDialog.show( this, "", "Loading repository data..", true);
 
         new GetRepoFiles().execute();
@@ -306,10 +320,11 @@ public class FileListingActivity extends Activity {
         // Update the repository name
         String theCwd = cwd.getFullPathWithTrailingSlash();
         String repoPlusCwd = repoName;
-        if( theCwd.equals("") ) {
-            repoPlusCwd += ":" + theCwd;
+        if( !theCwd.equals("") ) {
+            repoPlusCwd += "/" + theCwd;
         }
         repoTv.setText( repoPlusCwd  );
+        branchTv.setText( theBranch.getName() );
 
         // update the list
         adapter.notifyDataSetChanged();
@@ -340,7 +355,7 @@ public class FileListingActivity extends Activity {
                 theRepo = repositoryService.getRepository(login, repoName);
 
                 List<RepositoryBranch> branches = repositoryService.getBranches(theRepo);
-                RepositoryBranch theBranch = null;
+                theBranch = null;
                 RepositoryBranch master = null;
                 // Iterate over the branches and find gh-pages or master
                 for( RepositoryBranch i : branches ) {
@@ -386,6 +401,12 @@ public class FileListingActivity extends Activity {
         protected void onPostExecute(Boolean result) {
             // Determine the images, and load them
             pd.setMessage( "Loading and caching images...");
+
+            if( null != theBranch ) {
+                branchTv.setText( theBranch.getName() );
+                branchTv.setVisibility(View.VISIBLE);
+            }
+
             new LoadImageTask().execute();
 
             // This does not work. Why?

@@ -92,6 +92,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         setContentView(R.layout.activity_screen_slide);
 
+
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
         mPagerAdapter = new ScreenSlidePagerAdapter(getFragmentManager());
@@ -105,7 +106,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 // but for simplicity, the activity provides the actions in this sample.
                 invalidateOptionsMenu();
 
-                if( 1 == position ) {
+                if( 1 == position && null != md  ) {
                     md.onPageSelected(position);
                 }
 
@@ -301,8 +302,9 @@ public class ScreenSlideActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             Fragment rv;
             if( position == 0 ) {
-                rv = ScreenSlidePageFragment.create( position, theMarkdown );
+                rv = ScreenSlidePageFragment.create( position, theMarkdown, theFile );
                 // ((TextView)findViewById(R.id.currentFilename)).setText( theFile );
+
             }
             else {
                 md = ScreenSlidePageFragmentMarkdown.create( position );

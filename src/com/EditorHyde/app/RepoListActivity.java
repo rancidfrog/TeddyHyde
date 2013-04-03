@@ -33,8 +33,10 @@ public class RepoListActivity extends Activity {
         Intent i = new Intent(this, FileListingActivity.class);
 
         Bundle bundle = new Bundle();
-        bundle.putString( "repo", repo.getName());
-        bundle.putString( "login", repo.getOwner().getLogin() );
+        String repoName = repo.getName();
+        String login = repo.getOwner().getLogin();
+        bundle.putString( "repo", repoName );
+        bundle.putString( "login", login );
         i.putExtras(bundle);
         startActivity(i);
 

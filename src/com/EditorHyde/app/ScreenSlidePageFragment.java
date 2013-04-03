@@ -50,14 +50,16 @@ public class ScreenSlidePageFragment extends Fragment {
     private int mPageNumber;
 
     private String theMarkdown;
+    private String theFile;
     ViewGroup rootView;
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static ScreenSlidePageFragment create(int pageNumber, String markdown ) {
+    public static ScreenSlidePageFragment create(int pageNumber, String markdown, String filename ) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
         fragment.setMarkdown( markdown );
+        fragment.setFilename( filename );
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
@@ -73,6 +75,10 @@ public class ScreenSlidePageFragment extends Fragment {
         mPageNumber = getArguments().getInt(ARG_PAGE);
     }
 
+    public void setFilename( String filename ) {
+        theFile = filename;
+    }
+
     public void setMarkdown( String md) {
         theMarkdown = md;
     }
@@ -86,6 +92,9 @@ public class ScreenSlidePageFragment extends Fragment {
                 .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 
         ((EditText)rootView.findViewById(R.id.markdownEditor)).setText( theMarkdown );
+
+        TextView filenameView = (TextView)rootView.findViewById(R.id.currentFilename);
+        filenameView.setText(theFile);
 
         return rootView;
     }
