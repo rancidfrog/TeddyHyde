@@ -53,9 +53,7 @@ public class FileListingActivity extends Activity {
     public void onBackPressed() {
         Log.d("com.EditorHyde.app", "onBackPressed Called");
         if( cwd.atRoot()) {
-            Intent i;
-            i = new Intent(this, RepoListActivity.class);
-            startActivity(i);
+            finish();
         }
         else {
             ascend();
