@@ -161,11 +161,10 @@ public class FileListingActivity extends Activity {
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
-        login = sp.getString("login", null );
 
         Bundle extras = getIntent().getExtras();
         repoName = extras.getString("repo");
-
+        login = extras.getString("login", null );
         repoTv = (TextView)findViewById(R.id.repoName);
         repoTv.setText( repoName );
 
@@ -326,7 +325,6 @@ public class FileListingActivity extends Activity {
 
     private class GetRepoFiles extends AsyncTask<Void, Void, Boolean> {
 
-        String authToken;
         List<User> users;
 
         protected Boolean doInBackground(Void...unused) {

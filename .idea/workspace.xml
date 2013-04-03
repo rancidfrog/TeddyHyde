@@ -26,11 +26,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Editor Hyde.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -68,7 +64,7 @@
     <file path="/MyActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363101624561" ignored="false" />
     <file path="/RepoListActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365016634185" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364399645195" ignored="false" />
-    <file path="/FileListingActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365016680076" ignored="false" />
+    <file path="/FileListingActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365017167226" ignored="false" />
     <file path="/file_list.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363103572830" ignored="false" />
     <file path="/file_list_layout.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363197889893" ignored="false" />
     <file path="/FileListAdapter.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364993846193" ignored="false" />
@@ -166,6 +162,90 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" line="172" class="com.EditorHyde.app.FileListingActivity" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" line="338" class="com.EditorHyde.app.FileListingActivity.GetRepoFiles" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" line="164" class="com.EditorHyde.app.FileListingActivity" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" line="161" class="com.EditorHyde.app.FileListingActivity" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" line="35" class="com.EditorHyde.app.RepoListActivity" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" line="120" class="com.EditorHyde.app.RepoListActivity.GetReposTask$1" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
     </line_breakpoints>
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
@@ -217,16 +297,16 @@
       <file leaf-file-name="FileListingActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="20" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.20559211">
+            <state line="326" column="0" selection-start="10189" selection-end="10189" vertical-scroll-proportion="0.18092105">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3265#3553#0" expanded="true" />
                 <element signature="e#3534#3535#0" expanded="true" />
                 <element signature="e#3600#3801#0" expanded="true" />
                 <element signature="e#3782#3783#0" expanded="true" />
-                <element signature="e#6071#6079#0" expanded="true" />
-                <element signature="e#7695#8354#0" expanded="true" />
-                <element signature="e#8343#8344#0" expanded="true" />
+                <element signature="e#6074#6082#0" expanded="true" />
+                <element signature="e#7698#8357#0" expanded="true" />
+                <element signature="e#8346#8347#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -279,24 +359,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RepoListAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="30" column="39" selection-start="894" selection-end="894" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="RepoListActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="60" column="32" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+            <state line="37" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#2411#2423#0" expanded="true" />
-                <element signature="e#2491#2503#0" expanded="true" />
+                <element signature="e#2412#2424#0" expanded="true" />
+                <element signature="e#2492#2504#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -973,13 +1042,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="50" selection-start="1428" selection-end="1428" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="29" column="23" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
@@ -991,35 +1053,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="39" selection-start="894" selection-end="894" vertical-scroll-proportion="0.0">
+        <state line="30" column="39" selection-start="894" selection-end="894" vertical-scroll-proportion="0.44444445">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="50" selection-start="1428" selection-end="1428" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="60" column="32" selection-start="1658" selection-end="1658" vertical-scroll-proportion="0.0">
+        <state line="37" column="0" selection-start="1071" selection-end="1071" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#2411#2423#0" expanded="true" />
-            <element signature="e#2491#2503#0" expanded="true" />
+            <element signature="e#2412#2424#0" expanded="true" />
+            <element signature="e#2492#2504#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="20" selection-start="1410" selection-end="1410" vertical-scroll-proportion="0.20559211">
+        <state line="326" column="0" selection-start="10189" selection-end="10189" vertical-scroll-proportion="0.18092105">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3265#3553#0" expanded="true" />
             <element signature="e#3534#3535#0" expanded="true" />
             <element signature="e#3600#3801#0" expanded="true" />
             <element signature="e#3782#3783#0" expanded="true" />
-            <element signature="e#6071#6079#0" expanded="true" />
-            <element signature="e#7695#8354#0" expanded="true" />
-            <element signature="e#8343#8344#0" expanded="true" />
+            <element signature="e#6074#6082#0" expanded="true" />
+            <element signature="e#7698#8357#0" expanded="true" />
+            <element signature="e#8346#8347#0" expanded="true" />
           </folding>
         </state>
       </provider>
