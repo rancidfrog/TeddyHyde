@@ -230,7 +230,7 @@
       <file leaf-file-name="FileListingActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="210" column="0" selection-start="6908" selection-end="6908" vertical-scroll-proportion="0.33195022">
+            <state line="207" column="0" selection-start="6845" selection-end="6845" vertical-scroll-proportion="0.33195022">
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3353#3641#0" expanded="true" />
@@ -1012,7 +1012,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="210" column="0" selection-start="6908" selection-end="6908" vertical-scroll-proportion="0.33195022">
+        <state line="207" column="0" selection-start="6845" selection-end="6845" vertical-scroll-proportion="0.33195022">
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3353#3641#0" expanded="true" />
