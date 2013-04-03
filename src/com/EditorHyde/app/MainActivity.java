@@ -29,6 +29,13 @@ public class MainActivity extends Activity {
 
     public static final String APP_ID = "com.TeddyHyde.app";
 
+    public void nukePreferences() {
+        sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
+        SharedPreferences.Editor edit = sp.edit();
+        edit.clear();
+        edit.commit();
+    }
+
     /**
      * Called when the activity is first created.
      */
