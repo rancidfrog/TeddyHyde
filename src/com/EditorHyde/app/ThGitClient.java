@@ -1,5 +1,6 @@
 package com.EditorHyde.app;
 
+import org.apache.commons.codec.binary.Base64;
 import org.eclipse.egit.github.core.*;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.DataService;
@@ -16,17 +17,26 @@ import java.util.*;
  * Time: 8:44 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Github {
+public class ThGitClient {
 
-    public static boolean SaveFile( String authToken, String repoName, String contentsBase64, String filename, String commitMessage ) {
+    public static String GetFile( String authToken, String repoName, String login, String fileSha ) throws IOException {
+        RepositoryService repositoryService = new RepositoryService();
+        repositoryService.getClient().setOAuth2Token(authToken);
+        Repository repo = repositoryService.getRepository(login, repoName);
+        DataService ds = new DataService();
+        ds.getClient().setOAuth2Token(authToken);
+        Blob blob = ds.getBlob(repo, fileSha);
+        String theMarkdown64 = blob.getContent();
+        String encoding = blob.getEncoding();
+        byte[] decoded = Base64.decodeBase64(theMarkdown64.getBytes());
+        return new String( decoded );
+    }
+
+    public static boolean SaveFile( String authToken, String repoName, String login, String contentsBase64, String filename, String commitMessage ) {
 
         boolean rv = true;
 
         try {
-        UserService userService = new UserService();
-        userService.getClient().setOAuth2Token(authToken);
-        String username = userService.getUser().getLogin();
-
         // Thank you!
         // https://gist.github.com/Detelca/2337731
 
@@ -39,7 +49,7 @@ public class Github {
         dataService.getClient().setOAuth2Token(authToken);
 
         // get some sha's from current state in git
-        Repository repository =  repositoryService.getRepository(username, repoName);
+        Repository repository =  repositoryService.getRepository(login, repoName);
         List<RepositoryBranch> branches = repositoryService.getBranches(repository);
         RepositoryBranch theBranch = null;
         RepositoryBranch master = null;
