@@ -1,7 +1,12 @@
 package com.EditorHyde.app;
 
+import android.graphics.Path;
+import android.provider.MediaStore;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.EditText;
+
+import java.io.File;
+import java.util.Scanner;
 
 /**
  * This is a simple framework for a test of an Application.  See
@@ -19,6 +24,16 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private EditText mLogin;
     private EditText mPassword;
 
+    private String githubLogin;
+    private String githubPassword;
+
+    private void readPasswordFile() {
+        Scanner scan = new Scanner("password.cfg");
+        scan.useDelimiter("\\n");
+        githubLogin = scan.next();
+        githubPassword = scan.next();
+    }
+
     @Override
     protected void setUp() throws Exception {
         super.setUp();
@@ -30,6 +45,9 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         mLogin = (EditText) mActivity.findViewById( R.id.githubEmail );
         mPassword = (EditText) mActivity.findViewById( R.id.githubPassword );
+
+        // Load up the password file
+        readPasswordFile();
 
     } // end of setUp() method definition
 
