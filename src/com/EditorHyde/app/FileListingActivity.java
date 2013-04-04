@@ -21,6 +21,7 @@ import org.eclipse.egit.github.core.*;
 
 import org.eclipse.egit.github.core.service.*;
 
+
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -49,6 +50,7 @@ public class FileListingActivity extends Activity {
     Repository theRepo;
     TextView repoTv;
     Button branchTv;
+    String transformsJson;
 
     RepositoryBranch theBranch;
 
@@ -114,13 +116,13 @@ public class FileListingActivity extends Activity {
                 }).show();
     }
 
-
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         String filename;
         String template;
+
+
         switch ( itemId ) {
 
             case R.id.action_add_new_page:
@@ -407,13 +409,50 @@ public class FileListingActivity extends Activity {
                 branchTv.setVisibility(View.VISIBLE);
             }
 
-            new LoadImageTask().execute();
+            new LoadHydeTransformsTask().execute();
 
             // This does not work. Why?
             if( null != users && users.size() > 1 ) {
                 Toast.makeText( FileListingActivity.this, "WARNING: This repository has multiple collaborators. Teddy Hyde does not always detect recent file changes made via other collaborators. (bug #1)", Toast.LENGTH_LONG );
             }
         }
+    }
+
+
+    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Boolean> {
+
+        protected Boolean doInBackground(Void...unused) {
+
+            String transformsSha = null;
+            transformsJson = null;
+
+            for( TreeEntry entry: entries) {
+
+                String name = entry.getPath();
+
+                if( name.equals( "_hyde/transforms.json") ) {
+                    transformsSha = entry.getSha();
+                }
+            }
+
+            if( null != transformsSha ) {
+                try {
+                    transformsJson = ThGitClient.GetFile( authToken, repoName, login, transformsSha );
+                } catch (IOException e) {
+                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                }
+            }
+
+            return false;
+        }
+
+        protected void onPostExecute(Boolean result) {
+
+            new LoadImageTask().execute();
+
+        }
+
+
     }
 
     public void showEditor( String filename, String fileSha ) {
@@ -467,6 +506,7 @@ public class FileListingActivity extends Activity {
         extras.putString( "filename", theFilename );
         extras.putString( "repo", repoName );
         extras.putString( "login", login );
+        extras.putString( "transforms", transformsJson );
 
         i.putExtras(extras);
         startActivity(i);

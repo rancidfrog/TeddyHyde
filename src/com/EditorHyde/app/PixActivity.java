@@ -39,6 +39,7 @@ public class PixActivity extends Activity {
     String theRepo;
     String authToken;
     String theLogin;
+    int theTransformIndex;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,6 +52,7 @@ public class PixActivity extends Activity {
 
         theRepo = extras.getString("repo");
         theLogin = extras.getString("login");
+        theTransformIndex = extras.getInt( "transformIndex" );
 
         String [] images;
         images = extras.getStringArray( "images" );
@@ -69,7 +71,8 @@ public class PixActivity extends Activity {
                 // send back the image
                 RemoteImage ri =  (RemoteImage)gridview.getItemAtPosition(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("imageUri", ri.getUrl() );
+                bundle.putString("imageUrl", ri.getUrl() );
+                bundle.putInt( "transformIndex", theTransformIndex );
                 Intent intent = new Intent();
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);

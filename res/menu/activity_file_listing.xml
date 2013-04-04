@@ -12,4 +12,9 @@
           android:title="@string/add_new_page"
           android:showAsAction="ifRoom|withText" />
 
+
+    <item android:id="@+id/action_upload_image"
+          android:title="@string/upload_image"
+          android:showAsAction="ifRoom|withText" />
+
 </menu>

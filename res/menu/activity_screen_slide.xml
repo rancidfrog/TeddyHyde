@@ -18,11 +18,7 @@
 
     <!-- Adds an item to the list. -->
     <item android:id="@+id/action_previous"
-        android:title="@string/action_previous"
-        android:showAsAction="ifRoom|withText" />
-
-    <item android:id="@+id/add_image"
-          android:title="@string/add_image"
+          android:title="@string/action_previous"
           android:showAsAction="ifRoom|withText" />
 
 
@@ -36,15 +32,39 @@
           android:showAsAction="ifRoom|withText" />
 
 
-    <item android:id="@+id/action_paste_quote"
-          android:title="@string/paste_quote"
-          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_hyde_transforms"
+          android:title="@string/hyde_transforms"
+          android:visible="false">
 
+    </item>
 
-    <item android:id="@+id/action_paste_code"
-          android:title="@string/paste_code"
-          android:showAsAction="ifRoom|withText" />
+    <item android:id="@+id/action_markdown"
+          android:title="@string/action_markdown"
+          android:showAsAction="ifRoom|withText" >
+        <menu>
+            <item android:id="@+id/action_paste_quote"
+                  android:title="@string/paste_quote"
+                  android:showAsAction="ifRoom|withText" />
 
+            <item android:id="@+id/action_paste_code"
+                  android:title="@string/paste_code"
+                  android:showAsAction="ifRoom|withText" />
+
+            <item android:id="@+id/action_markdown_ulist"
+                  android:title="@string/markdown_ulist"
+                  android:showAsAction="ifRoom|withText"/>
+
+            <item android:id="@+id/action_markdown_olist"
+                  android:title="@string/markdown_olist"
+                  android:showAsAction="ifRoom|withText"/>
+
+            <item android:id="@+id/add_image"
+                  android:title="@string/add_image"
+                  android:showAsAction="ifRoom|withText" />
+
+        </menu>
+
+    </item>
 
 
 

@@ -26,13 +26,16 @@ import android.support.v4.app.NavUtils;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
-import android.text.SpannableString;
 import android.util.Base64;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.*;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import org.eclipse.egit.github.core.*;
+import org.ho.yaml.Yaml;
 
 import java.util.*;
 
@@ -53,9 +56,11 @@ public class ScreenSlideActivity extends FragmentActivity {
      */
     private static final int NUM_PAGES = 2;
     private static final int CHOOSE_IMAGE = 1 ;
+    private static final int CHOOSE_IMAGE_TRANSFORM = 2;
     Tree repoTree;
     ProgressBar pb;
 
+    private static final int HYDE_TRANSFORMS_GROUP_ID = 1;
 
     /**
      * The pager widget, which handles animation and allows swiping horizontally to access previous
@@ -68,7 +73,9 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theRepo;
     String authToken;
     String theLogin;
+    String theTransforms;
     String[] images;
+    List<Transform> transforms;
 
     ScreenSlidePageFragmentMarkdown md;
     ProgressDialog pd;
@@ -82,16 +89,17 @@ public class ScreenSlideActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        theMarkdown = getIntent().getExtras().getString( "markdown" );
-        theFile = getIntent().getExtras().getString( "filename" );
-        theRepo = getIntent().getExtras().getString( "repo" );
-        theLogin = getIntent().getExtras().getString( "login" );
+        Bundle extras = getIntent().getExtras();
+        theMarkdown = extras.getString("markdown");
+        theFile = extras.getString("filename");
+        theRepo = extras.getString("repo");
+        theLogin = extras.getString("login");
+        theTransforms = extras.getString( "transforms" );
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
 
         setContentView(R.layout.activity_screen_slide);
-
 
         // Instantiate a ViewPager and a PagerAdapter.
         mPager = (ViewPager) findViewById(R.id.pager);
@@ -112,6 +120,36 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             }
         });
+
+    }
+
+    private void loadHydeTransformsIntoMenu( Menu menu ) {
+        int index = 0;
+
+        Gson gson = new Gson();
+        List<Map<String,String>> objects = gson.fromJson(theTransforms, new TypeToken<List<Map<String, String>>>() {
+        }.getType());
+
+        transforms = new ArrayList<Transform>();
+        for( Map tr: objects ) {
+            Transform transform = new Transform();
+            transform.code = (String)tr.get( "code" );
+            transform.type = (String)tr.get( "type" );
+            transform.prompt = (String)tr.get( "prompt" );
+            transform.name = (String)tr.get( "name" );
+            transform.version = Integer.parseInt( (String)tr.get( "version" ) );
+            transforms.add( transform );
+        }
+
+        if( !transforms.isEmpty() )       {
+            SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
+
+            for( Transform item : transforms ) {
+                hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
+                index++;
+            }
+
+        }
     }
 
     @Override
@@ -131,6 +169,8 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         // If we are in the editor menu, then enable the save with commit message...
         menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
+
+        loadHydeTransformsIntoMenu( menu );
 
         return true;
     }
@@ -197,95 +237,169 @@ public class ScreenSlideActivity extends FragmentActivity {
         insertAtCursor( "\n> " + quote + "\n" );
     }
 
+    private void promptAndInsert( final Transform transform, final String imageUrl ) {
+        final EditText input = new EditText(ScreenSlideActivity.this);
+
+        new AlertDialog.Builder(ScreenSlideActivity.this)
+                .setTitle("Insert image code")
+                .setMessage( transform.prompt )
+                .setView(input)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        String code = new String(transform.code);
+                        String processedForImage;
+                        if( null != imageUrl ) {
+                            processedForImage = code.replace("{{IMAGE}}", imageUrl );
+                        }
+                        else {
+                            processedForImage = code;
+                        }
+                        String processed = processedForImage.replace( "{{PROMPT}}", input.getText() );
+                        insertAtCursor(processed);
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+    }
+
     @Override
     public void onActivityResult( int reqCode, int resCode, Intent data ) {
-        if( resCode == RESULT_OK ){
-            if( reqCode == CHOOSE_IMAGE ) {
+        if( RESULT_OK == resCode  ){
+            if( CHOOSE_IMAGE == reqCode ) {
                 Bundle extras = data.getExtras();
-                String uri = extras.getString( "imageUri" );
-                if( null != uri ) {
-                    insertAtCursor( "!["+ uri + "](" + uri +")" );
+                String url = extras.getString( "imageUrl" );
+                if( null != url ) {
+                    insertAtCursor( "!["+ url + "](" + url +")" );
+                }
+            }
+            else if (CHOOSE_IMAGE_TRANSFORM == reqCode) {
+                Bundle extras = data.getExtras();
+                String url = extras.getString("imageUrl");
+                // replace the url
+                if (null != url) {
+                    int transformIndex = extras.getInt("transformIndex");
+                    Transform transform = transforms.get(transformIndex);
+
+                    if( null != transform.prompt ) {
+                        promptAndInsert( transform, url );
+                    }
+                    else {
+                        String code = new String(transform.code);
+                        String processed = code.replace("{{IMAGE}}", url);
+                        insertAtCursor(processed);
+                    }
                 }
             }
         }
 
     }
 
+    private void getImage( int returnCode, int transformIndex ) {
+        Intent i;
+        Bundle extras = getIntent().getExtras();
+        extras.putString( "repo", theRepo );
+        extras.putString( "login", theLogin );
+        extras.putInt( "transformIndex", transformIndex );
+
+        extras.putStringArray( "images", images );
+        i = new Intent(this, PixActivity.class);
+        i.putExtras(extras);
+
+        startActivityForResult( i, returnCode );
+    }
+
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
-        switch ( itemId ) {
+        int groupId = item.getGroupId();
+        boolean rv = false;
 
-            case R.id.add_image:
-                Intent i;
-                Bundle extras = getIntent().getExtras();
-                extras.putString( "repo", theRepo );
-                extras.putString( "login", theLogin );
-
-                extras.putStringArray( "images", images );
-                i = new Intent(this, PixActivity.class);
-                i.putExtras(extras);
-
-                startActivityForResult(i, CHOOSE_IMAGE );
-                return true;
-
-            case R.id.action_paste_code:
-            case R.id.action_paste_quote:
-
-                // grab whatever is in the clipboard
-                ClipboardManager cm = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
-                if( cm.hasPrimaryClip() ) {
-                    ClipData cd = cm.getPrimaryClip();
-                    ClipData.Item clipItem  = cd.getItemAt(0);
-                    if( null != item ) {
-                        SpannableString theText = (SpannableString) clipItem.getText();
-
-                        if( itemId == R.id.action_paste_quote ) {
-                            pasteQuote( theText.toString() );
-                        }
-                        else if( itemId == R.id.action_paste_code ) {
-                            pasteCode( theText.toString() );
-                        }
-                    }
-                }
-
-                return true;
-
-
-            case R.id.action_save_with_commit:
-            case R.id.save_file:
-                EditText et = (EditText) findViewById(R.id.markdownEditor);
-                String contents = et.getText().toString();
-                if( R.id.action_save_with_commit == itemId ) {
-                    promptForCommitMessage( contents );
+        if( groupId == HYDE_TRANSFORMS_GROUP_ID ) {
+            // Get the transform and handle it
+            Transform theTransform = transforms.get( itemId );
+            if( 0 == "image".compareTo( theTransform.type ) ) {
+                getImage(CHOOSE_IMAGE_TRANSFORM, itemId);
+                rv = true;
+            }
+            else if( 0 == "insert".compareTo( theTransform.type ) ) {
+                if( null != theTransform.prompt ) {
+                    promptAndInsert( theTransform, null );
                 }
                 else {
-
-                    startSaveProgressIndicator();
-                    new SaveFileTask().execute( contents, null );
+                    insertAtCursor( theTransform.code );
                 }
-                return true;
+                rv = true;
+            }
 
-            case android.R.id.home:
-                // Navigate "up" the demo structure to the launchpad activity.
-                // See http://developer.android.com/design/patterns/navigation.html for more.
-                NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-                return true;
+        }
+        else {
+            switch ( itemId ) {
 
-            case R.id.action_previous:
-                // Go to the previous step in the wizard. If there is no previous step,
-                // setCurrentItem will do nothing.
-                mPager.setCurrentItem(mPager.getCurrentItem() - 1);
-                return true;
+                case R.id.add_image:
+                    getImage( CHOOSE_IMAGE, 0 );
+                    rv = true;
 
-            case R.id.action_next:
-                // Advance to the next step in the wizard. If there is no next step, setCurrentItem
-                // will do nothing.
-                mPager.setCurrentItem(mPager.getCurrentItem() + 1);
-                return true;
+                case R.id.action_paste_code:
+                case R.id.action_paste_quote:
+
+                    // grab whatever is in the clipboard
+                    ClipboardManager cm = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
+                    if( cm.hasPrimaryClip() ) {
+                        ClipData cd = cm.getPrimaryClip();
+                        ClipData.Item clipItem  = cd.getItemAt(0);
+                        if( null != item ) {
+                            CharSequence theText = clipItem.getText();
+
+                            if( itemId == R.id.action_paste_quote ) {
+                                pasteQuote( theText.toString() );
+                            }
+                            else if( itemId == R.id.action_paste_code ) {
+                                pasteCode( theText.toString() );
+                            }
+                        }
+                    }
+
+                    rv = true;
+
+                case R.id.action_save_with_commit:
+                case R.id.save_file:
+                    EditText et = (EditText) findViewById(R.id.markdownEditor);
+                    String contents = et.getText().toString();
+                    if( R.id.action_save_with_commit == itemId ) {
+                        promptForCommitMessage( contents );
+                    }
+                    else {
+
+                        startSaveProgressIndicator();
+                        new SaveFileTask().execute( contents, null );
+                    }
+                    rv = true;
+
+                case android.R.id.home:
+                    // Navigate "up" the demo structure to the launchpad activity.
+                    // See http://developer.android.com/design/patterns/navigation.html for more.
+                    NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
+                    rv = true;
+
+                case R.id.action_previous:
+                    // Go to the previous step in the wizard. If there is no previous step,
+                    // setCurrentItem will do nothing.
+                    mPager.setCurrentItem(mPager.getCurrentItem() - 1);
+                    rv = true;
+
+                case R.id.action_next:
+                    // Advance to the next step in the wizard. If there is no next step, setCurrentItem
+                    // will do nothing.
+                    mPager.setCurrentItem(mPager.getCurrentItem() + 1);
+                    rv = true;
+            }
         }
 
-        return super.onOptionsItemSelected(item);
+        return rv || super.onOptionsItemSelected(item);
     }
 
 

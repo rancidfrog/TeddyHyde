@@ -34,6 +34,12 @@
     <string name="paste_code">Paste Code</string>
     <string name="upload_image_button">Upload Image...</string>
     <string name="repo_name">Repository Name</string>
+    <string name="upload_image">Upload image...</string>
+    <string name="action_markdown">Markdown...</string>
+    <string name="markdown_list">Unordered list...</string>
+    <string name="markdown_ulist">Unordered list...</string>
+    <string name="markdown_olist">Ordered list...</string>
+    <string name="hyde_transforms">Transforms...</string>
 
 
 </resources>
