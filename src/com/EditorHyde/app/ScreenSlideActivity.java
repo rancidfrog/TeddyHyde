@@ -35,8 +35,9 @@ import android.widget.*;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.eclipse.egit.github.core.*;
-import org.ho.yaml.Yaml;
+import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
+import java.net.URLEncoder;
 import java.util.*;
 
 /**
@@ -246,15 +247,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                 .setView(input)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String code = new String(transform.code);
-                        String processedForImage;
-                        if( null != imageUrl ) {
-                            processedForImage = code.replace("{{IMAGE}}", imageUrl );
-                        }
-                        else {
-                            processedForImage = code;
-                        }
-                        String processed = processedForImage.replace( "{{PROMPT}}", input.getText() );
+                        String processed = processPlaceholders(transform.code, "IMAGE", imageUrl);
+                        processed = processPlaceholders(processed, "PROMPT", input.getText().toString() );
                         insertAtCursor(processed);
                     }
                 })
@@ -265,12 +259,28 @@ public class ScreenSlideActivity extends FragmentActivity {
                 }).show();
     }
 
+    private String getScaledImage( String url, String scaled ) {
+        String replaced;
+        replaced = new String( url );
+        replaced.replace(".png", "-" + scaled + ".png");
+        return replaced;
+    }
+
     @Override
     public void onActivityResult( int reqCode, int resCode, Intent data ) {
         if( RESULT_OK == resCode  ){
             if( CHOOSE_IMAGE == reqCode ) {
                 Bundle extras = data.getExtras();
                 String url = extras.getString( "imageUrl" );
+                int size = extras.getInt( "size" );
+
+                if( size == R.id.add_image_thumbnail ) {
+                    url = getScaledImage( url, "thumb" );
+                }
+                else if( size == R.id.add_image_resized ) {
+                    url = getScaledImage( url, "resized" );
+                }
+
                 if( null != url ) {
                     insertAtCursor( "!["+ url + "](" + url +")" );
                 }
@@ -287,8 +297,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                         promptAndInsert( transform, url );
                     }
                     else {
-                        String code = new String(transform.code);
-                        String processed = code.replace("{{IMAGE}}", url);
+                        String processed = processPlaceholders(transform.code, "IMAGE", url);
                         insertAtCursor(processed);
                     }
                 }
@@ -297,12 +306,26 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     }
 
-    private void getImage( int returnCode, int transformIndex ) {
+    private String processPlaceholders( String text, String placeholder, String replacement ) {
+        String processed = "";
+        // Process for URL escaping
+        processed = text.replace( "{{" + placeholder + "|url}}", URLEncoder.encode((replacement) );
+        // Process for HTML escaping
+        processed = processed.replace( "{{" + placeholder + "|html}}", escapeHtml(replacement) );
+
+        // Process for regular placeholders
+        processed = processed.replace( "{{" + placeholder + "}}", replacement );
+
+        return processed;
+    }
+
+    private void getImage( int returnCode, int transformIndex, int size ) {
         Intent i;
         Bundle extras = getIntent().getExtras();
         extras.putString( "repo", theRepo );
         extras.putString( "login", theLogin );
         extras.putInt( "transformIndex", transformIndex );
+        extras.putInt( "size", size );
 
         extras.putStringArray( "images", images );
         i = new Intent(this, PixActivity.class);
@@ -322,7 +345,7 @@ public class ScreenSlideActivity extends FragmentActivity {
             // Get the transform and handle it
             Transform theTransform = transforms.get( itemId );
             if( 0 == "image".compareTo( theTransform.type ) ) {
-                getImage(CHOOSE_IMAGE_TRANSFORM, itemId);
+                getImage(CHOOSE_IMAGE_TRANSFORM, itemId, 0 );
                 rv = true;
             }
             else if( 0 == "insert".compareTo( theTransform.type ) ) {
@@ -339,8 +362,10 @@ public class ScreenSlideActivity extends FragmentActivity {
         else {
             switch ( itemId ) {
 
-                case R.id.add_image:
-                    getImage( CHOOSE_IMAGE, 0 );
+                case R.id.add_image_full:
+                case R.id.add_image_resized:
+                case R.id.add_image_thumbnail:
+                    getImage( CHOOSE_IMAGE, 0, itemId );
                     rv = true;
 
                 case R.id.action_paste_code:

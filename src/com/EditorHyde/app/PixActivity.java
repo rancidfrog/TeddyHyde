@@ -40,6 +40,7 @@ public class PixActivity extends Activity {
     String authToken;
     String theLogin;
     int theTransformIndex;
+    int theSize;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class PixActivity extends Activity {
         theRepo = extras.getString("repo");
         theLogin = extras.getString("login");
         theTransformIndex = extras.getInt( "transformIndex" );
+        theSize = extras.getInt( "size" );
 
         String [] images;
         images = extras.getStringArray( "images" );
@@ -73,6 +75,7 @@ public class PixActivity extends Activity {
                 Bundle bundle = new Bundle();
                 bundle.putString("imageUrl", ri.getUrl() );
                 bundle.putInt( "transformIndex", theTransformIndex );
+                bundle.putInt( "size", theSize );
                 Intent intent = new Intent();
                 intent.putExtras(bundle);
                 setResult(RESULT_OK, intent);
@@ -169,7 +172,13 @@ public class PixActivity extends Activity {
 
     }
 
-    class ImageUploadTask extends AsyncTask<Void, Void, Boolean> {
+    class ImageUploadTask extends AsyncTask<Void, Integer, Boolean> {
+        private static final int UPLOADING_FULL_SIZE = 1;
+        private static final int GENERATING_RESIZED = 2;
+        private static final int UPLOADING_RESIZED = 3;
+        private static final int GENERATING_THUMBNAIL = 4;
+        private static final int UPLOADING_THUMBNAIL = 5;
+
         @Override
         protected Boolean doInBackground(Void... unused) {
 
@@ -186,10 +195,15 @@ public class PixActivity extends Activity {
 
             String filename = "assets/images/" + prefix + "-image.png";
 
+            publishProgress( UPLOADING_FULL_SIZE );
             rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, "Image added using Teddy Hyde on Android");
 
-            // add thumbnail
-            Bitmap thumb = Bitmap.createScaledBitmap( bitmap, 64, 64, false);
+            // add thumbnail and resized
+
+            publishProgress( GENERATING_RESIZED );
+            int thumbnailWidth = 64;
+            int thumbnailHeight = ( bitmap.getHeight() / bitmap.getWidth() ) * 64;
+            Bitmap thumb = Bitmap.createScaledBitmap( bitmap, thumbnailWidth, thumbnailHeight, false);
 
             bos = new ByteArrayOutputStream();
             thumb.compress(Bitmap.CompressFormat.PNG, 100, bos);
@@ -200,14 +214,48 @@ public class PixActivity extends Activity {
 
             String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
 
+            publishProgress( UPLOADING_RESIZED );
             rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android") && rv;
+
+            publishProgress( GENERATING_THUMBNAIL );
+            int resizedWidth = 200;
+            int resizedHeight = ( bitmap.getHeight() / bitmap.getWidth() ) * 64;
+            Bitmap resized= Bitmap.createScaledBitmap( bitmap, resizedWidth, resizedHeight, false);
+
+            bos = new ByteArrayOutputStream();
+            resized.compress(Bitmap.CompressFormat.PNG, 100, bos);
+            data = bos.toByteArray();
+
+            // Convert to base64
+            base64ed = Base64.encodeToString(data, Base64.DEFAULT);
+
+            String resizedFilename = "assets/images/" + prefix + "-image-resized.png";
+
+            publishProgress( UPLOADING_RESIZED );
+            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android") && rv;
 
             return rv;
         }
 
         @Override
-        protected void onProgressUpdate(Void... unused) {
+        protected void onProgressUpdate(Integer... progresses) {
+            int progress = progresses[0];
 
+            if( UPLOADING_FULL_SIZE == progress ) {
+                pd.setMessage( "Generating resized image...");
+            }
+            else if( GENERATING_RESIZED == progress ) {
+                pd.setMessage( "Generating resized...");
+            }
+            else if( UPLOADING_RESIZED == progress ) {
+                pd.setMessage( "Uploading resized...");
+            }
+            else if( GENERATING_THUMBNAIL == progress ) {
+                pd.setMessage( "Generating thumbnail...");
+            }
+            else if( UPLOADING_THUMBNAIL == progress ) {
+                pd.setMessage( "Uploading thumbnail...");
+            }
         }
 
         @Override

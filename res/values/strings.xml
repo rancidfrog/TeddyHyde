@@ -40,6 +40,9 @@
     <string name="markdown_ulist">Unordered list...</string>
     <string name="markdown_olist">Ordered list...</string>
     <string name="hyde_transforms">Transforms...</string>
+    <string name="add_image_full">Add full sized image...</string>
+    <string name="add_image_resized">Add resized image...</string>
+    <string name="add_image_thumbnail">Add thumbnail image...</string>
 
 
 </resources>

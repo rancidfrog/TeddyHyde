@@ -58,8 +58,18 @@
                   android:title="@string/markdown_olist"
                   android:showAsAction="ifRoom|withText"/>
 
-            <item android:id="@+id/add_image"
-                  android:title="@string/add_image"
+            <item android:id="@+id/add_image_full"
+                  android:title="@string/add_image_full"
+                  android:showAsAction="ifRoom|withText" />
+
+
+            <item android:id="@+id/add_image_resized"
+                  android:title="@string/add_image_resized"
+                  android:showAsAction="ifRoom|withText" />
+
+
+            <item android:id="@+id/add_image_thumbnail"
+                  android:title="@string/add_image_thumbnail"
                   android:showAsAction="ifRoom|withText" />
 
         </menu>
