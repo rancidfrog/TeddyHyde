@@ -142,6 +142,15 @@ public class FileListingActivity extends Activity {
                 // create a new post
                 return true;
 
+            case R.id.action_upload_image:
+                Intent i;
+                Bundle extras = getIntent().getExtras();
+                extras.putString( "repo", repoName );
+                extras.putString( "login", login );
+                i = new Intent(this, PixActivity.class);
+                i.putExtras(extras);
+                startActivity( i );
+
         }
 
         return super.onOptionsItemSelected(item);

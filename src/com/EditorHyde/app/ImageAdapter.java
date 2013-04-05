@@ -29,22 +29,27 @@ import java.util.ArrayList;
 
 public class ImageAdapter extends BaseAdapter {
     private Context mContext;
-    private RemoteImage[] mImages;
+    private ArrayList<RemoteImage> mImages;
 
     public ImageAdapter(Context c) {
         mContext = c;
     }
 
     public int getCount() {
-        return mImages.length;
+        int size = 0;
+        if( null != mImages ) {
+            size = mImages.size();
+        }
+
+        return size;
     }
 
-    public void setImages( RemoteImage[] images ) {
+    public void setImages( ArrayList<RemoteImage> images ) {
         mImages = images;
     }
 
     public Object getItem(int position) {
-        return mImages[ position ];
+        return mImages.get( position );
     }
 
     public long getItemId(int position) {
@@ -63,7 +68,7 @@ public class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-        imageView.setImageBitmap( mImages[position].getBmp() );
+        imageView.setImageBitmap( mImages.get( position ).getBmp() );
 
 
         return imageView;

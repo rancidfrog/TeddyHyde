@@ -20,28 +20,29 @@ import java.util.List;
  */
 public class RemoteFileCache {
 
-    private static RemoteImage[] mImages;
+    private static ArrayList<RemoteImage> mImages;
 
-    public static RemoteImage[] getImages() {
+    public static ArrayList<RemoteImage> getImages() {
         return mImages;
     }
 
     public static void clear() {
-        mImages = null;
+        if( null != mImages ) {
+        mImages.clear();
+        }
     }
 
     public static void loadImages( ArrayList<String> urls ) {
-        mImages = new RemoteImage[urls.size()];
+        mImages = new ArrayList<RemoteImage>();
 
-        int index = 0;
         for( String imageUrl : urls ) {
             try {
                 Bitmap bmp = RemoteFileCache.getRemoteImage(new URL(imageUrl));
-                mImages[index] = new RemoteImage( imageUrl, bmp );
+                RemoteImage ri = new RemoteImage( imageUrl, bmp );
+                mImages.add( ri );
             } catch (MalformedURLException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            index++;
         }
     }
 
@@ -59,4 +60,9 @@ public class RemoteFileCache {
         return bm;
     }
 
+    public static void addImage( RemoteImage ri ) {
+        if( null != mImages ) {
+            mImages.add( 0, ri );
+        }
+    }
 }

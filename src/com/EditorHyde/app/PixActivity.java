@@ -181,6 +181,8 @@ public class PixActivity extends Activity {
         private static final int GENERATING_THUMBNAIL = 4;
         private static final int UPLOADING_THUMBNAIL = 5;
 
+        RemoteImage newImage;
+
         @Override
         protected Boolean doInBackground(Void... unused) {
 
@@ -204,7 +206,7 @@ public class PixActivity extends Activity {
 
             publishProgress( GENERATING_THUMBNAIL );
             int thumbnailWidth = THUMBNAIL_WIDTH;
-            int thumbnailHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() ) * THUMBNAIL_WIDTH;
+            int thumbnailHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() * THUMBNAIL_WIDTH );
             Bitmap thumb = Bitmap.createScaledBitmap( bitmap, thumbnailWidth, thumbnailHeight, false);
 
             bos = new ByteArrayOutputStream();
@@ -221,7 +223,7 @@ public class PixActivity extends Activity {
 
             publishProgress( GENERATING_RESIZED );
             int resizedWidth = RESIZED_WIDTH;
-            int resizedHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() ) * 200;
+            int resizedHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() * 200 );
             Bitmap resized = Bitmap.createScaledBitmap( bitmap, resizedWidth, resizedHeight, false);
 
             bos = new ByteArrayOutputStream();
@@ -235,6 +237,9 @@ public class PixActivity extends Activity {
 
             publishProgress( UPLOADING_RESIZED );
             rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android") && rv;
+
+            // Save the image to add to our list
+            newImage = new RemoteImage( thumbFilename, thumb );
 
             return rv;
         }
@@ -267,6 +272,15 @@ public class PixActivity extends Activity {
 
             if( !result ) {
                 Toast.makeText( PixActivity.this, "Unable to upload image, please try again later", Toast.LENGTH_LONG );
+            }
+
+            // If we have a size parameter, then we need to allow them to choose. If not, we just needed to upload the image
+            if( 0 == theSize ) {
+                finish();
+            }
+            else {
+                // Add it to the images
+                RemoteFileCache.addImage( newImage );
             }
 
         }

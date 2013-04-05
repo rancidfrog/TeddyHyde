@@ -261,8 +261,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private String getScaledImage( String url, String scaled ) {
         String replaced;
-        replaced = new String( url );
-        replaced.replace(".png", "-" + scaled + ".png");
+        replaced = url.replace(".png", "-" + scaled + ".png");
         return replaced;
     }
 
