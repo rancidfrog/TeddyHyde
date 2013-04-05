@@ -265,7 +265,7 @@ public class FileListingActivity extends Activity {
                 }
             }
 
-            RemoteFileCache.loadImages(images);
+            RemoteFileCache.loadImagesReferences(images);
             return true;
         }
 
@@ -437,7 +437,7 @@ public class FileListingActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             // Determine the images, and load them
-            pd.setMessage( "Loading and caching images...");
+            pd.setMessage( "Loading hyde transformations...");
 
             if( null != theBranch ) {
                 branchTv.setText( theBranch.getName() );

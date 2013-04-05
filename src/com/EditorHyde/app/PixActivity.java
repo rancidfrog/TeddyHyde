@@ -63,6 +63,19 @@ public class PixActivity extends Activity {
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
 
+        if( !RemoteFileCache.isLoaded() ) {
+            pd = ProgressDialog.show(PixActivity.this, "Thumbnail",
+                    "Retrieving and caching thumbnails", true);
+
+            new LoadImagesTask().execute();
+        }
+        else {
+            setupImages();
+        }
+
+    }
+
+    private void setupImages() {
         setContentView(R.layout.pix_grid_layout);
 
         final GridView gridview = (GridView) findViewById(R.id.gridview);
@@ -93,8 +106,6 @@ public class PixActivity extends Activity {
 
             }
         });
-
-
     }
 
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -170,6 +181,22 @@ public class PixActivity extends Activity {
                     getString(R.string.exception_message),
                     Toast.LENGTH_LONG).show();
             Log.e(e.getClass().getName(), e.getMessage(), e);
+        }
+
+    }
+
+    class LoadImagesTask extends AsyncTask<Void, Void, Boolean> {
+
+        @Override
+        protected Boolean doInBackground(Void... unused) {
+            RemoteFileCache.loadImages();
+            return true;
+        }
+
+        @Override
+        protected void onPostExecute(Boolean result) {
+            pd.hide();
+            setupImages();
         }
 
     }

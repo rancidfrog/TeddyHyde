@@ -21,6 +21,8 @@ import java.util.List;
 public class RemoteFileCache {
 
     private static ArrayList<RemoteImage> mImages;
+    private static ArrayList<String> mUrls;
+    private static boolean mLoaded;
 
     public static ArrayList<RemoteImage> getImages() {
         return mImages;
@@ -32,10 +34,19 @@ public class RemoteFileCache {
         }
     }
 
-    public static void loadImages( ArrayList<String> urls ) {
+    public static void loadImagesReferences( ArrayList<String> urls ) {
+        mUrls = urls;
+    }
+
+    public static boolean isLoaded() {
+        return mLoaded;
+    }
+
+    public static void loadImages() {
+
         mImages = new ArrayList<RemoteImage>();
 
-        for( String imageUrl : urls ) {
+        for( String imageUrl : mUrls ) {
             try {
                 Bitmap bmp = RemoteFileCache.getRemoteImage(new URL(imageUrl));
                 RemoteImage ri = new RemoteImage( imageUrl, bmp );
@@ -44,6 +55,8 @@ public class RemoteFileCache {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
         }
+
+        mLoaded = true;
     }
 
     // Thanks
