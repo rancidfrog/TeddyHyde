@@ -60,6 +60,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     private static final int CHOOSE_IMAGE_TRANSFORM = 2;
     Tree repoTree;
     ProgressBar pb;
+    ScreenSlidePageFragment editorFragment;
 
     private static final int HYDE_TRANSFORMS_GROUP_ID = 1;
 
@@ -266,6 +267,31 @@ public class ScreenSlideActivity extends FragmentActivity {
     }
 
     @Override
+    public void onBackPressed() {
+
+          if( editorFragment.isDirty() ) {
+              // Notify the user they will lose work...
+              new AlertDialog.Builder(this)
+                      .setIcon(android.R.drawable.ic_dialog_alert)
+                      .setTitle( "Unsaved work")
+                      .setMessage("You have not saved your changes. If you leave this page, you will lose this work. Are you sure you want to do this?")
+                      .setPositiveButton( "Yes, discard edits", new DialogInterface.OnClickListener() {
+
+                          @Override
+                          public void onClick(DialogInterface dialog, int which) {
+                              finish();
+                          }
+
+                      })
+                      .setNegativeButton( "No, return to editing", null)
+                      .show();
+          }
+        else {
+              finish();
+          }
+    }
+
+    @Override
     public void onActivityResult( int reqCode, int resCode, Intent data ) {
         if( RESULT_OK == resCode  ){
             if( CHOOSE_IMAGE == reqCode ) {
@@ -329,7 +355,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         extras.putInt( "size", size );
 
         if( null != images ) {
-        extras.putStringArray( "images", images );
+            extras.putStringArray( "images", images );
         }
         i = new Intent(this, PixActivity.class);
         i.putExtras(extras);
@@ -450,7 +476,10 @@ public class ScreenSlideActivity extends FragmentActivity {
         public Fragment getItem(int position) {
             Fragment rv;
             if( position == 0 ) {
-                rv = ScreenSlidePageFragment.create( position, theMarkdown, theFile );
+
+                editorFragment = ScreenSlidePageFragment.create( position, theMarkdown, theFile );
+                rv = editorFragment;
+
                 // ((TextView)findViewById(R.id.currentFilename)).setText( theFile );
 
             }
@@ -496,6 +525,8 @@ public class ScreenSlideActivity extends FragmentActivity {
             if( !result ) {
                 Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
             }
+
+            editorFragment.makeClean();
         }
     }
 }

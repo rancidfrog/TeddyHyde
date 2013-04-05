@@ -20,6 +20,8 @@ import android.app.DialogFragment;
 import android.app.Fragment;
 import android.app.ProgressDialog;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -52,6 +54,7 @@ public class ScreenSlidePageFragment extends Fragment {
     private String theMarkdown;
     private String theFile;
     ViewGroup rootView;
+    boolean mDirty;
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -83,6 +86,15 @@ public class ScreenSlidePageFragment extends Fragment {
         theMarkdown = md;
     }
 
+
+    public boolean isDirty() {
+        return mDirty;
+    }
+
+    public void makeClean() {
+        mDirty = false;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -91,7 +103,21 @@ public class ScreenSlidePageFragment extends Fragment {
         rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 
-        ((EditText)rootView.findViewById(R.id.markdownEditor)).setText( theMarkdown );
+        EditText editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
+        editor.setText( theMarkdown );
+
+        editor.addTextChangedListener(new TextWatcher() {
+
+            public void afterTextChanged(Editable s) {
+                mDirty = true;
+            }
+
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+            }
+        });
 
         TextView filenameView = (TextView)rootView.findViewById(R.id.currentFilename);
         filenameView.setText(theFile);
