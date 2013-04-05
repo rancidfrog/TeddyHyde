@@ -130,6 +130,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     private void loadHydeTransformsIntoMenu( Menu menu ) {
         int index = 0;
 
+        if( null != theTransforms ) {
         Gson gson = new Gson();
         List<Map<String,String>> objects = gson.fromJson(theTransforms, new TypeToken<List<Map<String, String>>>() {
         }.getType());
@@ -153,6 +154,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 index++;
             }
 
+        }
         }
     }
 

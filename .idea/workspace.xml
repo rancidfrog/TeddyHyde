@@ -25,10 +25,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
     </list>
     <ignored path="Editor Hyde.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -80,7 +77,7 @@
     <file path="/a.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874641282" ignored="false" />
     <file path="/exerpt_content.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363867204978" ignored="false" />
     <file path="/fragment_screen_slide_page.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874261823" ignored="false" />
-    <file path="/ScreenSlideActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365187159959" ignored="false" />
+    <file path="/ScreenSlideActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365197437263" ignored="false" />
     <file path="/ScreenSlidePageFragment.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365164251277" ignored="false" />
     <file path="/MainActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364948402760" ignored="false" />
     <file path="/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364090268081" ignored="false" />
@@ -142,7 +139,7 @@
   <component name="DebuggerManager">
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" line="74" class="com.EditorHyde.app.FileListingActivity" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" line="307" class="com.EditorHyde.app.PixActivity.ImageUploadTask" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -157,7 +154,7 @@
         <option name="CONDITION" value="" />
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" line="307" class="com.EditorHyde.app.PixActivity.ImageUploadTask" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" line="133" class="com.EditorHyde.app.ScreenSlideActivity" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -222,10 +219,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="FileListingActivity.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="FileListingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="258" column="67" selection-start="8593" selection-end="8593" vertical-scroll-proportion="0.60855263">
+            <state line="74" column="0" selection-start="1823" selection-end="1823" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -253,7 +250,9 @@
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java">
           <provider selected="true" editor-type-id="text-editor">
             <state line="85" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0">
-              <folding />
+              <folding>
+                <element signature="imports" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -267,10 +266,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="101" column="0" selection-start="3436" selection-end="3436" vertical-scroll-proportion="0.0">
+            <state line="157" column="9" selection-start="5685" selection-end="5685" vertical-scroll-proportion="-0.63255817">
               <folding />
             </state>
           </provider>
@@ -351,10 +350,10 @@
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/testing/src/com/EditorHyde/app/MainActivityTest.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
       </list>
     </option>
   </component>
@@ -836,7 +835,7 @@
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.54613096" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.54613096" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1012,13 +1011,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="0" selection-start="3436" selection-end="3436" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="312" column="0" selection-start="11239" selection-end="11239" vertical-scroll-proportion="0.0">
@@ -1029,13 +1021,22 @@
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="85" column="0" selection-start="2275" selection-end="2275" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="imports" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="258" column="67" selection-start="8593" selection-end="8593" vertical-scroll-proportion="0.60855263">
+        <state line="74" column="0" selection-start="1823" selection-end="1823" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="157" column="9" selection-start="5685" selection-end="5685" vertical-scroll-proportion="-0.63255817">
           <folding />
         </state>
       </provider>
