@@ -37,6 +37,8 @@ import java.util.*;
 public class FileListingActivity extends Activity {
 
     private static final String MARKDOWN_EXTENSION = ".md";
+    private static final int EDIT_EXISTING_FILE = 1;
+    private static final int EDIT_NEW_FILE = 2;
     private ProgressDialog pd;
     private Cwd cwd;
     Tree repoTree;
@@ -51,6 +53,7 @@ public class FileListingActivity extends Activity {
     TextView repoTv;
     Button branchTv;
     String transformsJson;
+    TreeEntry currentTree;
 
     RepositoryBranch theBranch;
 
@@ -63,6 +66,28 @@ public class FileListingActivity extends Activity {
         else {
             ascend();
             rebuildFilesList();
+        }
+
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        String newSha = data.getExtras().getString( "sha" );
+        String newPath = data.getExtras().getString( "path" );
+
+        switch (requestCode) {
+            case EDIT_EXISTING_FILE:
+                // update the tree with the new sha
+                String oldSha = currentTree.getSha();
+                currentTree.setSha(newSha);
+                break;
+            case EDIT_NEW_FILE:
+                // Create a new file in the tree
+                TreeEntry newFile = new TreeEntry();
+                newFile.setSha( newPath );
+                newFile.setPath( newPath );
+                newFile.setType( "blob" );
+                repoTree.getTree().add(newFile);
+                rebuildFilesList();
         }
 
     }
@@ -106,7 +131,7 @@ public class FileListingActivity extends Activity {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Convert it to proper format
-                        loadEditor( template, filename[0], repoName );
+                        loadEditor( template, filename[0], repoName, null );
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -277,6 +302,7 @@ public class FileListingActivity extends Activity {
                 }
                 else {
                     String fileSha = treeEntry.getSha();
+                    currentTree = treeEntry;
                     showEditor( file, fileSha );
                 }
             }
@@ -481,6 +507,7 @@ public class FileListingActivity extends Activity {
 
         String theMarkdown;
         String theFilename;
+        String fileSha;
 
         protected Boolean doInBackground(String...strings) {
 
@@ -489,7 +516,7 @@ public class FileListingActivity extends Activity {
             String authToken = strings[1];
             String repoName = strings[2];
             theFilename = strings[3];
-            String fileSha = strings[4];
+            fileSha = strings[4];
 
             try {
                 theMarkdown = ThGitClient.GetFile(authToken, repoName, username, fileSha);
@@ -503,11 +530,11 @@ public class FileListingActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             pd.hide();
-            loadEditor( theMarkdown, theFilename, repoName );
+            loadEditor( theMarkdown, theFilename, repoName, fileSha  );
         }
     }
 
-    private void loadEditor( String theMarkdown, String theFilename, String repoName ) {
+    private void loadEditor( String theMarkdown, String theFilename, String repoName, String sha ) {
         Intent i;
         i = new Intent(ctx, ScreenSlideActivity.class);
         Bundle extras = getIntent().getExtras();
@@ -516,9 +543,12 @@ public class FileListingActivity extends Activity {
         extras.putString( "repo", repoName );
         extras.putString( "login", login );
         extras.putString( "transforms", transformsJson );
+        extras.putString( "sha", sha );
 
         i.putExtras(extras);
-        startActivity(i);
+
+        startActivityForResult(i, null != sha ? EDIT_EXISTING_FILE : EDIT_NEW_FILE );
+
 
     }
 }

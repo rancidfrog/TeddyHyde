@@ -186,7 +186,8 @@ public class PixActivity extends Activity {
         @Override
         protected Boolean doInBackground(Void... unused) {
 
-            boolean rv = false;
+            Boolean rv = true;
+            String newSha;
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, bos);
             byte[] data = bos.toByteArray();
@@ -200,7 +201,7 @@ public class PixActivity extends Activity {
             String filename = "assets/images/" + prefix + "-image.png";
 
             publishProgress( UPLOADING_FULL_SIZE );
-            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, "Image added using Teddy Hyde on Android");
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, "Image added using Teddy Hyde on Android");
 
             // add thumbnail and resized
 
@@ -219,7 +220,7 @@ public class PixActivity extends Activity {
             String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
 
             publishProgress( UPLOADING_THUMBNAIL );
-            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android") && rv;
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android");
 
             publishProgress( GENERATING_RESIZED );
             int resizedWidth = RESIZED_WIDTH;
@@ -236,7 +237,7 @@ public class PixActivity extends Activity {
             String resizedFilename = "assets/images/" + prefix + "-image-resized.png";
 
             publishProgress( UPLOADING_RESIZED );
-            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android") && rv;
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android");
 
             // Save the image to add to our list
             newImage = new RemoteImage( thumbFilename, thumb );

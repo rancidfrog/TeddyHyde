@@ -7,6 +7,8 @@ import android.provider.MediaStore;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
+import com.jayway.android.robotium.solo.Solo;
+import junit.framework.Assert;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -32,6 +34,8 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private String githubLogin;
     private String githubPassword;
 
+    private Solo solo;
+
     private void setPasswords() {
         githubLogin = Passwords.login;
         githubPassword = Passwords.password;
@@ -43,47 +47,23 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
 
         setActivityInitialTouchMode(false);
 
-        mActivity = getActivity();
-        mActivity.nukePreferences();
-
-        mLogin = (EditText) mActivity.findViewById( R.id.githubEmail );
-        mPassword = (EditText) mActivity.findViewById( R.id.githubPassword );
-        mLoginButton = (Button) mActivity.findViewById( R.id.button );
-
-        // Load up the password file
-        setPasswords();
-
     } // end of setUp() method definition
 
-    public MainActivityTest() {
-        super("com.EditorHyde.app", MainActivity.class);
+    @Override
+    public void tearDown() throws Exception {
+        solo.finishOpenedActivities();
     }
 
-    public void testPreConditions() {
-        String login = mLogin.getText().toString();
-        assertTrue( login.equals("") );
+    public MainActivityTest() {
+        super(MainActivity.class);
     }
 
     public void testLogin() {
-        mLogin.setText( githubLogin );
-        mPassword.setText(githubPassword);
-
-        mActivity.runOnUiThread(new Runnable() {
-            public void run() {
-                mLoginButton.performClick();
-            }
-        });
-
-        try {
-            Thread.sleep(20000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-        SharedPreferences sp = mActivity.getSharedPreferences(MainActivity.APP_ID, Activity.MODE_PRIVATE);
-        String authToken = sp.getString( "authToken", null );
-        assertNotNull(authToken);
+        solo.typeText(R.id.githubEmail, "xrdawson@gmail.com");
+        solo.typeText(R.id.githubPassword, "coins0nTable");
+        solo.clickOnButton(R.id.loginMessage);
+        solo.waitForActivity("RepoListActivity");
+        Assert.assertEquals(solo.getCurrentActivity().getClass(), RepoListActivity.class);
 
     }
 }

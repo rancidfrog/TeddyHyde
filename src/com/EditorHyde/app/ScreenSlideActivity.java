@@ -76,6 +76,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     String authToken;
     String theLogin;
     String theTransforms;
+    String theSha;
     String[] images;
     List<Transform> transforms;
 
@@ -97,6 +98,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         theRepo = extras.getString("repo");
         theLogin = extras.getString("login");
         theTransforms = extras.getString( "transforms" );
+        theSha = extras.getString( "sha" );
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
@@ -266,6 +268,16 @@ public class ScreenSlideActivity extends FragmentActivity {
         return replaced;
     }
 
+    private void finishWithResult() {
+        Intent intent = new Intent();
+        Bundle extras = new Bundle();
+        extras.putString( "sha", theSha );
+        extras.putString( "path", theFile);
+        intent.putExtras( extras );
+        setResult(RESULT_OK, intent );
+        finish();
+    }
+
     @Override
     public void onBackPressed() {
 
@@ -279,7 +291,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                           @Override
                           public void onClick(DialogInterface dialog, int which) {
-                              finish();
+                              finishWithResult();
                           }
 
                       })
@@ -287,7 +299,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                       .show();
           }
         else {
-              finish();
+              finishWithResult();
           }
     }
 
@@ -512,7 +524,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
 
-            rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, theFile, commitMessage);
+            theSha = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, theFile, commitMessage);
 
             return rv;
 
