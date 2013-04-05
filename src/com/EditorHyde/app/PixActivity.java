@@ -31,6 +31,8 @@ import java.util.Date;
 public class PixActivity extends Activity {
 
     private static final int PICK_IMAGE = 1;
+    public static final int THUMBNAIL_WIDTH = 64;
+    public static final int RESIZED_WIDTH = 200;
     private Context ctx;
     private Bitmap bitmap;
     private ProgressDialog pd;
@@ -200,9 +202,9 @@ public class PixActivity extends Activity {
 
             // add thumbnail and resized
 
-            publishProgress( GENERATING_RESIZED );
-            int thumbnailWidth = 64;
-            int thumbnailHeight = ( bitmap.getHeight() / bitmap.getWidth() ) * 64;
+            publishProgress( GENERATING_THUMBNAIL );
+            int thumbnailWidth = THUMBNAIL_WIDTH;
+            int thumbnailHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() ) * THUMBNAIL_WIDTH;
             Bitmap thumb = Bitmap.createScaledBitmap( bitmap, thumbnailWidth, thumbnailHeight, false);
 
             bos = new ByteArrayOutputStream();
@@ -214,13 +216,13 @@ public class PixActivity extends Activity {
 
             String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
 
-            publishProgress( UPLOADING_RESIZED );
+            publishProgress( UPLOADING_THUMBNAIL );
             rv = ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android") && rv;
 
-            publishProgress( GENERATING_THUMBNAIL );
-            int resizedWidth = 200;
-            int resizedHeight = ( bitmap.getHeight() / bitmap.getWidth() ) * 64;
-            Bitmap resized= Bitmap.createScaledBitmap( bitmap, resizedWidth, resizedHeight, false);
+            publishProgress( GENERATING_RESIZED );
+            int resizedWidth = RESIZED_WIDTH;
+            int resizedHeight = (int)( (float)bitmap.getHeight() / (float)bitmap.getWidth() ) * 200;
+            Bitmap resized = Bitmap.createScaledBitmap( bitmap, resizedWidth, resizedHeight, false);
 
             bos = new ByteArrayOutputStream();
             resized.compress(Bitmap.CompressFormat.PNG, 100, bos);

@@ -308,8 +308,10 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private String processPlaceholders( String text, String placeholder, String replacement ) {
         String processed = "";
+        // These will be ignored if they don't exist
+
         // Process for URL escaping
-        processed = text.replace( "{{" + placeholder + "|url}}", URLEncoder.encode((replacement) );
+        processed = text.replace( "{{" + placeholder + "|url}}", URLEncoder.encode(replacement) );
         // Process for HTML escaping
         processed = processed.replace( "{{" + placeholder + "|html}}", escapeHtml(replacement) );
 
@@ -327,7 +329,9 @@ public class ScreenSlideActivity extends FragmentActivity {
         extras.putInt( "transformIndex", transformIndex );
         extras.putInt( "size", size );
 
+        if( null != images ) {
         extras.putStringArray( "images", images );
+        }
         i = new Intent(this, PixActivity.class);
         i.putExtras(extras);
 
@@ -367,6 +371,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                 case R.id.add_image_thumbnail:
                     getImage( CHOOSE_IMAGE, 0, itemId );
                     rv = true;
+                    break;
 
                 case R.id.action_paste_code:
                 case R.id.action_paste_quote:
@@ -389,6 +394,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                     }
 
                     rv = true;
+                    break;
 
                 case R.id.action_save_with_commit:
                 case R.id.save_file:
@@ -403,24 +409,28 @@ public class ScreenSlideActivity extends FragmentActivity {
                         new SaveFileTask().execute( contents, null );
                     }
                     rv = true;
+                    break;
 
                 case android.R.id.home:
                     // Navigate "up" the demo structure to the launchpad activity.
                     // See http://developer.android.com/design/patterns/navigation.html for more.
                     NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
                     rv = true;
+                    break;
 
                 case R.id.action_previous:
                     // Go to the previous step in the wizard. If there is no previous step,
                     // setCurrentItem will do nothing.
                     mPager.setCurrentItem(mPager.getCurrentItem() - 1);
                     rv = true;
+                    break;
 
                 case R.id.action_next:
                     // Advance to the next step in the wizard. If there is no next step, setCurrentItem
                     // will do nothing.
                     mPager.setCurrentItem(mPager.getCurrentItem() + 1);
                     rv = true;
+                    break;
             }
         }
 
