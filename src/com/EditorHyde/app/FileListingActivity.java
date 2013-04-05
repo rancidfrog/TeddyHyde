@@ -54,6 +54,7 @@ public class FileListingActivity extends Activity {
     Button branchTv;
     String transformsJson;
     TreeEntry currentTree;
+    String baseUrl;
 
     RepositoryBranch theBranch;
 
@@ -232,7 +233,7 @@ public class FileListingActivity extends Activity {
             // Find all images in the repository
             // Only add items at the root for now
             String cnameContents = null;
-            String baseUrl = repoName;
+            baseUrl = repoName;
             ArrayList<String> images = new ArrayList<String>();
 
             for( TreeEntry entry: entries) {
@@ -254,6 +255,8 @@ public class FileListingActivity extends Activity {
             if( null != cnameContents) {
                 baseUrl = cnameContents.trim();
             }
+
+            RemoteFileCache.setHttpRoot( "http://" + baseUrl + "/" );
 
             for( TreeEntry entry: entries) {
 

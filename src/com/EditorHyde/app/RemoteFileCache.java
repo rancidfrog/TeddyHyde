@@ -23,9 +23,18 @@ public class RemoteFileCache {
     private static ArrayList<RemoteImage> mImages;
     private static ArrayList<String> mUrls;
     private static boolean mLoaded;
+    private static String mHttpRoot;
 
     public static ArrayList<RemoteImage> getImages() {
         return mImages;
+    }
+
+    public static void setHttpRoot( String root ) {
+        mHttpRoot = root;
+    }
+
+    public static String getHttpRoot() {
+        return mHttpRoot;
     }
 
     public static void clear() {

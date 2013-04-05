@@ -42,7 +42,8 @@ public class PixActivity extends Activity {
     String authToken;
     String theLogin;
     int theTransformIndex;
-    int theSize;
+    int theSize = 0;
+    String httpRoot;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -267,7 +268,7 @@ public class PixActivity extends Activity {
             ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android");
 
             // Save the image to add to our list
-            newImage = new RemoteImage( thumbFilename, thumb );
+            newImage = new RemoteImage( RemoteFileCache.getHttpRoot() + thumbFilename, thumb );
 
             return rv;
         }
@@ -302,15 +303,18 @@ public class PixActivity extends Activity {
                 Toast.makeText( PixActivity.this, "Unable to upload image, please try again later", Toast.LENGTH_LONG );
             }
 
-            // If we have a size parameter, then we need to allow them to choose. If not, we just needed to upload the image
-            if( 0 == theSize ) {
-                finish();
-            }
             else {
-                // Add it to the images
-                RemoteFileCache.addImage( newImage );
-            }
+                // If we have a size parameter, then we need to allow them to choose. If not, we just needed to upload the image
+                if( 0 == theSize ) {
+                    finish();
+                }
+                else {
+                    // Add it to the images
+                    RemoteFileCache.addImage( newImage );
+                    setupImages();
+                }
 
+            }
         }
     }
 
