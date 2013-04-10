@@ -332,7 +332,13 @@ public class FileListingActivity extends Activity {
                 int slashesInFile = countOccurrences( name, '/' );
 
                 if( slashesInCwd == slashesInFile ) {
-                    values.add( entry );
+                    // if posts, sort in reverse order
+                    if( 0 == path.compareTo( "_posts") ) {
+                        values.add( 0, entry );
+                    }
+                    else {
+                        values.add( entry );
+                    }
                 }
 
             }
@@ -457,34 +463,37 @@ public class FileListingActivity extends Activity {
     }
 
 
-    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Boolean> {
+    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Void> {
 
-        protected Boolean doInBackground(Void...unused) {
+        protected Void doInBackground(Void...unused) {
 
             String transformsSha = null;
             transformsJson = null;
 
-            for( TreeEntry entry: entries) {
+            if( null != entries ) {
+                for( TreeEntry entry: entries ) {
 
-                String name = entry.getPath();
+                    String name = entry.getPath();
 
-                if( name.equals( "_hyde/transforms.json") ) {
-                    transformsSha = entry.getSha();
+                    if( name.equals( "_hyde/transforms.json") ) {
+                        transformsSha = entry.getSha();
+                    }
+                }
+
+                if( null != transformsSha ) {
+                    try {
+                        transformsJson = ThGitClient.GetFile( authToken, repoName, login, transformsSha );
+                    } catch (IOException e) {
+                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    }
                 }
             }
 
-            if( null != transformsSha ) {
-                try {
-                    transformsJson = ThGitClient.GetFile( authToken, repoName, login, transformsSha );
-                } catch (IOException e) {
-                    e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
-                }
-            }
+            return null;
 
-            return false;
         }
 
-        protected void onPostExecute(Boolean result) {
+        protected void onPostExecute(Void... unused) {
 
             new LoadImageTask().execute();
 
