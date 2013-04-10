@@ -333,7 +333,7 @@ public class FileListingActivity extends Activity {
 
                 if( slashesInCwd == slashesInFile ) {
                     // if posts, sort in reverse order
-                    if( 0 == path.compareTo( "_posts") ) {
+                    if( 0 == path.compareTo( "_posts/") ) {
                         values.add( 0, entry );
                     }
                     else {
@@ -417,7 +417,6 @@ public class FileListingActivity extends Activity {
                     theBranch = master;
                 }
 
-                String masterCommitSha = master.getCommit().getSha();
                 String baseCommitSha = theBranch.getCommit().getSha();
                 DataService ds = new DataService();
                 ds.getClient().setOAuth2Token(authToken);
@@ -463,9 +462,10 @@ public class FileListingActivity extends Activity {
     }
 
 
-    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Void> {
+    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Boolean> {
 
-        protected Void doInBackground(Void...unused) {
+        @Override
+        protected Boolean doInBackground(Void...unused) {
 
             String transformsSha = null;
             transformsJson = null;
@@ -489,11 +489,12 @@ public class FileListingActivity extends Activity {
                 }
             }
 
-            return null;
+            return true;
 
         }
 
-        protected void onPostExecute(Void... unused) {
+        @Override
+        protected void onPostExecute(Boolean result) {
 
             new LoadImageTask().execute();
 
