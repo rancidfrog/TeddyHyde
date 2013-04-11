@@ -252,8 +252,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                 .setView(input)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String processed = processPlaceholders(transform.code, "IMAGE", imageUrl);
-                        processed = processPlaceholders(processed, "PROMPT", input.getText().toString() );
+                        String processed = Placeholder.process(transform.code, "IMAGE", imageUrl);
+                        processed = Placeholder.process(processed, "PROMPT", input.getText().toString() );
                         insertAtCursor(processed);
                     }
                 })
@@ -336,7 +336,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                         promptAndInsert( transform, url );
                     }
                     else {
-                        String processed = processPlaceholders(transform.code, "IMAGE", url);
+                        String processed = Placeholder.process(transform.code, "IMAGE", url);
                         insertAtCursor(processed);
                     }
                 }
@@ -345,20 +345,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     }
 
-    private String processPlaceholders( String text, String placeholder, String replacement ) {
-        String processed = "";
-        // These will be ignored if they don't exist
 
-        // Process for URL escaping
-        processed = text.replace( "{{" + placeholder + "|url}}", URLEncoder.encode(replacement) );
-        // Process for HTML escaping
-        processed = processed.replace( "{{" + placeholder + "|html}}", escapeHtml(replacement) );
-
-        // Process for regular placeholders
-        processed = processed.replace( "{{" + placeholder + "}}", replacement );
-
-        return processed;
-    }
 
     private void getImage( int returnCode, int transformIndex, int size ) {
         Intent i;

@@ -7,7 +7,9 @@ import android.provider.MediaStore;
 import android.test.ActivityInstrumentationTestCase2;
 import android.widget.Button;
 import android.widget.EditText;
-import com.jayway.android.robotium.solo.Solo;
+
+// import com.jayway.android.robotium.solo.Solo;
+
 import junit.framework.Assert;
 
 import java.io.File;
@@ -34,7 +36,7 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
     private String githubLogin;
     private String githubPassword;
 
-    private Solo solo;
+//    private Solo solo;
 
     private void setPasswords() {
         githubLogin = Passwords.login;
@@ -48,22 +50,22 @@ public class MainActivityTest extends ActivityInstrumentationTestCase2<MainActiv
         setActivityInitialTouchMode(false);
 
     } // end of setUp() method definition
-
-    @Override
-    public void tearDown() throws Exception {
-        solo.finishOpenedActivities();
-    }
+//
+//    @Override
+//    public void tearDown() throws Exception {
+//        solo.finishOpenedActivities();
+//    }
 
     public MainActivityTest() {
         super(MainActivity.class);
     }
 
-    public void testLogin() {
-        solo.typeText(R.id.githubEmail, "xrdawson@gmail.com");
-        solo.typeText(R.id.githubPassword, "coins0nTable");
-        solo.clickOnButton(R.id.loginMessage);
-        solo.waitForActivity("RepoListActivity");
-        Assert.assertEquals(solo.getCurrentActivity().getClass(), RepoListActivity.class);
-
-    }
+//    public void testLogin() {
+//        solo.typeText(R.id.githubEmail, "xrdawson@gmail.com");
+//        solo.typeText(R.id.githubPassword, "coins0nTable");
+//        solo.clickOnButton(R.id.loginMessage);
+//        solo.waitForActivity("RepoListActivity");
+//        Assert.assertEquals(solo.getCurrentActivity().getClass(), RepoListActivity.class);
+//
+//    }
 }

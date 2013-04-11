@@ -495,12 +495,8 @@ public class FileListingActivity extends Activity {
 
         @Override
         protected void onPostExecute(Boolean result) {
-
             new LoadImageTask().execute();
-
         }
-
-
     }
 
     public void showEditor( String filename, String fileSha ) {
