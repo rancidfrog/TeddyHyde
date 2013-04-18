@@ -9,6 +9,7 @@ package com.EditorHyde.app;
  */
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -64,6 +65,7 @@ public class FileListAdapter extends ArrayAdapter<TreeEntry> {
 
         if( 0 ==  "tree".compareTo( type ) ) {
             imageView.setImageResource(R.drawable.directory);
+            textView.setTypeface( null, Typeface.BOLD );
         }
         else {
             imageView.setImageResource(R.drawable.icon);

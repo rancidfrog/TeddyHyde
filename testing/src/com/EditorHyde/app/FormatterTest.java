@@ -62,7 +62,7 @@ public class FormatterTest extends TestCase {
 
         String result = Placeholder.process(template, "IMAGE", image);
 
-        assertEquals( result, "<a href='foobar.png}'>" );
+        assertEquals( result, "<a href='foobar.png'>" );
 
     }
 }

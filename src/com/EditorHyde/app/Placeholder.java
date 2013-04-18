@@ -1,6 +1,8 @@
 package com.EditorHyde.app;
 
 import java.net.URLEncoder;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
@@ -13,16 +15,45 @@ import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
  */
 public class Placeholder {
 
+    private static String processForRegex( String text, String placeholder, String replacement ) {
+
+        String rv = text;
+
+        // Search for the regex pattern plus a regex matcher
+        String toMatch =  "\\{\\{" +
+                placeholder
+                         + "\\|/(.+?)/(.*?)/"
+                + "\\}\\}"
+                ;
+        Pattern p = Pattern.compile( toMatch );
+        Matcher m = p.matcher( text );
+
+        if( m.find() ) {
+            String first = m.group(1);
+            String second = m.group(2);
+
+            Pattern p2 = Pattern.compile( first );
+            // Take $1 out of the replacement string and insert $2 in its place
+            Matcher m2 = p2.matcher( replacement );
+
+            String replaced = m2.replaceAll( second );
+
+            // Now replace this in the original text
+            rv = text.replace( "{{" + placeholder + "|/" + first + "/" + second + "/}}", replaced );
+        }
+        return rv;
+    }
+
     public static String process( String text, String placeholder, String replacement ) {
         String processed = "";
         // These will be ignored if they don't exist
 
         // Process for regexp
         // {{placeholder|/input/output/}}
-
+        processed = processForRegex( text, placeholder , replacement );
 
         // Process for URL escaping
-        processed = text.replace( "{{" + placeholder + "|url}}", URLEncoder.encode(replacement) );
+        processed = processed.replace( "{{" + placeholder + "|url}}", URLEncoder.encode(replacement) );
         // Process for HTML escaping
         processed = processed.replace( "{{" + placeholder + "|html}}", escapeHtml(replacement) );
 
