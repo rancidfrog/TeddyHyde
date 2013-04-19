@@ -112,7 +112,8 @@ public class FileListingActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Editable text = input.getText();
                 String title = text.toString();
-                String whitespaceStripped = title.toLowerCase().replaceAll( "\\W+", "-");
+                // Don't replace non-word at the end of the string.
+                String whitespaceStripped = title.toLowerCase().replaceAll( "\\W+", "-").replaceAll( "\\W+$", "" );
 
                 filename[0] = root + prefix + whitespaceStripped + MARKDOWN_EXTENSION;
 
