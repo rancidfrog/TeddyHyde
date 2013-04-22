@@ -30,7 +30,6 @@ public class FileListAdapter extends ArrayAdapter<TreeEntry> {
         super(context, R.layout.file_list_layout, theFiles);
         this.context = context;
         this.files = theFiles;
-
     }
 
     public void setFrontPath( String path ) {

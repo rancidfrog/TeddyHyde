@@ -1,6 +1,7 @@
 package com.EditorHyde.app;
 
 import android.graphics.Bitmap;
+import com.EditorHyde.app.RemoteImage;
 
 /**
  * Created with IntelliJ IDEA.
@@ -11,23 +12,36 @@ import android.graphics.Bitmap;
  */
 public class RemoteImage {
 
-    private String mThumbURL;
+    private String mThumbURI;
     private Bitmap mBmp;
-    private String mFullURL;
+    private String mFullURI;
 
-    public RemoteImage( String url, Bitmap bmp ) {
-        mThumbURL = url;
+    public RemoteImage( String uri, Bitmap bmp ) {
+        // Tack on / to front if not there.
+        if('/' != uri.charAt( 0 ) ) {
+            uri = "/" + uri;
+        }
+
+        mThumbURI = uri;
         mBmp = bmp;
 
-        mFullURL = url.replace( "-thumb", "");
+        mFullURI = uri.replace( "-thumb", "");
+    }
+
+    public String getThumbURI() {
+        return mThumbURI;
+    }
+
+    public String getFullURI() {
+        return mFullURI;
     }
 
     public String getThumbUrl() {
-        return mThumbURL;
+        return RemoteFileCache.getHttpRoot() + mThumbURI;
     }
 
     public String getUrl() {
-        return mFullURL;
+        return RemoteFileCache.getHttpRoot() + mFullURI;
     }
 
     public Bitmap getBmp() {

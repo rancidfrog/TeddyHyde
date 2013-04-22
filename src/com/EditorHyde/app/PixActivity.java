@@ -89,7 +89,7 @@ public class PixActivity extends Activity {
                 // send back the image
                 RemoteImage ri =  (RemoteImage)gridview.getItemAtPosition(position);
                 Bundle bundle = new Bundle();
-                bundle.putString("imageUrl", ri.getUrl() );
+                bundle.putString("imageUri", ri.getFullURI() );
                 bundle.putInt( "transformIndex", theTransformIndex );
                 bundle.putInt( "size", theSize );
                 Intent intent = new Intent();

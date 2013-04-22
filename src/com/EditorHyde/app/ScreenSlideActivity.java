@@ -310,33 +310,33 @@ public class ScreenSlideActivity extends FragmentActivity {
         if( RESULT_OK == resCode  ){
             if( CHOOSE_IMAGE == reqCode ) {
                 Bundle extras = data.getExtras();
-                String url = extras.getString( "imageUrl" );
+                String uri = extras.getString( "imageUri" );
                 int size = extras.getInt( "size" );
 
                 if( size == R.id.add_image_thumbnail ) {
-                    url = getScaledImage( url, "thumb" );
+                    uri = getScaledImage( uri, "thumb" );
                 }
                 else if( size == R.id.add_image_resized ) {
-                    url = getScaledImage( url, "resized" );
+                    uri = getScaledImage( uri, "resized" );
                 }
 
-                if( null != url ) {
-                    insertAtCursor( "!["+ url + "](" + url +")" );
+                if( null != uri ) {
+                    insertAtCursor( "!["+ uri + "](" + uri +")" );
                 }
             }
             else if (CHOOSE_IMAGE_TRANSFORM == reqCode) {
                 Bundle extras = data.getExtras();
-                String url = extras.getString("imageUrl");
+                String uri = extras.getString("imageUri");
                 // replace the url
-                if (null != url) {
+                if (null != uri) {
                     int transformIndex = extras.getInt("transformIndex");
                     Transform transform = transforms.get(transformIndex);
 
                     if( null != transform.prompt ) {
-                        promptAndInsert( transform, url );
+                        promptAndInsert( transform, uri );
                     }
                     else {
-                        String processed = Placeholder.process(transform.code, "IMAGE", url);
+                        String processed = Placeholder.process(transform.code, "IMAGE", uri );
                         insertAtCursor(processed);
                     }
                 }

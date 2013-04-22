@@ -264,12 +264,11 @@ public class FileListingActivity extends Activity {
                 String name = entry.getPath();
 
                 if( name.contains( "assets/images") && name.contains( "thumb") ) {
-                    String fullUrl = "http://" + baseUrl + "/" + name;
-                    images.add( fullUrl );
+                    images.add( name );
                 }
             }
 
-            RemoteFileCache.loadImagesReferences(images);
+            RemoteFileCache.loadImageUriReferences( images );
             return true;
         }
 

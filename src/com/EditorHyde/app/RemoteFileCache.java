@@ -21,7 +21,7 @@ import java.util.List;
 public class RemoteFileCache {
 
     private static ArrayList<RemoteImage> mImages;
-    private static ArrayList<String> mUrls;
+    private static ArrayList<String> mUris;
     private static boolean mLoaded;
     private static String mHttpRoot;
 
@@ -43,8 +43,8 @@ public class RemoteFileCache {
         }
     }
 
-    public static void loadImagesReferences( ArrayList<String> urls ) {
-        mUrls = urls;
+    public static void loadImageUriReferences( ArrayList<String> uris ) {
+        mUris = uris;
     }
 
     public static boolean isLoaded() {
@@ -55,10 +55,10 @@ public class RemoteFileCache {
 
         mImages = new ArrayList<RemoteImage>();
 
-        for( String imageUrl : mUrls ) {
+        for( String imageUri : mUris ) {
             try {
-                Bitmap bmp = RemoteFileCache.getRemoteImage(new URL(imageUrl));
-                RemoteImage ri = new RemoteImage( imageUrl, bmp );
+                Bitmap bmp = RemoteFileCache.getRemoteImage(new URL( RemoteFileCache.getHttpRoot() + imageUri ));
+                RemoteImage ri = new RemoteImage( imageUri, bmp );
                 mImages.add( ri );
             } catch (MalformedURLException e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.

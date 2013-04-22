@@ -90,6 +90,26 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
+    private String stripYFM( String markdown ) {
+        int yfmStart = markdown.indexOf( "---" );
+        int yfmEnd = markdown.indexOf( "---", 4 );
+        String withOutYFM = markdown;
+        if( -1 != yfmStart && -1 != yfmEnd ) {
+            withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
+        }
+
+        return withOutYFM;
+    }
+
+    private String addMetadataAndBody( String converted ) {
+        String fullHtml =
+                "<html><head>" +
+                "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
+                "</head><body>" + converted + "</body></html>";
+
+        return fullHtml;
+    }
+
     @Override
     public void onPageSelected(int i) {
         // Set the title view to show the page number.
@@ -100,14 +120,15 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         String markdown = et.getText().toString();
         MarkdownProcessor md = new MarkdownProcessor();
         String converted = "";
-        int yfmStart = markdown.indexOf( "---" );
-        int yfmEnd = markdown.indexOf( "---", 4 );
-        String withOutYFM = markdown;
-        if( -1 != yfmStart && -1 != yfmEnd ) {
-            withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
-        }
-        converted = md.markdown(withOutYFM);
-        wv.loadData(converted, "text/html", null );
+        String yfmStripped = stripYFM( markdown );
+
+        // convert to HTML
+        converted = md.markdown( yfmStripped );
+
+        // Add some information to make images load correctly, etc.
+        String fullHtml = addMetadataAndBody( converted );
+
+        wv.loadData(fullHtml , "text/html", null );
         // this.setShowsDialog(false);
 
     }
