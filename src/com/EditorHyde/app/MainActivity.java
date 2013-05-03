@@ -1,10 +1,13 @@
 package com.EditorHyde.app;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -26,6 +29,7 @@ public class MainActivity extends Activity {
 
     SharedPreferences sp;
     TextView loginMessage = null;
+    ProgressDialog pd = null;
 
     public static final String APP_ID = "com.TeddyHyde.app";
 
@@ -42,11 +46,20 @@ public class MainActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        pd = ProgressDialog.show( this, "", "Verifying login token...", true);
+
+        sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
+        new VerifyUser().execute();
+    }
+
+
+    private void setupLogin() {
+
         setContentView(R.layout.main);
 
         loginMessage = (TextView)findViewById(R.id.loginMessage);
 
-        sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
         String email = sp.getString( "email", null );
         String password = sp.getString( "password", null );
 
@@ -75,6 +88,47 @@ public class MainActivity extends Activity {
 
     }
 
+
+
+    private class VerifyUser extends AsyncTask<Void, Void, Boolean> {
+
+        protected Boolean doInBackground(Void...voids) {
+            Boolean rv = false;
+
+            String authToken = sp.getString( "authToken", null );
+
+            if( null != authToken ) {
+                // If we succeeded, get the user information and store it
+                UserService userService = new UserService();
+                userService.getClient().setOAuth2Token(authToken);
+                String name = null;
+                try {
+                    name = userService.getUser().getName();
+                    String login = userService.getUser().getLogin();
+                    sp.edit().putString( "name", name ).commit();
+                    sp.edit().putString( "login", login ).commit();
+                    rv = true;
+
+                } catch (IOException e) {
+
+                }
+            }
+
+            return rv;
+        }
+
+        protected void onPostExecute(Boolean result) {
+            pd.hide();
+
+            if( !result ) {
+                setupLogin();
+            }
+            else {
+                showRepoList();
+            }
+
+        }
+    }
 
 
     private class LoginTask extends AsyncTask<Void, Void, Boolean> {

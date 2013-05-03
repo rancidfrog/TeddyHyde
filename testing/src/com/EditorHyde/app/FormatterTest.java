@@ -54,6 +54,21 @@ public class FormatterTest extends TestCase {
 
     }
 
+
+// Incorrect, not working
+//
+//    public void testFormatterForYaml() {
+//
+//        String template;
+//        template = "{{YAML|yaml}}";
+//        String yaml = "something: with a colon";
+//
+//        String result = Placeholder.process(template, "YAML", yaml);
+//
+//        assertEquals( result, "something&#58; with a colon" );
+//
+//    }
+
     public void testFormatterForRegexes() {
 
         String template;
@@ -63,6 +78,18 @@ public class FormatterTest extends TestCase {
         String result = Placeholder.process(template, "IMAGE", image);
 
         assertEquals( result, "<a href='foobar.png'>" );
+
+    }
+
+    public void testFormatterForQuotes() {
+
+        String template;
+        template = "{{TITLE|escdblquotes}}";
+        String quoted = "Something with an embedded \" quote";
+
+        String result = Placeholder.process(template, "TITLE", quoted);
+
+        assertEquals( result, "Something with an embedded \\\" quote" );
 
     }
 }

@@ -102,6 +102,7 @@ public class FileListingActivity extends Activity {
         final TextView finalFilename = new TextView(FileListingActivity.this);
         ll.addView(finalFilename);
         ll.addView(input);
+        final String[] processedTemplate = new String[1];
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -116,6 +117,8 @@ public class FileListingActivity extends Activity {
                 String whitespaceStripped = title.toLowerCase().replaceAll( "\\W+", "-").replaceAll( "\\W+$", "" );
 
                 filename[0] = root + prefix + whitespaceStripped + MARKDOWN_EXTENSION;
+
+                processedTemplate[0] = Placeholder.process( template, "TITLE", title );
 
                 finalFilename.setText( "Filename: " + filename[0] );
             }
@@ -133,7 +136,7 @@ public class FileListingActivity extends Activity {
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Convert it to proper format
-                        loadEditor( template, filename[0], repoName, null );
+                        loadEditor(processedTemplate[0], filename[0], repoName, null );
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -149,7 +152,6 @@ public class FileListingActivity extends Activity {
         String filename;
         String template;
 
-
         switch ( itemId ) {
 
             case R.id.action_add_new_page:
@@ -163,7 +165,7 @@ public class FileListingActivity extends Activity {
                 SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-" );
                 String prefix = sdf.format( new Date() );
 
-                template = getString(R.string.page_template);
+                template = getString(R.string.post_template);
                 promptForFilename("_posts/", prefix, template, "Post");
 
                 // create a new post

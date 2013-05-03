@@ -1,5 +1,10 @@
 package com.EditorHyde.app;
 
+import org.yaml.snakeyaml.Yaml;
+import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.Escaper;
+import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.PercentEscaper;
+import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.UnicodeEscaper;
+
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -56,6 +61,14 @@ public class Placeholder {
         processed = processed.replace( "{{" + placeholder + "|url}}", URLEncoder.encode(replacement) );
         // Process for HTML escaping
         processed = processed.replace( "{{" + placeholder + "|html}}", escapeHtml(replacement) );
+
+
+        // Process for dbl-quotes
+        processed = processed.replace( "{{" + placeholder + "|escdblquotes}}", replacement.replace( "\"", "\\\"") );
+
+        // This is wrong, PercentEscaper is not the right thing to use
+        // Process for YAML escaping
+        // processed = processed.replace( "{{" + placeholder + "|yaml}}", new PercentEscaper(PercentEscaper.SAFECHARS_URLENCODER, false ).escape(replacement) );
 
         // Process for regular placeholders
         processed = processed.replace( "{{" + placeholder + "}}", replacement );
