@@ -44,6 +44,9 @@
     <string name="add_image_resized">Add resized image...</string>
     <string name="add_image_thumbnail">Add thumbnail image...</string>
     <string name="logout">Logout from GitHub</string>
+    <string name="image_thumbnail_upload_message">Image thumbnail added using Teddy Hyde for Android</string>
+    <string name="image_resize_upload_message">Resized image added using Teddy Hyde for Android</string>
+    <string name="image_upload_message">Image added using Teddy Hyde for Android</string>
 
 
 </resources>

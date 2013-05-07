@@ -50,14 +50,6 @@
                   android:title="@string/paste_code"
                   android:showAsAction="ifRoom|withText" />
 
-            <item android:id="@+id/action_markdown_ulist"
-                  android:title="@string/markdown_ulist"
-                  android:showAsAction="ifRoom|withText"/>
-
-            <item android:id="@+id/action_markdown_olist"
-                  android:title="@string/markdown_olist"
-                  android:showAsAction="ifRoom|withText"/>
-
             <item android:id="@+id/add_image_full"
                   android:title="@string/add_image_full"
                   android:showAsAction="ifRoom|withText" />

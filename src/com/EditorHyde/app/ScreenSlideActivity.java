@@ -27,6 +27,7 @@ import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.text.Editable;
 import android.util.Base64;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.SubMenu;
@@ -131,30 +132,35 @@ public class ScreenSlideActivity extends FragmentActivity {
         int index = 0;
 
         if( null != theTransforms ) {
-        Gson gson = new Gson();
-        List<Map<String,String>> objects = gson.fromJson(theTransforms, new TypeToken<List<Map<String, String>>>() {
-        }.getType());
+            Gson gson = new Gson();
+            List<Map<String,String>> objects = gson.fromJson(theTransforms, new TypeToken<List<Map<String, String>>>() {
+            }.getType());
 
-        transforms = new ArrayList<Transform>();
-        for( Map tr: objects ) {
-            Transform transform = new Transform();
-            transform.code = (String)tr.get( "code" );
-            transform.type = (String)tr.get( "type" );
-            transform.prompt = (String)tr.get( "prompt" );
-            transform.name = (String)tr.get( "name" );
-            transform.version = Integer.parseInt( (String)tr.get( "version" ) );
-            transforms.add( transform );
-        }
-
-        if( !transforms.isEmpty() )       {
-            SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
-
-            for( Transform item : transforms ) {
-                hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
-                index++;
+            transforms = new ArrayList<Transform>();
+            for( Map tr: objects ) {
+                Transform transform = new Transform();
+                transform.code = (String)tr.get( "code" );
+                transform.type = (String)tr.get( "type" );
+                transform.prompt = (String)tr.get( "prompt" );
+                transform.name = (String)tr.get( "name" );
+                transform.version = Integer.parseInt( (String)tr.get( "version" ) );
+                if( transform.version == 1 ) {
+                    transforms.add( transform );
+                }
+                else {
+                    Log.d(MainActivity.logname, "Unsupported transform version");
+                }
             }
 
-        }
+            if( !transforms.isEmpty() )       {
+                SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
+
+                for( Transform item : transforms ) {
+                    hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
+                    index++;
+                }
+
+            }
         }
     }
 
@@ -283,26 +289,24 @@ public class ScreenSlideActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
 
-          if( editorFragment.isDirty() ) {
-              // Notify the user they will lose work...
-              new AlertDialog.Builder(this)
-                      .setIcon(android.R.drawable.ic_dialog_alert)
-                      .setTitle( "Unsaved work")
-                      .setMessage("You have not saved your changes. If you leave this page, you will lose this work. Are you sure you want to do this?")
-                      .setPositiveButton( "Yes, discard edits", new DialogInterface.OnClickListener() {
-
-                          @Override
-                          public void onClick(DialogInterface dialog, int which) {
-                              finishWithResult();
-                          }
-
-                      })
-                      .setNegativeButton( "No, return to editing", null)
-                      .show();
-          }
+        if( editorFragment.isDirty() ) {
+            // Notify the user they will lose work...
+            new AlertDialog.Builder(this)
+                    .setIcon(android.R.drawable.ic_dialog_alert)
+                    .setTitle( "Unsaved work")
+                    .setMessage("You have not saved your changes. If you leave this page, you will lose your changes since the last save. Do you want to return to the page to save your edits?")
+                    .setPositiveButton( "Yes, return to editing", null )
+                    .setNegativeButton( "No, discard my edits", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            finishWithResult();
+                        }
+                    } )
+                    .show();
+        }
         else {
-              finishWithResult();
-          }
+            finishWithResult();
+        }
     }
 
     @Override

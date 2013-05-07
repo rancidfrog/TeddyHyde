@@ -16,16 +16,16 @@ public class RemoteImage {
     private Bitmap mBmp;
     private String mFullURI;
 
-    public RemoteImage( String uri, Bitmap bmp ) {
+    public RemoteImage( String thumbnailUri, Bitmap bmp ) {
         // Tack on / to front if not there.
-        if('/' != uri.charAt( 0 ) ) {
-            uri = "/" + uri;
+        if('/' != thumbnailUri.charAt( 0 ) ) {
+            thumbnailUri = "/" + thumbnailUri;
         }
 
-        mThumbURI = uri;
+        mThumbURI = thumbnailUri;
         mBmp = bmp;
 
-        mFullURI = uri.replace( "-thumb", "");
+        mFullURI = thumbnailUri.replace( "-thumb", "");
     }
 
     public String getThumbURI() {

@@ -30,6 +30,7 @@ public class MainActivity extends Activity {
     SharedPreferences sp;
     TextView loginMessage = null;
     ProgressDialog pd = null;
+    public static String logname = "com.TeddyHyde.app";
 
     public static final String APP_ID = "com.TeddyHyde.app";
 

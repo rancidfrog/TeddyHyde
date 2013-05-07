@@ -60,7 +60,7 @@ public class FileListingActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Log.d("com.EditorHyde.app", "onBackPressed Called");
+        Log.d(MainActivity.logname, "onBackPressed Called");
         if( cwd.atRoot()) {
             finish();
         }

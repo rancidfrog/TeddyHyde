@@ -130,7 +130,7 @@ public class PixActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Unknown path",
                                     Toast.LENGTH_LONG).show();
-                            Log.e("Bitmap", "Unknown path");
+                            Log.e(MainActivity.logname, "Unknown path");
                         }
 
                         if (filePath != null) {
@@ -145,7 +145,7 @@ public class PixActivity extends Activity {
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Internal error",
                                 Toast.LENGTH_LONG).show();
-                        Log.e(e.getClass().getName(), e.getMessage(), e);
+                        Log.e(MainActivity.logname, e.getMessage(), e);
                     }
                 }
                 break;
@@ -181,7 +181,7 @@ public class PixActivity extends Activity {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.exception_message),
                     Toast.LENGTH_LONG).show();
-            Log.e(e.getClass().getName(), e.getMessage(), e);
+            Log.e(MainActivity.logname, e.getMessage(), e);
         }
 
     }
@@ -229,7 +229,7 @@ public class PixActivity extends Activity {
             String filename = "assets/images/" + prefix + "-image.png";
 
             publishProgress( UPLOADING_FULL_SIZE );
-            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, "Image added using Teddy Hyde on Android");
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, filename, getString(R.string.image_upload_message));
 
             // add thumbnail and resized
 
@@ -248,7 +248,7 @@ public class PixActivity extends Activity {
             String thumbFilename = "assets/images/" + prefix + "-image-thumb.png";
 
             publishProgress( UPLOADING_THUMBNAIL );
-            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, "Image thumbnail added using Teddy Hyde on Android");
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, thumbFilename, getString(R.string.image_thumbnail_upload_message));
 
             publishProgress( GENERATING_RESIZED );
             int resizedWidth = RESIZED_WIDTH;
@@ -265,10 +265,10 @@ public class PixActivity extends Activity {
             String resizedFilename = "assets/images/" + prefix + "-image-resized.png";
 
             publishProgress( UPLOADING_RESIZED );
-            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, "Resized image added using Teddy Hyde on Android");
+            ThGitClient.SaveFile(authToken, theRepo, theLogin, base64ed, resizedFilename, getString(R.string.image_resize_upload_message));
 
             // Save the image to add to our list
-            newImage = new RemoteImage( RemoteFileCache.getHttpRoot() + thumbFilename, thumb );
+            newImage = new RemoteImage( thumbFilename, thumb );
 
             return rv;
         }
