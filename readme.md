@@ -17,7 +17,7 @@ When you have something to add to the project, send a pull request.
 
 The MIT License (MIT)
 
-Copyright (c) <2013> <Chris Dawson>
+Copyright (c) 2013 Chris Dawson
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
