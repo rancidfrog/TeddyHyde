@@ -7,8 +7,6 @@
     <string name="action_toggle">Toggle indicator</string>
     <string name="action_add_item">Add item</string>
     <string name="action_remove_item">Remove item</string>
-    <string name="action_previous">Previous</string>
-    <string name="action_next">Next</string>
     <string name="action_finish">Finish</string>
     <string name="action_info">Photo info</string>
     <string name="action_photo">View photo</string>

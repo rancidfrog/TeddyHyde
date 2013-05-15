@@ -169,16 +169,6 @@ public class ScreenSlideActivity extends FragmentActivity {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
 
-        menu.findItem(R.id.action_previous).setEnabled(mPager.getCurrentItem() > 0);
-
-        // Add either a "next" or "finish" button to the action bar, depending on which page
-        // is currently selected.
-        MenuItem item = menu.add(Menu.NONE, R.id.action_next, Menu.NONE,
-                (mPager.getCurrentItem() == mPagerAdapter.getCount() - 1)
-                        ? R.string.action_finish
-                        : R.string.action_next);
-        item.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM | MenuItem.SHOW_AS_ACTION_WITH_TEXT);
-
         // If we are in the editor menu, then enable the save with commit message...
         menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
 
@@ -445,13 +435,6 @@ public class ScreenSlideActivity extends FragmentActivity {
                     // Navigate "up" the demo structure to the launchpad activity.
                     // See http://developer.android.com/design/patterns/navigation.html for more.
                     NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-                    rv = true;
-                    break;
-
-                case R.id.action_previous:
-                    // Go to the previous step in the wizard. If there is no previous step,
-                    // setCurrentItem will do nothing.
-                    mPager.setCurrentItem(mPager.getCurrentItem() - 1);
                     rv = true;
                     break;
 
