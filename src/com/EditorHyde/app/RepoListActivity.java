@@ -71,19 +71,18 @@ public class RepoListActivity extends Activity {
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        int groupId = item.getGroupId();
-        boolean rv = false;
+    private class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 
-        if( itemId == R.id.action_logout ) {
-            SharedPreferences sp = this.getSharedPreferences(  MainActivity.APP_ID, MODE_PRIVATE );
+        SharedPreferences sp;
+        protected Boolean doInBackground(Void...voids) {
+
+            Boolean rv = true;
+
+            sp = getBaseContext().getSharedPreferences(MainActivity.APP_ID, MODE_PRIVATE);
 
             String authToken = sp.getString( "authToken", null );
 
             if( null != authToken ) {
-
                 OAuthService oauthService = new OAuthService();
                 // Replace with actual login and password
                 oauthService.getClient().setOAuth2Token(authToken);
@@ -95,16 +94,33 @@ public class RepoListActivity extends Activity {
                     }
                 }
                 catch (IOException e) {
+                    rv = false;
                     e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
                 }
 
             }
 
+            return rv;
+
+        }
+
+        protected void onPostExecute(Boolean result) {
+            pd.hide();
             sp.edit().putString( "authToken", "" ).commit();
-
-
-
             finish();
+        }
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        int groupId = item.getGroupId();
+        boolean rv = false;
+
+        if( itemId == R.id.action_logout ) {
+            pd = ProgressDialog.show( this, "", "Logging out from GitHub...", true);
+            new LogoutTask().execute();
         }
         return rv;
     }

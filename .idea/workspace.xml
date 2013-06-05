@@ -26,9 +26,8 @@
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditorHyde.apk" afterPath="$PROJECT_DIR$/EditorHyde.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" afterPath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -64,9 +63,9 @@
     <file path="$PROJECT_DIR$/app/build/manifests/release/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
     <file path="$PROJECT_DIR$/app/build/incremental/mergeResources/blah/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
     <file path="$PROJECT_DIR$/app/bin/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="/Dummy.txt" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366229549995" ignored="false" />
+    <file path="/Dummy.txt" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370449191429" ignored="false" />
     <file path="/MyActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363101624561" ignored="false" />
-    <file path="/RepoListActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367381527754" ignored="false" />
+    <file path="/RepoListActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370449580066" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364399645195" ignored="false" />
     <file path="/FileListingActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367806815919" ignored="false" />
     <file path="/file_list.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366150090692" ignored="false" />
@@ -90,7 +89,7 @@
     <file path="/RepoListAdapter.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365011974960" ignored="false" />
     <file path="/fragment_screen_slide_page_editor.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364523782707" ignored="false" />
     <file path="/activity_screen_slide.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365102768490" ignored="false" />
-    <file path="/strings.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367601895266" ignored="false" />
+    <file path="/strings.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370450659494" ignored="false" />
     <file path="/PixAuthenticationActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364416829494" ignored="false" />
     <file path="$PROJECT_DIR$/../GitHubTesting/src/StoreInGitHub.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364521748077" ignored="false" />
     <file path="/StoreInGitHub.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364521518995" ignored="false" />
@@ -132,7 +131,7 @@
     <file path="/Main.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367503506266" ignored="false" />
     <file path="/FormatterTest.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367601815248" ignored="false" />
     <file path="/Placeholder.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367601733346" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366150029996" ignored="false" />
+    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370450699162" ignored="false" />
     <file path="$PROJECT_DIR$/../../YamlEditorPreserveComments/src/com/teddyhyde/Main.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367503509499" ignored="false" />
     <file path="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/BuildConfig.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367597085047" ignored="false" />
     <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/SessionLoginSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
@@ -161,7 +160,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -198,6 +196,23 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" line="90" class="com.EditorHyde.app.RepoListActivity.LogoutTask" package="com.EditorHyde.app">
+        <option name="ENABLED" value="true" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="REMOVE_AFTER_HIT" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
@@ -221,28 +236,46 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_file_listing.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_file_listing.xml">
+      <file leaf-file-name="PixActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="7" selection-start="0" selection-end="561" vertical-scroll-proportion="0.0">
+            <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_screen_slide.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
+      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
+            <state line="202" column="76" selection-start="7593" selection-end="7593" vertical-scroll-proportion="0.33333334">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="58" selection-start="383" selection-end="383" vertical-scroll-proportion="-4.6153846">
+            <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="RepoListActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="96" column="0" selection-start="2947" selection-end="2947" vertical-scroll-proportion="-10.769231">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ThGitClient.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -257,52 +290,28 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PixActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
+      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="-7.4615383">
+            <state line="44" column="116" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="MainActivity.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
+      <file leaf-file-name="activity_screen_slide.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.38647342">
+            <state line="19" column="0" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RemoteImage.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java">
+      <file leaf-file-name="activity_file_listing.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/menu/activity_file_listing.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="31" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="439" column="16" selection-start="16639" selection-end="16639" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="e#0#18970#0" expanded="true" />
-                <element signature="e#11092#11342#0" expanded="true" />
-                <element signature="e#11319#11320#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="RemoteFileCache.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="55" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0">
+            <state line="19" column="7" selection-start="0" selection-end="561" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -316,7 +325,7 @@
     </FindUsagesManager>
   </component>
   <component name="GenerateSignedApkSettings">
-    <option name="KEY_STORE_PATH" value="inqry_keystore" />
+    <option name="KEY_STORE_PATH" value="$APPLICATION_HOME_DIR$/bin/inqry_keystore" />
     <option name="KEY_ALIAS" value="inQRy" />
     <option name="REMEMBER_PASSWORDS" value="true" />
   </component>
@@ -341,17 +350,17 @@
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java" />
         <option value="$PROJECT_DIR$/res/menu/main.xml" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
         <option value="$PROJECT_DIR$/testing/src/com/EditorHyde/app/FormatterTest.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/Placeholder.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
         <option value="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
       </list>
     </option>
   </component>
@@ -359,7 +368,7 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="38" />
+    <option name="x" value="20" />
     <option name="y" value="33" />
     <option name="width" value="1420" />
     <option name="height" value="792" />
@@ -418,6 +427,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -546,8 +557,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -560,8 +569,9 @@
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="ExportedModule" value="EditorHyde" />
-    <property name="last_opened_file_path" value="$USER_HOME$/Downloads/Shake3" />
+    <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/bin/inqry_keystore" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="default" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
@@ -855,14 +865,12 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="38" y="33" width="1420" height="792" extended-state="0" />
+    <frame x="20" y="33" width="1420" height="792" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5595238" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="11" side_tool="true" content_ui="tabs" />
@@ -882,6 +890,8 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216885" sideWeight="0.45386904" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
@@ -950,22 +960,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="94" column="0" selection-start="2912" selection-end="2912" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="62" column="8" selection-start="1539" selection-end="1591" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/Placeholder.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="66" column="68" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.0">
@@ -1006,9 +1000,7 @@
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="31" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1026,28 +1018,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="58" selection-start="383" selection-end="383" vertical-scroll-proportion="-4.6153846">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="19" column="0" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
           <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="439" column="16" selection-start="16639" selection-end="16639" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#0#18970#0" expanded="true" />
-            <element signature="e#11092#11342#0" expanded="true" />
-            <element signature="e#11319#11320#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1060,14 +1034,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="-7.4615383">
+        <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.38647342">
+        <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="96" column="0" selection-start="2947" selection-end="2947" vertical-scroll-proportion="-10.769231">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="116" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="202" column="76" selection-start="7593" selection-end="7593" vertical-scroll-proportion="0.33333334">
           <folding />
         </state>
       </provider>

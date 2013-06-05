@@ -200,7 +200,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                         String message = text.toString();
 
                         if (cb.isChecked()) {
-                            message += " (edited by Teddy Hyde)";
+                            message += " (edited by Teddy Hyde teddyhyde.com)";
                         }
 
                         // deal with the editable
@@ -495,7 +495,7 @@ public class ScreenSlideActivity extends FragmentActivity {
             String commitMessage = strings[1];
 
             if( null == commitMessage ) {
-                commitMessage = "Edited by Teddy Hyde at " + new Date(System.currentTimeMillis()).toLocaleString();
+                commitMessage = "Edited by Teddy Hyde (teddyhyde.com) at " + new Date(System.currentTimeMillis()).toLocaleString();
             }
 
             String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
