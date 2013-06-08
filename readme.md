@@ -1,5 +1,6 @@
-
 # Teddy Hyde: the extensible, one handed blogging editor for Android #
+
+<iframe width="560" height="315" src="http://www.youtube.com/embed/YbZtLKIV6Mc" frameborder="0" allowfullscreen></iframe>
 
 Learn more at teddyhyde.com
 
