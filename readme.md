@@ -1,6 +1,6 @@
 # Teddy Hyde: the extensible, one handed blogging editor for Android #
 
-[Watch a video of Teddy Hyde in action](http://www.youtube.com/v/YbZtLKIV6Mc)
+[Watch a video of Teddy Hyde in action](http://www.youtube.com/watch?v=YbZtLKIV6Mc)
 
 Learn more at [TeddyHyde.com](http://teddyhyde.com)
 
