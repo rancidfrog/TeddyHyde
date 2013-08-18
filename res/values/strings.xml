@@ -30,6 +30,7 @@
     <string name="post_template">---\nlayout: post \ncategory: \ntitle: \"{{TITLE|escdblquotes}}\"\ntagline: \ntags : [] \npublished: false\n---\n\n# A new post #\n\nWrite your post here, using Markdown.\n\n</string>
     <string name="paste_quote">Paste Quote</string>
     <string name="paste_code">Paste Code</string>
+    <string name="paste_link">Paste Link...</string>
     <string name="upload_image_button">Upload Image...</string>
     <string name="repo_name">Repository Name</string>
     <string name="upload_image">Upload image...</string>

@@ -45,6 +45,10 @@
                   android:title="@string/paste_code"
                   android:showAsAction="ifRoom|withText" />
 
+            <item android:id="@+id/action_paste_link"
+                  android:title="@string/paste_link"
+                  android:showAsAction="ifRoom|withText" />
+
             <item android:id="@+id/add_image_full"
                   android:title="@string/add_image_full"
                   android:showAsAction="ifRoom|withText" />

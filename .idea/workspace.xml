@@ -23,128 +23,29 @@
       </GlobalState>
     </option>
   </component>
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditorHyde.apk" afterPath="$PROJECT_DIR$/EditorHyde.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TeddyHyde.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/EditorHyde/app/Manifest.java" afterPath="$PROJECT_DIR$/gen/com/EditorHyde/app/Manifest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/EditorHyde/app/R.java" afterPath="$PROJECT_DIR$/gen/com/EditorHyde/app/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" afterPath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Editor Hyde.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/demo/res/layout/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/src/com/commonsware/cwac/anddown/AndDown.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/demo/res/values/strings.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/demo/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/demo/build.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086308100" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/source/r/blah/com/editorhyde/app/R.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/gen/com/editorhyde/app/R.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/src/main/com/editorhyde/app/MainActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/res/all/debug/layout/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/demo/src/com/commonsware/cwac/anddown/demo/AndDownDemoActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/src/main/res/layout/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/source/r/debug/com/editorhyde/app/R.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/res/all/release/layout/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/libs/cwac-anddown/build.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086308100" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/source/r/release/com/editorhyde/app/R.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299346" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeResources/debug/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build.gradle" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeResources/release/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeAssets/blah/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/res/all/blah/layout/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeAssets/debug/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeAssets/release/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/manifests/blah/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/manifests/debug/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/manifests/release/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/build/incremental/mergeResources/blah/merger.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="$PROJECT_DIR$/app/bin/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363086299656" ignored="false" />
-    <file path="/Dummy.txt" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370449191429" ignored="false" />
-    <file path="/MyActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363101624561" ignored="false" />
-    <file path="/RepoListActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370449580066" ignored="false" />
-    <file path="/AndroidManifest.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364399645195" ignored="false" />
-    <file path="/FileListingActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367806815919" ignored="false" />
-    <file path="/file_list.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366150090692" ignored="false" />
-    <file path="/file_list_layout.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363197889893" ignored="false" />
-    <file path="/FileListAdapter.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366150322880" ignored="false" />
-    <file path="/EditorActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874373236" ignored="false" />
-    <file path="/RenderedActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363372249139" ignored="false" />
-    <file path="/editor.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363799284721" ignored="false" />
-    <file path="/fragment.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366248360463" ignored="false" />
-    <file path="/markdown_editor.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364493454607" ignored="false" />
-    <file path="/editor_activity.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364824102642" ignored="false" />
-    <file path="/ScreenSlidePagerActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363863945581" ignored="false" />
-    <file path="/a.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874641282" ignored="false" />
-    <file path="/exerpt_content.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363867204978" ignored="false" />
-    <file path="/fragment_screen_slide_page.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363874261823" ignored="false" />
-    <file path="/ScreenSlideActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367941641622" ignored="false" />
-    <file path="/ScreenSlidePageFragment.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365164251277" ignored="false" />
-    <file path="/MainActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367806727890" ignored="false" />
-    <file path="/main.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367257839621" ignored="false" />
-    <file path="/EditorHyde.iml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1363964165538" ignored="false" />
-    <file path="/RepoListAdapter.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365011974960" ignored="false" />
-    <file path="/fragment_screen_slide_page_editor.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364523782707" ignored="false" />
-    <file path="/activity_screen_slide.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365102768490" ignored="false" />
-    <file path="/strings.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370450659494" ignored="false" />
-    <file path="/PixAuthenticationActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364416829494" ignored="false" />
-    <file path="$PROJECT_DIR$/../GitHubTesting/src/StoreInGitHub.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364521748077" ignored="false" />
-    <file path="/StoreInGitHub.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364521518995" ignored="false" />
-    <file path="/ScreenSlidePageFragmentMarkdown.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366644238551" ignored="false" />
-    <file path="/Github.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365010711612" ignored="false" />
-    <file path="/PixActivity.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367806777400" ignored="false" />
-    <file path="/pix_grid_layout.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1364908625447" ignored="false" />
-    <file path="/ImageAdapter.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365163157382" ignored="false" />
-    <file path="/RemoteImage.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367941499076" ignored="false" />
-    <file path="/MainActivityTest.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173300318" ignored="false" />
-    <file path="/Passwords.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365172149575" ignored="false" />
-    <file path="/Passwords.java.sample" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365171894733" ignored="false" />
-    <file path="/Cwd.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365002948885" ignored="false" />
-    <file path="/RemoteFileCache.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1366644852864" ignored="false" />
-    <file path="/activity_file_listing.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365076277132" ignored="false" />
-    <file path="/Transform.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365082626717" ignored="false" />
-    <file path="/ThGitClient.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365177366848" ignored="false" />
-    <file path="/FileListingActivityTest.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365172218048" ignored="false" />
-    <file path="/TeddyHydeActInstrTestCase2Base.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365171739950" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/catalog.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xsl" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/resources/relaxng.rng" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-frameset.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xinclude.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xml.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-2_0.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/XMLSchema-instance.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/html5/xhtml5.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521852" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-transitional.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xhtml1-strict.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/maven-4.0.0.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/lib/idea.jar!/standardSchemas/xslt-1_0.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/settings-1.0.0.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/maven/lib/maven.jar!/schemas/profiles-1.0.0.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/documentation.xml" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/xpath/lib/xpath.jar!/org/intellij/lang/xpath/xslt/resources/xslt-schema.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365173521853" ignored="false" />
-    <file path="$PROJECT_DIR$/../TeddyHydePatch/src/com/teddyhyde/patch/Main.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1365445750229" ignored="false" />
-    <file path="/Main.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367503506266" ignored="false" />
-    <file path="/FormatterTest.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367601815248" ignored="false" />
-    <file path="/Placeholder.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367601733346" ignored="false" />
-    <file path="$APPLICATION_HOME_DIR$/plugins/android/lib/android.jar!/org/jetbrains/android/android.xsd" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370450699162" ignored="false" />
-    <file path="$PROJECT_DIR$/../../YamlEditorPreserveComments/src/com/teddyhyde/Main.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367503509499" ignored="false" />
-    <file path="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/BuildConfig.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1367597085047" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/SessionLoginSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/Scrumptious/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/KineticPass/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513925475" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/BooleanOGSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/FriendPickerSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/Free/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/Hackbook/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/GraphApiSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/SwitchUserSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/PlacePickerSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/HelloFacebookSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/../../KineticPass/KineticPass/facebook-android-sdk-3.0/samples/ProfilePictureSample/project.properties" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1368513918465" ignored="false" />
-    <file path="$PROJECT_DIR$/gen/com/EditorHyde/app/BuildConfig.java" changelist="3e5bc9fc-c132-47fc-9e56-27291ab722e3" time="1370451465133" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,6 +60,7 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -196,7 +98,7 @@
       </breakpoint>
     </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" line="90" class="com.EditorHyde.app.RepoListActivity.LogoutTask" package="com.EditorHyde.app">
+      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" line="92" class="com.EditorHyde.app.RepoListActivity.LogoutTask" package="com.EditorHyde.app">
         <option name="ENABLED" value="true" />
         <option name="LOG_ENABLED" value="false" />
         <option name="LOG_EXPRESSION_ENABLED" value="false" />
@@ -212,7 +114,6 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </line_breakpoints>
-    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -226,19 +127,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="activity_crossfade.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_crossfade.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="PixActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0">
+            <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0" vertical-offset="4035" max-vertical-offset="5340">
               <folding />
             </state>
           </provider>
@@ -247,7 +139,16 @@
       <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="202" column="76" selection-start="7593" selection-end="7593" vertical-scroll-proportion="-7.4615383">
+            <state line="39" column="28" selection-start="1406" selection-end="1406" vertical-scroll-proportion="-14.423077" vertical-offset="0" max-vertical-offset="7935">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="FileListingActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="28" selection-start="548" selection-end="548" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8415">
               <folding />
             </state>
           </provider>
@@ -256,7 +157,7 @@
       <file leaf-file-name="MainActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0">
+            <state line="43" column="7" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2985">
               <folding />
             </state>
           </provider>
@@ -265,7 +166,7 @@
       <file leaf-file-name="RepoListActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="0" selection-start="2641" selection-end="2641" vertical-scroll-proportion="0.9041096">
+            <state line="19" column="0" selection-start="623" selection-end="623" vertical-scroll-proportion="1.0594796" vertical-offset="0" max-vertical-offset="3000">
               <folding />
             </state>
           </provider>
@@ -274,7 +175,7 @@
       <file leaf-file-name="ThGitClient.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
+            <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0" vertical-offset="270" max-vertical-offset="1950">
               <folding />
             </state>
           </provider>
@@ -283,7 +184,7 @@
       <file leaf-file-name="AndroidManifest.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="73" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
+            <state line="28" column="71" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="615">
               <folding />
             </state>
           </provider>
@@ -292,7 +193,7 @@
       <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="44" column="116" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0">
+            <state line="32" column="43" selection-start="1909" selection-end="1909" vertical-scroll-proportion="0.0" vertical-offset="209" max-vertical-offset="855">
               <folding />
             </state>
           </provider>
@@ -301,17 +202,19 @@
       <file leaf-file-name="activity_screen_slide.xml" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="0" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_file_listing.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_file_listing.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="19" column="7" selection-start="0" selection-end="561" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="49" column="59" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0" vertical-offset="451" max-vertical-offset="1170">
+              <folding>
+                <element signature="e#734#753#0" expanded="true" />
+                <element signature="e#884#910#0" expanded="true" />
+                <element signature="e#1040#1065#0" expanded="true" />
+                <element signature="e#1183#1208#0" expanded="true" />
+                <element signature="e#1362#1383#0" expanded="true" />
+                <element signature="e#1531#1551#0" expanded="true" />
+                <element signature="e#1699#1719#0" expanded="true" />
+                <element signature="e#1864#1888#0" expanded="true" />
+                <element signature="e#2037#2064#0" expanded="true" />
+                <element signature="e#2215#2244#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -341,6 +244,63 @@
       <MyDateState />
     </option>
   </component>
+  <component name="GradleLocalSettings">
+    <option name="tasksExpandState">
+      <map>
+        <entry key="" value="true" />
+      </map>
+    </option>
+    <option name="availableProjects">
+      <map>
+        <entry>
+          <key>
+            <ExternalProjectPojo>
+              <option name="name" value="TeddyHyde" />
+              <option name="path" value="$PROJECT_DIR$/build.gradle" />
+            </ExternalProjectPojo>
+          </key>
+          <value>
+            <list>
+              <ExternalProjectPojo>
+                <option name="name" value="TeddyHyde" />
+                <option name="path" value="$PROJECT_DIR$/build.gradle" />
+              </ExternalProjectPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="availableTasks">
+      <map>
+        <entry key="$PROJECT_DIR$/build.gradle">
+          <value>
+            <list>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates a Gradle build file. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/build.gradle" />
+                <option name="name" value="generateBuildFile" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates a Gradle settings file. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/build.gradle" />
+                <option name="name" value="generateSettingsFile" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Initializes a new Gradle build. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/build.gradle" />
+                <option name="name" value="setupBuild" />
+              </ExternalTaskPojo>
+              <ExternalTaskPojo>
+                <option name="description" value="Generates Gradle wrapper files. [incubating]" />
+                <option name="linkedExternalProjectPath" value="$PROJECT_DIR$/build.gradle" />
+                <option name="name" value="setupWrapper" />
+              </ExternalTaskPojo>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
@@ -352,14 +312,14 @@
         <option value="$PROJECT_DIR$/testing/src/com/EditorHyde/app/FormatterTest.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/Placeholder.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java" />
-        <option value="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
-        <option value="$PROJECT_DIR$/res/values/strings.xml" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
+        <option value="$PROJECT_DIR$/res/values/strings.xml" />
+        <option value="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
       </list>
     </option>
   </component>
@@ -368,7 +328,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="20" />
-    <option name="y" value="33" />
+    <option name="y" value="31" />
     <option name="width" value="1420" />
     <option name="height" value="792" />
   </component>
@@ -426,8 +386,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -556,21 +514,23 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="OverrideImplement.combined" value="false" />
     <property name="project.structure.proportion" value="0.09832842" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="ExportedApkPath" value="$PROJECT_DIR$/EditorHyde.apk" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="ExportedApkPath" value="$PROJECT_DIR$/EditorHyde.apk" />
     <property name="ExportedModule" value="EditorHyde" />
     <property name="last_opened_file_path" value="$APPLICATION_HOME_DIR$/bin/inqry_keystore" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="default" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_AVD" value="MonoForAndroid_API_10" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FullScreen" value="false" />
@@ -583,12 +543,12 @@
     <property name="options.lastSelected" value="Errors" />
     <property name="AndroidLayoutSelectedEditor" value="text-editor" />
     <property name="project.structure.side.proportion" value="0.33296943" />
-    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="016B806206014003" />
+    <property name="ANDROID_EXTENDED_DEVICE_CHOOSER_SERIALS" value="emulator-5554" />
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -658,12 +618,6 @@
       <ConfigurationWrapper RunnerId="Run" />
       <method />
     </configuration>
-    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
-      <module name="" />
-      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
-      <option name="PROGRAM_PARAMETERS" />
-      <method />
-    </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
       <module name="" />
       <option name="TESTING_TYPE" value="0" />
@@ -701,33 +655,6 @@
       <option name="VM_PARAMETERS" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
       <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
-    <configuration default="true" type="TestNG" factoryName="TestNG">
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" value="-ea" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="moduleWithDependencies" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
-      <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -864,30 +791,32 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="33" width="1420" height="792" extended-state="0" />
+    <frame x="20" y="31" width="1420" height="792" extended-state="0" />
     <editor active="true" />
     <layout>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605532" sideWeight="0.45386904" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216885" sideWeight="0.45386904" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.5595238" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.55803573" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="357" y="659" width="1385" height="708" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="618" y="659" width="1385" height="708" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5714286" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.7022222" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24526928" sideWeight="0.44047618" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24526928" sideWeight="0.4419643" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.74553573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="25" width="1440" height="801" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605532" sideWeight="0.45386904" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216885" sideWeight="0.45386904" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -959,116 +888,125 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/Placeholder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="66" column="68" selection-start="2322" selection-end="2322" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/com/EditorHyde/app/FormatterTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="88" column="40" selection-start="2224" selection-end="2224" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="31" column="30" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0">
+        <state line="31" column="30" selection-start="907" selection-end="907" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/activity_layout_changes.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteFileCache.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="55" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0">
+        <state line="55" column="0" selection-start="1229" selection-end="1229" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="31" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0">
+        <state line="27" column="31" selection-start="664" selection-end="664" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/activity_crossfade.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/activity_file_listing.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="7" selection-start="0" selection-end="561" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="0" selection-start="672" selection-end="672" vertical-scroll-proportion="0.0">
+        <state line="19" column="7" selection-start="0" selection-end="561" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0">
+        <state line="270" column="39" selection-start="9777" selection-end="9777" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="50" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0">
+        <state line="43" column="7" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2985">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="116" selection-start="2710" selection-end="2710" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="202" column="76" selection-start="7593" selection-end="7593" vertical-scroll-proportion="-7.4615383">
+        <state line="19" column="13" selection-start="569" selection-end="569" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="73" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0">
+        <state line="28" column="71" selection-start="1200" selection-end="1200" vertical-scroll-proportion="0.0" vertical-offset="405" max-vertical-offset="615">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="32" column="43" selection-start="1909" selection-end="1909" vertical-scroll-proportion="0.0" vertical-offset="209" max-vertical-offset="855">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="59" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0" vertical-offset="451" max-vertical-offset="1170">
+          <folding>
+            <element signature="e#734#753#0" expanded="true" />
+            <element signature="e#884#910#0" expanded="true" />
+            <element signature="e#1040#1065#0" expanded="true" />
+            <element signature="e#1183#1208#0" expanded="true" />
+            <element signature="e#1362#1383#0" expanded="true" />
+            <element signature="e#1531#1551#0" expanded="true" />
+            <element signature="e#1699#1719#0" expanded="true" />
+            <element signature="e#1864#1888#0" expanded="true" />
+            <element signature="e#2037#2064#0" expanded="true" />
+            <element signature="e#2215#2244#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="28" selection-start="1406" selection-end="1406" vertical-scroll-proportion="-14.423077" vertical-offset="0" max-vertical-offset="7935">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="28" selection-start="548" selection-end="548" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8415">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/com/EditorHyde/app/MainActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="40" column="33" selection-start="1196" selection-end="1196" vertical-scroll-proportion="0.73977697" vertical-offset="191" max-vertical-offset="945">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="90" column="0" selection-start="2641" selection-end="2641" vertical-scroll-proportion="0.9041096">
+        <state line="19" column="0" selection-start="623" selection-end="623" vertical-scroll-proportion="1.0594796" vertical-offset="0" max-vertical-offset="3000">
           <folding />
         </state>
       </provider>

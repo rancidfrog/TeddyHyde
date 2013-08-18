@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.eclipse.egit.github.core.*;
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+import com.EditorHyde.app.R;
 
 import java.net.URLEncoder;
 import java.util.*;
@@ -233,7 +234,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private void pasteLink( final String preprocessed ) {
 
-        final String link = preprocessed.replaceAll( ")", "\\)");
+        final String link = preprocessed.replaceAll( "\\)", "\\)");
 
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
