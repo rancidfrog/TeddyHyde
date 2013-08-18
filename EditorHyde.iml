@@ -24,6 +24,7 @@
     <orderEntry type="library" name="apache-lang:commons-lang:2.1" level="project" />
     <orderEntry type="library" name="apache-codec:commons-codec:1.2" level="project" />
     <orderEntry type="library" name="org.yaml:snakeyaml:1.12" level="project" />
+    <orderEntry type="library" name="com.wu-man:android-oauth-client:0.0.1" level="project" />
   </component>
 </module>
 

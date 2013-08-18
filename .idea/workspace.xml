@@ -30,18 +30,15 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/TeddyHyde.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/EditorHyde/app/Manifest.java" afterPath="$PROJECT_DIR$/gen/com/EditorHyde/app/Manifest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gen/com/EditorHyde/app/R.java" afterPath="$PROJECT_DIR$/gen/com/EditorHyde/app/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" afterPath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/modules.xml" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/com_wu_man_android_oauth_client_0_0_1.xml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/android-4.0.1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/commons-logging-1.1.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpclient-4.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/httpcore-4.0.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/support-v4-r7.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/xmlParserAPIs-2.6.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/xpp3-1.1.4c.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditorHyde.iml" afterPath="$PROJECT_DIR$/EditorHyde.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="Editor Hyde.iws" />
@@ -203,18 +200,7 @@
         <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
           <provider selected="true" editor-type-id="text-editor">
             <state line="49" column="59" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0" vertical-offset="451" max-vertical-offset="1170">
-              <folding>
-                <element signature="e#734#753#0" expanded="true" />
-                <element signature="e#884#910#0" expanded="true" />
-                <element signature="e#1040#1065#0" expanded="true" />
-                <element signature="e#1183#1208#0" expanded="true" />
-                <element signature="e#1362#1383#0" expanded="true" />
-                <element signature="e#1531#1551#0" expanded="true" />
-                <element signature="e#1699#1719#0" expanded="true" />
-                <element signature="e#1864#1888#0" expanded="true" />
-                <element signature="e#2037#2064#0" expanded="true" />
-                <element signature="e#2215#2244#0" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -369,6 +355,7 @@
   </component>
   <component name="ProjectStructureProblems">
     <ignored-problems>
+      <problem id="invalid-module-dependency(module:EditorHyde,src)" />
       <problem id="invalid-module-dependency(module:testing,com.jayway.android.robotium:robotium-solo:4.0)" />
       <problem id="unused-library(library:project:com.jayway.android.robotium:robotium-solo:4.0)" />
     </ignored-problems>
@@ -803,7 +790,7 @@
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="618" y="659" width="1385" height="708" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="55" y="115" width="1385" height="708" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5714286" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
@@ -968,18 +955,7 @@
     <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="49" column="59" selection-start="1779" selection-end="1779" vertical-scroll-proportion="0.0" vertical-offset="451" max-vertical-offset="1170">
-          <folding>
-            <element signature="e#734#753#0" expanded="true" />
-            <element signature="e#884#910#0" expanded="true" />
-            <element signature="e#1040#1065#0" expanded="true" />
-            <element signature="e#1183#1208#0" expanded="true" />
-            <element signature="e#1362#1383#0" expanded="true" />
-            <element signature="e#1531#1551#0" expanded="true" />
-            <element signature="e#1699#1719#0" expanded="true" />
-            <element signature="e#1864#1888#0" expanded="true" />
-            <element signature="e#2037#2064#0" expanded="true" />
-            <element signature="e#2215#2244#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1020,7 +996,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.33296943" />
               </list>
             </option>
           </splitter-proportions>
@@ -1032,7 +1008,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.33296943" />
               </list>
             </option>
           </splitter-proportions>
@@ -1044,7 +1020,7 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.33296943" />
               </list>
             </option>
           </splitter-proportions>
@@ -1052,11 +1028,11 @@
       </state>
       <state key="JdkListConfigurable.UI">
         <settings>
-          <last-edited>Android 2.3.3 Platform</last-edited>
+          <last-edited>1.6</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.2" />
+                <option value="0.33296943" />
               </list>
             </option>
           </splitter-proportions>
@@ -1068,7 +1044,8 @@
           <splitter-proportions>
             <option name="proportions">
               <list>
-                <option value="0.10989011" />
+                <option value="0.33296943" />
+                <option value="0.5" />
               </list>
             </option>
           </splitter-proportions>
@@ -1088,7 +1065,7 @@
       </state>
       <state key="ProjectLibrariesConfigurable.UI">
         <settings>
-          <last-edited>org.yaml:snakeyaml:1.12</last-edited>
+          <last-edited>org.apache.httpcomponents:com.springsource.org.apache.httpcomponents.httpmime:4.2.1</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
