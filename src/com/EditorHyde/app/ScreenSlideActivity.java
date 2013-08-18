@@ -122,10 +122,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                 if( 1 == position && null != md  ) {
                     md.onPageSelected(position);
                 }
-
             }
         });
-
     }
 
     private void loadHydeTransformsIntoMenu( Menu menu ) {
@@ -231,6 +229,39 @@ public class ScreenSlideActivity extends FragmentActivity {
         int end = et.getSelectionEnd();
         et.getText().replace(Math.min(start, end), Math.max(start, end),
                 text, 0, text.length());
+    }
+
+    private void pasteLink( final String preprocessed ) {
+
+        final String link = preprocessed.replaceAll( ")", "\\)");
+
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Link text");
+        alert.setMessage("Enter link text, or leave blank to use link as text");
+
+        // Set an EditText view to get user input
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                String name = input.getText().toString();
+                if( name == null || name == "" ) {
+                    name = link;
+                }
+                // make sure first line is also done
+                insertAtCursor( "[" + name + "](" + link + ")" );
+            }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
+        });
+
+        alert.show();
     }
 
     private void pasteQuote( String preprocessed ) {
@@ -395,6 +426,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 case R.id.action_paste_code:
                 case R.id.action_paste_quote:
+                case R.id.action_paste_link:
 
                     // grab whatever is in the clipboard
                     ClipboardManager cm = (ClipboardManager)getSystemService(CLIPBOARD_SERVICE);
@@ -409,6 +441,9 @@ public class ScreenSlideActivity extends FragmentActivity {
                             }
                             else if( itemId == R.id.action_paste_code ) {
                                 pasteCode( theText.toString() );
+                            }
+                            else if( itemId == R.id.action_paste_link ) {
+                                pasteLink(theText.toString());
                             }
                         }
                     }

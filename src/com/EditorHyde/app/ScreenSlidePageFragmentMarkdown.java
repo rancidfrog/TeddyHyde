@@ -33,6 +33,8 @@ import com.petebevin.markdown.MarkdownProcessor;
 
 import java.io.IOException;
 
+import static com.EditorHyde.app.R.*;
+
 public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPager.OnPageChangeListener {
     /**
      * The argument key for the page number this fragment represents.
@@ -72,7 +74,7 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
                              Bundle savedInstanceState) {
 
         rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page, container, false);
+                .inflate(layout.fragment_screen_slide_page, container, false);
         // getDialog().setTitle("Rendering markdown");
 
         return rootView;
@@ -105,7 +107,8 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         String fullHtml =
                 "<html><head>" +
                 "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
-                "</head><body>" + converted + "</body></html>";
+                "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>" +
+                "</head><body> (with CSS)<br/>" + converted + "</body></html>";
 
         return fullHtml;
     }
@@ -113,10 +116,10 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
     @Override
     public void onPageSelected(int i) {
         // Set the title view to show the page number.
-        WebView wv = (WebView)rootView.findViewById(R.id.webView);
+        WebView wv = (WebView)rootView.findViewById(id.webView);
 
         // Get md text
-        EditText et = (EditText)getActivity().findViewById(R.id.markdownEditor);
+        EditText et = (EditText)getActivity().findViewById(id.markdownEditor);
         String markdown = et.getText().toString();
         MarkdownProcessor md = new MarkdownProcessor();
         String converted = "";
