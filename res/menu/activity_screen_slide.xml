@@ -26,6 +26,16 @@
           android:title="@string/save_with_commit"
           android:showAsAction="ifRoom|withText" />
 
+    <item android:id="@+id/action_save_as_gist"
+          android:title="@string/save_as_gist"
+          android:visible="false"
+          android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_save_into_repository"
+          android:title="@string/save_into_repository"
+          android:visible="false"
+          android:showAsAction="ifRoom|withText" />
+
 
     <item android:id="@+id/action_hyde_transforms"
           android:title="@string/hyde_transforms"

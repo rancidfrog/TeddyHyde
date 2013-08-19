@@ -8,5 +8,8 @@
               android:title="@string/logout"
               android:showAsAction="ifRoom|withText" />
 
+        <item android:id="@+id/action_scratchpad"
+          android:title="@string/scratchpad"
+          android:showAsAction="ifRoom|withText" />
 
 </menu>

@@ -80,6 +80,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theTransforms;
     String theSha;
     String[] images;
+    Boolean isScratchpad;
     List<Transform> transforms;
 
     ScreenSlidePageFragmentMarkdown md;
@@ -96,11 +97,15 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         Bundle extras = getIntent().getExtras();
         theMarkdown = extras.getString("markdown");
-        theFile = extras.getString("filename");
-        theRepo = extras.getString("repo");
-        theLogin = extras.getString("login");
-        theTransforms = extras.getString( "transforms" );
-        theSha = extras.getString( "sha" );
+        isScratchpad = extras.getBoolean( "scratchpad" );
+
+        if( !isScratchpad ) {
+            theFile = extras.getString("filename");
+            theRepo = extras.getString("repo");
+            theLogin = extras.getString("login");
+            theTransforms = extras.getString( "transforms" );
+            theSha = extras.getString( "sha" );
+        }
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
@@ -168,16 +173,22 @@ public class ScreenSlideActivity extends FragmentActivity {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
 
-        // If we are in the editor menu, then enable the save with commit message...
-        menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
+        if( !isScratchpad ){
+            // If we are in the editor menu, then enable the save with commit message...
+            menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
 
-        loadHydeTransformsIntoMenu( menu );
+            loadHydeTransformsIntoMenu( menu );
+        }
+        else {
+            menu.findItem(R.id.action_save_as_gist).setEnabled(mPager.getCurrentItem() == 0);
+            menu.findItem(R.id.action_save_into_repository).setEnabled(mPager.getCurrentItem() == 0);
+        }
 
         return true;
     }
 
     private void promptForCommitMessage( final String contents ) {
-// Set an EditText view to get user input
+        // Set an EditText view to get user input
         final LinearLayout ll = new LinearLayout(ScreenSlideActivity.this);
         ll.setOrientation(LinearLayout.VERTICAL);
         final EditText input = new EditText(ScreenSlideActivity.this);
@@ -300,11 +311,16 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private void finishWithResult() {
         Intent intent = new Intent();
-        Bundle extras = new Bundle();
-        extras.putString( "sha", theSha );
-        extras.putString( "path", theFile);
-        intent.putExtras( extras );
+
+        if( !isScratchpad) {
+            Bundle extras = new Bundle();
+            extras.putString( "sha", theSha );
+            extras.putString( "path", theFile);
+            intent.putExtras(extras);
+        }
+
         setResult(RESULT_OK, intent );
+
         finish();
     }
 
@@ -416,6 +432,9 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         }
         else {
+            String contents;
+            EditText et;
+
             switch ( itemId ) {
 
                 case R.id.add_image_full:
@@ -454,17 +473,28 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 case R.id.action_save_with_commit:
                 case R.id.save_file:
-                    EditText et = (EditText) findViewById(R.id.markdownEditor);
-                    String contents = et.getText().toString();
+                    et = (EditText) findViewById(R.id.markdownEditor);
+                    contents = et.getText().toString();
                     if( R.id.action_save_with_commit == itemId ) {
                         promptForCommitMessage( contents );
                     }
                     else {
-
                         startSaveProgressIndicator();
                         new SaveFileTask().execute( contents, null );
                     }
                     rv = true;
+                    break;
+
+                case R.id.action_save_as_gist:
+                    startSaveProgressIndicator();
+                    et = (EditText) findViewById(R.id.markdownEditor);
+                    contents = et.getText().toString();
+                    new SaveGistTask().execute( contents );
+                    break;
+
+                case R.id.action_save_into_repository:
+                    saveIntoRepository();
+
                     break;
 
                 case android.R.id.home:
@@ -486,6 +516,42 @@ public class ScreenSlideActivity extends FragmentActivity {
         return rv || super.onOptionsItemSelected(item);
     }
 
+
+    private void saveIntoRepository() {
+        final LinearLayout ll = new LinearLayout(ScreenSlideActivity.this);
+        ll.setOrientation(LinearLayout.VERTICAL);
+        final EditText input = new EditText(ScreenSlideActivity.this);
+        final Spinner spinner = new Spinner(ScreenSlideActivity.this);
+        SharedPreferences sp = sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+
+        Set<String> repositorySet;
+        repositorySet = new HashSet<String>();
+        sp.getStringSet( getString(R.string.cached_repositories), repositorySet );
+        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, (List<String>) repositorySet);
+        spinner.setAdapter(spinnerArrayAdapter);
+        ll.addView( input );
+        ll.addView( spinner );
+
+        new AlertDialog.Builder(ScreenSlideActivity.this)
+                .setTitle("Filename")
+                .setMessage( "Enter filename to save under...")
+                .setView(ll)
+                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        startSaveProgressIndicator();
+                        EditText et = (EditText) findViewById(R.id.markdownEditor);
+                        String contents = et.getText().toString();
+                        String filename = input.getText().toString();
+                        String repository = spinner.getSelectedItem().toString();
+                        new SaveIntoRepository().execute( authToken, repository, theLogin, contents, filename );
+                    }
+                })
+                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // Do nothing.
+                    }
+                }).show();
+    }
 
     /**
      * A simple pager adapter that represents 2 {@link ScreenSlidePageFragment} objects, in
@@ -518,6 +584,64 @@ public class ScreenSlideActivity extends FragmentActivity {
         @Override
         public int getCount() {
             return NUM_PAGES;
+        }
+    }
+
+    private class SaveGistTask extends AsyncTask<String, Void, Boolean> {
+        String URL;
+
+        protected Boolean doInBackground(String...strings) {
+            Boolean rv = true;
+            String contents = strings[0];
+            URL = ThGitClient.SaveGist( authToken, contents, "some description", "filename1.txt" );
+            return rv;
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+            pb.setVisibility(View.GONE);
+
+            if( !result ) {
+                Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
+            }
+
+            editorFragment.makeClean();
+        }
+    }
+
+    private class SaveIntoRepository extends AsyncTask<String, Void, Boolean> {
+
+        protected Boolean doInBackground(String...strings) {
+            Boolean rv = true;
+
+            String authToken = strings[0];
+            String repo = strings[1];
+            String theLogin = strings[2];
+            String contents = strings[3];
+            String filename = strings[4];
+            String commitMessage = strings[5];
+
+            if( null == commitMessage ) {
+                commitMessage = "Edited by Teddy Hyde (teddyhyde.com) at " + new Date(System.currentTimeMillis()).toLocaleString();
+            }
+
+            String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
+
+            theSha = ThGitClient.SaveFile( authToken, repo, theLogin, base64ed, filename, commitMessage);
+
+            return rv;
+
+        }
+
+
+        protected void onPostExecute(Boolean result) {
+            pb.setVisibility(View.GONE);
+
+            if( !result ) {
+                Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
+            }
+
+            editorFragment.makeClean();
         }
     }
 

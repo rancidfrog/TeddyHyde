@@ -4,6 +4,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.eclipse.egit.github.core.*;
 import org.eclipse.egit.github.core.service.CommitService;
 import org.eclipse.egit.github.core.service.DataService;
+import org.eclipse.egit.github.core.service.GistService;
 import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.service.UserService;
 
@@ -30,6 +31,22 @@ public class ThGitClient {
         String encoding = blob.getEncoding();
         byte[] decoded = Base64.decodeBase64(theMarkdown64.getBytes());
         return new String( decoded );
+    }
+
+    public static String SaveGist( String authToken, String contents, String description, String filename ) {
+        GistFile file = new GistFile();
+        file.setContent(contents);
+        Gist gist = new Gist();
+        gist.setDescription( description );
+        gist.setFiles(Collections.singletonMap(filename, file));
+        GistService service = new GistService();
+        service.getClient().setOAuth2Token( authToken );
+        try {
+            gist = service.createGist(gist); //returns the created gist
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return gist.getUrl();
     }
 
     public static String SaveFile( String authToken, String repoName, String login, String contentsBase64, String filename, String commitMessage ) {

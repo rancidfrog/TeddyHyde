@@ -20,7 +20,9 @@ import org.eclipse.egit.github.core.service.RepositoryService;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created with IntelliJ IDEA.
@@ -50,6 +52,7 @@ public class RepoListActivity extends Activity {
     private ProgressDialog pd;
     String authToken;
     ListView listView;
+    SharedPreferences sp;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -61,7 +64,7 @@ public class RepoListActivity extends Activity {
 
         listView = (ListView) findViewById(R.id.listView);
 
-        SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
+        sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
 
         RemoteFileCache.clear();
@@ -124,6 +127,11 @@ public class RepoListActivity extends Activity {
             pd = ProgressDialog.show( this, "", "Logging out from GitHub...", true);
             new LogoutTask().execute();
         }
+        else if( itemId == R.id.action_scratchpad ) {
+            Intent i = new Intent(this, ScratchpadActivity.class);
+            startActivity(i);
+        }
+
         return rv;
     }
 
@@ -138,8 +146,10 @@ public class RepoListActivity extends Activity {
     private class GetReposTask extends AsyncTask<Void, Void, Boolean> {
 
         List<Repository> allRepos;
+        Set<String> repositorySet;
 
         protected Boolean doInBackground(Void...voids) {
+            repositorySet = new HashSet<String>();
             Boolean rv = true;
             List<Repository> repos = null;
 
@@ -153,7 +163,6 @@ public class RepoListActivity extends Activity {
                 rv = false;
             }
 
-
             ArrayList<Repository> nonJekyll = new ArrayList<Repository>();
             ArrayList<Repository> possibleJekyll = new ArrayList<Repository>();
             for( int j = 0; j < repos.size(); j++ ) {
@@ -163,11 +172,12 @@ public class RepoListActivity extends Activity {
 
                 if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
                     possibleJekyll.add( repo );
-
                 }
                 else {
                     nonJekyll.add( repo );
                 }
+
+                repositorySet.add( name );
             }
 
             possibleJekyll.addAll( nonJekyll);
@@ -191,6 +201,8 @@ public class RepoListActivity extends Activity {
                         showFilesList(repo);
                     }
                 });
+
+                sp.edit().putStringSet(getString(R.string.cached_repositories), repositorySet );
             }
 
         }

@@ -31,6 +31,7 @@
     <string name="paste_quote">Paste Quote</string>
     <string name="paste_code">Paste Code</string>
     <string name="paste_link">Paste Link...</string>
+    <string name="save_as_gist">Save as gist...</string>
     <string name="upload_image_button">Upload Image...</string>
     <string name="repo_name">Repository Name</string>
     <string name="upload_image">Upload image...</string>
@@ -46,6 +47,9 @@
     <string name="image_thumbnail_upload_message">Image thumbnail added using Teddy Hyde for Android (teddyhyde.com)</string>
     <string name="image_resize_upload_message">Resized image added using Teddy Hyde for Android (teddyhyde.com)</string>
     <string name="image_upload_message">Image added using Teddy Hyde for Android (teddyhyde.com)</string>
+    <string name="scratchpad">Scratchpad...</string>
+    <string name="save_into_repository">Save into repository...</string>
+    <string name="cached_repositories">cachedRepositories</string>
 
 
 </resources>

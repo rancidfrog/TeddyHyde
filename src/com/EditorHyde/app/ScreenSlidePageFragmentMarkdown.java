@@ -108,7 +108,7 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
                 "<html><head>" +
                 "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
                 "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>" +
-                "</head><body> (with CSS)<br/>" + converted + "</body></html>";
+                "</head><body>" + converted + "</body></html>";
 
         return fullHtml;
     }
