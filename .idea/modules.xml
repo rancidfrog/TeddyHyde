@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/EditorHyde.iml" filepath="$PROJECT_DIR$/EditorHyde.iml" />
-      <module fileurl="file://$PROJECT_DIR$/TeddyHyde.iml" filepath="$PROJECT_DIR$/TeddyHyde.iml" />
       <module fileurl="file://$PROJECT_DIR$/testing/testing.iml" filepath="$PROJECT_DIR$/testing/testing.iml" />
     </modules>
   </component>
