@@ -17,13 +17,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
 
-    <item android:id="@+id/save_file"
+    <item android:id="@+id/action_save_file"
           android:title="@string/save_file"
+          android:visible="false"
           android:showAsAction="ifRoom|withText" />
-
 
     <item android:id="@+id/action_save_with_commit"
           android:title="@string/save_with_commit"
+          android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
     <item android:id="@+id/action_save_as_gist"
@@ -36,12 +37,9 @@
           android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
-
     <item android:id="@+id/action_hyde_transforms"
           android:title="@string/hyde_transforms"
-          android:visible="false">
-
-    </item>
+          android:visible="false"/>
 
     <item android:id="@+id/action_markdown"
           android:title="@string/action_markdown"

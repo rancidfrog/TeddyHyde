@@ -177,16 +177,17 @@ public class ScreenSlideActivity extends FragmentActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_screen_slide, menu);
+        boolean isNumberOne = mPager.getCurrentItem() == 0;
 
         if( !isScratchpad ){
             // If we are in the editor menu, then enable the save with commit message...
-            menu.findItem(R.id.action_save_with_commit).setEnabled(mPager.getCurrentItem() == 0);
-
+            menu.findItem(R.id.action_save_with_commit).setEnabled( isNumberOne );
+            menu.findItem(R.id.action_save_file).setEnabled( isNumberOne );
             loadHydeTransformsIntoMenu( menu );
         }
         else {
-            menu.findItem(R.id.action_save_as_gist).setEnabled(mPager.getCurrentItem() == 0);
-            menu.findItem(R.id.action_save_into_repository).setEnabled(mPager.getCurrentItem() == 0);
+            menu.findItem(R.id.action_save_as_gist).setEnabled( isNumberOne );
+            menu.findItem(R.id.action_save_into_repository).setEnabled( isNumberOne );
         }
 
         return true;
@@ -481,7 +482,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                     break;
 
                 case R.id.action_save_with_commit:
-                case R.id.save_file:
+                case R.id.action_save_file:
                     et = (EditText) findViewById(R.id.markdownEditor);
                     contents = et.getText().toString();
                     if( R.id.action_save_with_commit == itemId ) {
