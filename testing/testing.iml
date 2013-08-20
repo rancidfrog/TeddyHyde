@@ -17,6 +17,15 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="EditorHyde" scope="PROVIDED" />
     <orderEntry type="library" name="org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.3" level="project" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../lib/robotium-solo-4.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
 
