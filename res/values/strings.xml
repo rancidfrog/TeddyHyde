@@ -50,6 +50,7 @@
     <string name="scratchpad">Scratchpad...</string>
     <string name="save_into_repository">Save into repository...</string>
     <string name="cached_repositories">cachedRepositories</string>
+    <string name="hello">Hello</string>
 
 
 </resources>

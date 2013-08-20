@@ -14,11 +14,6 @@
   <component name="AndroidLayoutPreviewToolWindow">
     <option name="state">
       <GlobalState>
-        <option name="device" value="2.7in QVGA" />
-        <option name="dockMode" value="" />
-        <option name="nightMode" value="notnight" />
-        <option name="targetHashString" value="android-10" />
-        <option name="theme" value="Theme" />
         <option name="visible" value="false" />
       </GlobalState>
     </option>
@@ -30,21 +25,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="3e5bc9fc-c132-47fc-9e56-27291ab722e3" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/lib/android-4.0.1.2.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/EditorHyde.apk" afterPath="$PROJECT_DIR$/EditorHyde.apk" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/AndroidManifest.xml" afterPath="$PROJECT_DIR$/AndroidManifest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/Scratch.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchDataSource.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/SqliteHelper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/res/layout/scratch.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/Manifest.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" afterPath="$PROJECT_DIR$/testing/gen/com/EditorHyde/app/tests/R.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/TeddyHyde.iml" afterPath="$PROJECT_DIR$/TeddyHyde.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" afterPath="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/gradle.xml" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/ids.xml" afterPath="$PROJECT_DIR$/res/values/ids.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/menu/main.xml" afterPath="$PROJECT_DIR$/res/menu/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" afterPath="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/res/values/strings.xml" afterPath="$PROJECT_DIR$/res/values/strings.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -101,23 +88,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
-    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint url="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" line="11" class="com.EditorHyde.app.ScratchpadActivity" package="com.EditorHyde.app">
-        <option name="ENABLED" value="true" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="REMOVE_AFTER_HIT" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </line_breakpoints>
+    <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -134,21 +105,7 @@
       <file leaf-file-name="ScreenSlideActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="112" column="24" selection-start="3808" selection-end="3808" vertical-scroll-proportion="-2.9615386" vertical-offset="1033" max-vertical-offset="9405">
-              <folding>
-                <element signature="e#19915#19954#0" expanded="true" />
-                <element signature="e#20040#20048#0" expanded="true" />
-                <element signature="e#20473#21105#0" expanded="true" />
-                <element signature="e#21086#21087#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScreenSlidePageFragment.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragment.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="13" selection-start="1376" selection-end="1376" vertical-scroll-proportion="0.0" vertical-offset="796" max-vertical-offset="1665">
+            <state line="112" column="24" selection-start="3808" selection-end="3808" vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="10275">
               <folding />
             </state>
           </provider>
@@ -157,91 +114,84 @@
       <file leaf-file-name="FileListingActivity.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="200" column="11" selection-start="6756" selection-end="6759" vertical-scroll-proportion="-109.61539" vertical-offset="90" max-vertical-offset="8415">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ThGitClient.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="53" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="2070">
+            <state line="200" column="11" selection-start="6756" selection-end="6759" vertical-scroll-proportion="0.0" vertical-offset="2985" max-vertical-offset="8565">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="RepoListActivity.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="152" column="11" selection-start="4354" selection-end="4405" vertical-scroll-proportion="0.0" vertical-offset="1996" max-vertical-offset="3225">
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#4849#4861#0" expanded="true" />
-                <element signature="e#4929#4941#0" expanded="true" />
-                <element signature="e#5774#6116#0" expanded="true" />
-                <element signature="e#6097#6098#0" expanded="true" />
-                <element signature="e#6159#6198#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScratchpadActivity.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="ScratchpadActivity.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="41" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="465">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ScreenSlidePageFragmentMarkdown.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="30" selection-start="3600" selection-end="3600" vertical-scroll-proportion="0.20807454" vertical-offset="1051" max-vertical-offset="1770">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FileListAdapter.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListAdapter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="32" selection-start="575" selection-end="578" vertical-scroll-proportion="-3.1153846" vertical-offset="99" max-vertical-offset="1035">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="activity_screen_slide.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="34" column="45" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1320">
+            <state line="34" column="24" selection-start="736" selection-end="736" vertical-scroll-proportion="0.7925926" vertical-offset="296" max-vertical-offset="1395">
               <folding>
-                <element signature="e#734#753#0" expanded="true" />
-                <element signature="e#884#910#0" expanded="true" />
-                <element signature="e#1085#1092#0" expanded="true" />
-                <element signature="e#1420#1445#0" expanded="true" />
-                <element signature="e#1563#1588#0" expanded="true" />
-                <element signature="e#1742#1763#0" expanded="true" />
-                <element signature="e#1911#1931#0" expanded="true" />
-                <element signature="e#2079#2099#0" expanded="true" />
-                <element signature="e#2244#2268#0" expanded="true" />
-                <element signature="e#2417#2444#0" expanded="true" />
-                <element signature="e#2595#2624#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#1036#1045#0" expanded="true" />
+                <element signature="e#1880#1910#1" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="strings.xml" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/res/values/strings.xml">
+      <file leaf-file-name="EditorActivity.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/EditorActivity.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="33" column="47" selection-start="1966" selection-end="1966" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="915">
+            <state line="29" column="52" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SqliteHelper.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/SqliteHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="45" column="61" selection-start="1553" selection-end="1553" vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="825">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scratch.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/res/layout/scratch.xml">
+          <provider editor-type-id="android-designer">
+            <state />
+          </provider>
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="22" column="41" selection-start="743" selection-end="743" vertical-scroll-proportion="-12.222222" vertical-offset="0" max-vertical-offset="495">
+              <folding>
+                <element signature="e#866#881#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScratchDataSource.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchDataSource.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="70" column="23" selection-start="2188" selection-end="2188" vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1275">
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#1753#1762#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Scratch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/Scratch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="5" selection-start="582" selection-end="582" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ScreenSlidePageFragmentMarkdown.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="110" column="30" selection-start="3600" selection-end="3600" vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1770">
               <folding />
             </state>
           </provider>
@@ -332,10 +282,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/testing/src/com/EditorHyde/app/FormatterTest.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/Placeholder.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/PixActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RemoteImage.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java" />
         <option value="$PROJECT_DIR$/AndroidManifest.xml" />
@@ -346,8 +292,12 @@
         <option value="$PROJECT_DIR$/res/menu/activity_screen_slide.xml" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java" />
-        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" />
         <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/SqliteHelper.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/Scratch.java" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchDataSource.java" />
+        <option value="$PROJECT_DIR$/res/layout/scratch.xml" />
+        <option value="$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java" />
       </list>
     </option>
   </component>
@@ -415,7 +365,6 @@
     </navigator>
     <panes>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -541,20 +490,39 @@
               <option name="myItemId" value="res" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Editor Hyde" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="TeddyHyde" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.last.edited" value="Libraries" />
-    <property name="OverrideImplement.combined" value="false" />
     <property name="project.structure.proportion" value="0.09832842" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="Repository.Attach.JavaDocs" value="false" />
-    <property name="ExportedApkPath" value="$PROJECT_DIR$/EditorHyde.apk" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="ExportedApkPath" value="$PROJECT_DIR$/EditorHyde.apk" />
     <property name="ExportedModule" value="EditorHyde" />
     <property name="last_opened_file_path" value="$USER_HOME$/teststore" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -575,8 +543,8 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="AndroidRunProguardForReleaseBuild" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -825,31 +793,60 @@
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605532" sideWeight="0.45386904" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216885" sideWeight="0.45386904" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55654764" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.55654764" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="11" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="55" y="120" width="1385" height="708" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="55" y="124" width="1385" height="708" />
       <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5714286" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.7022222" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24526928" sideWeight="0.4434524" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24526928" sideWeight="0.4434524" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.74553573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="25" width="1440" height="801" />
       <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32605532" sideWeight="0.45386904" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32" sideWeight="0.29475984" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24526928" sideWeight="0.4434524" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.74553573" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" x="0" y="25" width="1440" height="801" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3216885" sideWeight="0.45386904" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.6" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32886904" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.55654764" sideWeight="0.70014554" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="FLOATING" visible="false" weight="0.61160713" sideWeight="0.38209608" order="9" side_tool="false" content_ui="tabs" x="55" y="120" width="1385" height="708" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.5714286" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2496361" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32969433" sideWeight="0.7022222" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
@@ -916,62 +913,10 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/MainActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="43" column="7" selection-start="1446" selection-end="1471" vertical-scroll-proportion="0.0" vertical-offset="630" max-vertical-offset="2985">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AndroidManifest.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="28" selection-start="742" selection-end="742" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="570">
-          <folding>
-            <element signature="e#1165#1181#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/values/ids.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="48" selection-start="1077" selection-end="1077" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="540">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/menu/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="0" selection-start="404" selection-end="404" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
-          <folding>
-            <element signature="e#183#199#0" expanded="true" />
-            <element signature="e#331#351#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ThGitClient.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="53" selection-start="1381" selection-end="1381" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="2070">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/res/menu/activity_screen_slide.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state line="34" column="45" selection-start="1247" selection-end="1247" vertical-scroll-proportion="0.0" vertical-offset="225" max-vertical-offset="1320">
-          <folding>
-            <element signature="e#734#753#0" expanded="true" />
-            <element signature="e#884#910#0" expanded="true" />
-            <element signature="e#1085#1092#0" expanded="true" />
-            <element signature="e#1420#1445#0" expanded="true" />
-            <element signature="e#1563#1588#0" expanded="true" />
-            <element signature="e#1742#1763#0" expanded="true" />
-            <element signature="e#1911#1931#0" expanded="true" />
-            <element signature="e#2079#2099#0" expanded="true" />
-            <element signature="e#2244#2268#0" expanded="true" />
-            <element signature="e#2417#2444#0" expanded="true" />
-            <element signature="e#2595#2624#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
@@ -992,36 +937,20 @@
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/RepoListActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="152" column="11" selection-start="4354" selection-end="4405" vertical-scroll-proportion="0.0" vertical-offset="1996" max-vertical-offset="3225">
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#4849#4861#0" expanded="true" />
-            <element signature="e#4929#4941#0" expanded="true" />
-            <element signature="e#5774#6116#0" expanded="true" />
-            <element signature="e#6097#6098#0" expanded="true" />
-            <element signature="e#6159#6198#0" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListAdapter.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="32" selection-start="575" selection-end="578" vertical-scroll-proportion="-3.1153846" vertical-offset="99" max-vertical-offset="1035">
+        <state line="23" column="32" selection-start="575" selection-end="578" vertical-scroll-proportion="0.0" vertical-offset="330" max-vertical-offset="1200">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/FileListingActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="200" column="11" selection-start="6756" selection-end="6759" vertical-scroll-proportion="-109.61539" vertical-offset="90" max-vertical-offset="8415">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/testing/src/com/EditorHyde/app/FileListingActivityTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="22" selection-start="571" selection-end="571" vertical-scroll-proportion="0.94074076" vertical-offset="16" max-vertical-offset="660">
+        <state line="200" column="11" selection-start="6756" selection-end="6759" vertical-scroll-proportion="0.0" vertical-offset="2985" max-vertical-offset="8565">
           <folding />
         </state>
       </provider>
@@ -1035,27 +964,78 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlideActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="112" column="24" selection-start="3808" selection-end="3808" vertical-scroll-proportion="-2.9615386" vertical-offset="1033" max-vertical-offset="9405">
-          <folding>
-            <element signature="e#19915#19954#0" expanded="true" />
-            <element signature="e#20040#20048#0" expanded="true" />
-            <element signature="e#20473#21105#0" expanded="true" />
-            <element signature="e#21086#21087#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="41" selection-start="799" selection-end="799" vertical-scroll-proportion="0.0" vertical-offset="195" max-vertical-offset="465">
+        <state line="112" column="24" selection-start="3808" selection-end="3808" vertical-scroll-proportion="0.0" vertical-offset="1665" max-vertical-offset="10275">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScreenSlidePageFragmentMarkdown.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="30" selection-start="3600" selection-end="3600" vertical-scroll-proportion="0.20807454" vertical-offset="1051" max-vertical-offset="1770">
+        <state line="110" column="30" selection-start="3600" selection-end="3600" vertical-scroll-proportion="0.0" vertical-offset="1101" max-vertical-offset="1770">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/Scratch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="5" selection-start="582" selection-end="582" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="720">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/SqliteHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="45" column="61" selection-start="1553" selection-end="1553" vertical-scroll-proportion="0.0" vertical-offset="14" max-vertical-offset="825">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/layout/scratch.xml">
+      <provider editor-type-id="android-designer">
+        <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="41" selection-start="743" selection-end="743" vertical-scroll-proportion="-12.222222" vertical-offset="0" max-vertical-offset="495">
+          <folding>
+            <element signature="e#866#881#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/EditorActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="29" column="52" selection-start="938" selection-end="938" vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="70" column="23" selection-start="2188" selection-end="2188" vertical-scroll-proportion="0.0" vertical-offset="44" max-vertical-offset="1275">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1753#1762#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/testing/src/com/EditorHyde/app/FileListingActivityTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="20" column="22" selection-start="571" selection-end="571" vertical-scroll-proportion="0.94074076" vertical-offset="16" max-vertical-offset="660">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/EditorHyde/app/ScratchpadActivity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="24" selection-start="736" selection-end="736" vertical-scroll-proportion="0.7925926" vertical-offset="296" max-vertical-offset="1395">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#1036#1045#0" expanded="true" />
+            <element signature="e#1880#1910#1" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
