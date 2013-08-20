@@ -47,11 +47,18 @@ public class ScratchDataSource {
         return newScratch;
     }
 
-    public void deleteScratch(Scratch Scratch) {
-        long id = Scratch.getId();
+    public void deleteScratch(Scratch scratch) {
+        long id = scratch.getId();
         System.out.println("Scratch deleted with id: " + id);
         database.delete(SqliteHelper.TABLE_SCRATCHES, SqliteHelper.COLUMN_ID
                 + " = " + id, null);
+    }
+
+    public void updateScratch(String id, String scratch ) {
+        ContentValues args = new ContentValues();
+        args.put(SqliteHelper.COLUMN_CONTENT, scratch);
+        System.out.println("Scratch updated with id: " + id);
+        database.update(SqliteHelper.TABLE_SCRATCHES, args, SqliteHelper.COLUMN_ID + "=" + id, null);
     }
 
     public List<Scratch> getAllScratches() {

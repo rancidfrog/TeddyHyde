@@ -80,8 +80,10 @@ public class ScreenSlideActivity extends FragmentActivity {
     String theTransforms;
     String theSha;
     String[] images;
+    String scratchId;
     Boolean isScratchpad;
     List<Transform> transforms;
+
 
     ScreenSlidePageFragmentMarkdown md;
     ProgressDialog pd;
@@ -105,6 +107,9 @@ public class ScreenSlideActivity extends FragmentActivity {
             theLogin = extras.getString("login");
             theTransforms = extras.getString( "transforms" );
             theSha = extras.getString( "sha" );
+        }
+        else {
+            scratchId = extras.getString("scratch_id");
         }
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
@@ -311,13 +316,17 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private void finishWithResult() {
         Intent intent = new Intent();
+        Bundle extras = new Bundle();
 
         if( !isScratchpad) {
-            Bundle extras = new Bundle();
             extras.putString( "sha", theSha );
             extras.putString( "path", theFile);
-            intent.putExtras(extras);
         }
+        else {
+            extras.putString( "scratch", theMarkdown );
+            extras.putString( "scratch_id", scratchId );
+        }
+        intent.putExtras(extras);
 
         setResult(RESULT_OK, intent );
 

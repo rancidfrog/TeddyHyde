@@ -5,7 +5,9 @@ import android.app.ListActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 import java.util.List;
 import java.util.Random;
@@ -16,6 +18,9 @@ import java.util.Random;
 public class ScratchpadActivity extends ListActivity {
 
     private ScratchDataSource datasource;
+    private final int NEW_SCRATCH = 1;
+    private final int EXISTING_SCRATCH = 2;
+    ArrayAdapter<Scratch> adapter;
 
     @Override
     protected void onResume() {
@@ -41,38 +46,60 @@ public class ScratchpadActivity extends ListActivity {
 
         // Use the SimpleCursorAdapter to show the
         // elements in a ListView
-        ArrayAdapter<Scratch> adapter = new ArrayAdapter<Scratch>(this,
+       adapter = new ArrayAdapter<Scratch>(this,
                 android.R.layout.simple_list_item_1, values);
         setListAdapter(adapter);
-//
-//        Intent i;
-//        i = new Intent(this, ScreenSlideActivity.class);
-//        Bundle extras = new Bundle(); // getIntent().getExtras();
-//        if( null != extras ) {
-//        extras.putString( "markdown", "## Enter a title here ##" );
-////        extras.putString( "filename", theFilename );
-////        extras.putString( "repo", repoName );
-////        extras.putString( "login", login );
-////        extras.putString( "transforms", transformsJson );
-////        extras.putString( "sha", sha );
-//        i.putExtras(extras);
-//        startActivityForResult( i, 1 );
-       // }
+
+        final ListView lv = getListView();
+        lv.setTextFilterEnabled(true);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    int position, long id) {
+                Scratch scratch = (Scratch) lv.getItemAtPosition( position );
+                String markdown = scratch.getScratch();
+                startMarkdownActivity( markdown, EXISTING_SCRATCH, scratch.getId() );
+            }
+        });
     }
 
-    // Will be called via the onClick attribute
-    // of the buttons in main.xml
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // Check which request we're responding to
+        if (requestCode == NEW_SCRATCH ) {
+            Scratch scratch = new Scratch();
+            String contents = data.getStringExtra("scratch");
+            scratch.setScratch(contents);
+            adapter.add(scratch);
+        }
+        else {
+            String contents = data.getStringExtra("scratch");
+            String id = data.getStringExtra("scratch_id");
+            datasource.updateScratch( id, contents );
+        }
+    }
+
+    private void startMarkdownActivity( String markdown, int scratchType, Long id ) {
+        Intent i;
+        i = new Intent(this, ScreenSlideActivity.class);
+        Bundle extras = new Bundle(); // getIntent().getExtras();
+        if( null != extras ) {
+            extras.putString( "markdown", markdown );
+            if( null != id ) {
+            extras.putString( "scratch_id", id.toString() );
+            }
+            i.putExtras(extras);
+            startActivityForResult( i, scratchType );
+        }
+    }
+
     public void onClick(View view) {
         @SuppressWarnings("unchecked")
         ArrayAdapter<Scratch> adapter = (ArrayAdapter<Scratch>) getListAdapter();
         Scratch Scratch = null;
         switch (view.getId()) {
             case R.id.add:
-                String[] Scratches = new String[] { "Cool", "Very nice", "Hate it" };
-                int nextInt = new Random().nextInt(3);
-                // Save the new Scratch to the database
-                Scratch = datasource.createScratch(Scratches[nextInt]);
-                adapter.add(Scratch);
+                String markdown = "## Enter a title here ##";
+               startMarkdownActivity( markdown, NEW_SCRATCH, 0L );
                 break;
 //            case R.id.delete:
 //                if (getListAdapter().getCount() > 0) {
