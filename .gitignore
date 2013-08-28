@@ -1,3 +1,10 @@
 out
 proguard_logs
 .idea
+*.iml
+*.ipr
+*.iws
+local.properties
+gen
+build
+.gradle
