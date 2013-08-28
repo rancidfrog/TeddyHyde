@@ -37,6 +37,11 @@
           android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
+    <item android:id="@+id/action_share_last_gist"
+          android:title="@string/share_last_gist"
+          android:visible="false"
+          android:showAsAction="ifRoom|withText" />
+
     <item android:id="@+id/action_hyde_transforms"
           android:title="@string/hyde_transforms"
           android:visible="false"/>

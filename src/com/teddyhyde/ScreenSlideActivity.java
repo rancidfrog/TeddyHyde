@@ -18,6 +18,7 @@ package com.teddyhyde;
 
 import android.app.*;
 import android.content.*;
+import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -63,6 +64,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     Tree repoTree;
     ProgressBar pb;
     ScreenSlidePageFragment editorFragment;
+    String lastGistUrl = null;
 
     private static final int HYDE_TRANSFORMS_GROUP_ID = 1;
 
@@ -181,13 +183,16 @@ public class ScreenSlideActivity extends FragmentActivity {
 
         if( !isScratchpad ){
             // If we are in the editor menu, then enable the save with commit message...
-            menu.findItem(R.id.action_save_with_commit).setEnabled( isNumberOne );
-            menu.findItem(R.id.action_save_file).setEnabled( isNumberOne );
+            menu.findItem(R.id.action_save_with_commit).setEnabled( isNumberOne ).setVisible( isNumberOne );
+            menu.findItem(R.id.action_save_file).setEnabled(isNumberOne).setVisible(isNumberOne);
             loadHydeTransformsIntoMenu( menu );
         }
         else {
-            menu.findItem(R.id.action_save_as_gist).setEnabled( isNumberOne );
-            menu.findItem(R.id.action_save_into_repository).setEnabled( isNumberOne );
+            menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
+            menu.findItem(R.id.action_save_into_repository).setEnabled(isNumberOne).setVisible(isNumberOne);
+            if( null != lastGistUrl) {
+                menu.findItem(R.id.action_share_last_gist).setEnabled( isNumberOne ).setVisible( isNumberOne );
+            }
         }
 
         return true;
@@ -238,7 +243,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
     private void pasteCode( String preprocessed ) {
         String code = preprocessed.replaceAll( "\n", "\n    ");
-        insertAtCursor( "\n    " + code + "\n" );
+        insertAtCursor("\n    " + code + "\n");
     }
 
     private void insertAtCursor( String text )  {
@@ -495,6 +500,15 @@ public class ScreenSlideActivity extends FragmentActivity {
                     rv = true;
                     break;
 
+                case R.id.action_share_last_gist:
+//                    startActivity(Intent.createChooser(new Intent(Intent.ACTION_SEND,
+//                            Uri.parse(lastGistUrl)),"Scratchpad Gist"));
+                    Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                    shareIntent.setType("text/plain");
+                    shareIntent.putExtra(Intent.EXTRA_TEXT, lastGistUrl );
+                    startActivity(shareIntent);
+                    break;
+
                 case R.id.action_save_as_gist:
                     startSaveProgressIndicator();
                     et = (EditText) findViewById(R.id.markdownEditor);
@@ -504,7 +518,6 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 case R.id.action_save_into_repository:
                     saveIntoRepository();
-
                     break;
 
                 case android.R.id.home:
@@ -607,15 +620,23 @@ public class ScreenSlideActivity extends FragmentActivity {
             return rv;
         }
 
-
         protected void onPostExecute(Boolean result) {
             pb.setVisibility(View.GONE);
 
             if( !result ) {
                 Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
             }
+            else {
+                Toast.makeText( ScreenSlideActivity.this, "Copied Gist URL to clipboard.", Toast.LENGTH_LONG );
+                addShareGistLink(URL);
+            }
 
             editorFragment.makeClean();
+        }
+
+        private void addShareGistLink( String url ) {
+            invalidateOptionsMenu();
+            lastGistUrl = url;
         }
     }
 

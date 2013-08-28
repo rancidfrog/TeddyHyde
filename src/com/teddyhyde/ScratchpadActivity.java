@@ -124,7 +124,7 @@ public class ScratchpadActivity extends ListActivity {
         Scratch Scratch = null;
         switch (view.getId()) {
             case R.id.add:
-                String markdown = "## Enter a title here ##";
+                String markdown = "";
                startMarkdownActivity( markdown, NEW_SCRATCH, 0L );
                 break;
 //            case R.id.delete:
