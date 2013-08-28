@@ -54,6 +54,27 @@ public class MainActivity extends Activity {
         new VerifyUser().execute();
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.main, menu);
+        return true;
+    }
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        int groupId = item.getGroupId();
+        boolean rv = false;
+
+        if( itemId == R.id.action_scratchpad ) {
+            Intent i = new Intent(this, ScratchpadActivity.class);
+            startActivity(i);
+        }
+
+        return rv;
+    }
 
     private void setupLogin() {
 

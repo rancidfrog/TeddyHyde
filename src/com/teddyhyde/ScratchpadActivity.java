@@ -2,8 +2,11 @@ package com.teddyhyde;
 
 import android.app.Activity;
 import android.app.ListActivity;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -33,6 +36,28 @@ public class ScratchpadActivity extends ListActivity {
         datasource.close();
         super.onPause();
     }
+
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int itemId = item.getItemId();
+//        int groupId = item.getGroupId();
+//        boolean rv = false;
+//
+//        if( itemId == R.id.action_save_file ) {
+//        datasource.createScratch( "Foobar and barfoo" );
+//        }
+//
+//        return rv;
+//    }
+//
+//    @Override
+//    public boolean onCreateOptionsMenu(Menu menu) {
+//        super.onCreateOptionsMenu(menu);
+//        getMenuInflater().inflate(R.menu.main, menu);
+//        return true;
+//    }
+
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
