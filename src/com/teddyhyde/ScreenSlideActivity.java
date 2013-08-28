@@ -101,15 +101,15 @@ public class ScreenSlideActivity extends FragmentActivity {
         theMarkdown = extras.getString("markdown");
         isScratchpad = extras.getBoolean( "scratchpad" );
 
-        if( !isScratchpad ) {
+        if( isScratchpad ) {
+            scratchId = extras.getString("scratch_id");
+        }
+        else {
             theFile = extras.getString("filename");
             theRepo = extras.getString("repo");
             theLogin = extras.getString("login");
             theTransforms = extras.getString( "transforms" );
             theSha = extras.getString( "sha" );
-        }
-        else {
-            scratchId = extras.getString("scratch_id");
         }
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);

@@ -109,6 +109,7 @@ public class ScratchpadActivity extends ListActivity {
         Bundle extras = new Bundle(); // getIntent().getExtras();
         if( null != extras ) {
             extras.putString( "markdown", markdown );
+            extras.putBoolean( "scratchpad", true );
             if( null != id ) {
             extras.putString( "scratch_id", id.toString() );
             }
