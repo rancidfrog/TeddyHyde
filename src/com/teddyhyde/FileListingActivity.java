@@ -1,4 +1,4 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -16,7 +16,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.EditorHyde.app.R;
+import com.teddyhyde.R;
 
 import org.eclipse.egit.github.core.*;
 

@@ -1,7 +1,7 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import android.graphics.Bitmap;
-import com.EditorHyde.app.RemoteImage;
+import com.teddyhyde.RemoteImage;
 
 /**
  * Created with IntelliJ IDEA.

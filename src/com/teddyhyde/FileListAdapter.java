@@ -1,4 +1,4 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 /**
  * Created with IntelliJ IDEA.

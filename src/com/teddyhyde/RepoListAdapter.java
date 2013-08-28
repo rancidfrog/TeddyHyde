@@ -1,4 +1,4 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import android.content.Context;
 import android.view.LayoutInflater;

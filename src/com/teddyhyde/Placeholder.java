@@ -1,4 +1,4 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.Escaper;

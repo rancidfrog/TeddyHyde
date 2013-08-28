@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import android.app.DialogFragment;
 import android.app.Fragment;

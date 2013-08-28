@@ -1,4 +1,4 @@
-package com.EditorHyde.app;
+package com.teddyhyde;
 
 import android.app.Activity;
 import android.app.ProgressDialog;
@@ -30,9 +30,9 @@ public class MainActivity extends Activity {
     SharedPreferences sp;
     TextView loginMessage = null;
     ProgressDialog pd = null;
-    public static String logname = "com.TeddyHyde.app";
+    public static String logname = "com.teddyhyde.app";
 
-    public static final String APP_ID = "com.TeddyHyde.app";
+    public static final String APP_ID = "com.teddyhyde.app";
 
     public void nukePreferences() {
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
