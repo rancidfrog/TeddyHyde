@@ -5,3 +5,5 @@ proguard_logs
 *.ipr
 *.iws
 local.properties
+gen
+build
