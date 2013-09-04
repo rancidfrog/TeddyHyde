@@ -202,7 +202,9 @@ public class RepoListActivity extends Activity {
                     }
                 });
 
-                sp.edit().putStringSet(getString(R.string.cached_repositories), repositorySet );
+                SharedPreferences.Editor editor = sp.edit();
+                editor.putStringSet(getString(R.string.cached_repositories), repositorySet );
+                editor.commit();
             }
 
         }

@@ -548,12 +548,17 @@ public class ScreenSlideActivity extends FragmentActivity {
         SharedPreferences sp = sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
 
         Set<String> repositorySet;
-        repositorySet = new HashSet<String>();
-        sp.getStringSet( getString(R.string.cached_repositories), repositorySet );
-        ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, (List<String>) repositorySet);
-        spinner.setAdapter(spinnerArrayAdapter);
-        ll.addView( input );
-        ll.addView( spinner );
+        repositorySet = sp.getStringSet( getString(R.string.cached_repositories), null );
+        List<String> repositoryList = new ArrayList<String>();
+        for( String s : repositorySet ) {
+            repositoryList.add( s );
+        }
+
+        if( 0 < repositorySet.size() ) {
+            ArrayAdapter<String> spinnerArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, repositoryList);
+            spinner.setAdapter(spinnerArrayAdapter);
+            ll.addView( input );
+            ll.addView( spinner );
 
         new AlertDialog.Builder(ScreenSlideActivity.this)
                 .setTitle("Filename")
@@ -574,6 +579,10 @@ public class ScreenSlideActivity extends FragmentActivity {
                         // Do nothing.
                     }
                 }).show();
+        }
+        else {
+            Toast.makeText( this, "No repositories into which save is possible.", Toast.LENGTH_LONG );
+        }
     }
 
     /**
