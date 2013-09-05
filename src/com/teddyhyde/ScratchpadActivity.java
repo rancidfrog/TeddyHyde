@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ListActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -21,8 +22,8 @@ import java.util.Random;
 public class ScratchpadActivity extends ListActivity {
 
     private ScratchDataSource datasource;
-    private final int NEW_SCRATCH = 1;
-    private final int EXISTING_SCRATCH = 2;
+    public static final int NEW_SCRATCH = 1;
+    public static final int EXISTING_SCRATCH = 2;
     ArrayAdapter<Scratch> adapter;
 
     @Override
@@ -37,27 +38,7 @@ public class ScratchpadActivity extends ListActivity {
         super.onPause();
     }
 
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int itemId = item.getItemId();
-//        int groupId = item.getGroupId();
-//        boolean rv = false;
-//
-//        if( itemId == R.id.action_save_file ) {
-//        datasource.createScratch( "Foobar and barfoo" );
-//        }
-//
-//        return rv;
-//    }
-//
-//    @Override
-//    public boolean onCreateOptionsMenu(Menu menu) {
-//        super.onCreateOptionsMenu(menu);
-//        getMenuInflater().inflate(R.menu.main, menu);
-//        return true;
-//    }
-
+    String theLogin;
 
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -92,7 +73,9 @@ public class ScratchpadActivity extends ListActivity {
         // Check which request we're responding to
         if (requestCode == NEW_SCRATCH ) {
             Scratch scratch = new Scratch();
-            String contents = data.getStringExtra("scratch");
+            Bundle bundle = data.getExtras();
+            String contents = bundle.getString( "scratch" );
+            // String contents = data.getStringExtra("scratch");
             scratch.setScratch(contents);
             adapter.add(scratch);
         }
@@ -113,6 +96,7 @@ public class ScratchpadActivity extends ListActivity {
             if( null != id ) {
             extras.putString( "scratch_id", id.toString() );
             }
+
             i.putExtras(extras);
             startActivityForResult( i, scratchType );
         }

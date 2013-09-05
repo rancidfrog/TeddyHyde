@@ -52,6 +52,7 @@
     <string name="cached_repositories">cachedRepositories</string>
     <string name="hello">Hello</string>
     <string name="share_last_gist">Share last gist URL...</string>
+    <string name="close_scratchpad">Close scratchpad</string>
 
 
 </resources>

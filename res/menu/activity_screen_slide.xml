@@ -42,6 +42,11 @@
           android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
+    <item android:id="@+id/action_close_scratchpad"
+          android:title="@string/close_scratchpad"
+          android:visible="false"
+          android:showAsAction="ifRoom|withText" />
+
     <item android:id="@+id/action_hyde_transforms"
           android:title="@string/hyde_transforms"
           android:visible="false"/>

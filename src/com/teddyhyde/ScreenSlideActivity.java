@@ -102,6 +102,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         Bundle extras = getIntent().getExtras();
         theMarkdown = extras.getString("markdown");
         isScratchpad = extras.getBoolean( "scratchpad" );
+        theLogin = extras.getString("login");
 
         if( isScratchpad ) {
             scratchId = extras.getString("scratch_id");
@@ -109,7 +110,6 @@ public class ScreenSlideActivity extends FragmentActivity {
         else {
             theFile = extras.getString("filename");
             theRepo = extras.getString("repo");
-            theLogin = extras.getString("login");
             theTransforms = extras.getString( "transforms" );
             theSha = extras.getString( "sha" );
         }
@@ -190,6 +190,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         else {
             menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
             menu.findItem(R.id.action_save_into_repository).setEnabled(isNumberOne).setVisible(isNumberOne);
+            menu.findItem(R.id.action_close_scratchpad).setEnabled(isNumberOne).setVisible(isNumberOne);
             if( null != lastGistUrl) {
                 menu.findItem(R.id.action_share_last_gist).setEnabled( isNumberOne ).setVisible( isNumberOne );
             }
@@ -516,6 +517,10 @@ public class ScreenSlideActivity extends FragmentActivity {
                     new SaveGistTask().execute( contents );
                     break;
 
+                case R.id.action_close_scratchpad:
+                    finishWithResult();
+                    break;
+
                 case R.id.action_save_into_repository:
                     saveIntoRepository();
                     break;
@@ -572,6 +577,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                         String filename = input.getText().toString();
                         String repository = spinner.getSelectedItem().toString();
                         new SaveIntoRepository().execute( authToken, repository, theLogin, contents, filename );
+
+                        finishWithResult();
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -656,14 +663,11 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             String authToken = strings[0];
             String repo = strings[1];
-            String theLogin = strings[2];
             String contents = strings[3];
             String filename = strings[4];
-            String commitMessage = strings[5];
-
-            if( null == commitMessage ) {
-                commitMessage = "Edited by Teddy Hyde (teddyhyde.com) at " + new Date(System.currentTimeMillis()).toLocaleString();
-            }
+            String commitMessage = "Created using Teddy Hyde (teddyhyde.com) at " + new Date(System.currentTimeMillis()).toLocaleString();
+            SharedPreferences sp = getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE );
+            String theLogin = sp.getString( "login", null );
 
             String base64ed = Base64.encodeToString( contents.getBytes(), Base64.DEFAULT );
 
