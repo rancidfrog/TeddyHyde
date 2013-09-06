@@ -53,6 +53,9 @@
     <string name="hello">Hello</string>
     <string name="share_last_gist">Share last gist URL...</string>
     <string name="close_scratchpad">Close scratchpad</string>
+    <string name="new_page">New jekyll page...</string>
+    <string name="new_post">New jekyll post...</string>
+    <string name="new_markdown">New markdown...</string>
 
 
 </resources>

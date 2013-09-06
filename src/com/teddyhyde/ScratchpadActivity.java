@@ -11,8 +11,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
@@ -69,6 +72,13 @@ public class ScratchpadActivity extends ListActivity {
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.scratchpad, menu);
+        return true;
+    }
+
+    @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         // Check which request we're responding to
         if (requestCode == NEW_SCRATCH ) {
@@ -84,6 +94,38 @@ public class ScratchpadActivity extends ListActivity {
             String id = data.getStringExtra("scratch_id");
             datasource.updateScratch( id, contents );
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int itemId = item.getItemId();
+        String template = "";
+        boolean rv = false;
+
+        switch( itemId ) {
+            case R.id.action_scratchpad_new_post:
+                template = getString(R.string.post_template);
+                // create a new post
+                rv = true;
+                break;
+            case R.id.action_scratchpad_new_page:
+                template = getString(R.string.page_template);
+        rv = true;
+                break;
+            case R.id.action_scratchpad_new_markdown:
+                template = "";
+                rv = true;
+                break;
+        }
+
+        if( rv ) {
+            SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
+            String prefix = sdf.format( new Date() );
+            template = Placeholder.process( template, "TITLE", "Markdown created on " + prefix );
+            startMarkdownActivity( template, NEW_SCRATCH, 0L );
+        }
+
+        return rv;
     }
 
     private void startMarkdownActivity( String markdown, int scratchType, Long id ) {
@@ -102,24 +144,24 @@ public class ScratchpadActivity extends ListActivity {
         }
     }
 
-    public void onClick(View view) {
-        @SuppressWarnings("unchecked")
-        ArrayAdapter<Scratch> adapter = (ArrayAdapter<Scratch>) getListAdapter();
-        Scratch Scratch = null;
-        switch (view.getId()) {
-            case R.id.add:
-                String markdown = "";
-               startMarkdownActivity( markdown, NEW_SCRATCH, 0L );
-                break;
-//            case R.id.delete:
-//                if (getListAdapter().getCount() > 0) {
-//                    Scratch = (Scratch) getListAdapter().getItem(0);
-//                    datasource.deleteScratch(Scratch);
-//                    adapter.remove(Scratch);
-//                }
+//    public void onClick(View view) {
+//        @SuppressWarnings("unchecked")
+//        ArrayAdapter<Scratch> adapter = (ArrayAdapter<Scratch>) getListAdapter();
+//        Scratch Scratch = null;
+//        switch (view.getId()) {
+//            case R.id.add:
+//                String markdown = "";
+//               startMarkdownActivity( markdown, NEW_SCRATCH, 0L );
 //                break;
-        }
-        adapter.notifyDataSetChanged();
-    }
+////            case R.id.delete:
+////                if (getListAdapter().getCount() > 0) {
+////                    Scratch = (Scratch) getListAdapter().getItem(0);
+////                    datasource.deleteScratch(Scratch);
+////                    adapter.remove(Scratch);
+////                }
+////                break;
+//        }
+//        adapter.notifyDataSetChanged();
+//    }
 
 }

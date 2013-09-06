@@ -5,20 +5,6 @@
               android:layout_height="match_parent"
               android:orientation="vertical" >
 
-    <LinearLayout
-            android:id="@+id/group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-        <Button
-                android:id="@+id/add"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Add New Scratch"
-                android:onClick="onClick"/>
-
-    </LinearLayout>
-
     <ListView
             android:id="@android:id/list"
             android:layout_width="match_parent"
