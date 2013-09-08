@@ -121,7 +121,7 @@ public class ScratchpadActivity extends ListActivity {
         if( rv ) {
             SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd" );
             String prefix = sdf.format( new Date() );
-            template = Placeholder.process( template, "TITLE", "Markdown created on " + prefix );
+            template = Placeholder.process( template, "TITLE", "Markdown created " + prefix );
             startMarkdownActivity( template, NEW_SCRATCH, 0L );
         }
 
