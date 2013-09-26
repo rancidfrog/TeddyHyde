@@ -16,22 +16,15 @@
 
 package com.teddyhyde;
 
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
-
-import com.petebevin.markdown.MarkdownProcessor;
-
-import java.io.IOException;
 
 /**
  * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating

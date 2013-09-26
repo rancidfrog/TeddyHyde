@@ -18,7 +18,6 @@ package com.teddyhyde;
 
 import android.app.*;
 import android.content.*;
-import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v13.app.FragmentStatePagerAdapter;
@@ -38,9 +37,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import org.eclipse.egit.github.core.*;
 import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
-import com.teddyhyde.R;
 
-import java.net.URLEncoder;
 import java.util.*;
 
 /**

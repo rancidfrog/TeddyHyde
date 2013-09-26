@@ -1,35 +1,53 @@
 package com.teddyhyde;
 
+import android.accounts.Account;
+import android.accounts.AccountManager;
+import android.accounts.AccountManagerCallback;
+import android.accounts.AccountManagerFuture;
+import android.accounts.AuthenticatorException;
+import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
+import android.provider.Settings;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.google.api.client.auth.oauth2.BearerToken;
+import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
+import com.google.api.client.auth.oauth2.Credential;
+import com.google.api.client.extensions.android.http.AndroidHttp;
+import com.google.api.client.http.GenericUrl;
+import com.google.api.client.json.jackson2.JacksonFactory;
+import com.wuman.android.auth.AuthorizationFlow;
+import com.wuman.android.auth.AuthorizationUIController;
+import com.wuman.android.auth.DialogFragmentController;
+import com.wuman.android.auth.OAuthManager;
+import com.wuman.android.auth.oauth2.store.SharedPreferencesCredentialStore;
+
 import org.eclipse.egit.github.core.Authorization;
-import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.User;
-import org.eclipse.egit.github.core.client.GitHubClient;
 import org.eclipse.egit.github.core.service.OAuthService;
-import org.eclipse.egit.github.core.service.RepositoryService;
 import org.eclipse.egit.github.core.service.UserService;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.List;
+
+//import com.wuman.oauth.samples.OAuth;
 
 public class MainActivity extends Activity {
 
     SharedPreferences sp;
     TextView loginMessage = null;
     ProgressDialog pd = null;
+    String authToken;
+    String foobar;
     public static String logname = "com.teddyhyde.app";
 
     public static final String APP_ID = "com.teddyhyde.app";
@@ -78,38 +96,174 @@ public class MainActivity extends Activity {
 
     private void setupLogin() {
 
-        setContentView(R.layout.main);
-
-        loginMessage = (TextView)findViewById(R.id.loginMessage);
-
-        String email = sp.getString( "email", null );
-        String password = sp.getString( "password", null );
-
-        if( null != email && null != password ) {
-            EditText etU = (EditText)findViewById(R.id.githubEmail);
-            EditText etP = (EditText)findViewById(R.id.githubPassword);
-            etU.setText( email );
-            etP.setText(password);
-        }
-
-        findViewById(R.id.button).setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
+//        setContentView(R.layout.main);
 //
-                        loginMessage.setText( "Logging in...");
-                        EditText etU = (EditText)findViewById(R.id.githubEmail);
-                        EditText etP = (EditText)findViewById(R.id.githubPassword) ;
+//        loginMessage = (TextView)findViewById(R.id.loginMessage);
+//
+//        String email = sp.getString( "email", null );
+//        String password = sp.getString( "password", null );
+//
+//        if( null != email && null != password ) {
+//            EditText etU = (EditText)findViewById(R.id.githubEmail);
+//            EditText etP = (EditText)findViewById(R.id.githubPassword);
+//            etU.setText( email );
+//            etP.setText(password);
+//        }
+//
+//        findViewById(R.id.button).setOnClickListener(
+//                new View.OnClickListener() {
+//                    public void onClick(View v) {
+////
+//                        loginMessage.setText( "Logging in...");
+//                        EditText etU = (EditText)findViewById(R.id.githubEmail);
+//                        EditText etP = (EditText)findViewById(R.id.githubPassword) ;
+//
+//                        String email = etU.getText().toString();
+//                        String password = etP.getText().toString();
+//                        sp.edit().putString( "email", email ).commit();
+//                        sp.edit().putString( "password", password ).commit();
+//                        new LoginTask().execute();
+//                    }
+//                });
 
-                        String email = etU.getText().toString();
-                        String password = etP.getText().toString();
-                        sp.edit().putString( "email", email ).commit();
-                        sp.edit().putString( "password", password ).commit();
-                        new LoginTask().execute();
-                    }
-                });
+          // getAuthFromGoogleAccounts();
+
+//            getAuthFromOauth();
+
+        new DoLogin().execute();
 
     }
 
+    private class DoLogin extends AsyncTask<Void, Void, Boolean> {
+
+        private class GitHubConstants {
+            public static final String CLIENT_ID = "e4f185a088112cb1b0e9";
+
+            public static final String CLIENT_SECRET = "5a46ba23d0d66ae5fa4eeca519f502fb3f9a5a09";
+
+            public static final String AUTHORIZATION_CODE_SERVER_URL = "https://github.com/login/oauth/authorize";
+
+            public static final String TOKEN_SERVER_URL = "https://github.com/login/oauth/access_token";
+
+            public static final String REDIRECT_URL = "http://localhost/Callback";
+
+            private GitHubConstants() {
+            }
+        }
+
+        Credential credential;
+
+        protected Boolean doInBackground(Void...voids) {
+
+
+            SharedPreferencesCredentialStore credentialStore =
+                    new SharedPreferencesCredentialStore(getApplicationContext(),
+                            "preferenceFileName", new JacksonFactory());
+
+            AuthorizationFlow.Builder builder = new AuthorizationFlow.Builder(
+                    BearerToken.authorizationHeaderAccessMethod(),
+                    AndroidHttp.newCompatibleTransport(),
+                    new JacksonFactory(),
+                    new GenericUrl(GitHubConstants.TOKEN_SERVER_URL),
+                    new ClientParametersAuthentication( GitHubConstants.CLIENT_ID, GitHubConstants.CLIENT_SECRET ),
+                    GitHubConstants.CLIENT_ID,
+                    GitHubConstants.AUTHORIZATION_CODE_SERVER_URL);
+            builder.setCredentialStore(credentialStore);
+            builder.setScopes(Arrays.asList( "user", "repo", "gist" ));
+
+            AuthorizationFlow flow = builder.build();
+
+            AuthorizationUIController controller =
+                    new DialogFragmentController(getFragmentManager()) {
+
+                        @Override
+                        public String getRedirectUri() throws IOException {
+                            return GitHubConstants.REDIRECT_URL;
+                        }
+
+                        @Override
+                        public boolean isJavascriptEnabledForWebView() {
+                            return true;
+                        }
+
+                    };
+
+            OAuthManager oauth = new OAuthManager(flow, controller);
+
+            try {
+
+                credential = oauth.authorizeImplicitly("userId", null, null).getResult();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            String bar = "";
+            if( null == flow ) {
+                bar = "asdasd";
+            }
+            else {
+                bar = "a4234sdasd";
+            }
+
+
+            return true;
+        }
+
+        protected void onPostExecute(Boolean result) {
+
+
+            if( null != credential) {
+                authToken = credential.getAccessToken();
+                Log.w("TeddyHyde", "Credentials are OK!: " + credential.getAccessToken());
+            } else {
+                Log.w( "TeddyHyde", "Bad credentials!");
+            }
+        }
+    }
+
+
+    private void getAuthFromGoogleAccounts() {
+        AccountManager am = AccountManager.get(this);
+        //Bundle options = new Bundle();
+
+        Account[] accounts;
+        accounts = am.getAccountsByType("com.github");
+
+        if( accounts.length > 0 ) {
+            am.getAuthToken(
+                    accounts[0],                     // Account retrieved using getAccountsByType()
+                    "repo, user",            // Auth scope
+                    null,                        // Authenticator-specific options
+                    this,                           // Your activity
+                    new OnTokenAcquired(),          // Callback called when a token is successfully acquired
+                    new Handler(new OnError()));    // Callback called if an error occurs
+        }
+        else {
+            startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
+        }
+    }
+
+    private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
+        @Override
+        public void run(AccountManagerFuture<Bundle> result) {
+            // Get the result of the operation from the AccountManagerFuture.
+            Bundle bundle = null;
+            try {
+                bundle = result.getResult();
+            } catch (OperationCanceledException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (AuthenticatorException e) {
+                e.printStackTrace();
+            }
+
+            // The token is a named value in the bundle. The name of the value
+            // is stored in the constant AccountManager.KEY_AUTHTOKEN.
+            authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
+            foobar = authToken;
+        }
+    }
 
 
     private class VerifyUser extends AsyncTask<Void, Void, Boolean> {

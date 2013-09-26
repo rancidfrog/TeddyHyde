@@ -5,10 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import org.eclipse.egit.github.core.Repository;
-import org.eclipse.egit.github.core.TreeEntry;
 
 import java.util.List;
 

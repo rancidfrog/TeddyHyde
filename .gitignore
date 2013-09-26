@@ -8,3 +8,6 @@ local.properties
 gen
 build
 .gradle
+*.class
+*.apk
+.\#*

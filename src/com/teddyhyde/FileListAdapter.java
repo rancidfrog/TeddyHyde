@@ -18,7 +18,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import org.eclipse.egit.github.core.TreeEntry;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class FileListAdapter extends ArrayAdapter<TreeEntry> {

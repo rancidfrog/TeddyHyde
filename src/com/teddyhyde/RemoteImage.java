@@ -1,7 +1,6 @@
 package com.teddyhyde;
 
 import android.graphics.Bitmap;
-import com.teddyhyde.RemoteImage;
 
 /**
  * Created with IntelliJ IDEA.

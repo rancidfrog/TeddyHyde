@@ -3,7 +3,6 @@ package com.teddyhyde;
 import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
-import android.widget.Button;
 
 /**
  * Created with IntelliJ IDEA.

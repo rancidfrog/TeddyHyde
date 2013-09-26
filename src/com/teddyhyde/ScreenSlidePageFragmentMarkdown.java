@@ -16,10 +16,7 @@
 
 package com.teddyhyde;
 
-import android.app.Dialog;
-import android.app.DialogFragment;
 import android.app.Fragment;
-import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -27,11 +24,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import com.petebevin.markdown.MarkdownProcessor;
-
-import java.io.IOException;
 
 import static com.teddyhyde.R.*;
 

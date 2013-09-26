@@ -1,10 +1,5 @@
 package com.teddyhyde;
 
-import org.yaml.snakeyaml.Yaml;
-import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.Escaper;
-import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.PercentEscaper;
-import org.yaml.snakeyaml.external.com.google.gdata.util.common.base.UnicodeEscaper;
-
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

@@ -16,7 +16,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
-import com.teddyhyde.R;
 
 import org.eclipse.egit.github.core.*;
 
