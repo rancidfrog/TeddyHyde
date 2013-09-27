@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import android.app.*;
 import android.content.*;

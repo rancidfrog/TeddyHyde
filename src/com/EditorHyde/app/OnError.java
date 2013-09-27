@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import android.os.Handler;
 import android.os.Message;

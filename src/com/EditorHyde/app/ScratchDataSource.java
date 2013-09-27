@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 /**
  * Created by xrdawson on 8/19/13.

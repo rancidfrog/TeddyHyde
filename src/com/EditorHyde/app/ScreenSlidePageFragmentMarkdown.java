@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import android.app.Fragment;
 import android.os.Bundle;
@@ -27,7 +27,7 @@ import android.widget.EditText;
 
 import com.petebevin.markdown.MarkdownProcessor;
 
-import static com.teddyhyde.R.*;
+import static com.EditorHyde.app.R.*;
 
 public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPager.OnPageChangeListener {
     /**

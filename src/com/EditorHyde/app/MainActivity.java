@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import android.accounts.Account;
 import android.accounts.AccountManager;
@@ -19,6 +19,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.api.client.auth.oauth2.BearerToken;
 import com.google.api.client.auth.oauth2.ClientParametersAuthentication;
@@ -44,13 +45,14 @@ import java.util.Arrays;
 public class MainActivity extends Activity {
 
     SharedPreferences sp;
-    TextView loginMessage = null;
     ProgressDialog pd = null;
     String authToken;
     String foobar;
-    public static String logname = "com.teddyhyde.app";
+    SharedPreferencesCredentialStore credentialStore;
+    Credential credential;
+    public static String logname = "com.EditorHyde.app.app";
 
-    public static final String APP_ID = "com.teddyhyde.app";
+    public static final String APP_ID = "com.EditorHyde.app.app";
 
     public void nukePreferences() {
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
@@ -95,43 +97,7 @@ public class MainActivity extends Activity {
     }
 
     private void setupLogin() {
-
-//        setContentView(R.layout.main);
-//
-//        loginMessage = (TextView)findViewById(R.id.loginMessage);
-//
-//        String email = sp.getString( "email", null );
-//        String password = sp.getString( "password", null );
-//
-//        if( null != email && null != password ) {
-//            EditText etU = (EditText)findViewById(R.id.githubEmail);
-//            EditText etP = (EditText)findViewById(R.id.githubPassword);
-//            etU.setText( email );
-//            etP.setText(password);
-//        }
-//
-//        findViewById(R.id.button).setOnClickListener(
-//                new View.OnClickListener() {
-//                    public void onClick(View v) {
-////
-//                        loginMessage.setText( "Logging in...");
-//                        EditText etU = (EditText)findViewById(R.id.githubEmail);
-//                        EditText etP = (EditText)findViewById(R.id.githubPassword) ;
-//
-//                        String email = etU.getText().toString();
-//                        String password = etP.getText().toString();
-//                        sp.edit().putString( "email", email ).commit();
-//                        sp.edit().putString( "password", password ).commit();
-//                        new LoginTask().execute();
-//                    }
-//                });
-
-          // getAuthFromGoogleAccounts();
-
-//            getAuthFromOauth();
-
         new DoLogin().execute();
-
     }
 
     private class DoLogin extends AsyncTask<Void, Void, Boolean> {
@@ -151,14 +117,7 @@ public class MainActivity extends Activity {
             }
         }
 
-        Credential credential;
-
         protected Boolean doInBackground(Void...voids) {
-
-
-            SharedPreferencesCredentialStore credentialStore =
-                    new SharedPreferencesCredentialStore(getApplicationContext(),
-                            "preferenceFileName", new JacksonFactory());
 
             AuthorizationFlow.Builder builder = new AuthorizationFlow.Builder(
                     BearerToken.authorizationHeaderAccessMethod(),
@@ -191,8 +150,7 @@ public class MainActivity extends Activity {
             OAuthManager oauth = new OAuthManager(flow, controller);
 
             try {
-
-                credential = oauth.authorizeImplicitly("userId", null, null).getResult();
+                credential = oauth.authorizeExplicitly("userId", null, null).getResult();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -211,67 +169,23 @@ public class MainActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
 
-
             if( null != credential) {
                 authToken = credential.getAccessToken();
-                Log.w("TeddyHyde", "Credentials are OK!: " + credential.getAccessToken());
+                sp.edit().putString( "authToken", authToken ).commit();
+                Log.w("TeddyHyde", "Credentials are OK: " +  authToken );
+                new LoadUserTask().execute();
             } else {
                 Log.w( "TeddyHyde", "Bad credentials!");
             }
         }
     }
 
-
-    private void getAuthFromGoogleAccounts() {
-        AccountManager am = AccountManager.get(this);
-        //Bundle options = new Bundle();
-
-        Account[] accounts;
-        accounts = am.getAccountsByType("com.github");
-
-        if( accounts.length > 0 ) {
-            am.getAuthToken(
-                    accounts[0],                     // Account retrieved using getAccountsByType()
-                    "repo, user",            // Auth scope
-                    null,                        // Authenticator-specific options
-                    this,                           // Your activity
-                    new OnTokenAcquired(),          // Callback called when a token is successfully acquired
-                    new Handler(new OnError()));    // Callback called if an error occurs
-        }
-        else {
-            startActivity(new Intent(Settings.ACTION_ADD_ACCOUNT));
-        }
-    }
-
-    private class OnTokenAcquired implements AccountManagerCallback<Bundle> {
-        @Override
-        public void run(AccountManagerFuture<Bundle> result) {
-            // Get the result of the operation from the AccountManagerFuture.
-            Bundle bundle = null;
-            try {
-                bundle = result.getResult();
-            } catch (OperationCanceledException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (AuthenticatorException e) {
-                e.printStackTrace();
-            }
-
-            // The token is a named value in the bundle. The name of the value
-            // is stored in the constant AccountManager.KEY_AUTHTOKEN.
-            authToken = bundle.getString(AccountManager.KEY_AUTHTOKEN);
-            foobar = authToken;
-        }
-    }
-
-
     private class VerifyUser extends AsyncTask<Void, Void, Boolean> {
 
         protected Boolean doInBackground(Void...voids) {
             Boolean rv = false;
 
-            String authToken = sp.getString( "authToken", null );
+            authToken = sp.getString( "authToken", null );
 
             if( null != authToken ) {
                 // If we succeeded, get the user information and store it
@@ -307,32 +221,11 @@ public class MainActivity extends Activity {
     }
 
 
-    private class LoginTask extends AsyncTask<Void, Void, Boolean> {
+    private class LoadUserTask extends AsyncTask<Void, Void, Boolean> {
         protected Boolean doInBackground(Void...voids) {
             Boolean rv = true;
-            String email, password;
 
-            EditText etU = (EditText)findViewById(R.id.githubEmail);
-            EditText etP = (EditText)findViewById(R.id.githubPassword);
-            email = etU.getText().toString();
-            password = etP.getText().toString();
-
-            OAuthService oauthService = new OAuthService();
-            // Replace with actual login and password
-            oauthService.getClient().setCredentials(email, password);
-
-            // Create authorization with 'gist' scope only
-            Authorization auth = new Authorization();
-            auth.setScopes(Arrays.asList("gist", "repo"));
-            String authToken = null;
             try {
-                auth = oauthService.createAuthorization(auth);
-                authToken = auth.getToken();
-
-                // Store it for other activities
-                sp.edit().putString( "authToken", authToken ).commit();
-
-                // If we succeeded, get the user information and store it
                 UserService userService = new UserService();
                 userService.getClient().setOAuth2Token(authToken);
                 String name = userService.getUser().getName();
@@ -350,7 +243,7 @@ public class MainActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             if( !result ) {
-                loginMessage.setText( "Invalid credentials, try again.");
+                Toast.makeText( getApplicationContext(), "Invalid credentials, try again.", Toast.LENGTH_LONG );
             }
             else {
                 showRepoList();

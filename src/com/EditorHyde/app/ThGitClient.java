@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import org.apache.commons.codec.binary.Base64;
 import org.eclipse.egit.github.core.*;

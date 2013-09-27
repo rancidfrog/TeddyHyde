@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import android.app.Activity;
 import android.app.AlertDialog;

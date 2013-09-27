@@ -1,4 +1,4 @@
-package com.teddyhyde;
+package com.EditorHyde.app;
 
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
