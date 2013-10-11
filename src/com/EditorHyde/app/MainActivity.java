@@ -42,17 +42,18 @@ import java.util.Arrays;
 
 //import com.wuman.oauth.samples.OAuth;
 
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements View.OnClickListener {
 
     SharedPreferences sp;
     ProgressDialog pd = null;
     String authToken;
+    Button loginButton;
     String foobar;
     SharedPreferencesCredentialStore credentialStore;
     Credential credential;
     public static String logname = "com.EditorHyde.app.app";
 
-    public static final String APP_ID = "com.EditorHyde.app.app";
+    public static final String APP_ID = "com.EditorHyde.app";
 
     public void nukePreferences() {
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
@@ -72,6 +73,15 @@ public class MainActivity extends Activity {
 
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
         new VerifyUser().execute();
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupLogin();
+        TextView tv = (TextView)findViewById(R.id.logoutWarning);
+        tv.setVisibility(View.VISIBLE);
+        //new VerifyUser().execute();
     }
 
     @Override
@@ -97,7 +107,33 @@ public class MainActivity extends Activity {
     }
 
     private void setupLogin() {
-        new DoLogin().execute();
+        setContentView(R.layout.main);
+        loginButton = (Button)findViewById(R.id.login);
+        loginButton.setOnClickListener(this);
+
+//        new DoLogin().execute();
+    }
+
+    @Override
+    public void onClick(View v) {
+        if( v == loginButton) {
+            boolean warnedAboutFirstTime = sp.getBoolean( getString(R.string.warnedFirstTime), false );
+
+            if( !warnedAboutFirstTime ) {
+                new AlertDialog.Builder(MainActivity.this)
+                        .setTitle("Warning about oAuth redirection")
+                        .setMessage( "If this is your first time using this application and you are using 2-factor authentication, you will need to hit the back button after logging in on GitHub and entering your security code. GitHub does not properly redirect to the auth callback. This message will not be displayed again.")
+                        .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int whichButton) {
+                                sp.edit().putBoolean( getString(R.string.warnedFirstTime), true).commit();
+                                new DoLogin().execute();
+                            }
+                        }).show();
+            }
+            else {
+                new DoLogin().execute();
+            }
+        }
     }
 
     private class DoLogin extends AsyncTask<Void, Void, Boolean> {
@@ -128,7 +164,7 @@ public class MainActivity extends Activity {
                     GitHubConstants.CLIENT_ID,
                     GitHubConstants.AUTHORIZATION_CODE_SERVER_URL);
             builder.setCredentialStore(credentialStore);
-            builder.setScopes(Arrays.asList( "user", "repo", "gist" ));
+            builder.setScopes(Arrays.asList( "user", "repo" ));
 
             AuthorizationFlow flow = builder.build();
 

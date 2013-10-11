@@ -163,25 +163,27 @@ public class RepoListActivity extends Activity {
                 rv = false;
             }
 
-            ArrayList<Repository> nonJekyll = new ArrayList<Repository>();
-            ArrayList<Repository> possibleJekyll = new ArrayList<Repository>();
-            for( int j = 0; j < repos.size(); j++ ) {
+            if( rv ) {
+                ArrayList<Repository> nonJekyll = new ArrayList<Repository>();
+                ArrayList<Repository> possibleJekyll = new ArrayList<Repository>();
+                for( int j = 0; j < repos.size(); j++ ) {
 
-                Repository repo = repos.get(j);
-                String name = repo.getName();
+                    Repository repo = repos.get(j);
+                    String name = repo.getName();
 
-                if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
-                    possibleJekyll.add( repo );
+                    if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
+                        possibleJekyll.add( repo );
+                    }
+                    else {
+                        nonJekyll.add( repo );
+                    }
+
+                    repositorySet.add( name );
                 }
-                else {
-                    nonJekyll.add( repo );
-                }
 
-                repositorySet.add( name );
+                possibleJekyll.addAll( nonJekyll);
+                allRepos = possibleJekyll;
             }
-
-            possibleJekyll.addAll( nonJekyll);
-            allRepos = possibleJekyll;
             return rv;
 
         }

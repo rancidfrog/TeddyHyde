@@ -7,40 +7,31 @@
     <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Enter your GitHub crendentials"
+            android:text="Login using secure GitHub oAuth"
             android:id="@+id/textView" android:layout_gravity="center" android:layout_margin="3pt"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/githubEmail" android:layout_gravity="center" android:padding="5pt"
-            android:layout_margin="3pt" android:hint="GitHub login"/>
-    <EditText
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/githubPassword" android:layout_gravity="center" android:padding="5pt"
-            android:layout_margin="3pt" android:hint="GitHub password" android:password="true"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/loginMessage" android:layout_gravity="center"/>
+
     <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/login"
-            android:id="@+id/button" android:layout_gravity="center" android:textSize="14pt"
+            android:id="@+id/login" android:layout_gravity="center" android:textSize="14pt"
             android:layout_marginTop="10pt"/>
-    <ListView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/listView" android:layout_gravity="center"/>
+
     <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Your username and credentials are only stored in this application"
-            android:id="@+id/textView1" android:layout_margin="5pt"/>
-    <FrameLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-    </FrameLayout>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Teddy Hyde is the no compromises Android editor for GitHub Jekyll blogs. "
+        android:id="@+id/textView2"
+        android:layout_margin="5dp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:visibility="invisible"
+        android:text="@string/githubAuthTokenWarning"
+        android:id="@+id/logoutWarning" />
+
 </LinearLayout>
 

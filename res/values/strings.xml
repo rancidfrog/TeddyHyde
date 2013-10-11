@@ -56,6 +56,8 @@
     <string name="new_page">New jekyll page...</string>
     <string name="new_post">New jekyll post...</string>
     <string name="new_markdown">New markdown...</string>
+    <string name="warnedFirstTime">warnedFirstTime</string>
+    <string name="githubAuthTokenWarning">Due to a bug in the egit libraries, Teddy Hyde cannot remove your authentication token automatically from GitHub.com. There is no risk to this other than this application can renew access to GitHub without your consent. If you want to remove access to GitHub from this application, look for \"Teddy Hyde Android\" in the \"Applications\" section on the desktop version of GitHub.com and delete that token.</string>
 
 
 </resources>

@@ -9,6 +9,7 @@
 
         <item android:id="@+id/action_scratchpad"
           android:title="@string/scratchpad"
+            android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
 </menu>
