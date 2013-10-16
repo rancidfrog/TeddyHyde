@@ -263,12 +263,14 @@ public class FileListingActivity extends Activity {
 
             RemoteFileCache.setHttpRoot( "http://" + baseUrl + "/" );
 
-            for( TreeEntry entry: entries) {
+            if( null != entries ) {
+                for( TreeEntry entry: entries) {
 
-                String name = entry.getPath();
+                    String name = entry.getPath();
 
-                if( name.contains( "assets/images") && name.contains( "thumb") ) {
-                    images.add( name );
+                    if( name.contains( "assets/images") && name.contains( "thumb") ) {
+                        images.add( name );
+                    }
                 }
             }
 
