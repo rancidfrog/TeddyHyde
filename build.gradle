@@ -12,6 +12,7 @@ apply plugin: 'android'
 
 dependencies {
     compile fileTree(dir: 'lib', include: '*.jar')
+    compile fileTree(dir: 'TeddyHyde/libs', include: '*.jar')
 }
 
 repositories {

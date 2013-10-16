@@ -239,20 +239,22 @@ public class FileListingActivity extends Activity {
             baseUrl = repoName;
             ArrayList<String> images = new ArrayList<String>();
 
-            for( TreeEntry entry: entries) {
+            if( null != entries ) {
+                for( TreeEntry entry: entries) {
 
-                String name = entry.getPath();
+                    String name = entry.getPath();
 
-                // Get the CNAME file. If not there, use the repository name as the URL
-                if( name.equals( "CNAME" ) ) {
-                    try {
-                        String fileSha = entry.getSha();
-                        cnameContents = ThGitClient.GetFile(authToken, repoName, login, fileSha);
-                    } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    // Get the CNAME file. If not there, use the repository name as the URL
+                    if( name.equals( "CNAME" ) ) {
+                        try {
+                            String fileSha = entry.getSha();
+                            cnameContents = ThGitClient.GetFile(authToken, repoName, login, fileSha);
+                        } catch (IOException e) {
+                            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        }
                     }
-                }
 
+                }
             }
 
             if( null != cnameContents) {
