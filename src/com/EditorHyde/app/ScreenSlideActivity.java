@@ -83,7 +83,6 @@ public class ScreenSlideActivity extends FragmentActivity {
     Boolean isScratchpad;
     List<Transform> transforms;
 
-
     ScreenSlidePageFragmentMarkdown md;
     ProgressDialog pd;
 
@@ -300,8 +299,8 @@ public class ScreenSlideActivity extends FragmentActivity {
                 .setView(input)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
-                        String processed = Placeholder.process(transform.code, "IMAGE", imageUrl);
-                        processed = Placeholder.process(processed, "PROMPT", input.getText().toString() );
+                        String processed = MarkupUtilities.process(transform.code, "IMAGE", imageUrl);
+                        processed = MarkupUtilities.process(processed, "PROMPT", input.getText().toString() );
                         insertAtCursor(processed);
                     }
                 })
@@ -391,7 +390,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                         promptAndInsert( transform, uri );
                     }
                     else {
-                        String processed = Placeholder.process(transform.code, "IMAGE", uri );
+                        String processed = MarkupUtilities.process(transform.code, "IMAGE", uri );
                         insertAtCursor(processed);
                     }
                 }
@@ -487,7 +486,11 @@ public class ScreenSlideActivity extends FragmentActivity {
                 case R.id.action_save_with_commit:
                 case R.id.action_save_file:
                     et = (EditText) findViewById(R.id.markdownEditor);
-                    contents = et.getText().toString();
+                    EditText yfmEt = (EditText) findViewById(R.id.yfmEditText);
+                    String yfm = yfmEt.getText().toString();
+                    String markup = et.getText().toString();
+                    contents = yfm + markup;
+
                     if( R.id.action_save_with_commit == itemId ) {
                         promptForCommitMessage( contents );
                     }
@@ -562,27 +565,27 @@ public class ScreenSlideActivity extends FragmentActivity {
             ll.addView( input );
             ll.addView( spinner );
 
-        new AlertDialog.Builder(ScreenSlideActivity.this)
-                .setTitle("Filename")
-                .setMessage( "Enter filename to save under...")
-                .setView(ll)
-                .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        startSaveProgressIndicator();
-                        EditText et = (EditText) findViewById(R.id.markdownEditor);
-                        String contents = et.getText().toString();
-                        String filename = input.getText().toString();
-                        String repository = spinner.getSelectedItem().toString();
-                        new SaveIntoRepository().execute( authToken, repository, theLogin, contents, filename );
+            new AlertDialog.Builder(ScreenSlideActivity.this)
+                    .setTitle("Filename")
+                    .setMessage( "Enter filename to save under...")
+                    .setView(ll)
+                    .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            startSaveProgressIndicator();
+                            EditText et = (EditText) findViewById(R.id.markdownEditor);
+                            String contents = et.getText().toString();
+                            String filename = input.getText().toString();
+                            String repository = spinner.getSelectedItem().toString();
+                            new SaveIntoRepository().execute( authToken, repository, theLogin, contents, filename );
 
-                        finishWithResult();
-                    }
-                })
-                .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int whichButton) {
-                        // Do nothing.
-                    }
-                }).show();
+                            finishWithResult();
+                        }
+                    })
+                    .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                        public void onClick(DialogInterface dialog, int whichButton) {
+                            // Do nothing.
+                        }
+                    }).show();
         }
         else {
             Toast.makeText( this, "No repositories into which save is possible.", Toast.LENGTH_LONG );

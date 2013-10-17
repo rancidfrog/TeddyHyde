@@ -24,8 +24,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.petebevin.markdown.MarkdownProcessor;
+import org.asciidoctor.Asciidoctor;
+import java.util.Collections;
 
 import static com.EditorHyde.app.R.*;
 
@@ -86,16 +89,6 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         //To change body of implemented methods use File | Settings | File Templates.
     }
 
-    private String stripYFM( String markdown ) {
-        int yfmStart = markdown.indexOf( "---" );
-        int yfmEnd = markdown.indexOf( "---", 4 );
-        String withOutYFM = markdown;
-        if( -1 != yfmStart && -1 != yfmEnd ) {
-            withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
-        }
-
-        return withOutYFM;
-    }
 
     private String addMetadataAndBody( String converted ) {
         String fullHtml =
@@ -114,16 +107,27 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
 
         // Get md text
         EditText et = (EditText)getActivity().findViewById(id.markdownEditor);
-        String markdown = et.getText().toString();
-        MarkdownProcessor md = new MarkdownProcessor();
-        String converted = "";
-        String yfmStripped = stripYFM( markdown );
+        TextView filenameTV = (TextView)getActivity().findViewById(id.currentFilename);
+        String filename = filenameTV.getText().toString();
+        String markup = et.getText().toString();
+        String fullHtml = null;
 
-        // convert to HTML
-        converted = md.markdown( yfmStripped );
+        if( filename.endsWith( ".md" )  ) {
+            MarkdownProcessor md = new MarkdownProcessor();
+            String converted = "";
+            String yfmStripped = MarkupUtilities.stripYFM( markup );
 
-        // Add some information to make images load correctly, etc.
-        String fullHtml = addMetadataAndBody( converted );
+            // convert to HTML
+            converted = md.markdown( yfmStripped );
+
+            // Add some information to make images load correctly, etc.
+            fullHtml = addMetadataAndBody( converted );
+
+        }
+        else if( filename.endsWith( ".asciidoc" )) {
+            Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+            fullHtml = asciidoctor.render( markup, Collections.EMPTY_MAP);
+        }
 
         wv.loadData(fullHtml , "text/html", null );
         // this.setShowsDialog(false);

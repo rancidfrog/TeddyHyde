@@ -13,7 +13,29 @@ import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
  * Time: 9:30 AM
  * To change this template use File | Settings | File Templates.
  */
-public class Placeholder {
+public class MarkupUtilities {
+
+    public static String stripYFM( String markdown ) {
+        int yfmStart = markdown.indexOf( "---" );
+        int yfmEnd = markdown.indexOf( "---", 4 );
+        String withOutYFM = markdown;
+        if( -1 != yfmStart && -1 != yfmEnd ) {
+            withOutYFM = markdown.substring(yfmEnd+"---".length()+1);
+        }
+
+        return withOutYFM;
+    }
+
+    public static String getYFM( String markdown ) {
+        int yfmStart = markdown.indexOf( "---" );
+        int yfmEnd = markdown.indexOf( "---", 4 );
+        String yfm = markdown;
+        if( -1 != yfmStart && -1 != yfmEnd ) {
+            yfm = markdown.substring(0,yfmEnd+4);
+        }
+
+        return yfm;
+    }
 
     private static String processForRegex( String text, String placeholder, String replacement ) {
 

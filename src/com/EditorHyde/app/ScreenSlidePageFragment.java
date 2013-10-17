@@ -23,6 +23,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -48,6 +49,10 @@ public class ScreenSlidePageFragment extends Fragment {
     private String theFile;
     ViewGroup rootView;
     boolean mDirty;
+    public boolean mYfmDisplayed = false;
+    EditText editor;
+    EditText yfmEditText;
+    public String theYfm;
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -79,7 +84,6 @@ public class ScreenSlidePageFragment extends Fragment {
         theMarkdown = md;
     }
 
-
     public boolean isDirty() {
         return mDirty;
     }
@@ -96,8 +100,24 @@ public class ScreenSlidePageFragment extends Fragment {
         rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 
-        EditText editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
-        editor.setText( theMarkdown );
+        editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
+        yfmEditText = ((EditText)rootView.findViewById(R.id.yfmEditText));
+
+        Button toggleYfml = (Button)rootView.findViewById(R.id.toggleYFM);
+        toggleYfml.setOnClickListener( new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                toggleYamlFrontMatter();
+            }
+        });
+
+        // Strip YFM
+        String stripped = MarkupUtilities.stripYFM( theMarkdown );
+
+        // Get the YFM
+        theYfm = MarkupUtilities.getYFM( theMarkdown );
+
+        editor.setText( stripped );
 
         editor.addTextChangedListener(new TextWatcher() {
 
@@ -116,6 +136,24 @@ public class ScreenSlidePageFragment extends Fragment {
         filenameView.setText(theFile);
 
         return rootView;
+    }
+
+    private void toggleYamlFrontMatter() {
+        // Get the current editor text
+        theMarkdown = editor.getText().toString();
+
+        if( mYfmDisplayed ) {
+            // save the YFM
+            theYfm = MarkupUtilities.getYFM( theMarkdown );
+            yfmEditText.setText( theYfm );
+            String newText = MarkupUtilities.stripYFM( theMarkdown );
+            editor.setText( newText );
+        }
+        else {
+            editor.setText( theYfm + theMarkdown );
+            yfmEditText.setText( "" );
+        }
+        mYfmDisplayed = !mYfmDisplayed;
     }
 
     /**

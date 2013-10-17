@@ -19,6 +19,12 @@
               android:layout_height="match_parent"
               android:id="@+id/markdownEditorLayout">
 
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/yfmEditText"
+        android:visibility="gone" />
+
     <RelativeLayout
             android:orientation="horizontal"
             android:layout_width="fill_parent"
@@ -40,7 +46,14 @@
                 android:layout_alignParentRight="true"/>
     </RelativeLayout>
 
-        <EditText
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:text="Show YAML Front Matter"
+        android:id="@+id/toggleYFM" />
+
+    <EditText
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:text="### Hello! ###"

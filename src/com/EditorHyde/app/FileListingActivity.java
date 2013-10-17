@@ -118,7 +118,7 @@ public class FileListingActivity extends Activity {
 
                 filename[0] = root + prefix + whitespaceStripped + MARKDOWN_EXTENSION;
 
-                processedTemplate[0] = Placeholder.process( template, "TITLE", title );
+                processedTemplate[0] = MarkupUtilities.process( template, "TITLE", title );
 
                 finalFilename.setText( "Filename: " + filename[0] );
             }
