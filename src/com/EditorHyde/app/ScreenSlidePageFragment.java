@@ -53,6 +53,8 @@ public class ScreenSlidePageFragment extends Fragment {
     EditText editor;
     EditText yfmEditText;
     public String theYfm;
+    Button toggleYfm;
+    Boolean togglingYfm = false;
 
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
@@ -103,19 +105,27 @@ public class ScreenSlidePageFragment extends Fragment {
         editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
         yfmEditText = ((EditText)rootView.findViewById(R.id.yfmEditText));
 
-        Button toggleYfml = (Button)rootView.findViewById(R.id.toggleYFM);
-        toggleYfml.setOnClickListener( new View.OnClickListener() {
+        String stripped = theMarkdown;
+
+        toggleYfm = (Button)rootView.findViewById(R.id.toggleYFM);
+        if( theFile.endsWith( ".md") ) {
+
+            // Strip YFM
+            stripped = MarkupUtilities.stripYFM( theMarkdown );
+
+            // Get the YFM
+            theYfm = MarkupUtilities.getYFM( theMarkdown );
+
+            toggleYfm.setOnClickListener( new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 toggleYamlFrontMatter();
             }
         });
-
-        // Strip YFM
-        String stripped = MarkupUtilities.stripYFM( theMarkdown );
-
-        // Get the YFM
-        theYfm = MarkupUtilities.getYFM( theMarkdown );
+        }
+        else {
+            toggleYfm.setVisibility(View.GONE);
+        }
 
         editor.setText( stripped );
 
@@ -139,6 +149,9 @@ public class ScreenSlidePageFragment extends Fragment {
     }
 
     private void toggleYamlFrontMatter() {
+
+        Boolean isDirtyNow = mDirty;
+        togglingYfm = true;
         // Get the current editor text
         theMarkdown = editor.getText().toString();
 
@@ -148,12 +161,18 @@ public class ScreenSlidePageFragment extends Fragment {
             yfmEditText.setText( theYfm );
             String newText = MarkupUtilities.stripYFM( theMarkdown );
             editor.setText( newText );
+            toggleYfm.setText(getString(R.string.show_yfm));
         }
         else {
             editor.setText( theYfm + theMarkdown );
             yfmEditText.setText( "" );
+            toggleYfm.setText(getString(R.string.hide_yfm));
         }
         mYfmDisplayed = !mYfmDisplayed;
+
+        if( isDirtyNow != mDirty ) {
+            mDirty = isDirtyNow;
+        }
     }
 
     /**

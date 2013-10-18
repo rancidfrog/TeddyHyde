@@ -93,9 +93,9 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
     private String addMetadataAndBody( String converted ) {
         String fullHtml =
                 "<html><head>" +
-                "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
-                "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>" +
-                "</head><body>" + converted + "</body></html>";
+                        "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
+                        "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>" +
+                        "</head><body>" + converted + "</body></html>";
 
         return fullHtml;
     }
@@ -110,12 +110,12 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         TextView filenameTV = (TextView)getActivity().findViewById(id.currentFilename);
         String filename = filenameTV.getText().toString();
         String markup = et.getText().toString();
-        String fullHtml = null;
+        String fullHtml = markup;
 
         if( filename.endsWith( ".md" )  ) {
             MarkdownProcessor md = new MarkdownProcessor();
             String converted = "";
-            String yfmStripped = MarkupUtilities.stripYFM( markup );
+            String yfmStripped = MarkupUtilities.stripYFM(markup);
 
             // convert to HTML
             converted = md.markdown( yfmStripped );
@@ -124,10 +124,10 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
             fullHtml = addMetadataAndBody( converted );
 
         }
-        else if( filename.endsWith( ".asciidoc" )) {
-            Asciidoctor asciidoctor = Asciidoctor.Factory.create();
-            fullHtml = asciidoctor.render( markup, Collections.EMPTY_MAP);
-        }
+       // else if (filename.endsWith(".asciidoc")) {
+        //    Asciidoctor asciidoctor = Asciidoctor.Factory.create();
+        //    fullHtml = asciidoctor.render(markup, Collections.EMPTY_MAP);
+        //}
 
         wv.loadData(fullHtml , "text/html", null );
         // this.setShowsDialog(false);
