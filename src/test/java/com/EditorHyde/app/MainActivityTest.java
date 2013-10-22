@@ -1,3 +1,4 @@
+package com.EditorHyde.app;
 //import android.view.View.MeasureSpec;
 import org.junit.Test;
 import org.junit.runner.RunWith;
