@@ -37,7 +37,7 @@ dependencies {
 //    compile 'com.google.android:support-v4:r7'
 //    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
 
- instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.0'
+ instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
  testCompile 'junit:junit:4.10'
  testCompile 'org.robolectric:robolectric:2.1.+'
  testCompile 'com.squareup:fest-android:1.0.+'
@@ -49,32 +49,19 @@ android {
 
     sourceSets {
         main {
-        //            srcDir = 'src/java'
-            // manifest.srcFile 'AndroidManifest.xml'
-            // java.srcDirs = ['src']
-            // resources.srcDirs = ['src']
-            // aidl.srcDirs = ['src']
-            // renderscript.srcDirs = ['src']
-            // res.srcDirs = ['res']
-            // assets.srcDirs = ['assets']
         }
 
-        resources {
-          // srcDir = 'src/resources'
-        }       
-
-        // Move the tests to tests/java, tests/res, etc...
-        // instrumentTest.setRoot('tests')
-
-        // Move the build types to build-types/<type>
-        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
-        // This moves them out of them default location under src/<type>/... which would
-        // conflict with src/ being used by the main source set.
-        // Adding new build types or product flavors should be accompanied
-        // by a similar customization.
-        // debug.setRoot('build-types/debug')
-        //release.setRoot('build-types/release')
+        // integrationTest {
+        //   // Gives you access to the compiled classes in your tests
+        //   compileClasspath += main.output
+        //   runtimeClasspath += main.output
+        // }
     }
 
-
 }
+
+// // To run the tests: ./gradlew integrationTest
+// task integrationTest(type: Test) {
+//     testClassesDir = sourceSets.integrationTest.classesDir
+//     classpath = sourceSets.integrationTest.runtimeClasspath
+// }
