@@ -27,9 +27,9 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.petebevin.markdown.MarkdownProcessor;
-import org.asciidocj.*;
-//import org.asciidoctor.Asciidoctor;
-//import java.util.Collections;
+// import org.asciidocj.*;
+import org.asciidoctor.Asciidoctor;
+import java.util.Collections;
 
 import static com.EditorHyde.app.R.*;
 
@@ -126,11 +126,10 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
 
         }
        else if (filename.endsWith(".asciidoc")) {
-            AsciiDocProcessor asciidoc = new AsciiDocProcessor();
-            //Asciidoctor.Factory.create();
-            fullHtml = asciidoc.asciidocToHtml( markup);
-            //
-            // fullHtml = asciidoctor.render(markup, Collections.EMPTY_MAP);
+	   Asciidoctor asciidoc = // new AsciiDocProcessor();
+	       Asciidoctor.Factory.create();
+	   //fullHtml = asciidoc.asciidocToHtml( markup);
+	   fullHtml = asciidoc.render(markup, Collections.EMPTY_MAP);
         }
 
         wv.loadData(fullHtml , "text/html", null );
