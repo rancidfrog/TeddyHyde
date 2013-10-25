@@ -1,0 +1,50 @@
+query( "webView css:'a'" )[4]
+query( "webView css:'a'" )[2]
+touch query( "webView css:'a'" )[2]
+touch query( "webView css:'a'" )[3]
+start_test_server_in_background
+start_test_server_in_background
+query "button"
+touch "button"
+touch "button"
+set_text "webView css:input[name=password]", "burningon"
+set_text "webView css:input[name=login]", "burningon"
+set_text "webView css:input[name=login]", "L0udCaf3"
+set_text "webView css:input[name=login]", "burningon"
+set_text "webView css:input[name=password]", "burningon"
+set_text "webView css:input[name=password]", "L0udCaf3"
+set_text "webView css:input[name=password]", "L0udCaf3"
+set_text "webView css:input[name=password]", "burning@burningon.com"
+set_text "webView css:input[name=password]", "L0udCaf3"
+
+set_text "webView css:input[name=password]", "L0udCaf3"
+scroll_to_bottom
+scroll_to
+scroll
+scroll_to_row 1
+scroll_to_row 1, 2
+query "webView css:a"
+query "webView css:'a'"
+query "webView css:'a.oauth_allow'"
+query "webView css:'a.oauth_deny'"
+query "webView css:'a.oauth_deny'"
+query "webView css:'a'"
+scroll_to 'css', 'oauth_deny'
+scroll 'css', '.oauth_deny'
+scroll "css:'.oauth_deny'"
+scroll "a"
+scroll "css", "a"
+performAction "scroll_to", "css", "a"
+
+performAction "scroll_to", "css", "a"
+performAction "scroll_to", "css", "a"
+performAction "scroll_to", "css", "div"
+performAction "scroll_to", "css", ""
+performAction "scroll_to", "css", "a.oauth-deny"
+query( "webView css:'a'" )
+query( "webView css:'button'" )
+query "webView css:'button[name=authorize]'"
+touch  "webView css:'button[name=authorize]'"
+touch  "webView css:'button[name=authorize]'"
+performAction "scroll_to", "css", "a.oauth-deny"
+touch  "webView css:'button[name=authorize]'"

@@ -1,0 +1,7 @@
+
+start_test_server_in_background
+touch "button"
+set_text "webView css:input[name=login]", "burning@burningon.com"
+set_text "webView css:input[name=password]", "L0udCaf3"
+performAction "scroll_to", "css", "a.oauth-deny"
+touch  "webView css:'button[name=authorize]'"
