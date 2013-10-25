@@ -26,7 +26,8 @@ import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
 
-import com.petebevin.markdown.MarkdownProcessor;
+// import com.petebevin.markdown.MarkdownProcessor;
+import org.pegdown.PegDownProcessor;
 // import org.asciidocj.*;
 import org.asciidoctor.Asciidoctor;
 import java.util.Collections;
@@ -113,13 +114,15 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         String markup = et.getText().toString();
         String fullHtml = markup;
 
-        if( filename.endsWith( ".md" )  ) {
-            MarkdownProcessor md = new MarkdownProcessor();
+        if( filename.endsWith( ".md" ) || filename.endsWith( ".markdown" ) ) {
+            // MarkdownProcessor md = new MarkdownProcessor();
+	    PegDownProcessor pdp = new PegDownProcessor();
             String converted = "";
             String yfmStripped = MarkupUtilities.stripYFM(markup);
 
             // convert to HTML
-            converted = md.markdown( yfmStripped );
+            //converted = md.markdown( yfmStripped );
+	    converted = pdp.markdownToHtml( yfmStripped );
 
             // Add some information to make images load correctly, etc.
             fullHtml = addMetadataAndBody( converted );
