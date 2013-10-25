@@ -113,7 +113,7 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
         String markup = et.getText().toString();
         String fullHtml = markup;
 
-        if( filename.endsWith( ".md" )  ) {
+        if( filename.endsWith( ".md" ) || filename.endsWith( ".markdown" ) ) {
             MarkdownProcessor md = new MarkdownProcessor();
             String converted = "";
             String yfmStripped = MarkupUtilities.stripYFM(markup);
