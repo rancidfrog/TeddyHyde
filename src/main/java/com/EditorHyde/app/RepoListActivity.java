@@ -171,7 +171,8 @@ public class RepoListActivity extends Activity {
                     Repository repo = repos.get(j);
                     String name = repo.getName();
 
-                    if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
+                    int length = name.length();
+                    if( name.indexOf( "." ) != -1 && ( ( length-4 == name.lastIndexOf(".") ) || length-3 == name.lastIndexOf(".") ) ) {
                         possibleJekyll.add( repo );
                     }
                     else {
