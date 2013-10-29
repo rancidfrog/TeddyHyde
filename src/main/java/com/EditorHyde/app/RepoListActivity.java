@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import org.eclipse.egit.github.core.Authorization;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.OAuthService;
@@ -211,5 +213,18 @@ public class RepoListActivity extends Activity {
             }
 
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 }

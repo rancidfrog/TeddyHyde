@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
+import com.google.analytics.tracking.android.EasyTracker;
 
 /**
  * Created with IntelliJ IDEA.
@@ -565,5 +566,17 @@ public class FileListingActivity extends Activity {
         startActivityForResult(i, null != sha ? EDIT_EXISTING_FILE : EDIT_NEW_FILE );
 
 
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 }
