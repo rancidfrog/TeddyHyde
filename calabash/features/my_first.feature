@@ -1,11 +1,9 @@
-Feature: Login feature
-
-  Scenario: As a valid user I can log into my app
-    When I press "Login"
-    Then I press "OK"
-    Then I wait up to 10 seconds to see "GitHub"
-    Then I enter "burningon" into input field number 1
+Feature: Add file to repository
+  Scenario: As a logged in user I can add a file
+    Given I start the login process
+    And I acknowledge the 2 factor bug
     Then I wait 10 seconds
-    Then I enter "L0udCaf3" into input field number 2
-    Then I wait 10 seconds
-    Then I press "Login"
+    And I login using GitHub oAuth login
+    And I access the first repository
+    And I press "New Post"
+	    

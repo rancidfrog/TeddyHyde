@@ -16,3 +16,5 @@ src/main/res/values/com_crashlytics_export_strings.xml
 src/test/java/com/EditorHyde/app/Passwords.java
 Passwords.java
 *~
+*/**/test_servers/*
+test_servers
