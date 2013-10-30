@@ -1,44 +1,3 @@
-start_test_server_in_background
-query "button"
-touch "button"
-touch "button"
-set_text "webView css:input[name=password]", "burningon"
-set_text "webView css:input[name=login]", "burningon"
-set_text "webView css:input[name=login]", "L0udCaf3"
-set_text "webView css:input[name=login]", "burningon"
-set_text "webView css:input[name=password]", "burningon"
-set_text "webView css:input[name=password]", "L0udCaf3"
-set_text "webView css:input[name=password]", "L0udCaf3"
-set_text "webView css:input[name=password]", "burning@burningon.com"
-set_text "webView css:input[name=password]", "L0udCaf3"
-
-set_text "webView css:input[name=password]", "L0udCaf3"
-scroll_to_bottom
-scroll_to
-scroll
-scroll_to_row 1
-scroll_to_row 1, 2
-query "webView css:a"
-query "webView css:'a'"
-query "webView css:'a.oauth_allow'"
-query "webView css:'a.oauth_deny'"
-query "webView css:'a.oauth_deny'"
-query "webView css:'a'"
-scroll_to 'css', 'oauth_deny'
-scroll 'css', '.oauth_deny'
-scroll "css:'.oauth_deny'"
-scroll "a"
-scroll "css", "a"
-performAction "scroll_to", "css", "a"
-
-performAction "scroll_to", "css", "a"
-performAction "scroll_to", "css", "a"
-performAction "scroll_to", "css", "div"
-performAction "scroll_to", "css", ""
-performAction "scroll_to", "css", "a.oauth-deny"
-query( "webView css:'a'" )
-query( "webView css:'button'" )
-query "webView css:'button[name=authorize]'"
 touch  "webView css:'button[name=authorize]'"
 touch  "webView css:'button[name=authorize]'"
 performAction "scroll_to", "css", "a.oauth-deny"
@@ -48,3 +7,44 @@ touch "button"
 quit
 start_test_server_in_background
 quit
+start_test_server_in_background
+touch "button"
+if element_exists( "2-factor" )
+puts "hi"
+end
+start_test_server_in_background
+touch "button"
+query( "text '2-factor'" )
+query( "text" )
+query( "textfield" )
+query( "dialog" )
+query( "alertdialog" )
+query( "AlertDialog" )
+query( "android.app.AlertDialog" )
+query( "*" )
+query( "textview" )
+query( "textview text:'2-factor'" )
+query( "textview text:'2-factor*'" )
+query( "textview text:'*2-factor*'" )
+query( "textview text" )
+query( "textview", "text" )
+query( "textview text" )
+query( "textview text" )
+query( "textview text" )
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+reinstall_test_server
+start_test_server_in_background
+reinstall_apps
+start_test_server_in_background
+touch "button"
+tv = query( "textview", "text" )
+tv
+tv[0]
+if tv[0] =~ /2\-factor authentication/
+puts "Got it!"
+end
+touch "button text:'Ok'"
