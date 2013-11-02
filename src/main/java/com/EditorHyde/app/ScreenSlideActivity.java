@@ -83,7 +83,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     Boolean isScratchpad;
     List<Transform> transforms;
 
-    ScreenSlidePageFragmentMarkdown md;
+    ScreenSlidePageFragmentMarkup md;
     ProgressDialog pd;
 
     /**
@@ -613,7 +613,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
             }
             else {
-                md = ScreenSlidePageFragmentMarkdown.create( position );
+                md = ScreenSlidePageFragmentMarkup.create(position);
                 rv = md;
 
             }

@@ -33,7 +33,7 @@ import java.util.Collections;
 
 import static com.EditorHyde.app.R.*;
 
-public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPager.OnPageChangeListener {
+public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager.OnPageChangeListener {
     /**
      * The argument key for the page number this fragment represents.
      */
@@ -49,15 +49,15 @@ public class ScreenSlidePageFragmentMarkdown extends Fragment implements ViewPag
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
-    public static ScreenSlidePageFragmentMarkdown create(int pageNumber ) {
-        ScreenSlidePageFragmentMarkdown fragment = new ScreenSlidePageFragmentMarkdown();
+    public static ScreenSlidePageFragmentMarkup create(int pageNumber ) {
+        ScreenSlidePageFragmentMarkup fragment = new ScreenSlidePageFragmentMarkup();
         Bundle args = new Bundle();
         args.putInt(ARG_PAGE, pageNumber);
         fragment.setArguments(args);
         return fragment;
     }
 
-    public ScreenSlidePageFragmentMarkdown() {
+    public ScreenSlidePageFragmentMarkup() {
     }
 
     @Override
