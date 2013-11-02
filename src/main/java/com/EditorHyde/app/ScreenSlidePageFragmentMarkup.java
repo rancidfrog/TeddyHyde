@@ -168,8 +168,10 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
             // create the HTML with the opal and asciidoctor.js libraries
         }
 
-        wv.loadDataWithBaseURL("file:///android_asset/", fullHtml, "text/html", "utf-8", "");
-//        wv.loadData( fullHtml, "text/html", "utf-8" );
+       wv.loadDataWithBaseURL("file:///android_asset/", fullHtml, "text/html", "utf-8", "");
+
+       // This does NOT work, you need to use withBaseUrl...
+       // wv.loadData( fullHtml, "text/html", "utf-8" );
 
         // this.setShowsDialog(false);
 
