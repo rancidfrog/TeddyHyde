@@ -19,9 +19,13 @@ package com.EditorHyde.app;
 import android.app.Fragment;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.ConsoleMessage;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -91,11 +95,10 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
     }
 
 
-    private String addMetadataAndBody( String converted ) {
+    private String addMetadataAndBody( String converted, String extras ) {
         String fullHtml =
                 "<html><head>" +
-                        "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" +
-                        "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>" +
+                        "<base href=\"" + RemoteFileCache.getHttpRoot() + "\">" + extras +
                         "</head><body>" + converted + "</body></html>";
 
         return fullHtml;
@@ -105,6 +108,18 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
     public void onPageSelected(int i) {
         // Set the title view to show the page number.
         WebView wv = (WebView)rootView.findViewById(id.webView);
+
+        WebSettings webSettings = wv.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+
+        wv.setWebChromeClient(new WebChromeClient() {
+            public boolean onConsoleMessage(ConsoleMessage cm) {
+                Log.d("TeddyHyde", cm.message() + " -- From line "
+                        + cm.lineNumber() + " of "
+                        + cm.sourceId());
+                return true;
+            }
+        });
 
         // Get md text
         EditText et = (EditText)getActivity().findViewById(id.markdownEditor);
@@ -122,17 +137,40 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
             converted = md.markdown( yfmStripped );
 
             // Add some information to make images load correctly, etc.
-            fullHtml = addMetadataAndBody( converted );
+            String extras =
+                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/css/markdown.css\"/>";
+
+            fullHtml = addMetadataAndBody( converted, extras );
 
         }
        else if (filename.endsWith(".asciidoc")) {
-	   Asciidoctor asciidoc = // new AsciiDocProcessor();
-	       Asciidoctor.Factory.create();
-	   //fullHtml = asciidoc.asciidocToHtml( markup);
-	   fullHtml = asciidoc.render(markup, Collections.EMPTY_MAP);
+
+            String extras =
+                    "<script src=\"file:///android_asset/js/opal.js\"></script>"
+                            + "<script src=\"file:///android_asset/js/asciidoctor.js\"></script>" +
+                    "<script src=\"file:///android_asset/js/teddyhyde.js\"></script>"
+            //+ "<script src=\"/js/teddyhyde.js\"></script>"
+            //+ "<script src=\"teddyhyde.js\"></script>"
+                    ;
+
+//                            "<script src=\"teddyhyde.js\"></script>" +
+//                            "<script src=\"\"teddyhyde.js\"></script>";
+////
+//                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/js/opal.js\"/>\n" +
+//            "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/js/asciidoctor.js\"/>\n" +
+
+//            extras = "<script>alert( 'Hi, we are inside Teddy Hyde.' );document.write( 'Hey there, this is great, thanks.' );</script>";
+
+
+            fullHtml= "<html><body>Hi there<br/>" + extras + "</body></html>";
+
+//            fullHtml = addMetadataAndBody( fullHtml, extras );
+            // create the HTML with the opal and asciidoctor.js libraries
         }
 
-        wv.loadData(fullHtml , "text/html", null );
+        wv.loadDataWithBaseURL("file:///android_asset/", fullHtml, "text/html", "utf-8", "");
+//        wv.loadData( fullHtml, "text/html", "utf-8" );
+
         // this.setShowsDialog(false);
 
     }
