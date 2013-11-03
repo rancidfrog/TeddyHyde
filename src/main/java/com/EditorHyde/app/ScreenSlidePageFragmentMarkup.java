@@ -126,9 +126,9 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
         TextView filenameTV = (TextView)getActivity().findViewById(id.currentFilename);
         String filename = filenameTV.getText().toString();
         String markup = et.getText().toString();
-        String fullHtml = markup;
 
         if( filename.endsWith( ".md" ) || filename.endsWith( ".markdown" ) ) {
+            String fullHtml = "";
             MarkdownProcessor md = new MarkdownProcessor();
             String converted = "";
             String yfmStripped = MarkupUtilities.stripYFM(markup);
@@ -142,39 +142,26 @@ public class ScreenSlidePageFragmentMarkup extends Fragment implements ViewPager
 
             fullHtml = addMetadataAndBody( converted, extras );
 
+            wv.loadData( fullHtml, "text/html", "utf-8" );
         }
        else if (filename.endsWith(".asciidoc")) {
+            String convertedMarkup = markup.replaceAll( "\"", "\\\\\"" ).replaceAll( "\n", "\\\\n" );
+            Log.w( "TeddyHyde", "Converted: " + convertedMarkup );
+            String convertedAsVar = "<script>var asciidocMarkup = \"" + convertedMarkup + "\";</script>";
+            Log.w( "TeddyHyde", convertedAsVar );
 
             String extras =
                     "<script src=\"file:///android_asset/js/opal.js\"></script>"
                             + "<script src=\"file:///android_asset/js/asciidoctor.js\"></script>" +
-                    "<script src=\"file:///android_asset/js/teddyhyde.js\"></script>"
-            //+ "<script src=\"/js/teddyhyde.js\"></script>"
-            //+ "<script src=\"teddyhyde.js\"></script>"
-                    ;
+                    "<script src=\"file:///android_asset/js/teddyhyde.js\"></script>";
 
-//                            "<script src=\"teddyhyde.js\"></script>" +
-//                            "<script src=\"\"teddyhyde.js\"></script>";
-////
-//                    "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/js/opal.js\"/>\n" +
-//            "<link rel=\"stylesheet\" type=\"text/css\" href=\"file:///android_asset/js/asciidoctor.js\"/>\n" +
+            String fullHtml= "<html><body>" + convertedAsVar + extras + "</body></html>";
 
-//            extras = "<script>alert( 'Hi, we are inside Teddy Hyde.' );document.write( 'Hey there, this is great, thanks.' );</script>";
-
-
-            fullHtml= "<html><body>Hi there<br/>" + extras + "</body></html>";
-
-//            fullHtml = addMetadataAndBody( fullHtml, extras );
-            // create the HTML with the opal and asciidoctor.js libraries
+            wv.loadDataWithBaseURL("file:///android_asset/", fullHtml, "text/html", "utf-8", "");
         }
-
-       wv.loadDataWithBaseURL("file:///android_asset/", fullHtml, "text/html", "utf-8", "");
-
-       // This does NOT work, you need to use withBaseUrl...
-       // wv.loadData( fullHtml, "text/html", "utf-8" );
-
-        // this.setShowsDialog(false);
-
+        else {
+            wv.loadData( markup, "text/html", "utf-8" );
+        }
     }
 
     @Override
