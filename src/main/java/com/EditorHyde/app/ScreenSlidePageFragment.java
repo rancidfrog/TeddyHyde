@@ -108,13 +108,15 @@ public class ScreenSlidePageFragment extends Fragment {
         String stripped = theMarkdown;
 
         toggleYfm = (Button)rootView.findViewById(R.id.toggleYFM);
-        if( theFile.endsWith( ".md") ) {
+        if( theFile.endsWith( ".md" ) || theFile.endsWith( ".markdown" ) ) {
 
             // Strip YFM
             stripped = MarkupUtilities.stripYFM( theMarkdown );
 
             // Get the YFM
             theYfm = MarkupUtilities.getYFM( theMarkdown );
+	    // Store it for saving here as well.
+            yfmEditText.setText( theYfm );
 
             toggleYfm.setOnClickListener( new View.OnClickListener() {
             @Override

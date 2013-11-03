@@ -10,6 +10,8 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -137,6 +139,18 @@ public class ScratchpadActivity extends ListActivity {
             i.putExtras(extras);
             startActivityForResult( i, scratchType );
         }
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 
 //    public void onClick(View view) {

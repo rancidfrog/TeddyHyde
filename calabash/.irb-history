@@ -1,0 +1,50 @@
+touch  "webView css:'button[name=authorize]'"
+touch  "webView css:'button[name=authorize]'"
+performAction "scroll_to", "css", "a.oauth-deny"
+touch  "webView css:'button[name=authorize]'"
+start_test_server_in_background
+touch "button"
+quit
+start_test_server_in_background
+quit
+start_test_server_in_background
+touch "button"
+if element_exists( "2-factor" )
+puts "hi"
+end
+start_test_server_in_background
+touch "button"
+query( "text '2-factor'" )
+query( "text" )
+query( "textfield" )
+query( "dialog" )
+query( "alertdialog" )
+query( "AlertDialog" )
+query( "android.app.AlertDialog" )
+query( "*" )
+query( "textview" )
+query( "textview text:'2-factor'" )
+query( "textview text:'2-factor*'" )
+query( "textview text:'*2-factor*'" )
+query( "textview text" )
+query( "textview", "text" )
+query( "textview text" )
+query( "textview text" )
+query( "textview text" )
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+start_test_server_in_background
+reinstall_test_server
+start_test_server_in_background
+reinstall_apps
+start_test_server_in_background
+touch "button"
+tv = query( "textview", "text" )
+tv
+tv[0]
+if tv[0] =~ /2\-factor authentication/
+puts "Got it!"
+end
+touch "button text:'Ok'"

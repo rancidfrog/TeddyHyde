@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.webkit.WebView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 /**
  * Created with IntelliJ IDEA.
  * User: xrdawson
@@ -23,5 +25,18 @@ public class RenderedActivity extends Activity {
         WebView wv = (WebView) findViewById(R.id.webView);
         wv.loadData(data, "text/html", null);
 
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 }

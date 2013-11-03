@@ -13,6 +13,8 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.google.analytics.tracking.android.EasyTracker;
+
 import org.eclipse.egit.github.core.Authorization;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.OAuthService;
@@ -171,7 +173,8 @@ public class RepoListActivity extends Activity {
                     Repository repo = repos.get(j);
                     String name = repo.getName();
 
-                    if( name.contains( "github.com" ) || name.endsWith( ".com") )    {
+                    int length = name.length();
+                    if( name.indexOf( "." ) != -1 && ( ( length-4 == name.lastIndexOf(".") ) || length-3 == name.lastIndexOf(".") ) ) {
                         possibleJekyll.add( repo );
                     }
                     else {
@@ -210,5 +213,18 @@ public class RepoListActivity extends Activity {
             }
 
         }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        EasyTracker.getInstance(this).activityStart(this);  // Add this method.
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        EasyTracker.getInstance(this).activityStop(this);  // Add this method.
     }
 }
