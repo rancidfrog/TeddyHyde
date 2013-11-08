@@ -26,5 +26,6 @@
     <item type="id" name="action_next" />
     <item type="id" name="action_flip" />
     <item name="action_save_as_gist" type="id"/>
+    <item type="id" name="repo_list"/>
 
 </resources>

@@ -60,6 +60,9 @@
     <string name="githubAuthTokenWarning">Due to a bug in the egit libraries, Teddy Hyde cannot remove your authentication token automatically from GitHub.com. There is no risk to this other than this application can renew access to GitHub without your consent. If you want to remove access to GitHub from this application, look for \"Teddy Hyde Android\" in the \"Applications\" section on the desktop version of GitHub.com and delete that token.</string>
     <string name="hide_yfm">Hide YAML Front Matter</string>
     <string name="show_yfm">Show YAML Front Matter</string>
+    <string name="loading_all_repositories">Loading all repositories...</string>
+    <string name="loading_file_data">Loading file data..</string>
+    <string name="loading_repository_data">Loading repository data..</string>
 
 
 </resources>

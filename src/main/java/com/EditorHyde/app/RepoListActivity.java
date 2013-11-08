@@ -71,7 +71,7 @@ public class RepoListActivity extends Activity {
 
         RemoteFileCache.clear();
 
-        pd = ProgressDialog.show( this, "", "Loading all repositories...", true);
+        pd = ProgressDialog.show( this, "", getString(R.string.loading_all_repositories), true);
 
         new GetReposTask().execute();
 

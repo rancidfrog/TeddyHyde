@@ -223,7 +223,7 @@ public class FileListingActivity extends Activity {
 
             }
         });
-        pd = ProgressDialog.show( this, "", "Loading repository data..", true);
+        pd = ProgressDialog.show( this, "", getString(R.string.loading_repository_data), true);
 
         new GetRepoFiles().execute();
 
@@ -452,7 +452,7 @@ public class FileListingActivity extends Activity {
 
         protected void onPostExecute(Boolean result) {
             // Determine the images, and load them
-            pd.setMessage( "Loading hyde transformations...");
+            pd.setMessage( "Loading hyde transformations..");
 
             if( null != theBranch ) {
                 branchTv.setText( theBranch.getName() );
@@ -512,7 +512,7 @@ public class FileListingActivity extends Activity {
         String authToken = sp.getString("authToken", null);
         String login = sp.getString("login", null );
 
-        pd = ProgressDialog.show( this, "", "Loading file data...", true);
+        pd = ProgressDialog.show( this, "", getString(R.string.loading_file_data), true);
 
         new GetFileTask().execute( login, authToken, repoName, filename, fileSha );
 
