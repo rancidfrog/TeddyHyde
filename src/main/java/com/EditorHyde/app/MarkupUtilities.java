@@ -1,5 +1,7 @@
 package com.EditorHyde.app;
 
+import android.widget.TextView;
+
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -26,6 +28,8 @@ public class MarkupUtilities {
         return withOutYFM;
     }
 
+
+
     public static String getYFM( String markdown ) {
         int yfmStart = markdown.indexOf( "---" );
         int yfmEnd = markdown.indexOf( "---", 4 );
@@ -44,7 +48,7 @@ public class MarkupUtilities {
         // Search for the regex pattern plus a regex matcher
         String toMatch =  "\\{\\{" +
                 placeholder
-                         + "\\|/(.+?)/(.*?)/"
+                + "\\|/(.+?)/(.*?)/"
                 + "\\}\\}"
                 ;
         Pattern p = Pattern.compile( toMatch );

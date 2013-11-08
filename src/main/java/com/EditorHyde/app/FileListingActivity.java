@@ -28,6 +28,8 @@ import java.util.*;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import static com.EditorHyde.app.MarkupUtilities.*;
+
 /**
  * Created with IntelliJ IDEA.
  * User: xrdawson
@@ -94,16 +96,66 @@ public class FileListingActivity extends Activity {
 
     }
 
-    private void promptForFilename( final String root, final String prefix, final String template, final String type ) {
+
+    private void promptForFilename( final String root, final String prefix, final String template, final String pageType ) {
         // Set an EditText view to get user input
         final String[] filename = new String[1];
         final LinearLayout ll = new LinearLayout(FileListingActivity.this);
         ll.setOrientation(LinearLayout.VERTICAL);
+        final CheckBox filenamePrettifyingCb = new CheckBox(FileListingActivity.this);
+        final boolean[] useFilenamePrettifying = new boolean[1];
+        useFilenamePrettifying[0] = true;
+        filenamePrettifyingCb.setChecked(true);
+        filenamePrettifyingCb.setText( getString(R.string.filename_prettifying) );
+        final Spinner fileTypes = new Spinner(FileListingActivity.this);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.file_extensions, android.R.layout.simple_spinner_item);
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        // Apply the adapter to the spinner
+        fileTypes.setAdapter(adapter);
         final EditText input = new EditText(FileListingActivity.this);
         final TextView finalFilename = new TextView(FileListingActivity.this);
-        ll.addView(finalFilename);
-        ll.addView(input);
-        final String[] processedTemplate = new String[1];
+        ll.addView( filenamePrettifyingCb );
+        ll.addView( fileTypes );
+        ll.addView( finalFilename );
+        ll.addView( input );
+
+        final PrettyfiedFile pf;
+        pf = new PrettyfiedFile();
+        pf.template = template;
+        pf.root = root;
+        pf.prefix = prefix;
+
+        fileTypes.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                Editable text = input.getText();
+                String title = text.toString();
+                String type= parentView.getItemAtPosition(position).toString();
+                pf.prettify( title, type, pf);
+                finalFilename.setText( "Filename: " + pf.title );
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        } );
+
+            filenamePrettifyingCb.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Editable text = input.getText();
+                    String title = text.toString();
+                    String type = (String) fileTypes.getSelectedItem();
+                    pf.doPrettify = useFilenamePrettifying[0] = (((CheckBox) v).isChecked());
+                    fileTypes.setEnabled(useFilenamePrettifying[0]);
+                    pf.prettify(title, type, pf);
+                    finalFilename.setText("Filename: " + pf.title);
+                }
+            });
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -114,14 +166,10 @@ public class FileListingActivity extends Activity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 Editable text = input.getText();
                 String title = text.toString();
-                // Don't replace non-word at the end of the string.
-                String whitespaceStripped = title.toLowerCase().replaceAll( "\\W+", "-").replaceAll( "\\W+$", "" );
-
-                filename[0] = root + prefix + whitespaceStripped + MARKDOWN_EXTENSION;
-
-                processedTemplate[0] = MarkupUtilities.process( template, "TITLE", title );
-
-                finalFilename.setText( "Filename: " + filename[0] );
+                String type = (String) fileTypes.getSelectedItem();
+                pf.doPrettify = useFilenamePrettifying[0];
+                pf.prettify( title, type, pf);
+                finalFilename.setText("Filename: " + pf.title);
             }
 
             @Override
@@ -131,13 +179,13 @@ public class FileListingActivity extends Activity {
         });
 
         AlertDialog show = new AlertDialog.Builder(FileListingActivity.this)
-                .setTitle(type + " title")
-                .setMessage("Provide a title for your " + type.toLowerCase())
+                .setTitle( pageType + " title")
+                .setMessage("Provide a title for your " + pageType.toLowerCase())
                 .setView(ll)
                 .setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // Convert it to proper format
-                        loadEditor(processedTemplate[0], filename[0], repoName, null );
+                        loadEditor(pf.contents, pf.title, repoName, null );
                     }
                 })
                 .setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

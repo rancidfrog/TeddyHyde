@@ -63,6 +63,11 @@
     <string name="loading_all_repositories">Loading all repositories...</string>
     <string name="loading_file_data">Loading file data..</string>
     <string name="loading_repository_data">Loading repository data..</string>
+    <string name="filename_prettifying">Use filename prettifying</string>
 
+    <string-array name="file_extensions">
+        <item>Markdown</item>
+        <item>AsciiDoc</item>
+    </string-array>
 
 </resources>
