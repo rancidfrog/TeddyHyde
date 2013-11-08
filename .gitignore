@@ -19,4 +19,4 @@ Passwords.java
 */**/test_servers/*
 test_servers
 calabash/screenshot*
-.irb-history
+/**/.irb-history
