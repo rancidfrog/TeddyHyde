@@ -115,7 +115,7 @@ public class ScreenSlidePageFragment extends Fragment {
 
             // Get the YFM
             theYfm = MarkupUtilities.getYFM( theMarkdown );
-	    // Store it for saving here as well.
+            // Store it for saving here as well.
             yfmEditText.setText( theYfm );
 
             toggleYfm.setOnClickListener( new View.OnClickListener() {

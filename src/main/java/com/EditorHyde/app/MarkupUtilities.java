@@ -33,7 +33,7 @@ public class MarkupUtilities {
     public static String getYFM( String markdown ) {
         int yfmStart = markdown.indexOf( "---" );
         int yfmEnd = markdown.indexOf( "---", 4 );
-        String yfm = markdown;
+        String yfm = "";
         if( -1 != yfmStart && -1 != yfmEnd ) {
             yfm = markdown.substring(0,yfmEnd+4);
         }
