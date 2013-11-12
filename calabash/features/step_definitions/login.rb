@@ -1,9 +1,12 @@
+require 'byebug'
 require 'date'
-format = "%Y-%m-%d"
+FORMAT = "%Y-%m-%d"
 filename = "My first file"
+@auth_token = nil
 
 def convert_name( text )
-  "#{DateTime.now().strftime( format )}-#{text.gsub(/\s+/, '-' )}"
+  rv = "#{DateTime.now().strftime( FORMAT )}-#{text.downcase.gsub(/\s+/, '-' )}.md"
+  rv
 end
 
 Given /I start the login process/ do
@@ -26,7 +29,7 @@ And /I select "New Post"/ do
 end
 
 And /I select "Save File"/ do
-  touch "ActionMenuItemView id:'Save File'"
+  touch "ActionMenuItemView text:'Save File'"
 end
 
 
@@ -35,13 +38,29 @@ Then /I click on the list item named "([^\"]*)"/ do |text|
   touch("TextView text:'#{jekyll_name}'")
 end
 
+And /I grab the oauth token for cleanup/ do
+  preferences = get_preferences("com.EditorHyde.app")
+  @auth_token = preferences['authToken']
+
+end
+
+def cleanup
+  file = convert_name( "My new file" )
+  # curl -u "your_login:your_token" \
+  #     https://api.github.com/repos/user/repo
+  cmd = "curl -i -X DELETE -u 'BurningOnUp:#{@auth_token}' https://api.github.com/repos/BurningOnUp/mynewrepo/contents/_posts/#{file}"
+  puts "Cmd: #{cmd}"
+  `#{cmd}`
+  
+  # /applications/:client_id/tokens
+  cmd = "curl -i -X DELETE -u 'BurningOnUp:#{@auth_token}' https://api.github.com/applications/e4f185a088112cb1b0e9/tokens"
+  #  puts "Delete the token for the app"
+  `#{cmd}`
+end
+
 Then /^I scroll until I see the "([^\"]*)" as a jekyll post/ do |text|
-  jekyll_name =  convert_name( text )
-  q = query("TextView text:'#{jekyll_name}'")
-  while q.empty?
-    performAction('scroll_down')
-    q = query("TextView text:'#{jekyll_name}'")
-  end 
+  jekyll_name = convert_name( text )
+  wait_for( timeout: 60  ) { query("TextView text:'#{jekyll_name}'") }
 end
 
 And /I don't see a logout button/ do
@@ -49,7 +68,7 @@ And /I don't see a logout button/ do
 end
 
 And /I wait for the repository layout/ do
-  wait_for( timeout: 60 ) { query( "linearlayout id:'repo_list'" ) }
+  wait_for( timeout: 60 ) { query( "textview id:'repo_name'" ) }
 end
 
 And /I wait for the editor/ do
@@ -58,6 +77,7 @@ end
 
 Then /^I should see the text containing "(.*?)"$/ do |arg1|
   et = query( "edittext" )
+  puts et.inspect
   unless et[0]['text'] =~ /markdown/i
     fail( "Could not find markdown text" )
   end
