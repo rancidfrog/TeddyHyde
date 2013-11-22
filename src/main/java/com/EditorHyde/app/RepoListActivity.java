@@ -25,6 +25,7 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import net.simonvt.menudrawer.*;
 
 /**
  * Created with IntelliJ IDEA.
@@ -56,11 +57,17 @@ public class RepoListActivity extends Activity {
     ListView listView;
     SharedPreferences sp;
 
+    private MenuDrawer mDrawer;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.repo_list);
+
+        mDrawer = MenuDrawer.attach(this);
+        mDrawer.setContentView(R.layout.activity_sample);
+        mDrawer.setMenuView(R.layout.menu_sample);
 
         ctx = this;
 
