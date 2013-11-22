@@ -1,0 +1,5 @@
+tell application "QuickTime Player"
+    --activate
+    new screen recording
+    start document 1
+end tell

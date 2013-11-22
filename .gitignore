@@ -20,3 +20,5 @@ Passwords.java
 test_servers
 calabash/screenshot*
 /**/.irb-history
+video/*.mp4
+video/*.mpg
