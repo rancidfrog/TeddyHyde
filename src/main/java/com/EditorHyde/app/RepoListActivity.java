@@ -63,11 +63,11 @@ public class RepoListActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.repo_list);
+//        setContentView(R.layout.repo_list);
 
         mDrawer = MenuDrawer.attach(this);
         mDrawer.setContentView(R.layout.activity_sample);
-        mDrawer.setMenuView(R.layout.menu_sample);
+        mDrawer.setMenuView(R.layout.repo_list);
 
         ctx = this;
 

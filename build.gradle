@@ -10,7 +10,8 @@ buildscript {
         //        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.+'
         classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
         classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.+'
-	classpath 'net.simonvt.menudrawer:menudrawer:3.0.4+'
+        classpath 'net.simonvt.menudrawer:menudrawer:3.0.4+'
+
     }
 }
 
@@ -29,17 +30,6 @@ repositories {
 
 dependencies {
 
-
-//compile('org.asciidocj:asciidocj:0.1.0')
-//compile('org.asciidoctor:asciidoctor-java-integration:0.1.4') { 
-//		transitive = false
-//	}
-//        compile 'com.wu-man:android-oauth-client:0.0.1'
-//	compile 'com.google.http-client:google-http-client-jackson2:1.15.0-rc'
-//compile 'com.fasterxml.jackson.core:jackson-core:2.2.2'
-//    compile 'com.google.android:support-v4:r7'
-//    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
-
  instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
  testCompile 'junit:junit:4.10'
  testCompile 'org.robolectric:robolectric:2.1.+'
@@ -53,18 +43,6 @@ android {
     sourceSets {
         main {
         }
-
-        // integrationTest {
-        //   // Gives you access to the compiled classes in your tests
-        //   compileClasspath += main.output
-        //   runtimeClasspath += main.output
-        // }
     }
 
 }
-
-// // To run the tests: ./gradlew integrationTest
-// task integrationTest(type: Test) {
-//     testClassesDir = sourceSets.integrationTest.classesDir
-//     classpath = sourceSets.integrationTest.runtimeClasspath
-// }
