@@ -1,4 +1,4 @@
-require 'byebug'
+# require 'byebug'
 require 'date'
 FORMAT = "%Y-%m-%d"
 filename = "My first file"
@@ -102,9 +102,12 @@ end
 
 And /I login using GitHub oAuth login/ do
   set_text "webView css:input[name=login]", "burning@burningon.com"
-  set_text "webView css:input[name=password]", "smallbaby1"
-  #set_text "webView css:input[name=password]", "L0udCaf3"
-  touch "webView input:'button[type=submit]'"
+  set_text "webView css:input[name=password]", "Stinky3y3"
+  if element_exists "webView css:'button[type=submit]'"
+    touch "webView css:'button[type=submit]'"
+  else
+    touch "webView css:'input[type=submit]'"
+  end
   sleep 10
   text = query( "webView css:'.bubble-content'", "textContent" )[0]
   if text =~ /Teddy Hyde Android wants/
