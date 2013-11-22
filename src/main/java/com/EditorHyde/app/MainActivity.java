@@ -58,7 +58,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
     String foobar;
     SharedPreferencesCredentialStore credentialStore;
     Credential credential;
-    public static String logname = "com.EditorHyde.app.app";
+    public static String logname = "com.EditorHyde.app";
 
     public static final String APP_ID = "com.EditorHyde.app";
 
