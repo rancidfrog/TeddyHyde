@@ -10,16 +10,25 @@ def bump_point( current )
   AndroidVersion.point( current )
 end
 
-def version( bump=false )
+def get_version_and_code( node )
+  current = node[VERSION_ATTRIBUTE]
+  code = node[VERSION_CODE]
+  [ current, code ]
+end
+
+def extract_current_and_code_from_xml( xml, bump=false )
+
   # read and parse the old file
-  file = File.read( ANDROID_MANIFEST )
-  xml = Nokogiri::XML(file)
   current = nil
-  
+  code = nil
+  new_version = nil
+  new_code = nil
+
   # replace \n and any additional whitespace with a space
   xml.xpath("/manifest").each do |node|
-    current = node[VERSION_ATTRIBUTE]
-    code = node[VERSION_CODE]
+    tuple = get_version_and_code(node)
+    current = tuple.shift
+    code = tuple.shift
     
     puts "Current version: #{current}/#{code}"
     if bump
@@ -30,6 +39,18 @@ def version( bump=false )
       puts "New version: #{new_version}/#{new_code}"
     end
   end
+  [ current, code ]
+end
+
+def get_xml
+  file = File.read( ANDROID_MANIFEST )
+  xml = Nokogiri::XML(file)
+end
+
+def version( bump=false )
+  xml = get_xml()
+  extract_current_and_code_from_xml( xml, bump )
+  
   if bump
     # save the output into a new file
     File.open( ANDROID_MANIFEST, "w") do |f|
@@ -39,6 +60,17 @@ def version( bump=false )
 end
 
 namespace :version do
+  desc "Tag current version and code"
+  task :tag do
+    xml = get_xml()
+    tuple = extract_current_and_code_from_xml( xml )
+    current = tuple.shift
+    code = tuple.shift
+    # Do git tag
+    the_tag = "#{current}-#{code}"
+    `git tag #{the_tag}"
+  end
+  
   desc "Update version"
   task :current do
     version()
