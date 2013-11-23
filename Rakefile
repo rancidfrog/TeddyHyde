@@ -61,14 +61,16 @@ end
 
 namespace :version do
   desc "Tag current version and code"
-  task :tag do
+  task :commit_and_tag do
     xml = get_xml()
     tuple = extract_current_and_code_from_xml( xml )
     current = tuple.shift
     code = tuple.shift
     # Do git tag
     the_tag = "#{current}-#{code}"
-    `git tag #{the_tag}"`
+    `git add src/main/AndroidManifest.xml`
+    `git commit -m "Version upgrade: #{the_tag}"`
+    `git tag "#{the_tag}"`
   end
   
   desc "Current version"
