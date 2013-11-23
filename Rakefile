@@ -71,7 +71,7 @@ namespace :version do
     `git tag #{the_tag}"`
   end
   
-  desc "Update version"
+  desc "Current version"
   task :current do
     version()
   end
