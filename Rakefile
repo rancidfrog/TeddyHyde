@@ -68,7 +68,7 @@ namespace :version do
     code = tuple.shift
     # Do git tag
     the_tag = "#{current}-#{code}"
-    `git tag #{the_tag}"
+    `git tag #{the_tag}"`
   end
   
   desc "Update version"
