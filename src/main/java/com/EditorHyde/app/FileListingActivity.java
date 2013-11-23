@@ -14,6 +14,7 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SubMenu;
 import android.view.View;
 import android.widget.*;
 
@@ -23,6 +24,7 @@ import org.eclipse.egit.github.core.service.*;
 
 
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -40,6 +42,9 @@ import static com.EditorHyde.app.MarkupUtilities.*;
 public class FileListingActivity extends Activity {
 
     private static final String MARKDOWN_EXTENSION = ".md";
+    private static final String TEMPLATES_PREFIX = "_hyde/templates/";
+    private static final String HYDE_TRANSFORM = "_hyde/transforms.json";
+    private static final int TEMPLATES_GROUP_ID= 1;
     private static final int EDIT_EXISTING_FILE = 1;
     private static final int EDIT_NEW_FILE = 2;
     private ProgressDialog pd;
@@ -58,6 +63,8 @@ public class FileListingActivity extends Activity {
     String transformsJson;
     TreeEntry currentTree;
     String baseUrl;
+    List<String> templates;
+    Map<String, String> specialFiles;
 
     RepositoryBranch theBranch;
 
@@ -144,18 +151,18 @@ public class FileListingActivity extends Activity {
 
         } );
 
-            filenamePrettifyingCb.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Editable text = input.getText();
-                    String title = text.toString();
-                    String type = (String) fileTypes.getSelectedItem();
-                    pf.doPrettify = useFilenamePrettifying[0] = (((CheckBox) v).isChecked());
-                    fileTypes.setEnabled(useFilenamePrettifying[0]);
-                    pf.prettify(title, type, pf);
-                    finalFilename.setText("Filename: " + pf.title);
-                }
-            });
+        filenamePrettifyingCb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Editable text = input.getText();
+                String title = text.toString();
+                String type = (String) fileTypes.getSelectedItem();
+                pf.doPrettify = useFilenamePrettifying[0] = (((CheckBox) v).isChecked());
+                fileTypes.setEnabled(useFilenamePrettifying[0]);
+                pf.prettify(title, type, pf);
+                finalFilename.setText("Filename: " + pf.title);
+            }
+        });
 
         input.addTextChangedListener(new TextWatcher() {
             @Override
@@ -195,40 +202,57 @@ public class FileListingActivity extends Activity {
                 }).show();
     }
 
+    private void promptForPost( String template ) {
+        cwd.descendTo("_posts");
+        SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-" );
+        String prefix = sdf.format( new Date() );
+        promptForFilename("_posts/", prefix, template, "Post");
+    }
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int itemId = item.getItemId();
         String filename;
         String template;
+        int groupId = item.getGroupId();
 
-        switch ( itemId ) {
+        if( groupId == TEMPLATES_GROUP_ID ) {
 
-            case R.id.action_add_new_page:
-                template = getString(R.string.page_template);
-                promptForFilename( cwd.getFullPathWithTrailingSlash(), "", template, "Page" );
+            // Get the transform and handle it
+            String templateName = templates.get( itemId );
+            String templateContents = specialFiles.get( TEMPLATES_PREFIX + templateName );
 
-                return true;
+            if( templateName.endsWith( "post" ) ) {
+                promptForPost( templateContents );
+            }
+            else {
+                promptForFilename( cwd.getFullPathWithTrailingSlash(), "", templateContents, "Post" );
+            }
+        }
+        else{
+            switch ( itemId ) {
 
-            case R.id.action_add_new_post:
-                cwd.descendTo("_posts");
-                SimpleDateFormat sdf = new SimpleDateFormat( "yyyy-MM-dd-" );
-                String prefix = sdf.format( new Date() );
+                case R.id.action_add_new_page:
+                    template = getString(R.string.page_template);
+                    promptForFilename( cwd.getFullPathWithTrailingSlash(), "", template, "Page" );
+                    return true;
 
-                template = getString(R.string.post_template);
-                promptForFilename("_posts/", prefix, template, "Post");
+                case R.id.action_add_new_post:
+                    template = getString(R.string.post_template);
+                    promptForPost( template );
+                    // create a new post
+                    return true;
 
-                // create a new post
-                return true;
+                case R.id.action_upload_image:
+                    Intent i;
+                    Bundle extras = getIntent().getExtras();
+                    extras.putString( "repo", repoName );
+                    extras.putString( "login", login );
+                    i = new Intent(this, PixActivity.class);
+                    i.putExtras(extras);
+                    startActivity( i );
 
-            case R.id.action_upload_image:
-                Intent i;
-                Bundle extras = getIntent().getExtras();
-                extras.putString( "repo", repoName );
-                extras.putString( "login", login );
-                i = new Intent(this, PixActivity.class);
-                i.putExtras(extras);
-                startActivity( i );
-
+            }
         }
 
         return super.onOptionsItemSelected(item);
@@ -239,6 +263,25 @@ public class FileListingActivity extends Activity {
     public boolean onCreateOptionsMenu(Menu menu) {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_file_listing, menu);
+
+        if( null != specialFiles ) {
+            // Load up the extra templates into the menu
+            // Load up the templates
+            int index = 0;
+            templates = new ArrayList<String>();
+
+            SubMenu templatesMenu;
+            templatesMenu = menu.addSubMenu("Templates...");
+
+            for ( String file : specialFiles.keySet() ) {
+                if( file.startsWith( TEMPLATES_PREFIX ) ) {
+                    String shortName = file.replace( TEMPLATES_PREFIX, "");
+                    templates.add( shortName );
+                    templatesMenu.add(TEMPLATES_GROUP_ID, index, index, shortName);
+                    index++;
+                }
+            }
+        }
         return true;
     }
 
@@ -507,7 +550,7 @@ public class FileListingActivity extends Activity {
                 branchTv.setVisibility(View.VISIBLE);
             }
 
-            new LoadHydeTransformsTask().execute();
+            new LoadSpecialFiles().execute();
 
             // This does not work. Why?
             if( null != users && users.size() > 1 ) {
@@ -517,34 +560,57 @@ public class FileListingActivity extends Activity {
     }
 
 
-    private class LoadHydeTransformsTask extends AsyncTask<Void, Void, Boolean> {
+    private class LoadSpecialFiles extends AsyncTask<Void, Void, Boolean> {
+
+        int templateCount = 0;
 
         @Override
         protected Boolean doInBackground(Void...unused) {
+            getSpecialFiles();
+            return true;
+        }
 
+        private boolean isTemplate( String name ) {
+            return name.startsWith( TEMPLATES_PREFIX );
+        }
+
+        private boolean isSpecialFile( String name ) {
+            boolean rv = false;
+            rv = name.equals( HYDE_TRANSFORM );
+            rv = rv || isTemplate( name );
+            return rv;
+        }
+
+        private void getSpecialFiles() {
             String transformsSha = null;
             transformsJson = null;
+            specialFiles = new HashMap<String, String>();
 
             if( null != entries ) {
+
                 for( TreeEntry entry: entries ) {
 
                     String name = entry.getPath();
-
-                    if( name.equals( "_hyde/transforms.json") ) {
-                        transformsSha = entry.getSha();
-                    }
-                }
-
-                if( null != transformsSha ) {
-                    try {
-                        transformsJson = ThGitClient.GetFile( authToken, repoName, login, transformsSha );
-                    } catch (IOException e) {
-                        e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                    if( isSpecialFile( name ) ) {
+                        try {
+                            if( isTemplate( name )) {
+                                templateCount++;
+                            }
+                            transformsSha = entry.getSha();
+                            String contents = ThGitClient.GetFile( authToken, repoName, login, transformsSha );
+                            specialFiles.put( name, contents );
+                        } catch (IOException e) {
+                            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                        }
                     }
                 }
             }
 
-            return true;
+            // Load up the transforms
+            transformsJson = specialFiles.get( HYDE_TRANSFORM );
+
+
+            invalidateOptionsMenu();
 
         }
 

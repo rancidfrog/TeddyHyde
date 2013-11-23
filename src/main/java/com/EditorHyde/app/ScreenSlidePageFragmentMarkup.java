@@ -31,8 +31,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.petebevin.markdown.MarkdownProcessor;
-// import org.asciidocj.*;
-import org.asciidoctor.Asciidoctor;
 import java.util.Collections;
 
 import static com.EditorHyde.app.R.*;
