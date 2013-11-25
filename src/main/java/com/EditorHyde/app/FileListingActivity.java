@@ -669,12 +669,8 @@ public class FileListingActivity extends Activity {
         extras.putString( "login", login );
         extras.putString( "transforms", transformsJson );
         extras.putString( "sha", sha );
-
         i.putExtras(extras);
-
         startActivityForResult(i, null != sha ? EDIT_EXISTING_FILE : EDIT_NEW_FILE );
-
-
     }
 
     @Override
