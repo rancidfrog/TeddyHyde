@@ -60,7 +60,7 @@ public class FileListingActivity extends Activity {
     String baseUrl;
     List<String> templates;
     Map<String, String> specialFiles;
-
+    int templateCount = 0;
     RepositoryBranch theBranch;
 
     @Override
@@ -259,21 +259,23 @@ public class FileListingActivity extends Activity {
         super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.activity_file_listing, menu);
 
-        if( null != specialFiles ) {
-            // Load up the extra templates into the menu
-            // Load up the templates
-            int index = 0;
-            templates = new ArrayList<String>();
+        if( templateCount > 0 ) {
+            if( null != specialFiles ) {
+                // Load up the extra templates into the menu
+                // Load up the templates
+                int index = 0;
+                templates = new ArrayList<String>();
 
-            SubMenu templatesMenu;
-            templatesMenu = menu.addSubMenu("Templates...");
+                SubMenu templatesMenu;
+                templatesMenu = menu.addSubMenu("Templates...");
 
-            for ( String file : specialFiles.keySet() ) {
-                if( file.startsWith( TEMPLATES_PREFIX ) ) {
-                    String shortName = file.replace( TEMPLATES_PREFIX, "");
-                    templates.add( shortName );
-                    templatesMenu.add(TEMPLATES_GROUP_ID, index, index, shortName);
-                    index++;
+                for ( String file : specialFiles.keySet() ) {
+                    if( file.startsWith( TEMPLATES_PREFIX ) ) {
+                        String shortName = file.replace( TEMPLATES_PREFIX, "");
+                        templates.add( shortName );
+                        templatesMenu.add(TEMPLATES_GROUP_ID, index, index, shortName);
+                        index++;
+                    }
                 }
             }
         }
@@ -556,8 +558,6 @@ public class FileListingActivity extends Activity {
 
 
     private class LoadSpecialFiles extends AsyncTask<Void, Void, Boolean> {
-
-        int templateCount = 0;
 
         @Override
         protected Boolean doInBackground(Void...unused) {
