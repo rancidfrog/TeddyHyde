@@ -19,7 +19,6 @@ apply plugin: 'android-test'
 dependencies {
     compile fileTree(dir: 'lib', include: '*.jar')
     compile fileTree(dir: 'TeddyHyde/libs', include: '*.jar')
-    //    compile fileTree(dir: 'asciidocj/target/classes')
 }
 
 repositories {
@@ -27,17 +26,6 @@ repositories {
 }
 
 dependencies {
-
-
-//compile('org.asciidocj:asciidocj:0.1.0')
-//compile('org.asciidoctor:asciidoctor-java-integration:0.1.4') { 
-//		transitive = false
-//	}
-//        compile 'com.wu-man:android-oauth-client:0.0.1'
-//	compile 'com.google.http-client:google-http-client-jackson2:1.15.0-rc'
-//compile 'com.fasterxml.jackson.core:jackson-core:2.2.2'
-//    compile 'com.google.android:support-v4:r7'
-//    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
 
  instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
  testCompile 'junit:junit:4.10'
@@ -48,6 +36,15 @@ dependencies {
 android {
     compileSdkVersion 18
     buildToolsVersion "18.0.1"
+
+//    signingConfigs {
+//    release {
+//        storeFile file(System.getenv("KEYSTORE"))
+//        storePassword System.getenv("KEYSTORE_PASSWORD")
+//        keyAlias System.getenv("KEY_ALIAS")
+//        keyPassword System.getenv("KEY_PASSWORD")
+//    }
+//    }
 
     sourceSets {
         main {
@@ -60,10 +57,11 @@ android {
         // }
     }
 
+    buildTypes {
+        release {
+//            signingConfig signingConfigs.release
+        }
+    }
+
 }
 
-// // To run the tests: ./gradlew integrationTest
-// task integrationTest(type: Test) {
-//     testClassesDir = sourceSets.integrationTest.classesDir
-//     classpath = sourceSets.integrationTest.runtimeClasspath
-// }

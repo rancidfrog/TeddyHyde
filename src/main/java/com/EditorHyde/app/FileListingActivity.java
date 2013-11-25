@@ -17,14 +17,9 @@ import android.view.MenuItem;
 import android.view.SubMenu;
 import android.view.View;
 import android.widget.*;
-
 import org.eclipse.egit.github.core.*;
-
 import org.eclipse.egit.github.core.service.*;
-
-
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
