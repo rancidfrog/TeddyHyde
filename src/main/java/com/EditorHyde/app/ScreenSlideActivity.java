@@ -187,6 +187,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
         else {
             menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
+            menu.findItem(R.id.action_save_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
             menu.findItem(R.id.action_save_into_repository).setEnabled(isNumberOne).setVisible(isNumberOne);
             menu.findItem(R.id.action_close_scratchpad).setEnabled(isNumberOne).setVisible(isNumberOne);
             if( null != lastGistUrl) {
@@ -328,7 +329,8 @@ public class ScreenSlideActivity extends FragmentActivity {
             extras.putString( "path", theFile);
         }
         else {
-            extras.putString( "scratch", theMarkdown );
+            String contents = getFullContents();
+            extras.putString( "scratch", contents );
             extras.putString( "scratch_id", scratchId );
         }
         intent.putExtras(extras);
@@ -420,6 +422,15 @@ public class ScreenSlideActivity extends FragmentActivity {
         startActivityForResult( i, returnCode );
     }
 
+    public String getFullContents() {
+        EditText et;
+        et = (EditText) findViewById(R.id.markdownEditor);
+        EditText yfmEt = (EditText) findViewById(R.id.yfmEditText);
+        String yfm = yfmEt.getText().toString();
+        String markup = et.getText().toString();
+        String contents = yfm + markup;
+        return contents;
+    }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -447,7 +458,6 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
         else {
             String contents;
-            EditText et;
 
             switch ( itemId ) {
 
@@ -487,11 +497,7 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 case R.id.action_save_with_commit:
                 case R.id.action_save_file:
-                    et = (EditText) findViewById(R.id.markdownEditor);
-                    EditText yfmEt = (EditText) findViewById(R.id.yfmEditText);
-                    String yfm = yfmEt.getText().toString();
-                    String markup = et.getText().toString();
-                    contents = yfm + markup;
+                    contents = getFullContents();
 
                     if( R.id.action_save_with_commit == itemId ) {
                         promptForCommitMessage( contents );
@@ -514,9 +520,12 @@ public class ScreenSlideActivity extends FragmentActivity {
 
                 case R.id.action_save_as_gist:
                     startSaveProgressIndicator();
-                    et = (EditText) findViewById(R.id.markdownEditor);
-                    contents = et.getText().toString();
+                    contents = getFullContents();
                     new SaveGistTask().execute( contents );
+                    break;
+
+                case R.id.action_save_scratch:
+                    finishWithResult();
                     break;
 
                 case R.id.action_close_scratchpad:

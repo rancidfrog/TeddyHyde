@@ -9,6 +9,9 @@
 
 
     <application android:icon="@drawable/teddyhyde" android:label="@string/app_name">
+
+        <meta-data android:name="ormdroid.database.name" android:value="TeddyHyde" />
+
         <activity android:name=".MainActivity" android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>

@@ -47,6 +47,8 @@ import org.eclipse.egit.github.core.service.UserService;
 import java.io.IOException;
 import java.util.Arrays;
 
+import com.roscopeco.ormdroid.*;
+
 //import com.wuman.oauth.samples.OAuth;
 
 public class MainActivity extends Activity implements View.OnClickListener {
@@ -80,6 +82,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
         pd = ProgressDialog.show( this, "", "Verifying login token...", true);
 
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
+        ORMDroidApplication.initialize(this);
         new VerifyUser().execute();
     }
 

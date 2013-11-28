@@ -97,8 +97,6 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
         rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 
@@ -106,10 +104,9 @@ public class ScreenSlidePageFragment extends Fragment {
         yfmEditText = ((EditText)rootView.findViewById(R.id.yfmEditText));
 
         String stripped = theMarkdown;
-
         toggleYfm = (Button)rootView.findViewById(R.id.toggleYFM);
-        if( theFile.endsWith( ".md" ) || theFile.endsWith( ".markdown" ) ) {
 
+        if( MarkupUtilities.hasYFM( theMarkdown ) ) {
             // Strip YFM
             stripped = MarkupUtilities.stripYFM( theMarkdown );
 
@@ -145,7 +142,10 @@ public class ScreenSlidePageFragment extends Fragment {
         });
 
         TextView filenameView = (TextView)rootView.findViewById(R.id.currentFilename);
-        filenameView.setText(theFile);
+
+        if( null != theFile ) {
+            filenameView.setText(theFile);
+        }
 
         return rootView;
     }

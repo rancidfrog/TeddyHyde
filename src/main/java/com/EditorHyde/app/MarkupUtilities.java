@@ -28,7 +28,13 @@ public class MarkupUtilities {
         return withOutYFM;
     }
 
-
+    public static boolean hasYFM( String markdown ) {
+        boolean rv = false;
+        int yfmStart = markdown.indexOf( "---" );
+        int yfmEnd = markdown.indexOf( "---", 4 );
+        rv = ( 0 == yfmStart && yfmStart != yfmEnd );
+        return rv;
+    }
 
     public static String getYFM( String markdown ) {
         int yfmStart = markdown.indexOf( "---" );

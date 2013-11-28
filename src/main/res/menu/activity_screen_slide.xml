@@ -32,6 +32,11 @@
           android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
+    <item android:id="@+id/action_save_scratch"
+        android:title="@string/save_as_scratch"
+        android:visible="false"
+        android:showAsAction="ifRoom|withText" />
+
     <item android:id="@+id/action_save_into_repository"
           android:title="@string/save_into_repository"
           android:visible="false"

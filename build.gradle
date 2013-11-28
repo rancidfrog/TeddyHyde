@@ -17,8 +17,8 @@ apply plugin: 'android'
 apply plugin: 'android-test'
 
 dependencies {
-    compile fileTree(dir: 'lib', include: '*.jar')
-    compile fileTree(dir: 'TeddyHyde/libs', include: '*.jar')
+    compile fileTree( dir: 'lib', include: '*.jar' )
+    compile fileTree( dir: 'TeddyHyde/libs', include: '*.jar' )
 }
 
 repositories {

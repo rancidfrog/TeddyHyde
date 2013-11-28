@@ -5,10 +5,17 @@
               android:layout_height="match_parent"
               android:orientation="vertical" >
 
+    <TextView
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="You have no scratches yet in your scratchpad. Choose from the menu items above to make one."
+        android:id="@+id/no_scratches" />
+
     <ListView
-            android:id="@android:id/list"
+            android:id="@+id/scratch_list"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/hello" />
+            android:layout_height="wrap_content" />
 
 </LinearLayout>

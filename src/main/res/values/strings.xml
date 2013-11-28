@@ -64,6 +64,7 @@
     <string name="loading_file_data">Loading file data..</string>
     <string name="loading_repository_data">Loading repository data..</string>
     <string name="filename_prettifying">Use filename prettifying</string>
+    <string name="save_as_scratch">Save as scratch</string>
 
     <string-array name="file_extensions">
         <item>Markdown</item>
