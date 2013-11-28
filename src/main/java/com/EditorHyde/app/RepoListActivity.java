@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,12 +16,22 @@ import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
 import org.eclipse.egit.github.core.Authorization;
 import org.eclipse.egit.github.core.Repository;
 import org.eclipse.egit.github.core.service.OAuthService;
 import org.eclipse.egit.github.core.service.RepositoryService;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -36,6 +47,7 @@ import java.util.Set;
 public class RepoListActivity extends Activity {
 
     Context ctx;
+    String json = null;
 
     public void showFilesList( Repository repo ) {
         Intent i = new Intent(this, FileListingActivity.class);
@@ -43,7 +55,7 @@ public class RepoListActivity extends Activity {
         Bundle bundle = new Bundle();
         String repoName = repo.getName();
         String login = repo.getOwner().getLogin();
-        bundle.putString( "repo", repoName );
+        bundle.putString("repo", repoName);
         bundle.putString( "login", login );
         i.putExtras(bundle);
         startActivity(i);
@@ -133,8 +145,65 @@ public class RepoListActivity extends Activity {
             Intent i = new Intent(this, ScratchpadActivity.class);
             startActivity(i);
         }
+        else if( itemId == R.id.action_import_code ) {
+            // Get the JSON code repository for display
+            new GetImportList().execute();
+        }
 
         return rv;
+    }
+
+    private class GetImportList extends AsyncTask<Void, Void, Boolean> {
+
+
+        protected Boolean doInBackground(Void...voids) {
+        json = getImportList();
+            return true;
+        }
+
+    private String getImportList() {
+        String url = null;
+        url = "http://blog.teddyhyde.com/modules.json";
+
+        HttpClient httpClient = new DefaultHttpClient();
+
+        try{
+            HttpGet httpGet = new HttpGet(url);
+            HttpResponse httpResponse = httpClient.execute(httpGet);
+            HttpEntity httpEntity = httpResponse.getEntity();
+
+            if(httpEntity != null){
+
+                InputStream inputStream = httpEntity.getContent();
+
+                //Lecture du retour au format JSON
+                BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+                StringBuilder stringBuilder = new StringBuilder();
+
+                String ligneLue = bufferedReader.readLine();
+                while(ligneLue != null){
+                    stringBuilder.append(ligneLue + " \n");
+                    ligneLue = bufferedReader.readLine();
+                }
+                bufferedReader.close();
+                json = stringBuilder.toString();
+                JSONObject jsonObject = new JSONObject(json);
+
+            }// <-- end IF
+        }catch (IOException e){
+            Log.e("TeddyHyde", e.getMessage());
+        }catch (JSONException e){
+            Log.e("TeddyHyde", e.getMessage());
+
+        }
+
+        return json;
+    }
+
+        protected void onPostExecute(Boolean result) {
+
+        }
+
     }
 
     @Override

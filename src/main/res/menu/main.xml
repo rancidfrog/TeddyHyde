@@ -12,4 +12,9 @@
             android:visible="false"
           android:showAsAction="ifRoom|withText" />
 
+    <item android:id="@+id/action_import_code"
+        android:title="@string/import_code"
+        android:showAsAction="ifRoom|withText" />
+
+
 </menu>
