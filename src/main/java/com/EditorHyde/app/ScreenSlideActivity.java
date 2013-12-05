@@ -343,7 +343,7 @@ public class ScreenSlideActivity extends FragmentActivity {
     @Override
     public void onBackPressed() {
 
-        if( editorFragment.isDirty() ) {
+        if( null != editorFragment && editorFragment.isDirty() ) {
             // Notify the user they will lose work...
             new AlertDialog.Builder(this)
                     .setIcon(android.R.drawable.ic_dialog_alert)

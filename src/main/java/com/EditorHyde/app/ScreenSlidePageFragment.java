@@ -68,22 +68,11 @@ public class ScreenSlidePageFragment extends Fragment {
         return fragment;
     }
 
-    public ScreenSlidePageFragment() {
-    }
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPageNumber = getArguments().getInt(ARG_PAGE);
     }
-
-//    public void setFilename( String filename ) {
-//        theFile = filename;
-//    }
-//
-//    public void setMarkdown( String md) {
-//        theMarkdown = md;
-//    }
 
     public boolean isDirty() {
         return mDirty;
@@ -101,60 +90,56 @@ public class ScreenSlidePageFragment extends Fragment {
         if( null != args ) {
             theMarkdown = args.getString( MARKDOWN );
             theFile = args.getString( FILENAME );
-        }
-        else if( null != savedInstanceState ) {
-            theMarkdown = savedInstanceState.getString( MARKDOWN );
-            theFile = savedInstanceState.getString( FILENAME );
-        }
 
-        rootView = (ViewGroup) inflater
-                .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
+            rootView = (ViewGroup) inflater
+                    .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 
-        editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
-        yfmEditText = ((EditText)rootView.findViewById(R.id.yfmEditText));
+            editor = ((EditText)rootView.findViewById(R.id.markdownEditor));
+            yfmEditText = ((EditText)rootView.findViewById(R.id.yfmEditText));
 
-        String stripped = theMarkdown;
-        toggleYfm = (Button)rootView.findViewById(R.id.toggleYFM);
+            String stripped = theMarkdown;
+            toggleYfm = (Button)rootView.findViewById(R.id.toggleYFM);
 
-        if( MarkupUtilities.hasYFM( theMarkdown ) ) {
-            // Strip YFM
-            stripped = MarkupUtilities.stripYFM( theMarkdown );
+            if( MarkupUtilities.hasYFM( theMarkdown ) ) {
+                // Strip YFM
+                stripped = MarkupUtilities.stripYFM( theMarkdown );
 
-            // Get the YFM
-            theYfm = MarkupUtilities.getYFM( theMarkdown );
-            // Store it for saving here as well.
-            yfmEditText.setText( theYfm );
+                // Get the YFM
+                theYfm = MarkupUtilities.getYFM( theMarkdown );
+                // Store it for saving here as well.
+                yfmEditText.setText( theYfm );
 
-            toggleYfm.setOnClickListener( new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                toggleYamlFrontMatter();
+                toggleYfm.setOnClickListener( new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        toggleYamlFrontMatter();
+                    }
+                });
             }
-        });
-        }
-        else {
-            toggleYfm.setVisibility(View.GONE);
-        }
-
-        editor.setText( stripped );
-
-        editor.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {
-                mDirty = true;
+            else {
+                toggleYfm.setVisibility(View.GONE);
             }
 
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            editor.setText( stripped );
+
+            editor.addTextChangedListener(new TextWatcher() {
+
+                public void afterTextChanged(Editable s) {
+                    mDirty = true;
+                }
+
+                public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                }
+
+                public void onTextChanged(CharSequence s, int start, int before, int count) {
+                }
+            });
+
+            TextView filenameView = (TextView)rootView.findViewById(R.id.currentFilename);
+
+            if( null != theFile ) {
+                filenameView.setText(theFile);
             }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-        });
-
-        TextView filenameView = (TextView)rootView.findViewById(R.id.currentFilename);
-
-        if( null != theFile ) {
-            filenameView.setText(theFile);
         }
 
         return rootView;
