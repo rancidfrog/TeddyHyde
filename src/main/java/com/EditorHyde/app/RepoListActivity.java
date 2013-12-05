@@ -7,10 +7,12 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -46,25 +48,26 @@ public class RepoListActivity extends Activity {
         bundle.putString( "repo", repoName );
         bundle.putString( "login", login );
         i.putExtras(bundle);
-        startActivity(i);
+        // startActivity(i);
 
+        FileListingActivity fla = new FileListingActivity();
+        fla.setIntent( i );
+        fla.onCreate(null);
     }
 
     RepoListAdapter adapter;
     private ProgressDialog pd;
     String authToken;
-    ListView listView;
     SharedPreferences sp;
+    private DrawerLayout mDrawerLayout;
+    private ListView mDrawerList;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.repo_list);
 
         ctx = this;
-
-        listView = (ListView) findViewById(R.id.listView);
 
         sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);
         authToken = sp.getString("authToken", null);
@@ -195,11 +198,23 @@ public class RepoListActivity extends Activity {
         protected void onPostExecute(Boolean result) {
             pd.hide();
 
-            if( result ) {
-                adapter = new RepoListAdapter(ctx, allRepos );
-                listView.setAdapter(adapter);
+            // Set the list's click listener
+//            mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
-                listView.setOnItemClickListener( new AdapterView.OnItemClickListener() {
+//            setContentView(R.layout.repo_list);
+
+            if( result ) {
+
+                setContentView(R.layout.navigation);
+
+                mDrawerList = (ListView) findViewById(R.id.drawer_repo_list);
+
+                adapter = new RepoListAdapter(ctx, allRepos );
+
+                // Set the adapter for the list view
+                mDrawerList.setAdapter(adapter);
+
+                mDrawerList.setOnItemClickListener( new AdapterView.OnItemClickListener() {
                     @Override
                     public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                         Repository repo = (Repository)adapterView.getItemAtPosition(i);

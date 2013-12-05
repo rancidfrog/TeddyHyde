@@ -1,11 +1,5 @@
 package com.EditorHyde.app;
 
-import android.accounts.Account;
-import android.accounts.AccountManager;
-import android.accounts.AccountManagerCallback;
-import android.accounts.AccountManagerFuture;
-import android.accounts.AuthenticatorException;
-import android.accounts.OperationCanceledException;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
@@ -14,15 +8,13 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.provider.Settings;
-import android.text.Editable;
+import android.support.v4.widget.DrawerLayout;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,14 +32,10 @@ import com.wuman.android.auth.DialogFragmentController;
 import com.wuman.android.auth.OAuthManager;
 import com.wuman.android.auth.oauth2.store.SharedPreferencesCredentialStore;
 
-import org.eclipse.egit.github.core.Authorization;
-import org.eclipse.egit.github.core.service.OAuthService;
 import org.eclipse.egit.github.core.service.UserService;
 
 import java.io.IOException;
 import java.util.Arrays;
-
-//import com.wuman.oauth.samples.OAuth;
 
 public class MainActivity extends Activity implements View.OnClickListener {
 
@@ -58,8 +46,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     String foobar;
     SharedPreferencesCredentialStore credentialStore;
     Credential credential;
-    public static String logname = "com.EditorHyde.app";
-
     public static final String APP_ID = "com.EditorHyde.app";
 
     public void nukePreferences() {
@@ -75,11 +61,13 @@ public class MainActivity extends Activity implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         Crashlytics.start(this);
 
         pd = ProgressDialog.show( this, "", "Verifying login token...", true);
 
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
+
         new VerifyUser().execute();
     }
 
@@ -198,15 +186,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            String bar = "";
-            if( null == flow ) {
-                bar = "asdasd";
-            }
-            else {
-                bar = "a4234sdasd";
-            }
-
 
             return true;
         }

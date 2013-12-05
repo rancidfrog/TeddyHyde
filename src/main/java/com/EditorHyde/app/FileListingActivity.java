@@ -65,7 +65,7 @@ public class FileListingActivity extends Activity {
 
     @Override
     public void onBackPressed() {
-        Log.d(MainActivity.logname, "onBackPressed Called");
+        Log.d(MainActivity.APP_ID, "onBackPressed Called");
         if( cwd.atRoot()) {
             finish();
         }
@@ -289,6 +289,10 @@ public class FileListingActivity extends Activity {
         ctx = this;
         cwd = new Cwd();
         values = new ArrayList<TreeEntry>();
+
+//        FrameLayout fl = (FrameLayout)findViewById(R.id.content_frame);
+//
+
         setContentView(R.layout.file_list);
 
         SharedPreferences sp = this.getSharedPreferences( MainActivity.APP_ID, MODE_PRIVATE);

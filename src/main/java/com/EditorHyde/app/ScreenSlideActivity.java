@@ -157,7 +157,7 @@ public class ScreenSlideActivity extends FragmentActivity {
                     transforms.add( transform );
                 }
                 else {
-                    Log.d(MainActivity.logname, "Unsupported transform version");
+                    Log.d(MainActivity.APP_ID, "Unsupported transform version");
                 }
             }
 

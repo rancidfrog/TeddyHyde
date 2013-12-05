@@ -132,7 +132,7 @@ public class PixActivity extends Activity {
                         } else {
                             Toast.makeText(getApplicationContext(), "Unknown path",
                                     Toast.LENGTH_LONG).show();
-                            Log.e(MainActivity.logname, "Unknown path");
+                            Log.e(MainActivity.APP_ID, "Unknown path");
                         }
 
                         if (filePath != null) {
@@ -147,7 +147,7 @@ public class PixActivity extends Activity {
                     } catch (Exception e) {
                         Toast.makeText(getApplicationContext(), "Internal error",
                                 Toast.LENGTH_LONG).show();
-                        Log.e(MainActivity.logname, e.getMessage(), e);
+                        Log.e(MainActivity.APP_ID, e.getMessage(), e);
                     }
                 }
                 break;
@@ -183,7 +183,7 @@ public class PixActivity extends Activity {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.exception_message),
                     Toast.LENGTH_LONG).show();
-            Log.e(MainActivity.logname, e.getMessage(), e);
+            Log.e(MainActivity.APP_ID, e.getMessage(), e);
         }
 
     }
