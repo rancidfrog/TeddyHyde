@@ -20,6 +20,7 @@ import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,13 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
-/**
- * A fragment representing a single step in a wizard. The fragment shows a dummy title indicating
- * the page number, along with some dummy text.
- *
- * <p>This class is used by the {@link CardFlipActivity} and {@link
- * ScreenSlideActivity} samples.</p>
- */
 public class ScreenSlidePageFragment extends Fragment {
     /**
      * The argument key for the page number this fragment represents.
@@ -56,15 +50,20 @@ public class ScreenSlidePageFragment extends Fragment {
     Button toggleYfm;
     Boolean togglingYfm = false;
 
+    private static final String MARKDOWN = "markdown";
+    private static final String FILENAME = "filename";
+
     /**
      * Factory method for this fragment class. Constructs a new fragment for the given page number.
      */
     public static ScreenSlidePageFragment create(int pageNumber, String markdown, String filename ) {
         ScreenSlidePageFragment fragment = new ScreenSlidePageFragment();
-        fragment.setMarkdown( markdown );
-        fragment.setFilename( filename );
+//        fragment.setMarkdown( markdown );
+//        fragment.setFilename( filename );
         Bundle args = new Bundle();
-        args.putInt(ARG_PAGE, pageNumber);
+        args.putInt( ARG_PAGE, pageNumber);
+        args.putString( MARKDOWN, markdown);
+        args.putString( FILENAME, filename );
         fragment.setArguments(args);
         return fragment;
     }
@@ -78,13 +77,13 @@ public class ScreenSlidePageFragment extends Fragment {
         mPageNumber = getArguments().getInt(ARG_PAGE);
     }
 
-    public void setFilename( String filename ) {
-        theFile = filename;
-    }
-
-    public void setMarkdown( String md) {
-        theMarkdown = md;
-    }
+//    public void setFilename( String filename ) {
+//        theFile = filename;
+//    }
+//
+//    public void setMarkdown( String md) {
+//        theMarkdown = md;
+//    }
 
     public boolean isDirty() {
         return mDirty;
@@ -97,6 +96,17 @@ public class ScreenSlidePageFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        Bundle args = getArguments();
+        if( null != args ) {
+            theMarkdown = args.getString( MARKDOWN );
+            theFile = args.getString( FILENAME );
+        }
+        else if( null != savedInstanceState ) {
+            theMarkdown = savedInstanceState.getString( MARKDOWN );
+            theFile = savedInstanceState.getString( FILENAME );
+        }
+
         rootView = (ViewGroup) inflater
                 .inflate(R.layout.fragment_screen_slide_page_editor, container, false);
 

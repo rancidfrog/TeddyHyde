@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="match_parent"
+    android:padding="2dp">
 
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/repoName" android:layout_gravity="left|center_vertical" android:textStyle="bold"
-            android:textSize="20dp"/>
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repoName" android:layout_gravity="left|center_vertical"
+        android:textStyle="bold"
+        style="@android:style/TextAppearance.Medium"/>
     <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/repoOwner" android:layout_gravity="left|center_vertical"/>
+        style="@android:style/TextAppearance.Small"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/repoOwner"
+        android:layout_gravity="left|center_vertical"/>
 </LinearLayout>
