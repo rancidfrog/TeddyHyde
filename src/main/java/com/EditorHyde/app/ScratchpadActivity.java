@@ -32,47 +32,11 @@ import com.EditorHyde.app.Scratch;
  */
 public class ScratchpadActivity extends Activity {
 
-
-    public class ScratchAdapter extends ArrayAdapter<Scratch> {
-
-        List<Scratch> scratches;
-        int rid;
-
-        public ScratchAdapter( Context ctx, int textViewResourceId, List<Scratch> scratches ) {
-            super(ctx, textViewResourceId, scratches );
-            this.scratches = scratches;
-            this.rid = textViewResourceId;
-        }
-
-        @Override
-        public long getItemId(int position) {
-            Scratch it = this.scratches.get(position);
-            return ( null != it ? it.id : 0 );
-        }
-
-        @Override
-        public boolean hasStableIds() {
-            return true;
-        }
-
-    }
-
     public static final int NEW_SCRATCH = 1;
     public static final int EXISTING_SCRATCH = 2;
     ListView scratches;
     List<Scratch> scratchList;
-    ScratchAdapter adapter;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
-    @Override
-    protected void onPause() {
-        super.onPause();
-    }
-
+    ScratchpadListAdapter adapter;
     String theLogin;
 
     private void setDisplayOfNotification() {
@@ -94,7 +58,7 @@ public class ScratchpadActivity extends Activity {
 
         setDisplayOfNotification();
 
-        adapter = new ScratchAdapter( this, android.R.layout.simple_list_item_1, scratchList );
+        adapter = new ScratchpadListAdapter( this, scratchList );
 
         scratches.setAdapter(adapter);
 
@@ -144,7 +108,7 @@ public class ScratchpadActivity extends Activity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
         // Check which request we're responding to
-        if (requestCode == NEW_SCRATCH ) {
+        if ( requestCode == NEW_SCRATCH ) {
             Bundle bundle = data.getExtras();
             String contents = bundle.getString("scratch");
             Scratch scratch = new Scratch();
@@ -177,7 +141,7 @@ public class ScratchpadActivity extends Activity {
                 break;
             case R.id.action_scratchpad_new_page:
                 template = getString(R.string.page_template);
-        rv = true;
+                rv = true;
                 break;
             case R.id.action_scratchpad_new_markdown:
                 template = "";
@@ -203,7 +167,7 @@ public class ScratchpadActivity extends Activity {
             extras.putString( "markdown", markdown );
             extras.putBoolean( "scratchpad", true );
             if( 0 != id ) {
-            extras.putString( "scratch_id", Integer.toString( id ) );
+                extras.putString( "scratch_id", Integer.toString( id ) );
             }
 
             i.putExtras(extras);

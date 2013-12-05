@@ -187,7 +187,12 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
         else {
             menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
+            if( null != scratchId ) {
             menu.findItem(R.id.action_save_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
+            }
+            else {
+                menu.findItem(R.id.action_save_as_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
+            }
             menu.findItem(R.id.action_save_into_repository).setEnabled(isNumberOne).setVisible(isNumberOne);
             menu.findItem(R.id.action_close_scratchpad).setEnabled(isNumberOne).setVisible(isNumberOne);
             if( null != lastGistUrl) {
@@ -324,14 +329,14 @@ public class ScreenSlideActivity extends FragmentActivity {
         Intent intent = new Intent();
         Bundle extras = new Bundle();
 
-        if( !isScratchpad) {
-            extras.putString( "sha", theSha );
-            extras.putString( "path", theFile);
-        }
-        else {
+        if( isScratchpad ) {
             String contents = getFullContents();
             extras.putString( "scratch", contents );
             extras.putString( "scratch_id", scratchId );
+        }
+        else {
+            extras.putString( "sha", theSha );
+            extras.putString( "path", theFile);
         }
         intent.putExtras(extras);
 
@@ -402,8 +407,6 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
 
     }
-
-
 
     private void getImage( int returnCode, int transformIndex, int size ) {
         Intent i;
@@ -525,9 +528,6 @@ public class ScreenSlideActivity extends FragmentActivity {
                     break;
 
                 case R.id.action_save_scratch:
-                    finishWithResult();
-                    break;
-
                 case R.id.action_close_scratchpad:
                     finishWithResult();
                     break;
