@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.roscopeco.ormdroid.ORMDroidApplication;
 
 import org.eclipse.egit.github.core.Authorization;
 import org.eclipse.egit.github.core.Repository;
@@ -72,7 +73,7 @@ public class RepoListActivity extends Activity {
         RemoteFileCache.clear();
 
         pd = ProgressDialog.show( this, "", getString(R.string.loading_all_repositories), true);
-
+        ORMDroidApplication.initialize(this);
         new GetReposTask().execute();
 
     }

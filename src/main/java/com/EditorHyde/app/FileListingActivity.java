@@ -24,6 +24,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 
 import com.google.analytics.tracking.android.EasyTracker;
+import com.roscopeco.ormdroid.ORMDroidApplication;
 
 import static com.EditorHyde.app.MarkupUtilities.*;
 
@@ -312,7 +313,7 @@ public class FileListingActivity extends Activity {
             }
         });
         pd = ProgressDialog.show( this, "", getString(R.string.loading_repository_data), true);
-
+        ORMDroidApplication.initialize(this);
         new GetRepoFiles().execute();
 
     }
