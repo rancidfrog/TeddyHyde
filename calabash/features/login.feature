@@ -1,13 +1,7 @@
 Feature: Login
+
   Scenario: As a logged in user I can add a file
-    Given I start the login process
-    Then I should not see "Logout from GitHub"
-    And I don't see a logout button
-    And I acknowledge the 2 factor bug
-    And I wait for the GitHub oAuth login page
-    And I login using GitHub oAuth login
-    And I grab the oauth token for cleanup
-    Then I wait for the "Loading all repositories.." dialog to close
+    Given I have logged in
     And I access the "mynewblog" repository
     Then I wait for the "Loading repository data.." dialog to close
     Then I wait for the "Loading hyde transformations.." dialog to close

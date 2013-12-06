@@ -21,3 +21,20 @@ Feature: Scratches
     Then I press "Yes"
     Then I should see text containing "no scratches yet"
 
+  Scenario:
+    Given I see the text "Login"
+    And I click the "Scratchpad" menu item
+    And I press view with id "action_scratchpad_new_markdown"
+    Then I enter text "Hi there" into field with id "markdownEditor"
+    And I expose the menu items
+    Then I should not see the gist menu item
+
+  Scenario: Once logged in I can create gists
+    Given I have logged in
+    And I click the "Scratchpad" menu item
+    And I press view with id "action_scratchpad_new_markdown"
+    Then I enter text "Hi there" into field with id "markdownEditor"
+    And I expose the menu items
+    Then I should see the gist menu item
+
+

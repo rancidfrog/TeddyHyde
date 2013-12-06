@@ -13,6 +13,19 @@ Given /I start the login process/ do
   touch "button text:'Login'"
 end   
 
+Given /I have logged in/ do
+  steps %Q{
+    Given I start the login process
+    Then I should not see "Logout from GitHub"
+    And I don't see a logout button
+    And I acknowledge the 2 factor bug
+    And I wait for the GitHub oAuth login page
+    And I login using GitHub oAuth login
+    And I grab the oauth token for cleanup
+    Then I wait for the "Loading all repositories.." dialog to close
+  }
+end
+
 And /I acknowledge the 2 factor bug/ do
   tv = query( "textview", "text" )
   if tv[0] =~ /2\-factor authentication/ 
@@ -43,6 +56,8 @@ And /I grab the oauth token for cleanup/ do
   @auth_token = preferences['authToken']
 
 end
+
+
 
 def cleanup
   file = convert_name( "My new file" )
