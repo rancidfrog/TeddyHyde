@@ -175,7 +175,7 @@ public class MainActivity extends Activity implements View.OnClickListener {
                     GitHubConstants.CLIENT_ID,
                     GitHubConstants.AUTHORIZATION_CODE_SERVER_URL);
             builder.setCredentialStore(credentialStore);
-            builder.setScopes(Arrays.asList( "user", "repo" ));
+            builder.setScopes(Arrays.asList( "user", "repo", "gist" ));
 
             AuthorizationFlow flow = builder.build();
 

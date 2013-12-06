@@ -45,7 +45,8 @@ public class ThGitClient {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return gist.getHtmlUrl();
+        String url = gist.getHtmlUrl();
+        return url;
     }
 
     public static String SaveFile( String authToken, String repoName, String login, String contentsBase64, String filename, String commitMessage ) {

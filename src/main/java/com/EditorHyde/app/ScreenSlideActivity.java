@@ -186,9 +186,12 @@ public class ScreenSlideActivity extends FragmentActivity {
             loadHydeTransformsIntoMenu( menu );
         }
         else {
-            menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
+            if( null != authToken ){
+                menu.findItem(R.id.action_save_as_gist).setEnabled(isNumberOne).setVisible(isNumberOne);
+            }
+
             if( null != scratchId ) {
-            menu.findItem(R.id.action_save_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
+                menu.findItem(R.id.action_save_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
             }
             else {
                 menu.findItem(R.id.action_save_as_scratch).setEnabled(isNumberOne).setVisible(isNumberOne);
@@ -325,23 +328,37 @@ public class ScreenSlideActivity extends FragmentActivity {
         return replaced;
     }
 
+    private void bundleScratchpadResults(Bundle extras) {
+        String contents = getFullContents();
+        extras.putString( "scratch", contents );
+        extras.putString( "scratch_id", scratchId );
+    }
+
+    private void bundleNormalResults(Bundle extras) {
+        extras.putString( "sha", theSha );
+        extras.putString( "path", theFile);
+    }
+
+    private void finishScratchpadWithResult(Boolean saveIt) {
+        Intent intent = new Intent();
+        Bundle extras = new Bundle();
+        bundleScratchpadResults(extras);
+        intent.putExtras(extras);
+        if( saveIt ) {
+            setResult(ScratchpadActivity.RESULT_SAVE_SCRATCH, intent );
+        }
+        else {
+            setResult(RESULT_OK, intent );
+        }
+        finish();
+    }
+
     private void finishWithResult() {
         Intent intent = new Intent();
         Bundle extras = new Bundle();
-
-        if( isScratchpad ) {
-            String contents = getFullContents();
-            extras.putString( "scratch", contents );
-            extras.putString( "scratch_id", scratchId );
-        }
-        else {
-            extras.putString( "sha", theSha );
-            extras.putString( "path", theFile);
-        }
+        bundleNormalResults(extras);
         intent.putExtras(extras);
-
         setResult(RESULT_OK, intent );
-
         finish();
     }
 
@@ -461,6 +478,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
         else {
             String contents;
+            Boolean saveIt = false;
 
             switch ( itemId ) {
 
@@ -528,8 +546,11 @@ public class ScreenSlideActivity extends FragmentActivity {
                     break;
 
                 case R.id.action_save_scratch:
+                case R.id.action_save_as_scratch:
+                    finishScratchpadWithResult(true);
+                    break;
                 case R.id.action_close_scratchpad:
-                    finishWithResult();
+                    onBackPressed();
                     break;
 
                 case R.id.action_save_into_repository:
@@ -543,12 +564,6 @@ public class ScreenSlideActivity extends FragmentActivity {
                     rv = true;
                     break;
 
-                case R.id.action_next:
-                    // Advance to the next step in the wizard. If there is no next step, setCurrentItem
-                    // will do nothing.
-                    mPager.setCurrentItem(mPager.getCurrentItem() + 1);
-                    rv = true;
-                    break;
             }
         }
 
@@ -643,7 +658,7 @@ public class ScreenSlideActivity extends FragmentActivity {
         protected Boolean doInBackground(String...strings) {
             Boolean rv = true;
             String contents = strings[0];
-            URL = ThGitClient.SaveGist( authToken, contents, "some description", "filename1.txt" );
+            URL = ThGitClient.SaveGist( authToken, contents, "Scratchpad Gist (created by Teddy Hyde)", "scratchpad" );
             return rv;
         }
 
@@ -651,10 +666,10 @@ public class ScreenSlideActivity extends FragmentActivity {
             pb.setVisibility(View.GONE);
 
             if( !result ) {
-                Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG );
+                Toast.makeText( ScreenSlideActivity.this, "Unable to save file, please try again later.", Toast.LENGTH_LONG ).show();
             }
             else {
-                Toast.makeText( ScreenSlideActivity.this, "Copied Gist URL to clipboard.", Toast.LENGTH_LONG );
+                Toast.makeText( ScreenSlideActivity.this, "Copied Gist URL to clipboard.", Toast.LENGTH_LONG ).show();
                 addShareGistLink(URL);
             }
 
@@ -662,8 +677,8 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
 
         private void addShareGistLink( String url ) {
-            invalidateOptionsMenu();
             lastGistUrl = url;
+            invalidateOptionsMenu();
         }
     }
 

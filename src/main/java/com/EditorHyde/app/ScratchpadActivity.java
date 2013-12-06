@@ -34,6 +34,7 @@ public class ScratchpadActivity extends Activity {
 
     public static final int NEW_SCRATCH = 1;
     public static final int EXISTING_SCRATCH = 2;
+    public static final int RESULT_SAVE_SCRATCH = 3;
     ListView scratches;
     List<Scratch> scratchList;
     ScratchpadListAdapter adapter;
@@ -107,24 +108,39 @@ public class ScratchpadActivity extends Activity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 
-        // Check which request we're responding to
-        if ( requestCode == NEW_SCRATCH ) {
-            Bundle bundle = data.getExtras();
-            String contents = bundle.getString("scratch");
-            Scratch scratch = new Scratch();
-            scratch.contents = contents;
-            scratch.save();
-            scratchList.add( scratch );
-        }
-        else {
-            String contents = data.getStringExtra("scratch");
-            String id = data.getStringExtra("scratch_id");
-            Scratch scratch = Scratch.query(Scratch.class).where("id=" + id).execute();
-            scratch.contents = contents;
-            scratch.save();
-        }
+        if( RESULT_SAVE_SCRATCH == resultCode ) {
 
-        setDisplayOfNotification();
+            // Check which request we're responding to
+            if ( requestCode == NEW_SCRATCH ) {
+                Bundle bundle = data.getExtras();
+                String contents = bundle.getString("scratch");
+                Scratch scratch = new Scratch();
+                scratch.contents = contents;
+                scratch.save();
+                adapter.add( scratch );
+            }
+            else {
+                String contents = data.getStringExtra("scratch");
+                String id = data.getStringExtra("scratch_id");
+                // Find the item in our adapter
+                int position = 0;
+                Scratch item = null;
+                while( position < adapter.getCount() && null == item ) {
+                    item = adapter.getItem( position );
+                    if( null != item && Integer.parseInt( id ) != item.id ) {
+                        item = null;
+
+                    }
+                    position++;
+                }
+                if( null != item ) {
+                    item.contents = contents;
+                    item.save();
+                }
+            }
+
+            setDisplayOfNotification();
+        }
     }
 
     @Override
