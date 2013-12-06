@@ -14,4 +14,11 @@ Feature: Scratches
     Then I should see "Hi there"
     Then I should see text containing "Updated:"
 
+  Scenario: I can delete an item from the scratchpad
+    Given I see the text "Login"
+    And I click the "Scratchpad" menu item
+    Then I long press "Hi there"
+    Then I press "Yes"
+    Then I should see text containing "no scratches yet"
+
 

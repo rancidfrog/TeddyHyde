@@ -87,7 +87,7 @@ public class ScratchpadActivity extends Activity {
                                 Scratch scratch = scratchList.get( position );
                                 scratch.delete();
                                 scratchList.remove( position );
-                                adapter.notifyDataSetChanged();
+                                setDisplayOfNotification();
                             }
                         }
                         )
