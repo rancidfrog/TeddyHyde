@@ -1,4 +1,4 @@
-Feature: Add file to repository
+Feature: Login
   Scenario: As a logged in user I can add a file
     Given I start the login process
     Then I should not see "Logout from GitHub"

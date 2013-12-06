@@ -1,3 +1,4 @@
-After do 
-  cleanup()
+After do
+  # Not working yet...
+  # cleanup()
 end
