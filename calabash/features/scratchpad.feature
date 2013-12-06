@@ -21,4 +21,3 @@ Feature: Scratches
     Then I press "Yes"
     Then I should see text containing "no scratches yet"
 
-
