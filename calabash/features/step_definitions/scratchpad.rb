@@ -1,9 +1,20 @@
 And /I click the "Scratchpad" menu item/ do
-  scratchpad_menu = "TextView text:'Scratchpad...'"
-  if element_does_not_exist scratchpad_menu
-    touch( "OverflowMenuButton" )
+  fourandabove = "TextView text:'Scratchpad...'"
+  honeycomb = "Button text:'Scratchpad...'" # for Honeycomb...
+  menu = nil
+  
+  if element_does_not_exist fourandabove
+    puts "No regular scratch pad"
+    if element_does_not_exist honeycomb
+      puts "No Honeycomb scratchpad button"
+      touch( "OverflowMenuButton" )
+    else
+      menu = honeycomb
+    end
+  else
+    menu = fourandabove
   end
-  touch scratchpad_menu
+  touch menu if menu
 end
 
 Then /I should see the gist menu item/ do
