@@ -8,12 +8,14 @@ And /I click the "Scratchpad" menu item/ do
     if element_does_not_exist honeycomb
       puts "No Honeycomb scratchpad button"
       touch( "OverflowMenuButton" )
+      menu = fourandabove
     else
       menu = honeycomb
     end
   else
     menu = fourandabove
   end
+  puts "Menu is #{menu}"
   touch menu if menu
 end
 
