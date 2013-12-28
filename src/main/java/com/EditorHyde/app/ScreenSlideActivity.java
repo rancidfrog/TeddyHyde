@@ -677,6 +677,11 @@ public class ScreenSlideActivity extends FragmentActivity {
         }
 
         private void addShareGistLink( String url ) {
+
+            ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
+            ClipData clip = ClipData.newPlainText("Teddy Hyde created gist URL", url );
+            clipboard.setPrimaryClip(clip);
+            
             lastGistUrl = url;
             invalidateOptionsMenu();
         }

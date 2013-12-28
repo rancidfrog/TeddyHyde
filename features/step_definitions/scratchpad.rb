@@ -31,12 +31,21 @@ And /I click the "Scratchpad" menu item/ do
   touch menu if menu
 end
 
+And /I see the toast indicating copied to clipboard/ do
+  element_exists '* text:"Copied Gist URL to clipboard."'
+  #  elements_exists "* id:'message'"
+end
+
+And /I touch the gist menu item/ do
+  touch "* id:'action_save_as_gist'"
+end
+
 Then /I should see the gist menu item/ do
   gist_exists()
 end
 
 def gist_exists
-  element_exists "TextView id:'action_save_as_gist'"
+  element_exists "* id:'action_save_as_gist'"
 end
 
 Then /I should not see the gist menu item/ do
@@ -54,12 +63,12 @@ end
 
 Then /I should have a gist with the current date/ do
   et = query "EditText id:'markdownEditor'"
-  text = et[0].getText()
+  text = et[0]['text']
   # extract the URL
   url = $1 if text =~ /(https:\/\/gist.[^\s]*)/
   if url
-    Curl::Easy.download convert_to_raw_gist( url ) do |curb|
-      
-    end
+    curb = Curl::Easy.new url
+    curb.perform
+    fail "Date is incorrect" unless curb.body_str =~ /#{@cd}/
   end
 end

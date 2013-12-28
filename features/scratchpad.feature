@@ -34,9 +34,10 @@ Feature: Scratches
     And I click the "Scratchpad" menu item
     And I press view with id "action_scratchpad_new_markdown"
     Then I enter the current date into field with id "markdownEditor"
-    And I expose the menu items
     Then I should see the gist menu item
     And I touch the gist menu item
+    And I wait for 1 second
+    And I see the toast indicating copied to clipboard
     And I paste in the URL
     Then I should have a gist with the current date
 
