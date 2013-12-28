@@ -33,8 +33,11 @@ Feature: Scratches
     Given I have logged in
     And I click the "Scratchpad" menu item
     And I press view with id "action_scratchpad_new_markdown"
-    Then I enter text "Hi there" into field with id "markdownEditor"
+    Then I enter the current date into field with id "markdownEditor"
     And I expose the menu items
     Then I should see the gist menu item
+    And I touch the gist menu item
+    And I paste in the URL
+    Then I should have a gist with the current date
 
 
