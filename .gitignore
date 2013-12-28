@@ -18,7 +18,7 @@ Passwords.java
 *~
 */**/test_servers/*
 test_servers
-calabash/screenshot*
+screenshot*
 /**/.irb-history
 video/*.mp4
 video/*.mpg
