@@ -6,7 +6,7 @@ import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
+import static android.text.Html.escapeHtml;
 
 /**
  * Created with IntelliJ IDEA.

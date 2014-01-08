@@ -43,7 +43,28 @@ android {
 //        keyAlias System.getenv("KEY_ALIAS")
 //        keyPassword System.getenv("KEY_PASSWORD")
 //    }
-//    }
+//   
+     
+     dependencies {
+
+
+     // Google Play Services
+    //compile 'com.google.android.gms:play-services:4.0.30'
+
+    // Support Libraries
+    //compile 'com.android.support:support-v4:19.0.0'
+    ///compile 'com.android.support:appcompat-v7:19.0.0'
+    //compile 'com.android.support:gridlayout-v7:19.0.0'
+    //compile 'com.android.support:support-v13:19.0.0'
+    compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
+    compile 'commons-codec:commons-codec:1.9'
+    compile 'com.madgag:markdownj-core:0.4.1'
+    compile 'com.wu-man:android-oauth-client:0.0.2'
+    compile 'com.google.http-client:google-http-client-jackson2:1.17.0-rc'
+    compile 'org.apache.commons:commons-lang3:3.2'
+    compile 'com.google.code.gson:gson:2.2.4'
+
+    }
 
     sourceSets {
         main {
