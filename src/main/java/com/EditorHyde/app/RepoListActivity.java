@@ -217,6 +217,17 @@ public class RepoListActivity extends Activity {
     }
 
 
+
+    @Override
+    public void onPause(){
+
+        super.onPause();
+        if(pd != null) {
+            pd.dismiss();
+        }
+    }
+
+
     @Override
     public void onStart() {
         super.onStart();

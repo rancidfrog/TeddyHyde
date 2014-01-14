@@ -378,6 +378,13 @@ public class FileListingActivity extends Activity {
         }
     }
 
+    @Override
+    public void onPause(){
+        super.onPause();
+        if(pd != null) {
+            pd.dismiss();
+        }
+    }
 
 
     private void showFiles( List<TreeEntry> files ) {
@@ -605,8 +612,12 @@ public class FileListingActivity extends Activity {
             // Load up the transforms
             transformsJson = specialFiles.get( HYDE_TRANSFORM );
 
-
-            invalidateOptionsMenu();
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    invalidateOptionsMenu();
+                }
+            });
 
         }
 

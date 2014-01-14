@@ -90,8 +90,8 @@ public class MainActivity extends Activity implements View.OnClickListener {
     public void onResume() {
         super.onResume();
         setupLogin();
-        TextView tv = (TextView)findViewById(R.id.logoutWarning);
-        tv.setVisibility(View.VISIBLE);
+       // TextView tv = (TextView)findViewById(R.id.logoutWarning);
+       // tv.setVisibility(View.VISIBLE);
         //new VerifyUser().execute();
     }
 

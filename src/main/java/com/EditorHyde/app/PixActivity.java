@@ -204,6 +204,15 @@ public class PixActivity extends Activity {
 
     }
 
+    @Override
+    public void onPause(){
+
+        super.onPause();
+        if(pd != null) {
+            pd.dismiss();
+        }
+    }
+
     class ImageUploadTask extends AsyncTask<Void, Integer, Boolean> {
         private static final int UPLOADING_FULL_SIZE = 1;
         private static final int GENERATING_RESIZED = 2;

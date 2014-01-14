@@ -225,6 +225,17 @@ public class ScreenSlideActivity extends FragmentActivity {
         return true;
     }
 
+
+    @Override
+    public void onPause(){
+
+        super.onPause();
+        if(pd != null) {
+            pd.dismiss();
+        }
+    }
+
+
     private void promptForCommitMessage( final String contents ) {
         // Set an EditText view to get user input
         final LinearLayout ll = new LinearLayout(ScreenSlideActivity.this);
