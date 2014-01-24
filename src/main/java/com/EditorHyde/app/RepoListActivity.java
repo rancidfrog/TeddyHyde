@@ -134,6 +134,10 @@ public class RepoListActivity extends Activity {
             Intent i = new Intent(this, ScratchpadActivity.class);
             startActivity(i);
         }
+        else if( itemId == R.id.new_blog_button ) {
+            Intent i = new Intent(this, BlogCreatorActivity.class);
+            startActivity(i);
+        }
 
         return rv;
     }
