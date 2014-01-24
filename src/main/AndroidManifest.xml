@@ -26,6 +26,7 @@
         <activity android:name=".ScreenSlideActivity"/>
         <activity android:name=".PixActivity"/>
         <activity android:name=".ScratchpadActivity"/>
+        <activity android:name=".BlogCreatorActivity"/>
         <meta-data android:name="com.crashlytics.ApiKey" android:value="8dc1f69ceff0e138bfdca4a082eb2b36ccc806fb"/>
 
     </application>

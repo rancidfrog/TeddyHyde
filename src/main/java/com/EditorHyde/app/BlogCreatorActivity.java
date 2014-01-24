@@ -32,7 +32,7 @@ public class BlogCreatorActivity extends Activity {
         Spinner typeSpinner = (Spinner) findViewById( R.id.blogThemeSpinner );
         typeSpinner.setAdapter( adapter2 );
 
-        Button newBlog = (Button) findViewById( R.id.new_blog_button );
+        Button newBlog = (Button) findViewById( R.id.createNewBlogButton );
         newBlog.setOnClickListener( new Button.OnClickListener() {
             public void onClick(View v)
             {

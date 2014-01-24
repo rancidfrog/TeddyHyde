@@ -11,6 +11,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.ListView;
 
 import com.google.analytics.tracking.android.EasyTracker;
@@ -64,6 +65,16 @@ public class RepoListActivity extends Activity {
         setContentView(R.layout.repo_list);
 
         ctx = this;
+
+        Button newRepoButton = (Button) findViewById(R.id.new_blog_button );
+
+        newRepoButton.setOnClickListener(new Button.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent( ctx, BlogCreatorActivity.class);
+                startActivity(i);
+            }
+        });
 
         listView = (ListView) findViewById(R.id.listView);
 
@@ -132,10 +143,6 @@ public class RepoListActivity extends Activity {
         }
         else if( itemId == R.id.action_scratchpad ) {
             Intent i = new Intent(this, ScratchpadActivity.class);
-            startActivity(i);
-        }
-        else if( itemId == R.id.new_blog_button ) {
-            Intent i = new Intent(this, BlogCreatorActivity.class);
             startActivity(i);
         }
 
