@@ -1,3 +1,4 @@
+
 buildscript {
     repositories {
         mavenCentral()
@@ -6,15 +7,11 @@ buildscript {
          }     
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7+'
-        //        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.+'
-        classpath 'com.squareup.gradle:gradle-android-test-plugin:0.9.1-SNAPSHOT'
-        classpath 'org.notlocalhost.gradle:gradle-calabash-android-plugin:0.1.+'
+       classpath 'com.android.tools.build:gradle:0.7+'
     }
 }
 
 apply plugin: 'android'
-apply plugin: 'android-test'
 
 dependencies {
     compile fileTree( dir: 'lib', include: '*.jar' )
@@ -25,37 +22,12 @@ repositories {
     mavenCentral()
 }
 
-dependencies {
- // instrumentTestCompile 'com.jayway.android.robotium:robotium-solo:4.2'
- // testCompile 'junit:junit:4.10'
- // testCompile 'org.robolectric:robolectric:2.1.+'
- // testCompile 'com.squareup:fest-android:1.0.+'
-}
-
 android {
     compileSdkVersion 18
     buildToolsVersion "18.0.1"
 
-//    signingConfigs {
-//    release {
-//        storeFile file(System.getenv("KEYSTORE"))
-//        storePassword System.getenv("KEYSTORE_PASSWORD")
-//        keyAlias System.getenv("KEY_ALIAS")
-//        keyPassword System.getenv("KEY_PASSWORD")
-//    }
-//   
-     
      dependencies {
 
-
-     // Google Play Services
-    //compile 'com.google.android.gms:play-services:4.0.30'
-
-    // Support Libraries
-    //compile 'com.android.support:support-v4:19.0.0'
-    ///compile 'com.android.support:appcompat-v7:19.0.0'
-    //compile 'com.android.support:gridlayout-v7:19.0.0'
-    //compile 'com.android.support:support-v13:19.0.0'
     compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
     compile 'commons-codec:commons-codec:1.9'
     compile 'com.madgag:markdownj-core:0.4.1'
@@ -66,23 +38,6 @@ android {
     compile 'org.apache.commons:commons-lang3:3.2'
     compile 'com.google.code.gson:gson:2.2.4'
 
-    }
-
-    sourceSets {
-        main {
-        }
-
-        // integrationTest {
-        //   // Gives you access to the compiled classes in your tests
-        //   compileClasspath += main.output
-        //   runtimeClasspath += main.output
-        // }
-    }
-
-    buildTypes {
-        release {
-//            signingConfig signingConfigs.release
-        }
     }
 
 }
