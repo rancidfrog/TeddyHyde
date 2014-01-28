@@ -7,12 +7,16 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.google.analytics.tracking.android.EasyTracker;
 import com.roscopeco.ormdroid.ORMDroidApplication;
@@ -28,6 +32,11 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import retrofit.Callback;
+import retrofit.RestAdapter;
+import retrofit.RetrofitError;
+import retrofit.client.Response;
+
 /**
  * Created with IntelliJ IDEA.
  * User: xrdawson
@@ -37,7 +46,9 @@ import java.util.Set;
  */
 public class RepoListActivity extends Activity {
 
+    final int NEW_BLOG_RESULT = 1;
     Context ctx;
+    int retryCount = 0;
 
     public void showFilesList( Repository repo ) {
         Intent i = new Intent(this, FileListingActivity.class);
@@ -59,6 +70,31 @@ public class RepoListActivity extends Activity {
     SharedPreferences sp;
 
     @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if( requestCode == NEW_BLOG_RESULT ) {
+            retryCount = 0;
+            String blogId = data.getStringExtra( "blog_id" );
+            String blogTitle = data.getStringExtra( "blog_title" );
+            if( !blogId.equals( "-1" ) ) {
+                displayNewBlogStatus( true, blogTitle );
+                new GetRepoStatus().execute( blogId, blogTitle );
+            }
+        }
+    }
+
+    private void displayNewBlogStatus( boolean onOff, String title ) {
+        RelativeLayout rl = (RelativeLayout)findViewById( R.id.newBlogStatus );
+        TextView tv = (TextView)findViewById( R.id.newBlogTitle );
+        if( null != rl && null != tv ) {
+            if( null != title ) {
+            tv.setText( "Verifying status of new blog \"" + title + "\"..." );
+            }
+            rl.setVisibility( onOff ? View.VISIBLE : View.GONE );
+        }
+    }
+
+    @Override
     public void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
@@ -72,7 +108,8 @@ public class RepoListActivity extends Activity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent( ctx, BlogCreatorActivity.class);
-                startActivity(i);
+
+                startActivityForResult( i, NEW_BLOG_RESULT );
             }
         });
 
@@ -155,6 +192,70 @@ public class RepoListActivity extends Activity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+
+    private class GetRepoStatus extends AsyncTask<String, Void, Boolean> {
+
+        String theId = null;
+        String theTitle = null;
+
+        protected Boolean doInBackground(String... args) {
+
+            theId = args[0];
+            theTitle = args[1];
+
+            final Boolean[] rv = {false};
+
+            // Hit Teddy Hyde and build out the blog
+            RestAdapter restAdapter = new RestAdapter.Builder()
+                    .setServer("https://teddyhyde.com")
+                    .build();
+
+            TeddyHydeService service = restAdapter.create(TeddyHydeService.class);
+
+            service.status( theId, new Callback<TeddyHydeService.Blog>() {
+                @Override
+                public void success(TeddyHydeService.Blog blog, Response response) {
+                    if( "success".equals( blog.status ) ) {
+                        rv[0] = true;
+                    }
+                    else {
+                        rv[0] = false;
+                    }
+                }
+
+                @Override
+                public void failure(RetrofitError retrofitError) {
+
+
+                }
+            });
+
+            return rv[0];
+        }
+
+        protected void onPostExecute(Boolean result) {
+            if( result ) {
+                displayNewBlogStatus( false, theTitle );
+            }
+            else {
+                if( retryCount < 20 ) {
+                retryCount++;
+                    Handler handler = new Handler();
+                handler.postDelayed(new Runnable() {
+                    public void run() {
+                        new GetRepoStatus().execute( theId, theTitle );
+                    }
+                }, 5000);
+                }
+                else {
+                 displayNewBlogStatus( false, null );
+                }
+            }
+        }
+
+    }
+
 
 
     private class GetReposTask extends AsyncTask<Void, Void, Boolean> {

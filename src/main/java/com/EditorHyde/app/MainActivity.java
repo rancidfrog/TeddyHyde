@@ -57,7 +57,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
     ProgressDialog pd = null;
     String authToken;
     Button loginButton;
-    String foobar;
     SharedPreferencesCredentialStore credentialStore;
     Credential credential;
     public static String logname = "com.EditorHyde.app";
@@ -201,15 +200,6 @@ public class MainActivity extends Activity implements View.OnClickListener {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-
-            String bar = "";
-            if( null == flow ) {
-                bar = "asdasd";
-            }
-            else {
-                bar = "a4234sdasd";
-            }
-
 
             return true;
         }
