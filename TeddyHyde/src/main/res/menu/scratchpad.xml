@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/action_scratchpad_new_markdown"
+          android:title="@string/new_markdown"
+
+          android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_scratchpad_new_post"
+          android:title="@string/new_post"
+          android:showAsAction="ifRoom|withText" />
+
+    <item android:id="@+id/action_scratchpad_new_page"
+          android:title="@string/new_page"
+          android:showAsAction="ifRoom|withText" />
+
+</menu>

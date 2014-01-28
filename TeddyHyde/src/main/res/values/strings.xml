@@ -1,7 +1,76 @@
-<resources>
-        <string name="title_activity_base">BaseActivity</string>
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
+    <string name="app_name">Teddy Hyde</string>
+    <string name="login">Login</string>
 
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <!-- Actions -->
+    <string name="action_toggle">Toggle indicator</string>
+    <string name="action_add_item">Add item</string>
+    <string name="action_remove_item">Remove item</string>
+    <string name="action_finish">Finish</string>
+    <string name="action_info">Photo info</string>
+    <string name="action_photo">View photo</string>
+
+    <!-- Accessibility-only descriptions -->
+    <string name="description_image_1">Image 1</string>
+    <string name="description_image_2">Image 2</string>
+    <string name="description_zoom_touch_close"> !!!! Expanded image (touch to close)</string>
+
+    <string name="add_image">Add Images</string>
+    <string name="exception_message">Unable to choose image, please try again</string>
+
+    <string name="WebServiceUrl">http://pix.teddyhyde.com</string>
+    <string name="app_id">233056656840150</string>
+    <string name="FbTokenAuthEndpoint">/authentication/fbtoken</string>
+    <string name="save_file">Save File</string>
+    <string name="save_with_commit">Save with message…</string>
+    <string name="add_new_post">New post…</string>
+    <string name="add_new_page">New page…</string>
+    <string name="page_template">---\nlayout: page\ntitle: \"{{TITLE|escdblquotes}}\"\ncategory: \ntagline: \ntags : [] \npublished: false\n---\n\n# A new page #\n\nWrite your page here, using Markdown.\n\n</string>
+    <string name="post_template">---\nlayout: post \ncategory: \ntitle: \"{{TITLE|escdblquotes}}\"\ntagline: \ntags : [] \npublished: false\n---\n\n# A new post #\n\nWrite your post here, using Markdown.\n\n</string>
+    <string name="paste_quote">Paste Quote</string>
+    <string name="paste_code">Paste Code</string>
+    <string name="paste_link">Paste Link...</string>
+    <string name="save_as_gist">Save as gist...</string>
+    <string name="upload_image_button">Upload Image...</string>
+    <string name="repo_name">Repository Name</string>
+    <string name="upload_image">Upload image...</string>
+    <string name="action_markdown">Markdown...</string>
+    <string name="markdown_list">Unordered list...</string>
+    <string name="markdown_ulist">Unordered list...</string>
+    <string name="markdown_olist">Ordered list...</string>
+    <string name="hyde_transforms">Transforms...</string>
+    <string name="add_image_full">Add full sized image...</string>
+    <string name="add_image_resized">Add resized image...</string>
+    <string name="add_image_thumbnail">Add thumbnail image...</string>
+    <string name="logout">Logout from GitHub</string>
+    <string name="image_thumbnail_upload_message">Image thumbnail added using Teddy Hyde for Android (teddyhyde.com)</string>
+    <string name="image_resize_upload_message">Resized image added using Teddy Hyde for Android (teddyhyde.com)</string>
+    <string name="image_upload_message">Image added using Teddy Hyde for Android (teddyhyde.com)</string>
+    <string name="scratchpad">Scratchpad...</string>
+    <string name="save_into_repository">Save into repository...</string>
+    <string name="cached_repositories">cachedRepositories</string>
+    <string name="hello">Hello</string>
+    <string name="share_last_gist">Share last gist URL...</string>
+    <string name="close_scratchpad">Close scratchpad</string>
+    <string name="new_page">New jekyll page...</string>
+    <string name="new_post">New jekyll post...</string>
+    <string name="new_markdown">New markdown...</string>
+    <string name="warnedFirstTime">warnedFirstTime</string>
+    <string name="githubAuthTokenWarning">Due to a bug in the egit libraries, Teddy Hyde cannot remove your authentication token automatically from GitHub.com. There is no risk to this other than this application can renew access to GitHub without your consent. If you want to remove access to GitHub from this application, look for \"Teddy Hyde Android\" in the \"Applications\" section on the desktop version of GitHub.com and delete that token.</string>
+    <string name="hide_yfm">Hide YAML Front Matter</string>
+    <string name="show_yfm">Show YAML Front Matter</string>
+    <string name="loading_all_repositories">Loading all repositories...</string>
+    <string name="loading_file_data">Loading file data..</string>
+    <string name="loading_repository_data">Loading repository data..</string>
+    <string name="filename_prettifying">Use filename prettifying</string>
+    <string name="save_as_scratch">Save as scratch</string>
+    <string name="save_scratch">Save scratch</string>
+    <string name="action_settings">Some action...</string>
+
+    <string-array name="file_extensions">
+        <item>Markdown</item>
+        <item>AsciiDoc</item>
+    </string-array>
 
 </resources>

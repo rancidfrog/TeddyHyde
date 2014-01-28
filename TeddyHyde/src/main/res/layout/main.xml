@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:background="@drawable/rls"
+    android:scaleType="centerInside"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:background="#80FFFFFF"
+        android:padding="10dp"
+        android:layout_alignParentBottom="true"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:background="#80dddddd"
+            android:text="Login using secure GitHub oAuth"
+            android:id="@+id/textView" android:layout_gravity="center"/>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:text="@string/login"
+            android:padding="15dp"
+            android:layout_margin="10dp"
+            android:id="@+id/login" android:layout_gravity="center" android:textSize="14pt"
+            />
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:padding="3dp"
+            android:background="#80dddddd"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Teddy Hyde is the no compromises Android editor for GitHub (especially Jekyll blogs). "
+            android:id="@+id/textView2"
+            android:layout_margin="5dp"
+            android:layout_gravity="right"
+            android:gravity="right" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:visibility="gone"
+            android:text="@string/githubAuthTokenWarning"
+            android:id="@+id/logoutWarning" />
+
+    </LinearLayout>
+
+</RelativeLayout>
+
