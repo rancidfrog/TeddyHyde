@@ -59,9 +59,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     Button loginButton;
     SharedPreferencesCredentialStore credentialStore;
     Credential credential;
-    public static String logname = "com.EditorHyde.app";
-
-    public static final String APP_ID = "com.EditorHyde.app";
 
     public void nukePreferences() {
         sp = this.getSharedPreferences( APP_ID, MODE_PRIVATE );
@@ -101,20 +98,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return true;
     }
 
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int itemId = item.getItemId();
-        int groupId = item.getGroupId();
-        boolean rv = false;
-
-        if( itemId == R.id.action_scratchpad ) {
-            Intent i = new Intent(this, ScratchpadActivity.class);
-            startActivity(i);
-        }
-
-        return rv;
-    }
+//
+//    @Override
+//    public boolean onOptionsItemSelected(MenuItem item) {
+//        int itemId = item.getItemId();
+//        int groupId = item.getGroupId();
+//        boolean rv = false;
+//
+//        super.onOptionsItemSelected(item);
+//
+//        return rv;
+//    }
 
     private void setupLogin() {
         setContentView(R.layout.main);
