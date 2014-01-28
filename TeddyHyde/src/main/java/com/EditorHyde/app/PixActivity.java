@@ -30,7 +30,7 @@ import java.util.Date;
  * Time: 10:48 AM
  * To change this template use File | Settings | File Templates.
  */
-public class PixActivity extends Activity {
+public class PixActivity extends BaseActivity {
 
     private static final int PICK_IMAGE = 1;
     public static final int THUMBNAIL_WIDTH = 64;

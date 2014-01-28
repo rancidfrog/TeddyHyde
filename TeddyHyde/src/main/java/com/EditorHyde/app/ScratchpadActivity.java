@@ -30,7 +30,7 @@ import com.EditorHyde.app.Scratch;
 /**
  * Created by xrdawson on 8/18/13.
  */
-public class ScratchpadActivity extends Activity {
+public class ScratchpadActivity extends BaseActivity {
 
     public static final int NEW_SCRATCH = 1;
     public static final int EXISTING_SCRATCH = 2;

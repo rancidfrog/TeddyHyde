@@ -51,7 +51,7 @@ import com.roscopeco.ormdroid.*;
 
 //import com.wuman.oauth.samples.OAuth;
 
-public class MainActivity extends Activity implements View.OnClickListener {
+public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     SharedPreferences sp;
     ProgressDialog pd = null;

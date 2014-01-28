@@ -44,7 +44,7 @@ import retrofit.client.Response;
  * Time: 11:04 AM
  * To change this template use File | Settings | File Templates.
  */
-public class RepoListActivity extends Activity {
+public class RepoListActivity extends BaseActivity {
 
     final int NEW_BLOG_RESULT = 1;
     Context ctx;

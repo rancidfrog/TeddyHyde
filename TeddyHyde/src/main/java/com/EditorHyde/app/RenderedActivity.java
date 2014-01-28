@@ -13,8 +13,7 @@ import com.google.analytics.tracking.android.EasyTracker;
  * Time: 2:27 PM
  * To change this template use File | Settings | File Templates.
  */
-public class RenderedActivity extends Activity {
-
+public class RenderedActivity extends BaseActivity {
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

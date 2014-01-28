@@ -35,7 +35,7 @@ import static com.EditorHyde.app.MarkupUtilities.*;
  * Time: 11:41 AM
  * To change this template use File | Settings | File Templates.
  */
-public class FileListingActivity extends Activity {
+public class FileListingActivity extends BaseActivity {
 
     private static final String MARKDOWN_EXTENSION = ".md";
     private static final String TEMPLATES_PREFIX = "_hyde/templates/";

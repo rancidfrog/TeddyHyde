@@ -72,7 +72,7 @@ import android.support.v4.app.FragmentManager;
  *
  * @see ScreenSlidePageFragment
  */
-public class ScreenSlideActivity extends FragmentActivity {
+public class ScreenSlideActivity extends BaseActivity {
     /**
      * The number of pages (wizard steps) to show in this demo.
      */
@@ -587,12 +587,6 @@ public class ScreenSlideActivity extends FragmentActivity {
                     saveIntoRepository();
                     break;
 
-                case android.R.id.home:
-                    // Navigate "up" the demo structure to the launchpad activity.
-                    // See http://developer.android.com/design/patterns/navigation.html for more.
-                    NavUtils.navigateUpTo(this, new Intent(this, MainActivity.class));
-                    rv = true;
-                    break;
 
             }
         }
