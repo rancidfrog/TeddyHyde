@@ -209,7 +209,7 @@ public class RepoListActivity extends BaseActivity {
             RepositoryService service = new RepositoryService();
             service.getClient().setOAuth2Token(authToken);
             try {
-                repos = service.getRepositories();
+                repos = null == organization ? service.getRepositories() : service.getOrgRepositories( organization );
             }
             catch( Exception e) {
                 e.printStackTrace();

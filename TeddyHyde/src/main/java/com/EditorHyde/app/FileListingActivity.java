@@ -313,7 +313,6 @@ public class FileListingActivity extends BaseActivity {
             }
         });
         pd = ProgressDialog.show( this, "", getString(R.string.loading_repository_data), true);
-        ORMDroidApplication.initialize(this);
         new GetRepoFiles().execute();
 
     }
@@ -501,7 +500,8 @@ public class FileListingActivity extends BaseActivity {
             try {
                 CommitService cs = new CommitService();
                 cs.getClient().setOAuth2Token(authToken);
-                theRepo = repositoryService.getRepository(login, repoName);
+
+                theRepo = repositoryService.getRepository( null == organization ? login : organization, repoName);
 
                 List<RepositoryBranch> branches = repositoryService.getBranches(theRepo);
                 theBranch = null;
