@@ -142,7 +142,6 @@ public class BaseActivity extends FragmentActivity {
 
     private class LogoutTask extends AsyncTask<Void, Void, Boolean> {
 
-        SharedPreferences sp;
         protected Boolean doInBackground(Void...voids) {
 
             Boolean rv = true;

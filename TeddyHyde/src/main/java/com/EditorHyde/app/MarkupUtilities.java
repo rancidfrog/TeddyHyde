@@ -30,9 +30,11 @@ public class MarkupUtilities {
 
     public static boolean hasYFM( String markdown ) {
         boolean rv = false;
-        int yfmStart = markdown.indexOf( "---" );
-        int yfmEnd = markdown.indexOf( "---", 4 );
-        rv = ( 0 == yfmStart && yfmStart != yfmEnd );
+        if( null != markdown ) {
+            int yfmStart = markdown.indexOf( "---" );
+            int yfmEnd = markdown.indexOf( "---", 4 );
+            rv = ( 0 == yfmStart && yfmStart != yfmEnd );
+        }
         return rv;
     }
 
