@@ -258,15 +258,18 @@ public class BaseActivity extends FragmentActivity {
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            String avatarUrl = user.getAvatarUrl();
-
-            avatar = loadImageFromURL( avatarUrl );
+            if( null != user ) {
+                String avatarUrl = user.getAvatarUrl();
+                avatar = loadImageFromURL( avatarUrl );
+            }
 
             return true;
         }
 
         protected void onPostExecute( Boolean rv ) {
-            getActionBar().setIcon( avatar );
+            if( null != avatar ) {
+                getActionBar().setIcon( avatar );
+            }
         }
     }
 
@@ -300,7 +303,11 @@ public class BaseActivity extends FragmentActivity {
                     GitHubConstants.CLIENT_ID,
                     GitHubConstants.AUTHORIZATION_CODE_SERVER_URL);
             builder.setCredentialStore(credentialStore);
-            builder.setScopes(Arrays.asList("user", "repo", "gist"));
+            builder.setScopes(Arrays.asList(
+                                // "user:email",
+                                "repo"
+                                // , "gist"
+                                ));
 
             AuthorizationFlow flow = builder.build();
 

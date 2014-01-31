@@ -4,7 +4,7 @@ require 'android_version'
 
 VERSION_ATTRIBUTE = 'android:versionName'
 VERSION_CODE = 'android:versionCode'
-ANDROID_MANIFEST = "src/main/AndroidManifest.xml"
+ANDROID_MANIFEST = "TeddyHyde/src/main/AndroidManifest.xml"
 
 def bump_point( current )
   AndroidVersion.point( current )
@@ -68,7 +68,7 @@ namespace :version do
     code = tuple.shift
     # Do git tag
     the_tag = "#{current}-#{code}"
-    `git add src/main/AndroidManifest.xml`
+    `git add TeddyHyde/src/main/AndroidManifest.xml`
     `git commit -m "Version upgrade: #{the_tag}"`
     `git tag "#{the_tag}"`
   end

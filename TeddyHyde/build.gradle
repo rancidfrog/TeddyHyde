@@ -1,3 +1,10 @@
+def env = System.getenv()
+//Print all the environment variables.
+
+env.each{
+println it
+}
+
 
 buildscript {
     repositories {
@@ -43,5 +50,19 @@ android {
 
     }
 
+    signingConfigs {
+//        debug {
+//            storeFile file("debug.keystore")
+//        }
+
+        release {
+            storeFile file("~/android/inqry_keystore")
+            storePassword "0penDuffel"
+            keyAlias "inqry"
+            keyPassword "0penDuffel"
+        }
+    }
+
 }
+
 

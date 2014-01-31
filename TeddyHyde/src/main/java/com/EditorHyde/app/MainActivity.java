@@ -47,10 +47,6 @@ import org.eclipse.egit.github.core.service.UserService;
 import java.io.IOException;
 import java.util.Arrays;
 
-import com.roscopeco.ormdroid.*;
-
-//import com.wuman.oauth.samples.OAuth;
-
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     SharedPreferences sp;
@@ -96,17 +92,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         return true;
     }
 
-//
-//    @Override
-//    public boolean onOptionsItemSelected(MenuItem item) {
-//        int itemId = item.getItemId();
-//        int groupId = item.getGroupId();
-//        boolean rv = false;
-//
-//        super.onOptionsItemSelected(item);
-//
-//        return rv;
-//    }
 
     private void setupLogin() {
         setContentView(R.layout.main);
