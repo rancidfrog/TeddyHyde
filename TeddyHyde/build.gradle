@@ -13,7 +13,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.9.+'
+            classpath 'com.android.tools.build:gradle:0.9.+'
     }
 }
 
@@ -36,7 +36,7 @@ android {
     dependencies {
 
         compile 'org.eclipse.mylyn.github:org.eclipse.egit.github.core:2.1.5'
-        compile 'commons-codec:commons-codec:1.9'
+        compile( 'commons-codec:commons-codec:1.9' )
         compile 'com.madgag:markdownj-core:0.4.1'
         compile( 'com.wu-man:android-oauth-client:0.0.2' ) {
             exclude module: 'support-v4'
@@ -48,6 +48,10 @@ android {
         compile 'com.squareup.picasso:picasso:2.1.1'
 
     }
+
+     packagingOptions {
+      exclude 'META-INF/LICENSE.txt'
+        }
 
     signingConfigs {
 
