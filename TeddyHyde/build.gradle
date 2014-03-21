@@ -1,9 +1,8 @@
-def env = System.getenv()
+//def env = System.getenv()
 //Print all the environment variables.
-
-env.each{
-println it
-}
+//env.each{
+//println it
+//}
 
 
 buildscript {
@@ -14,7 +13,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:0.7+'
+        classpath 'com.android.tools.build:gradle:0.9.+'
     }
 }
 
@@ -31,8 +30,8 @@ repositories {
 }
 
 android {
-    compileSdkVersion 18
-    buildToolsVersion "18.0.1"
+    compileSdkVersion 19
+    buildToolsVersion "19.0.3"
 
     dependencies {
 
