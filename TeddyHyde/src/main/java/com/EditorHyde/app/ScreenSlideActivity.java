@@ -172,7 +172,7 @@ public class ScreenSlideActivity extends BaseActivity {
                 transform.type = (String)tr.get( "type" );
                 transform.prompt = (String)tr.get( "prompt" );
                 transform.name = (String)tr.get( "name" );
-		transform.context = (HashMap)tr.get( "context" );
+                transform.layout = (String)tr.get( "layout" );
                 transform.version = Integer.parseInt( (String)tr.get( "version" ) );
                 if( transform.version >= 1 ) {
                     transforms.add( transform );
@@ -183,29 +183,29 @@ public class ScreenSlideActivity extends BaseActivity {
             }
 
             if( !transforms.isEmpty() ) {
-		String template = null;
+                String layout = null;
                 SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
 
                 for( Transform item : transforms ) {
-		    if( null == template && null != item.context ) {
-			// Load the template the first time around
-			template = loadTemplate( theMarkdown );
-		    }
+                    if( null == layout && null != item.layout ) {
+                        // Load the template the first time around
+                        layout = loadLayout( theMarkdown );
+                    }
 
-		    if( null == item.context || template.equals(item.context.get( "template" )) ) {
-			hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
-			index++;
-		    }
+                    if( null == item.layout|| layout.equals(item.layout) ) {
+                        hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
+                        index++;
+                    }
                 }
             }
         }
     }
 
-    private String loadTemplate( String markdown ) {
-	HashMap hash = new HashMap();
-	MarkupUtilities.getYFMHash( markdown, hash );
-	String rv = (String)hash.get( "template" );
-	return rv;
+    private String loadLayout( String markdown ) {
+        HashMap hash = new HashMap();
+        MarkupUtilities.getYFMHash( markdown, hash );
+        String rv = (String)hash.get( "layout" );
+        return rv;
     }
 
     @Override

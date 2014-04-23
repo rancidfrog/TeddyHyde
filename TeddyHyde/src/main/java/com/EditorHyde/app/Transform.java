@@ -17,10 +17,6 @@ public class Transform {
     public String prompt;
     public String code;
     public String name;
-    public HashMap context;
-
-    public Transform() {
-	context = new HashMap();
-    }
+    public String layout;
 
 }

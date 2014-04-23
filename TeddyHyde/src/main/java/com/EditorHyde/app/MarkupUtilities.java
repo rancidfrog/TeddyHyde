@@ -41,10 +41,12 @@ public class MarkupUtilities {
 	String yfm = MarkupUtilities.getYFM( markdown );
 	String[] lines = yfm.split( "\n" );
 	for( String line : lines ) {
-	    String[] kv = line.split( ":" );
-	    String key = kv[0].trim();
-	    String value = kv[1].trim();
-	    hash.put( key, value );
+        if( !line.startsWith( "---" ) ) {
+            String[] kv = line.split(":");
+            String key = kv[0].trim();
+            String value = kv[1].trim();
+            hash.put(key, value);
+        }
 	}
     }
 
