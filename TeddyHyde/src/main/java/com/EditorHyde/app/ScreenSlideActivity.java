@@ -187,11 +187,12 @@ public class ScreenSlideActivity extends BaseActivity {
                 SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
 
                 for( Transform item : transforms ) {
-		    if( null != item.context ) {
-			// Load the template 
+		    if( null == template && null != item.context ) {
+			// Load the template the first time around
 			template = loadTemplate( theMarkdown );
 		    }
-		    if( template.equals(item.context.get( "template" )) ) {
+
+		    if( null == item.context || template.equals(item.context.get( "template" )) ) {
 			hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
 			index++;
 		    }
