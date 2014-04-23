@@ -3,6 +3,7 @@ package com.EditorHyde.app;
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.HashMap;
 import static android.text.Html.escapeHtml;
 //import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
@@ -34,6 +35,17 @@ public class MarkupUtilities {
             rv = ( 0 == yfmStart && yfmStart != yfmEnd );
         }
         return rv;
+    }
+
+    public static void getYFMHash( String markdown, HashMap hash ) {
+	String yfm = MarkupUtilities.getYFM( markdown );
+	String[] lines = yfm.split( "\n" );
+	for( String line : lines ) {
+	    String[] kv = line.split( ":" );
+	    String key = kv[0].trim();
+	    String value = kv[1].trim();
+	    hash.put( key, value );
+	}
     }
 
     public static String getYFM( String markdown ) {

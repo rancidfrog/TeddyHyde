@@ -1,6 +1,7 @@
 package com.EditorHyde.app;
 
 import android.content.Context;
+import java.util.HashMap;
 
 /**
  * Created with IntelliJ IDEA.
@@ -16,9 +17,10 @@ public class Transform {
     public String prompt;
     public String code;
     public String name;
+    public HashMap context;
 
-    public void handle( Context ctx ) {
-
+    public Transform() {
+	context = new HashMap();
     }
 
 }

@@ -52,6 +52,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.HashMap;
 
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentActivity;
@@ -171,8 +172,9 @@ public class ScreenSlideActivity extends BaseActivity {
                 transform.type = (String)tr.get( "type" );
                 transform.prompt = (String)tr.get( "prompt" );
                 transform.name = (String)tr.get( "name" );
+		transform.context = (HashMap)tr.get( "context" );
                 transform.version = Integer.parseInt( (String)tr.get( "version" ) );
-                if( transform.version == 1 ) {
+                if( transform.version >= 1 ) {
                     transforms.add( transform );
                 }
                 else {
@@ -180,16 +182,29 @@ public class ScreenSlideActivity extends BaseActivity {
                 }
             }
 
-            if( !transforms.isEmpty() )       {
+            if( !transforms.isEmpty() ) {
+		String template = null;
                 SubMenu hydeMenu = menu.addSubMenu("Hyde Transform...");
 
                 for( Transform item : transforms ) {
-                    hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
-                    index++;
+		    if( null != item.context ) {
+			// Load the template 
+			template = loadTemplate( theMarkdown );
+		    }
+		    if( template.equals(item.context.get( "template" )) ) {
+			hydeMenu.add(HYDE_TRANSFORMS_GROUP_ID, index, index, item.name);
+			index++;
+		    }
                 }
-
             }
         }
+    }
+
+    private String loadTemplate( String markdown ) {
+	HashMap hash = new HashMap();
+	MarkupUtilities.getYFMHash( markdown, hash );
+	String rv = (String)hash.get( "template" );
+	return rv;
     }
 
     @Override
