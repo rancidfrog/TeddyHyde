@@ -1,12 +1,10 @@
 package com.EditorHyde.app;
 
-import android.widget.TextView;
-
 import java.net.URLEncoder;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import static android.text.Html.escapeHtml;
+//import static org.apache.commons.lang.StringEscapeUtils.escapeHtml;
 
 /**
  * Created with IntelliJ IDEA.
