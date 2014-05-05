@@ -1,6 +1,8 @@
-# Teddy Hyde: the extensible, one handed blogging editor for Android #
+# Teddy Hyde: the extensible, one handed GitHub editor for Android #
 
 [Watch a video of Teddy Hyde in action](http://www.youtube.com/watch?v=YbZtLKIV6Mc)
+
+Read the blog for more tips on [hacking Teddy Hyde](http://blog.teddyhyde.com)
 
 Learn more at [TeddyHyde.com](http://teddyhyde.com)
 
