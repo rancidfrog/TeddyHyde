@@ -54,6 +54,7 @@ android {
 exclude 'META-INF/NOTICE.txt'
         }
 
+
     signingConfigs {
 
         release {
@@ -67,6 +68,8 @@ exclude 'META-INF/NOTICE.txt'
     buildTypes {
         release {
             signingConfig signingConfigs.release
+            buildConfigField "String", "GITHUB_CLIENT_ID", "\"$System.env.GITHUB_CLIENT_ID\""
+            buildConfigField "String", "GITHUB_CLIENT_SECRET", "\"$System.env.GITHUB_CLIENT_SECRET\""
         }
     }
 

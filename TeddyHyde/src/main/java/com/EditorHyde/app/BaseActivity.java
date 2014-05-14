@@ -278,9 +278,9 @@ public class BaseActivity extends FragmentActivity {
     protected class DoLogin extends AsyncTask<Void, Void, Boolean> {
 
         private class GitHubConstants {
-            public static final String CLIENT_ID = "e4f185a088112cb1b0e9";
+            public static final String CLIENT_ID = BuildConfig.GITHUB_CLIENT_ID; //"e4f185a088112cb1b0e9";
 
-            public static final String CLIENT_SECRET = "5a46ba23d0d66ae5fa4eeca519f502fb3f9a5a09";
+            public static final String CLIENT_SECRET = BuildConfig.GITHUB_CLIENT_SECRET; // "5a46ba23d0d66ae5fa4eeca519f502fb3f9a5a09";
 
             public static final String AUTHORIZATION_CODE_SERVER_URL = "https://github.com/login/oauth/authorize";
 
